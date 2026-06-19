@@ -37,8 +37,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${anton.variable} ${inter.variable}`}>
-      <body>
+    <html lang="es" className={`${anton.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         {children}
         <JsonLd data={localBusinessLd()} />
       </body>

@@ -46,7 +46,7 @@ export default async function ModalidadPage({ params }: Params) {
         <aside className="h-fit rounded-lg border border-text-strong/8 bg-white p-6 shadow-card">
           <h2 className="font-display text-2xl text-text-strong">¿Te animas?</h2>
           <p className="mt-2 font-body text-[15px] text-text-muted">
-            Primera clase de prueba gratis. Escríbenos y te decimos el mejor día para tu nivel.
+            Reserva tu primera clase de prueba. Escríbenos y te asignamos el grupo ideal para tu nivel.
           </p>
           <WaLink origin="modalidad" extra={`de ${m.nombre}`} variant="red" className="mt-4 w-full py-[15px]">
             Probar {m.nombre}

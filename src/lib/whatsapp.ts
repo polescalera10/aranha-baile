@@ -12,7 +12,8 @@ export type WaOrigin =
   | "footer"
   | "nav"
   | "modalidad"
-  | "contacto";
+  | "contacto"
+  | "evento";
 
 const MESSAGES: Record<WaOrigin, string> = {
   hero: "¡Hola! Me gustaría info de la clase de prueba de baile 🙂",
@@ -23,6 +24,7 @@ const MESSAGES: Record<WaOrigin, string> = {
   nav: "¡Hola! Me gustaría info sobre las clases de baile 🙂",
   modalidad: "¡Hola! Me interesa la clase de", // se completa con la modalidad
   contacto: "¡Hola! Os escribo desde la web de Aranha Baile 🙂",
+  evento: "¡Hola! Me gustaría más información sobre el evento", // se completa con el nombre del evento
 };
 
 /**

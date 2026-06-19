@@ -3,7 +3,7 @@ import { WaLink } from "@/components/ui/WaLink";
 import Link from "next/link";
 
 const NAV = [
-  { href: "/clases/salsa-cubana", label: "Clases" },
+  { href: "/clases", label: "Clases" },
   { href: "/profesores", label: "Profesores" },
   { href: "/eventos", label: "Eventos" },
   { href: "/horarios", label: "Horarios" },

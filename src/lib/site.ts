@@ -7,7 +7,7 @@ export const site = {
   name: "Aranha Baile",
   legalName: "Aranha Baile",
   description:
-    "Escuela de salsa cubana, bachata y más en Vilanova i la Geltrú. Comunidad, niveles desde cero a avanzado y primera clase de prueba gratis.",
+    "Escuela de salsa cubana, bachata y más en Vilanova i la Geltrú. Comunidad, niveles desde cero a avanzado y clases de prueba para empezar.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://aranhabaile.com",
   locale: "es_ES",
   nap: {

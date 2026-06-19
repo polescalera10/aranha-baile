@@ -40,8 +40,7 @@ export function Hero() {
             Escríbenos por WhatsApp
           </WaLink>
           <span className="font-body text-sm text-white/70">
-            Primera clase de prueba — <strong className="font-bold text-white">gratis</strong> y sin
-            compromiso.
+            Reserva tu primera clase de prueba y conoce el ambiente.
           </span>
         </Reveal>
       </div>

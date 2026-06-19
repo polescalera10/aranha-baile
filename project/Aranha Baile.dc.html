@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#F6EFE4}
+  body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  @keyframes slowzoom{from{transform:scale(1.04)}to{transform:scale(1.14)}}
+  @keyframes pulsering{0%{transform:scale(1);opacity:.45}70%{transform:scale(1.7);opacity:0}100%{opacity:0}}
+  @keyframes dotpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+</style>
+</helmet>
+<div id="aranha-root" style="font-family:Inter,sans-serif;background:#F6EFE4;color:#1a1512;overflow-x:hidden">
+
+  <!-- ============ HERO ============ -->
+  <section style="position:relative;overflow:hidden;background:#0A0A0A;color:#fff">
+    <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#3a2820 0 18px,#2f201a 18px 36px);animation:slowzoom 22s ease-in-out infinite alternate"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.5) 0%,rgba(10,10,10,.2) 35%,rgba(10,10,10,.55) 70%,rgba(10,10,10,.95) 100%)"></div>
+    <div style="position:absolute;top:14px;right:14px;z-index:5;font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.04em;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.25);padding:4px 8px;border-radius:6px">[ vídeo · gente bailando ]</div>
+
+    <div style="position:absolute;top:0;left:0;right:0;z-index:4">
+      <div style="width:100%;max-width:1180px;margin:0 auto;padding:24px clamp(20px,5vw,56px);display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:baseline;gap:9px">
+          <span style="font-family:Anton;font-size:25px;letter-spacing:.04em;color:#fff;text-transform:uppercase">Aranha</span>
+          <span style="font-family:Inter;font-size:10px;font-weight:700;letter-spacing:.3em;color:#E8A87C;text-transform:uppercase">Baile</span>
+        </div>
+        <a href="{{ waLink }}" style="font-family:Inter;font-size:13px;font-weight:600;color:rgba(255,255,255,.85);text-decoration:none;border:1px solid rgba(255,255,255,.28);padding:9px 18px;border-radius:999px;transition:background .2s ease" style-hover="background:rgba(255,255,255,.12)">WhatsApp</a>
+      </div>
+    </div>
+
+    <div style="position:relative;z-index:2;width:100%;max-width:1180px;margin:0 auto;padding:140px clamp(20px,5vw,56px) clamp(56px,9vh,110px);min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end">
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);display:inline-flex;align-items:center;gap:9px;margin-bottom:22px">
+        <span style="width:8px;height:8px;border-radius:50%;background:#C0202A;animation:dotpulse 1.8s ease-in-out infinite"></span>
+        <span style="font-family:Inter;font-size:12px;font-weight:700;letter-spacing:.18em;color:#E8A87C;text-transform:uppercase">Salsa cubana · Bachata · Vilanova i la Geltrú</span>
+      </div>
+      <h1 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);font-family:Anton;font-weight:400;font-size:clamp(48px,8.5vw,108px);line-height:.92;letter-spacing:.005em;text-transform:uppercase;color:#fff;max-width:16ch;text-wrap:balance">No vienes a una clase. Entras a una comunidad.</h1>
+      <p data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);margin-top:22px;font-family:Inter;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:rgba(255,255,255,.85);max-width:48ch">Empieces donde empieces —de cero absoluto o ya con tablas— aquí encuentras tu grupo, tu ritmo y tu gente.</p>
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);margin-top:30px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 22px">
+        <a href="{{ waLink }}" style="display:flex;align-items:center;justify-content:center;gap:12px;background:#C0202A;color:#fff;text-decoration:none;padding:18px 28px;border-radius:16px;font-family:Inter;font-weight:700;font-size:16px;box-shadow:0 14px 34px -8px rgba(192,32,42,.6);transition:transform .25s ease,box-shadow .25s ease" style-hover="transform:translateY(-3px);box-shadow:0 20px 44px -8px rgba(192,32,42,.78)">
+          <span style="width:20px;height:20px;background:#fff;border-radius:8px 8px 8px 2px;flex:none"></span>
+          Escríbenos por WhatsApp
+        </a>
+        <span style="font-family:Inter;font-size:14px;color:rgba(255,255,255,.7)">Primera clase de prueba — <strong style="color:#fff;font-weight:700">gratis</strong> y sin compromiso.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARA TI · TODOS LOS NIVELES ============ -->
+  <section style="background:#F6EFE4;padding:clamp(64px,9vw,120px) 0">
+    <div style="width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,56px)">
+      <span data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);display:block;font-family:Inter;font-size:12px;font-weight:700;letter-spacing:.18em;color:#C0202A;text-transform:uppercase">Esto es para ti</span>
+      <h2 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);font-family:Anton;font-weight:400;font-size:clamp(34px,5.5vw,66px);line-height:.98;letter-spacing:.01em;text-transform:uppercase;color:#1a1512;margin-top:14px;max-width:20ch;text-wrap:balance">Para quien nunca ha bailado. Y para quien ya no puede parar.</h2>
+      <p data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);margin-top:20px;font-family:Inter;font-size:clamp(16px,1.4vw,19px);line-height:1.6;color:#4a4136;max-width:62ch">Tenemos grupos por nivel real, desde cero absoluto hasta avanzado. Llegues con la edad, la timidez o las dos manos izquierdas que sea: hay un sitio hecho para ti.</p>
+
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:36px">
+        <sc-for list="{{ levels }}" as="lv" hint-placeholder-count="4">
+          <div style="background:#fff;border:1px solid rgba(40,30,20,.08);border-radius:16px;padding:20px 18px;box-shadow:0 10px 28px -20px rgba(40,30,20,.5)">
+            <div style="font-family:Anton;font-size:30px;color:#E8A87C;line-height:1">{{ lv.n }}</div>
+            <div style="font-family:Inter;font-size:14px;font-weight:600;color:#1a1512;margin-top:8px">{{ lv.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LO QUE VAS A VIVIR ============ -->
+  <section style="background:#FBF6EE;padding:clamp(64px,9vw,120px) 0">
+    <div style="width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,56px)">
+      <span data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);display:block;font-family:Inter;font-size:12px;font-weight:700;letter-spacing:.18em;color:#C0202A;text-transform:uppercase">Lo que vas a vivir</span>
+      <h2 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);font-family:Anton;font-weight:400;font-size:clamp(34px,5.5vw,66px);line-height:.98;letter-spacing:.01em;text-transform:uppercase;color:#1a1512;margin-top:14px;max-width:18ch;text-wrap:balance">Más que pasos: una forma de sentirte</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:40px">
+        <sc-for list="{{ experience }}" as="e" hint-placeholder-count="3">
+          <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);background:#fff;border-radius:22px;padding:30px;box-shadow:0 14px 40px -24px rgba(40,30,20,.55);border:1px solid rgba(40,30,20,.05)">
+            <span style="width:40px;height:40px;border-radius:13px;background:{{ e.accent }};display:block"></span>
+            <h3 style="font-family:Anton;font-weight:400;font-size:clamp(24px,2.4vw,30px);letter-spacing:.01em;color:#1a1512;text-transform:uppercase;margin:18px 0 10px">{{ e.title }}</h3>
+            <p style="font-family:Inter;font-size:16px;line-height:1.6;color:#6b6052">{{ e.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUÉ SE BAILA · MODALIDADES ============ -->
+  <section style="background:#FBF6EE;padding:0 0 clamp(64px,9vw,120px)">
+    <div style="width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,56px)">
+      <span data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);display:block;font-family:Inter;font-size:12px;font-weight:700;letter-spacing:.18em;color:#C0202A;text-transform:uppercase">Qué se baila</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:26px">
+        <sc-for list="{{ modalidades }}" as="m" hint-placeholder-count="2">
+          <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);position:relative;border-radius:24px;overflow:hidden;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;background:#2a1d18;background-image:repeating-linear-gradient(135deg,rgba(232,168,124,.32) 0 14px,rgba(232,168,124,.10) 14px 28px)">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,14,11,.05) 30%,rgba(20,14,11,.85) 100%)"></div>
+            <div style="position:absolute;top:14px;left:14px;font-family:ui-monospace,Menlo,monospace;font-size:10px;color:rgba(255,255,255,.75);background:rgba(0,0,0,.3);padding:3px 8px;border-radius:6px">{{ m.ph }}</div>
+            <div style="position:relative;z-index:1;padding:28px">
+              <span style="font-family:Inter;font-size:11px;font-weight:700;letter-spacing:.16em;color:#E8A87C;text-transform:uppercase">Modalidad</span>
+              <h3 style="font-family:Anton;font-weight:400;font-size:clamp(34px,4.5vw,52px);line-height:.95;text-transform:uppercase;margin:8px 0 8px">{{ m.name }}</h3>
+              <p style="font-family:Inter;font-size:15px;line-height:1.55;color:rgba(255,255,255,.82);max-width:36ch">{{ m.vibe }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LA COMUNIDAD · RESEÑAS DE GOOGLE ============ -->
+  <section style="background:#F6EFE4;padding:clamp(64px,9vw,120px) 0">
+    <div style="width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,56px)">
+      <span data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);display:block;font-family:Inter;font-size:12px;font-weight:700;letter-spacing:.18em;color:#C0202A;text-transform:uppercase">El corazón</span>
+      <h2 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);font-family:Anton;font-weight:400;font-size:clamp(34px,5.5vw,66px);line-height:.98;letter-spacing:.01em;text-transform:uppercase;color:#1a1512;margin-top:14px;max-width:16ch;text-wrap:balance">El corazón son las personas</h2>
+
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);display:inline-flex;align-items:center;gap:12px;margin-top:18px;background:#fff;border:1px solid rgba(40,30,20,.08);border-radius:999px;padding:10px 18px;box-shadow:0 10px 26px -20px rgba(40,30,20,.5)">
+        <span style="font-family:Anton;font-size:26px;color:#1a1512;line-height:1">4,9</span>
+        <span style="color:#F2A900;letter-spacing:1px;font-size:16px">★★★★★</span>
+        <span style="font-family:Inter;font-size:13px;font-weight:600;color:#6b6052">Reseñas reales en Google</span>
+      </div>
+
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:30px">
+        <div style="grid-row:span 2;position:relative;border-radius:18px;overflow:hidden;min-height:300px;background:#efe1d0;background-image:repeating-linear-gradient(135deg,rgba(232,168,124,.30) 0 12px,rgba(232,168,124,.10) 12px 24px);display:flex;align-items:flex-end;padding:12px">
+          <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#9a8a76;background:rgba(255,255,255,.8);padding:3px 8px;border-radius:6px">[ fiesta ]</span>
+        </div>
+        <div style="position:relative;border-radius:18px;overflow:hidden;min-height:144px;background:#efe1d0;background-image:repeating-linear-gradient(135deg,rgba(192,32,42,.16) 0 12px,rgba(192,32,42,.05) 12px 24px);display:flex;align-items:flex-end;padding:12px">
+          <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#9a8a76;background:rgba(255,255,255,.8);padding:3px 8px;border-radius:6px">[ masterclass ]</span>
+        </div>
+        <div style="position:relative;border-radius:18px;overflow:hidden;min-height:144px;background:#efe1d0;background-image:repeating-linear-gradient(135deg,rgba(232,168,124,.30) 0 12px,rgba(232,168,124,.10) 12px 24px);display:flex;align-items:flex-end;padding:12px">
+          <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#9a8a76;background:rgba(255,255,255,.8);padding:3px 8px;border-radius:6px">[ caras ]</span>
+        </div>
+        <div style="grid-column:1 / -1;position:relative;border-radius:18px;overflow:hidden;min-height:130px;background:#efe1d0;background-image:repeating-linear-gradient(135deg,rgba(192,32,42,.14) 0 12px,rgba(232,168,124,.12) 12px 24px);display:flex;align-items:flex-end;padding:12px">
+          <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#9a8a76;background:rgba(255,255,255,.8);padding:3px 8px;border-radius:6px">[ noche social · directo ]</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:16px">
+        <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+          <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);background:#fff;border-radius:18px;padding:24px;box-shadow:0 14px 40px -26px rgba(40,30,20,.55);border:1px solid rgba(40,30,20,.05);display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+              <div style="display:flex;align-items:center;gap:11px;min-width:0">
+                <span style="width:42px;height:42px;border-radius:50%;flex:none;background:{{ r.hue }};color:#fff;font-family:Inter;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center">{{ r.initial }}</span>
+                <div style="min-width:0">
+                  <div style="font-family:Inter;font-weight:700;font-size:14px;color:#1a1512">{{ r.name }}</div>
+                  <div style="font-family:Inter;font-size:12px;color:#9a8b78">{{ r.date }}</div>
+                </div>
+              </div>
+              <span style="font-family:Inter;font-size:11px;font-weight:700;color:#5b5142;border:1px solid rgba(40,30,20,.12);border-radius:999px;padding:4px 9px;flex:none">Google</span>
+            </div>
+            <div style="color:#F2A900;letter-spacing:1px;font-size:15px;margin-top:14px">★★★★★</div>
+            <p style="font-family:Inter;font-size:15px;line-height:1.6;color:#33291f;margin-top:10px">{{ r.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUIÉN TE ACOMPAÑA ============ -->
+  <section style="background:#FBF6EE;padding:clamp(64px,9vw,120px) 0">
+    <div style="width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,56px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,56px);align-items:center">
+        <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);position:relative;border-radius:24px;overflow:hidden;min-height:360px;background:#efe1d0;background-image:repeating-linear-gradient(135deg,rgba(232,168,124,.30) 0 14px,rgba(232,168,124,.10) 14px 28px);display:flex;align-items:flex-end;padding:14px">
+          <span style="font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#9a8a76;background:rgba(255,255,255,.82);padding:4px 9px;border-radius:6px">[ foto de grupo · el equipo + alumnos ]</span>
+        </div>
+        <div>
+          <span data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);display:block;font-family:Inter;font-size:12px;font-weight:700;letter-spacing:.18em;color:#C0202A;text-transform:uppercase">Quién te acompaña</span>
+          <h2 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);font-family:Anton;font-weight:400;font-size:clamp(32px,5vw,58px);line-height:.98;letter-spacing:.01em;text-transform:uppercase;color:#1a1512;margin-top:14px;max-width:16ch;text-wrap:balance">Detrás de cada paso, los mejores</h2>
+          <p data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);margin-top:18px;font-family:Inter;font-size:clamp(16px,1.4vw,19px);line-height:1.65;color:#4a4136;max-width:54ch">No te suelta nadie. Un equipo de profesores en formación constante que cuida el detalle de cada movimiento, corrige con cariño y adapta la clase a tu nivel. Aquí te conocen por tu nombre desde el primer día.</p>
+          <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);display:flex;flex-wrap:wrap;gap:10px;margin-top:22px">
+            <span style="font-family:Inter;font-size:13px;font-weight:600;color:#5b5142;background:#fff;border:1px solid rgba(40,30,20,.1);padding:11px 17px;border-radius:999px">Te corrigen el detalle</span>
+            <span style="font-family:Inter;font-size:13px;font-weight:600;color:#5b5142;background:#fff;border:1px solid rgba(40,30,20,.1);padding:11px 17px;border-radius:999px">Te conocen por tu nombre</span>
+            <span style="font-family:Inter;font-size:13px;font-weight:600;color:#5b5142;background:#fff;border:1px solid rgba(40,30,20,.1);padding:11px 17px;border-radius:999px">Formación constante</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOUNDING MEMBER ============ -->
+  <section style="background:#0A0A0A;color:#fff;padding:clamp(70px,10vw,130px) 0;position:relative;overflow:hidden">
+    <div style="position:absolute;top:-140px;left:50%;transform:translateX(-50%);width:680px;height:380px;max-width:120vw;background:radial-gradient(ellipse at center,rgba(212,175,55,.22),transparent 70%);pointer-events:none"></div>
+    <div style="position:relative;z-index:1;width:100%;max-width:680px;margin:0 auto;padding:0 clamp(20px,5vw,56px)">
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);text-align:center">
+        <span style="display:block;font-family:Inter;font-size:12px;font-weight:800;letter-spacing:.2em;color:#D4AF37;text-transform:uppercase">Plazas fundadoras</span>
+        <h2 style="font-family:Anton;font-weight:400;font-size:clamp(36px,6vw,64px);line-height:.96;letter-spacing:.01em;text-transform:uppercase;color:#fff;margin-top:14px;text-wrap:balance">Sé fundador desde el día uno</h2>
+        <p style="font-family:Inter;font-size:clamp(16px,1.4vw,18px);line-height:1.6;color:rgba(255,255,255,.72);margin-top:14px;max-width:42ch;margin-left:auto;margin-right:auto">Perteneces antes que nadie y tu tarifa queda bloqueada de por vida. Plazas contadas.</p>
+      </div>
+
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);margin-top:30px;border:1.5px solid rgba(212,175,55,.55);background:linear-gradient(180deg,#151310,#0d0b09);border-radius:26px;padding:clamp(24px,4vw,40px);box-shadow:0 50px 90px -40px rgba(212,175,55,.45)">
+        <div style="display:flex;justify-content:center">
+          <span style="font-family:Inter;font-size:11px;font-weight:800;letter-spacing:.12em;color:#D4AF37;background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.4);padding:7px 14px;border-radius:999px;text-transform:uppercase">Precio bloqueado de por vida</span>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:center;gap:10px;margin-top:18px">
+          <span style="font-family:Anton;font-size:clamp(54px,9vw,76px);color:#D4AF37;line-height:1">{{ price }}</span>
+          <span style="font-family:Inter;font-size:17px;color:#c9bda3">/mes</span>
+          <span style="font-family:Inter;font-size:19px;color:#7d7460;text-decoration:line-through">{{ priceOld }}</span>
+        </div>
+
+        <div style="font-family:Inter;font-size:12px;font-weight:600;letter-spacing:.05em;color:#b9a98a;text-align:center;text-transform:uppercase;margin-top:24px">La tarifa fundadora cierra en</div>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:12px">
+          <div style="flex:1;max-width:96px;background:rgba(212,175,55,.10);border:1px solid rgba(212,175,55,.3);border-radius:12px;padding:13px 6px;text-align:center">
+            <div data-cd="days" style="font-family:Anton;font-size:clamp(30px,4vw,38px);color:#D4AF37;line-height:1">00</div>
+            <div style="font-family:Inter;font-size:10px;letter-spacing:.12em;color:#b9a98a;margin-top:6px">DÍAS</div>
+          </div>
+          <div style="flex:1;max-width:96px;background:rgba(212,175,55,.10);border:1px solid rgba(212,175,55,.3);border-radius:12px;padding:13px 6px;text-align:center">
+            <div data-cd="hours" style="font-family:Anton;font-size:clamp(30px,4vw,38px);color:#D4AF37;line-height:1">00</div>
+            <div style="font-family:Inter;font-size:10px;letter-spacing:.12em;color:#b9a98a;margin-top:6px">HORAS</div>
+          </div>
+          <div style="flex:1;max-width:96px;background:rgba(212,175,55,.10);border:1px solid rgba(212,175,55,.3);border-radius:12px;padding:13px 6px;text-align:center">
+            <div data-cd="mins" style="font-family:Anton;font-size:clamp(30px,4vw,38px);color:#D4AF37;line-height:1">00</div>
+            <div style="font-family:Inter;font-size:10px;letter-spacing:.12em;color:#b9a98a;margin-top:6px">MIN</div>
+          </div>
+          <div style="flex:1;max-width:96px;background:rgba(212,175,55,.10);border:1px solid rgba(212,175,55,.3);border-radius:12px;padding:13px 6px;text-align:center">
+            <div data-cd="secs" style="font-family:Anton;font-size:clamp(30px,4vw,38px);color:#D4AF37;line-height:1">00</div>
+            <div style="font-family:Inter;font-size:10px;letter-spacing:.12em;color:#b9a98a;margin-top:6px">SEG</div>
+          </div>
+        </div>
+
+        <div style="margin-top:24px">
+          <div style="display:flex;justify-content:space-between;font-family:Inter;font-size:12px;color:#c9bda3;margin-bottom:8px"><span>Plazas fundadoras</span><span>{{ spotsLabel }}</span></div>
+          <div style="height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden"><div style="height:100%;border-radius:99px;background:linear-gradient(90deg,#D4AF37,#E8A87C);width:{{ takenPct }}"></div></div>
+        </div>
+
+        <a href="{{ waLink }}" style="margin-top:24px;display:flex;align-items:center;justify-content:center;gap:12px;background:#D4AF37;color:#1a1208;text-decoration:none;padding:18px;border-radius:14px;font-family:Inter;font-weight:800;font-size:16px;box-shadow:0 16px 38px -10px rgba(212,175,55,.6);transition:transform .25s ease" style-hover="transform:translateY(-3px)">
+          <span style="width:20px;height:20px;background:#1a1208;border-radius:8px 8px 8px 2px;flex:none"></span>
+          Quiero mi plaza fundadora
+        </a>
+        <p style="margin-top:12px;font-family:Inter;font-size:12px;color:#8a8070;text-align:center">Sin permanencia. La tarifa fundadora no vuelve.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CÓMO EMPEZAR ============ -->
+  <section style="background:#F6EFE4;padding:clamp(64px,9vw,120px) 0">
+    <div style="width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,56px)">
+      <span data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);display:block;font-family:Inter;font-size:12px;font-weight:700;letter-spacing:.18em;color:#C0202A;text-transform:uppercase">Cómo empezar</span>
+      <h2 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);font-family:Anton;font-weight:400;font-size:clamp(34px,5.5vw,66px);line-height:.98;letter-spacing:.01em;text-transform:uppercase;color:#1a1512;margin-top:14px">Tres pasos y estás dentro</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(22px,3vw,40px);margin-top:44px">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+          <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);border-top:2px solid rgba(40,30,20,.12);padding-top:18px">
+            <span style="font-family:Anton;font-size:clamp(40px,5vw,56px);color:#E8A87C;line-height:.85;display:block">{{ s.n }}</span>
+            <h3 style="font-family:Anton;font-weight:400;font-size:clamp(22px,2.4vw,28px);color:#1a1512;text-transform:uppercase;margin:14px 0 8px">{{ s.title }}</h3>
+            <p style="font-family:Inter;font-size:16px;line-height:1.6;color:#6b6052;max-width:34ch">{{ s.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section style="background:#FBF6EE;padding:clamp(64px,9vw,120px) 0">
+    <div style="width:100%;max-width:780px;margin:0 auto;padding:0 clamp(20px,5vw,56px)">
+      <span data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);display:block;font-family:Inter;font-size:12px;font-weight:700;letter-spacing:.18em;color:#C0202A;text-transform:uppercase">Antes de escribir</span>
+      <h2 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);font-family:Anton;font-weight:400;font-size:clamp(34px,5.5vw,66px);line-height:.98;letter-spacing:.01em;text-transform:uppercase;color:#1a1512;margin-top:14px">Dudas rápidas</h2>
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);margin-top:26px">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="5">
+          <div data-faq data-open="0" style="border-bottom:1px solid rgba(40,30,20,.12)">
+            <button data-faq-q style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;background:none;border:none;padding:20px 0;cursor:pointer;text-align:left">
+              <span style="font-family:Inter;font-size:clamp(16px,1.6vw,18px);font-weight:600;color:#1a1512">{{ f.q }}</span>
+              <span data-faq-ic style="font-family:Inter;font-weight:400;font-size:28px;color:#C0202A;line-height:1;transition:transform .3s ease;flex:none">+</span>
+            </button>
+            <div data-faq-a style="max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .3s ease">
+              <p style="font-family:Inter;font-size:16px;line-height:1.6;color:#6b6052;padding-bottom:18px">{{ f.a }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section style="background:#C0202A;color:#fff;padding:clamp(70px,10vw,130px) 0">
+    <div style="width:100%;max-width:780px;margin:0 auto;padding:0 clamp(20px,5vw,56px);text-align:center">
+      <span data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);display:block;font-family:Inter;font-size:12px;font-weight:700;letter-spacing:.2em;color:rgba(255,255,255,.8);text-transform:uppercase">Último paso</span>
+      <h2 data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);font-family:Anton;font-weight:400;font-size:clamp(52px,12vw,110px);line-height:.9;letter-spacing:.01em;text-transform:uppercase;margin-top:14px">¿Empezamos?</h2>
+      <p data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);margin-top:16px;font-family:Inter;font-size:clamp(16px,1.5vw,19px);line-height:1.6;color:rgba(255,255,255,.88)">Tu primera clase de prueba está a un mensaje de distancia.</p>
+      <div data-reveal style="opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);margin-top:30px;display:flex;justify-content:center">
+        <a href="{{ waLink }}" style="display:inline-flex;align-items:center;justify-content:center;gap:12px;background:#fff;color:#C0202A;text-decoration:none;padding:20px 34px;border-radius:16px;font-family:Inter;font-weight:800;font-size:clamp(16px,1.6vw,18px);box-shadow:0 18px 44px -12px rgba(0,0,0,.45);transition:transform .25s ease" style-hover="transform:translateY(-3px)">
+          <span style="width:20px;height:20px;background:#C0202A;border-radius:8px 8px 8px 2px;flex:none"></span>
+          Escríbenos por WhatsApp
+        </a>
+      </div>
+      <p style="margin-top:14px;font-family:Inter;font-size:13px;color:rgba(255,255,255,.72)">Respondemos rápido. De verdad.</p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:#0A0A0A;color:#fff;padding:clamp(48px,6vw,72px) 0 110px">
+    <div style="width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px">
+      <div>
+        <div style="display:flex;align-items:baseline;gap:8px">
+          <span style="font-family:Anton;font-size:26px;letter-spacing:.04em;color:#fff;text-transform:uppercase">Aranha</span>
+          <span style="font-family:Inter;font-size:10px;font-weight:700;letter-spacing:.3em;color:#E8A87C;text-transform:uppercase">Baile</span>
+        </div>
+        <p style="font-family:Inter;font-size:14px;line-height:1.6;color:rgba(255,255,255,.6);margin-top:14px;max-width:38ch">Escuela de salsa cubana y bachata. Dentro del gimnasio Aranha · Vilanova i la Geltrú.</p>
+      </div>
+      <div>
+        <div style="font-family:Inter;font-size:11px;font-weight:700;letter-spacing:.16em;color:rgba(255,255,255,.45);text-transform:uppercase">Dónde</div>
+        <p style="font-family:ui-monospace,Menlo,monospace;font-size:13px;color:rgba(255,255,255,.7);margin-top:12px;line-height:1.7">C/ ____<br>Vilanova i la Geltrú</p>
+      </div>
+      <div>
+        <div style="font-family:Inter;font-size:11px;font-weight:700;letter-spacing:.16em;color:rgba(255,255,255,.45);text-transform:uppercase">Síguenos</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px">
+          <a href="#" style="font-family:Inter;font-size:13px;font-weight:600;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.2);padding:9px 16px;border-radius:999px;transition:background .2s ease" style-hover="background:rgba(255,255,255,.08)">Instagram</a>
+          <a href="#" style="font-family:Inter;font-size:13px;font-weight:600;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.2);padding:9px 16px;border-radius:999px;transition:background .2s ease" style-hover="background:rgba(255,255,255,.08)">TikTok</a>
+          <a href="{{ waLink }}" style="font-family:Inter;font-size:13px;font-weight:600;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.2);padding:9px 16px;border-radius:999px;transition:background .2s ease" style-hover="background:rgba(255,255,255,.08)">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div style="width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,56px)">
+      <div style="height:1px;background:rgba(255,255,255,.12);margin:32px 0 16px"></div>
+      <p style="font-family:Inter;font-size:12px;color:rgba(255,255,255,.4)">© 2026 Aranha Baile · Hecho con ritmo</p>
+    </div>
+  </footer>
+
+  <!-- ============ STICKY WHATSAPP ============ -->
+  <div data-sticky style="position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;justify-content:center;padding:14px 16px;pointer-events:none;transform:translateY(140%);transition:transform .45s cubic-bezier(.2,.8,.2,1)">
+    <a href="{{ waLink }}" style="position:relative;pointer-events:auto;display:flex;align-items:center;gap:11px;background:#C0202A;color:#fff;text-decoration:none;padding:16px 28px;border-radius:999px;font-family:Inter;font-weight:700;font-size:15px;box-shadow:0 14px 34px -8px rgba(192,32,42,.6)">
+      <span style="position:absolute;inset:0;border-radius:999px;background:#C0202A;z-index:-1;animation:pulsering 2.6s ease-out infinite"></span>
+      <span style="width:18px;height:18px;background:#fff;border-radius:7px 7px 7px 2px;flex:none"></span>
+      Reserva tu clase de prueba
+    </a>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:820},&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;34600000000&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;foundingPrice&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;50€&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;foundingPriceOld&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;55&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;spotsLeft&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:9,&quot;min&quot;:0,&quot;max&quot;:60,&quot;tsType&quot;:&quot;number&quot;},&quot;spotsTotal&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:20,&quot;min&quot;:1,&quot;max&quot;:100,&quot;tsType&quot;:&quot;number&quot;},&quot;deadline&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;2026-06-30T23:59:59&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const num = (this.props.whatsappNumber ?? '34600000000').replace(/[^0-9]/g, '');
+    const waLink = 'https://wa.me/' + num + '?text=' + encodeURIComponent('Hola! Me gustaría info de la clase de prueba de baile 🙂');
+    const left = this.props.spotsLeft ?? 9;
+    const total = this.props.spotsTotal ?? 30;
+    const takenPct = Math.max(6, Math.round((total - left) / total * 100)) + '%';
+    return {
+      waLink,
+      price: this.props.foundingPrice ?? '29€',
+      priceOld: this.props.foundingPriceOld ?? '45€',
+      spotsLabel: 'Quedan ' + left + ' / ' + total,
+      takenPct,
+      levels: [
+        { n: '00', label: 'Nunca he bailado' },
+        { n: '01', label: 'Empiezo' },
+        { n: '02', label: 'Intermedio' },
+        { n: '03', label: 'Avanzado' },
+      ],
+      experience: [
+        { title: 'Progresas sin agobio', text: 'A tu ritmo y por niveles reales. Avanzas cuando estás listo, nunca antes.', accent: '#C0202A' },
+        { title: 'Una comunidad de verdad', text: 'Llegas solo y te vas con gente. El finde empieza aquí, en la pista.', accent: '#E8A87C' },
+        { title: 'Sales sintiéndote capaz', text: 'Cada clase, un poco más tú. La confianza también se baila.', accent: '#D4AF37' },
+      ],
+      modalidades: [
+        { name: 'Salsa cubana', vibe: 'El sabor del son y la rueda de casino. Energía, giros y mucha risa en grupo.', ph: '[ foto · salsa ]' },
+        { name: 'Bachata', vibe: 'Sensibilidad, musicalidad y conexión. La que engancha desde el primer día.', ph: '[ foto · bachata ]' },
+        { name: 'Reparto', vibe: 'El género urbano que arrasa en La Habana. Movimiento, actitud y mucha calle.', ph: '[ foto · reparto ]' },
+        { name: 'Reggaeton', vibe: 'Perreo con técnica y estilo. Suena fuerte, se siente más fuerte.', ph: '[ foto · reggaeton ]' },
+        { name: 'Lady Style', vibe: 'Feminidad, expresión y soltura. Para brillar en cualquier pista.', ph: '[ foto · lady style ]' },
+        { name: 'Heels', vibe: 'Potencia, actitud y glamour. Con o sin tacones, la energía es la misma.', ph: '[ foto · heels ]' },
+      ],
+      reviews: [
+        { name: 'Laura M.', date: 'hace 3 semanas', initial: 'L', hue: '#C0202A', text: 'Entré muerta de vergüenza y a las dos semanas ya no quería irme. El ambiente es increíble y los profes muy atentos.' },
+        { name: 'Marc R.', date: 'hace 1 mes', initial: 'M', hue: '#E8A87C', text: 'No conocía a nadie y ahora son mi gente. Se nota que cuidan a cada alumno, vayas al nivel que vayas.' },
+        { name: 'Nuria P.', date: 'hace 2 meses', initial: 'N', hue: '#D4AF37', text: 'Pensaba que el baile no era para mí. Me equivocaba bonito. Empecé de cero y voy avanzando sin presión.' },
+      ],
+      steps: [
+        { n: '01', title: 'Escríbenos', text: 'Un mensaje por WhatsApp. Sin formularios, sin compromiso.' },
+        { n: '02', title: 'Te decimos cuándo', text: 'Te proponemos el mejor día y nivel para tu primera clase de prueba.' },
+        { n: '03', title: 'Vienes a probar', text: 'Bailas, ríes y decides. Sin presión, a tu ritmo.' },
+      ],
+      faqs: [
+        { q: '¿Dónde estáis?', a: 'Dentro del gimnasio Aranha, en Vilanova i la Geltrú. Buen ambiente desde la puerta.' },
+        { q: '¿Hay edad mínima o máxima?', a: 'No. Tenemos gente de los 18 a los 60+. El único requisito es tener ganas.' },
+        { q: '¿Qué nivel necesito?', a: 'El que tengas. Hay grupos desde cero absoluto hasta avanzado, y te ubicamos en el que mejor encaja contigo.' },
+        { q: '¿Necesito venir con pareja?', a: 'No hace falta. Rotamos en clase y conocerás a todo el grupo. Muchos vienen solos.' },
+        { q: '¿Qué llevo a la clase de prueba?', a: 'Ropa cómoda y unas zapatillas limpias. El resto lo ponemos nosotros.' },
+      ],
+    };
+  }
+
+  componentDidMount() {
+    const root = document.getElementById('aranha-root') || document;
+
+    // Scroll reveal with per-group stagger + robust fallback (some preview
+    // iframes freeze the animation timeline, pinning a running transition at 0).
+    const items = Array.from(root.querySelectorAll('[data-reveal]'));
+    const groups = new Map();
+    items.forEach(el => {
+      const p = el.parentElement;
+      const arr = groups.get(p) || [];
+      arr.push(el);
+      groups.set(p, arr);
+    });
+    groups.forEach(arr => arr.forEach((el, i) => { el.style.transitionDelay = (Math.min(i, 6) * 75) + 'ms'; }));
+    const hardForce = el => { el.style.transition = 'none'; el.style.opacity = '1'; el.style.transform = 'none'; el.dataset.shown = '1'; };
+    const show = el => {
+      if (el.dataset.shown === '1') return;
+      el.dataset.shown = '1';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      setTimeout(() => { if (parseFloat(getComputedStyle(el).opacity) < 0.99) hardForce(el); }, 820);
+    };
+    const revealInView = () => {
+      const h = window.innerHeight || document.documentElement.clientHeight;
+      items.forEach(el => {
+        if (el.dataset.shown === '1') return;
+        if (el.getBoundingClientRect().top < h - 40) show(el);
+      });
+    };
+    let io = null;
+    try {
+      io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+      items.forEach(el => io.observe(el));
+    } catch (err) { io = null; }
+    this._reveal = revealInView;
+    window.addEventListener('scroll', revealInView, { passive: true });
+    revealInView();
+    requestAnimationFrame(revealInView);
+    this._revealTimer = setTimeout(revealInView, 350);
+    this._revealTimer2 = setTimeout(() => items.forEach(el => {
+      if (el.getBoundingClientRect().top < (window.innerHeight || 800) && parseFloat(getComputedStyle(el).opacity) < 0.99) hardForce(el);
+    }), 1100);
+
+    // Countdown
+    const deadline = new Date(this.props.deadline ?? '2026-06-30T23:59:59');
+    const cd = {
+      days: root.querySelector('[data-cd="days"]'),
+      hours: root.querySelector('[data-cd="hours"]'),
+      mins: root.querySelector('[data-cd="mins"]'),
+      secs: root.querySelector('[data-cd="secs"]'),
+    };
+    const pad = n => String(n).padStart(2, '0');
+    const tick = () => {
+      let diff = Math.max(0, deadline.getTime() - Date.now());
+      const d = Math.floor(diff / 864e5); diff -= d * 864e5;
+      const h = Math.floor(diff / 36e5); diff -= h * 36e5;
+      const m = Math.floor(diff / 6e4); diff -= m * 6e4;
+      const s = Math.floor(diff / 1e3);
+      if (cd.days) cd.days.textContent = pad(d);
+      if (cd.hours) cd.hours.textContent = pad(h);
+      if (cd.mins) cd.mins.textContent = pad(m);
+      if (cd.secs) cd.secs.textContent = pad(s);
+    };
+    tick();
+    this._cd = setInterval(tick, 1000);
+
+    // FAQ accordion
+    root.querySelectorAll('[data-faq]').forEach(item => {
+      const btn = item.querySelector('[data-faq-q]');
+      const ans = item.querySelector('[data-faq-a]');
+      const ic = item.querySelector('[data-faq-ic]');
+      if (!btn || !ans) return;
+      btn.addEventListener('click', () => {
+        const open = item.getAttribute('data-open') === '1';
+        if (open) {
+          ans.style.maxHeight = '0px';
+          ans.style.opacity = '0';
+          if (ic) ic.style.transform = 'rotate(0deg)';
+          item.setAttribute('data-open', '0');
+        } else {
+          ans.style.maxHeight = ans.scrollHeight + 'px';
+          ans.style.opacity = '1';
+          if (ic) ic.style.transform = 'rotate(45deg)';
+          item.setAttribute('data-open', '1');
+        }
+      });
+    });
+
+    // Sticky WhatsApp after hero
+    const sticky = root.querySelector('[data-sticky]');
+    this._onScroll = () => {
+      if (!sticky) return;
+      const y = window.scrollY || window.pageYOffset || 0;
+      sticky.style.transform = y > 560 ? 'translateY(0)' : 'translateY(140%)';
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._cd);
+    clearTimeout(this._revealTimer);
+    clearTimeout(this._revealTimer2);
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('scroll', this._reveal);
+  }
+}
+</script>
+</body>
+</html>

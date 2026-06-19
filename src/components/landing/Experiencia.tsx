@@ -1,0 +1,35 @@
+import { Reveal } from "@/components/ui/Reveal";
+import { experience } from "@/content/landing";
+
+export function Experiencia() {
+  return (
+    <section className="bg-bg-cream py-[clamp(64px,9vw,120px)]">
+      <div className="container-aranha">
+        <Reveal as="span" className="block font-body text-xs font-bold uppercase tracking-[0.18em] text-red">
+          Lo que vas a vivir
+        </Reveal>
+        <Reveal delay={0.06}>
+          <h2 className="mt-3.5 max-w-[18ch] text-balance font-display text-[clamp(34px,5.5vw,66px)] leading-[0.98] text-text-strong">
+            Más que pasos: una forma de sentirte
+          </h2>
+        </Reveal>
+
+        <div className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-[18px]">
+          {experience.map((e, i) => (
+            <Reveal
+              key={e.title}
+              delay={i * 0.08}
+              className="rounded-lg border border-text-strong/5 bg-white p-[30px] shadow-card transition-transform duration-200 hover:-translate-y-1"
+            >
+              <span className={`block h-10 w-10 rounded-sm ${e.accent}`} />
+              <h3 className="mb-2.5 mt-[18px] font-display text-[clamp(24px,2.4vw,30px)] text-text-strong">
+                {e.title}
+              </h3>
+              <p className="font-body text-base leading-relaxed text-text-muted">{e.text}</p>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

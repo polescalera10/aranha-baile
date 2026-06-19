@@ -1,0 +1,61 @@
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { Reveal } from "@/components/ui/Reveal";
+
+/**
+ * Envoltorio de las páginas de soporte/SEO: cabecera sólida + banda de título
+ * + contenedor de contenido. Mantiene una sola intención por página.
+ */
+export function SupportPage({
+  eyebrow,
+  title,
+  intro,
+  children,
+}: {
+  eyebrow?: string;
+  title: string;
+  intro?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <>
+      <SiteHeader />
+      <main>
+        <section className="bg-ink pb-[clamp(40px,7vw,80px)] pt-[clamp(40px,7vw,72px)] text-white">
+          <div className="container-aranha">
+            {eyebrow && (
+              <Reveal as="span" className="block font-body text-xs font-bold uppercase tracking-[0.18em] text-warm">
+                {eyebrow}
+              </Reveal>
+            )}
+            <Reveal delay={0.06}>
+              <h1 className="mt-3 max-w-[20ch] text-balance font-display text-[clamp(36px,6vw,72px)] leading-[0.95]">
+                {title}
+              </h1>
+            </Reveal>
+            {intro && (
+              <Reveal delay={0.12}>
+                <p className="mt-4 max-w-[60ch] font-body text-[clamp(15px,1.4vw,18px)] leading-relaxed text-white/75">
+                  {intro}
+                </p>
+              </Reveal>
+            )}
+          </div>
+        </section>
+
+        <div className="bg-bg-base py-[clamp(48px,8vw,96px)]">
+          <div className="container-aranha">{children}</div>
+        </div>
+      </main>
+    </>
+  );
+}
+
+/** Caja de contenido placeholder para secciones aún sin desarrollar. */
+export function PlaceholderNote({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="rounded-lg border border-dashed border-text-strong/20 bg-white/60 p-8 font-body text-text-muted">
+      {/* PLACEHOLDER: copy/imágenes con agente */}
+      {children}
+    </div>
+  );
+}

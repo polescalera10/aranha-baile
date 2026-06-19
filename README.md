@@ -1,25 +1,108 @@
-# CODING AGENTS: READ THIS FIRST
+# Aranha Baile
 
-This is a **handoff bundle** from Claude Design (claude.ai/design).
+Web pública de la escuela de baile **Aranha** (salsa cubana, bachata y más) en Vilanova i la Geltrú.
+Objetivo nº1: convertir visitas en mensajes de **WhatsApp**. Construida sobre Supabase con el
+esquema preparado para crecer hacia un área privada con roles (alumno · profesor · admin).
 
-A user mocked up designs in HTML/CSS/JS using an AI design tool, then exported this bundle so a coding agent can implement the designs for real.
+## Stack
 
-## What you should do — IMPORTANT
+- **Next.js 15** (App Router, TypeScript estricto) — público en SSG/ISR, área privada dinámica.
+- **Tailwind CSS v4** — design tokens centralizados en `src/app/globals.css` (`@theme`).
+- **Supabase** — Postgres + Auth + RLS + Storage (`@supabase/ssr`).
+- **Framer Motion** — scroll reveal y microinteracciones (respeta `prefers-reduced-motion`).
+- **Zod** — validación en servidor. **Server Actions** para formularios.
+- **pnpm** · ESLint · Prettier.
 
-**Read the chat transcripts first.** There are 1 chat transcript(s) in `chats/`. The transcripts show the full back-and-forth between the user and the design assistant — they tell you **what the user actually wants** and **where they landed** after iterating. Don't skip them. The final HTML files are the output, but the chat is where the intent lives.
+## Arranque
 
-**Read `project/Aranha Baile.dc.html` in full.** The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
+```bash
+pnpm install
+cp .env.example .env.local   # rellena las variables
+pnpm dev                     # http://localhost:3000
+```
 
-**If anything is ambiguous, ask the user to confirm before you start implementing.** It's much cheaper to clarify scope up front than to build the wrong thing.
+La web compila y se ve **sin Supabase**: las modalidades caen a un fallback estático
+(`src/content/landing.ts`) si no hay variables de entorno.
 
-## About the design files
+### Variables de entorno
 
-The design medium is **HTML/CSS/JS** — these are prototypes, not production code. Your job is to **recreate them pixel-perfectly** in whatever technology makes sense for the target codebase (React, Vue, native, whatever fits). Match the visual output; don't copy the prototype's internal structure unless it happens to fit.
+| Variable | Ámbito | Descripción |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | público | URL del proyecto Supabase |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | público | Anon key |
+| `SUPABASE_SERVICE_ROLE_KEY` | **solo servidor** | Service role (salta RLS) |
+| `N8N_WEBHOOK_URL` | **solo servidor** | Webhook n8n (email + WhatsApp) |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | público | Teléfono WhatsApp (ej: `34600000000`) |
+| `NEXT_PUBLIC_SITE_URL` | público | URL canónica (metadata/sitemap) |
 
-**Don't render these files in a browser or take screenshots unless the user asks you to.** Everything you need — dimensions, colors, layout rules — is spelled out in the source. Read the HTML and CSS directly; a screenshot won't tell you anything they don't.
+## Supabase
 
-## Bundle contents
+Migraciones versionadas en `supabase/migrations/` y datos base en `supabase/seed.sql`.
 
-- `README.md` — this file
-- `chats/` — conversation transcripts (read these!)
-- `project/` — the `Design questions answered` project files (HTML prototypes, assets, components)
+```bash
+supabase start            # entorno local
+pnpm db:reset             # aplica migraciones + seed
+pnpm db:push              # empuja migraciones al proyecto vinculado
+pnpm db:types             # regenera src/types/database.ts desde la BD
+```
+
+Esquema: `profiles` (roles + trigger de alta), `leads` (insert público, lectura admin),
+`modalidades`, `niveles`, `clases`, `inscripciones`, `suscripciones` (seguimiento, sin pago),
+`asistencia`, `contenido`, `eventos`. **RLS** activado en todas las tablas (`0008_rls_policies.sql`):
+anon solo inserta leads y lee catálogo público; alumno ve lo suyo; profesor gestiona sus clases;
+admin todo.
+
+## Mapa de rutas
+
+```
+/                          Landing (objetivo WhatsApp)               público · ISR
+/clases/[modalidad]        Página por modalidad (generateStaticParams) público · ISR
+/profesores · /profesores/[slug]                                      público
+/horarios /eventos /sobre-nosotros /contacto /faq                     público
+/aviso-legal /privacidad /cookies                                     público
+/area-privada              Login (Supabase Auth) → redirige por rol    NOINDEX
+/area-privada/{alumno|profesor|admin}   Placeholder protegido          NOINDEX
+sitemap.xml · robots.txt
+```
+
+`middleware.ts` refresca la sesión y protege `/area-privada/**` (redirige al login sin sesión y al
+panel correcto según rol).
+
+## Formularios → CRM
+
+Los formularios (clase de prueba, founding, contacto) usan una **Server Action**
+(`src/lib/actions/leads.ts`): validan con Zod → insertan en `leads` → hacen `POST` al webhook de
+n8n (que gestiona email + WhatsApp). El webhook nunca se expone al cliente.
+
+## Estructura
+
+```
+src/
+├── app/
+│   ├── (public)/        landing + páginas SEO (layout con footer + sticky WA)
+│   ├── area-privada/    login + paneles por rol
+│   ├── layout.tsx       fuentes (next/font) + JSON-LD LocalBusiness
+│   ├── sitemap.ts robots.ts globals.css (TOKENS)
+├── components/  landing · layout · ui · forms · seo · area
+├── lib/         supabase · actions · validation · queries · whatsapp · site · auth
+├── content/     copy de la landing (placeholder)
+└── types/       database.ts
+supabase/migrations · supabase/seed.sql
+design-reference/    bundle original de Claude Design (prototipo + chats)
+```
+
+## Tokens de diseño
+
+Toda la marca vive en `@theme` (`globals.css`): colores (`ink`, `red`, `gold`, `warm`, fondos
+cálidos, jerarquía de texto), tipografías (`font-display` Anton, `font-body` Inter), radios y
+sombras. **Regla:** nada de colores sueltos en JSX, siempre vía token.
+
+## i18n
+
+Estructura lista para añadir catalán (CA) con `hreflang` más adelante. ES por defecto; sin traducir
+todavía.
+
+## Pendiente / PLACEHOLDER
+
+Buscar `PLACEHOLDER` en el código: copy final, fotografía real a color, NAP (dirección/teléfono),
+redes sociales, textos legales y datos del bloque Founding.

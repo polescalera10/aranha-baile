@@ -1,0 +1,20 @@
+# Configuración mínima del proyecto local de Supabase.
+# Ajusta project_id al ref de tu proyecto si vinculas con `supabase link`.
+project_id = "aranha-baile"
+
+[db]
+port = 54322
+major_version = 15
+
+[api]
+port = 54321
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+
+[studio]
+port = 54323
+
+[auth]
+enable_signup = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://localhost:3000/area-privada"]

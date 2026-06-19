@@ -1,0 +1,103 @@
+import Link from "next/link";
+import { Logo } from "@/components/layout/Logo";
+import { buildWaLink } from "@/lib/whatsapp";
+import { site } from "@/lib/site";
+
+const PILL =
+  "rounded-full border border-white/20 px-4 py-[9px] font-body text-[13px] font-semibold text-white no-underline transition-colors hover:bg-white/8";
+
+const COL_LABEL =
+  "font-body text-[11px] font-bold uppercase tracking-[0.16em] text-white/45";
+
+const EXPLORA: ReadonlyArray<readonly [string, string]> = [
+  ["/clases/salsa-cubana", "Clases"],
+  ["/eventos", "Eventos"],
+  ["/sobre-nosotros", "Sobre nosotros"],
+  ["/contacto", "Contacto"],
+];
+
+const LEGAL: ReadonlyArray<readonly [string, string]> = [
+  ["/aviso-legal", "Aviso legal"],
+  ["/privacidad", "Privacidad"],
+  ["/cookies", "Cookies"],
+];
+
+/**
+ * Footer global con NAP consistente (Name · Address · Phone) para SEO local.
+ */
+export function Footer() {
+  return (
+    <footer className="bg-ink pb-28 pt-[clamp(48px,6vw,72px)] text-white">
+      <div className="container-aranha grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-7">
+        <div>
+          <Logo size={26} />
+          <p className="mt-3.5 max-w-[38ch] font-body text-sm leading-relaxed text-white/60">
+            Escuela de salsa cubana y bachata. Dentro del gimnasio Aranha · {site.nap.addressLocality}.
+          </p>
+        </div>
+
+        <div>
+          <div className={COL_LABEL}>Dónde</div>
+          <address className="mt-3 font-mono text-[13px] not-italic leading-7 text-white/70">
+            {site.nap.streetAddress}
+            <br />
+            {site.nap.postalCode} {site.nap.addressLocality}
+            <br />
+            {site.nap.telephoneDisplay}
+          </address>
+        </div>
+
+        <div>
+          <div className={COL_LABEL}>Explora</div>
+          <ul className="mt-3 flex flex-col gap-2">
+            {EXPLORA.map(([href, label]) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className="font-body text-[13px] text-white/70 no-underline transition-colors hover:text-white"
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <div className={COL_LABEL}>Síguenos</div>
+          <div className="mt-3 flex flex-wrap gap-2.5">
+            <a href={site.social.instagram} className={PILL}>
+              Instagram
+            </a>
+            <a href={site.social.tiktok} className={PILL}>
+              TikTok
+            </a>
+            <a href={buildWaLink("footer")} target="_blank" rel="noopener noreferrer" className={PILL}>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-aranha">
+        <div className="my-4 mt-8 h-px bg-white/12" />
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="font-body text-xs text-white/40">
+            © {new Date().getFullYear()} {site.name} · Hecho con ritmo
+          </p>
+          <div className="flex gap-4">
+            {LEGAL.map(([href, label]) => (
+              <Link
+                key={href}
+                href={href}
+                className="font-body text-xs text-white/40 no-underline transition-colors hover:text-white/70"
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

@@ -130,11 +130,42 @@ export const ctaFinal = {
   note: "Respondemos rápido. De verdad.",
 };
 
-/** Founding Member — datos editables (placeholder). */
+/**
+ * Founding Member — oferta de fundadores.
+ *
+ * REGLA DE HONESTIDAD (Directiva Omnibus / competencia desleal):
+ * la cuenta atrás y las plazas SOLO se muestran si son reales. Mientras los
+ * campos numéricos sean null, la UI no pinta contador ni barra de plazas, y la
+ * urgencia se sostiene solo con hechos ciertos (aforo físico limitado, tarifa
+ * ligada a la apertura).
+ */
 export const founding = {
-  price: "50€",
-  priceOld: "65€",
-  spotsLeft: 9,
-  spotsTotal: 20,
-  deadline: "2026-06-30T23:59:59",
+  kicker: "Plazas fundadoras",
+  title: "Sé fundador desde el día uno",
+  subtitle:
+    "Los primeros alumnos abren la escuela con nosotros: tu cuota queda bloqueada mientras sigas de alta y tu nombre forma parte de la historia desde el principio.",
+  badge: "Cuota bloqueada mientras sigas de alta",
+  // TODO: precio real de la cuota fundadora y cuota estándar de referencia.
+  price: "XX €",
+  priceOld: "XX €",
+  /**
+   * Plazas fundadoras REALES. Los grupos tienen aforo físico limitado, pero el
+   * número exacto debe salir de la capacidad real de la sala.
+   * TODO: aforo real → spotsTotal, y actualizar spotsLeft a mano o desde BD.
+   * Mientras sean null no se muestra la barra de plazas.
+   */
+  spotsLeft: null as number | null,
+  spotsTotal: null as number | null,
+  /**
+   * Fecha límite REAL de la tarifa fundadora (fin del periodo de apertura).
+   * TODO: fecha real de cierre. Mientras sea null no se muestra la cuenta atrás.
+   */
+  deadline: null as string | null,
+  deadlineLabel: "La tarifa fundadora cierra en",
+  /** Urgencia basada en hechos: la oferta va ligada a la apertura, sin cifras inventadas. */
+  urgencyNote:
+    "La tarifa fundadora solo existe mientras abrimos la escuela. Los grupos tienen aforo limitado: cuando se llenan, se cierran.",
+  cta: "Quiero mi plaza fundadora",
+  // TODO: confirmar condiciones reales (sin permanencia, mantenimiento de tarifa).
+  finePrint: "Sin permanencia. Si te das de baja, la tarifa fundadora no se recupera.",
 };

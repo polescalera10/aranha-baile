@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { PhotoPlaceholder } from "@/components/ui/PhotoPlaceholder";
-import { reviews } from "@/content/landing";
+import { reviews, googleRating } from "@/content/landing";
 
 export function Comunidad() {
   return (
@@ -15,13 +15,16 @@ export function Comunidad() {
           </h2>
         </Reveal>
 
-        <Reveal delay={0.1} className="mt-[18px] inline-flex items-center gap-3 rounded-full border border-text-strong/8 bg-white px-[18px] py-2.5 shadow-soft">
-          <span className="font-display text-[26px] leading-none text-text-strong">4,9</span>
-          <span className="text-base tracking-[1px] text-star">★★★★★</span>
-          <span className="font-body text-[13px] font-semibold text-text-muted">
-            Reseñas reales en Google
-          </span>
-        </Reveal>
+        {/* Badge de valoración: solo se pinta con la nota REAL de Google (ver content/landing.ts). */}
+        {googleRating && (
+          <Reveal delay={0.1} className="mt-[18px] inline-flex items-center gap-3 rounded-full border border-text-strong/8 bg-white px-[18px] py-2.5 shadow-soft">
+            <span className="font-display text-[26px] leading-none text-text-strong">{googleRating}</span>
+            <span className="text-base tracking-[1px] text-star">★★★★★</span>
+            <span className="font-body text-[13px] font-semibold text-text-muted">
+              Reseñas reales en Google
+            </span>
+          </Reveal>
+        )}
 
         {/* Mosaico de fotos. PLACEHOLDER: fotografía real de fiestas/eventos/caras. */}
         <Reveal delay={0.12} className="mt-[30px] grid grid-cols-[repeat(auto-fit,minmax(170px,1fr))] gap-3">
@@ -30,6 +33,14 @@ export function Comunidad() {
           <PhotoPlaceholder label="[ caras ]" tint="warm" className="min-h-[144px] rounded-lg p-3" />
           <PhotoPlaceholder label="[ noche social · directo ]" tint="mix" className="col-span-full min-h-[130px] rounded-lg p-3" />
         </Reveal>
+
+        {/* Reseñas: SOLO reales de Google. Mientras no haya, placeholder visible (Directiva Omnibus). */}
+        {reviews.length === 0 && (
+          <div className="mt-4 rounded-lg border border-dashed border-text-strong/20 bg-white/60 p-8 font-body text-sm text-text-muted">
+            [ TODO: reseñas reales de Google — texto literal y con permiso. No publicar esta sección
+            sin reseñas verificadas. ]
+          </div>
+        )}
 
         <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
           {reviews.map((r, i) => (

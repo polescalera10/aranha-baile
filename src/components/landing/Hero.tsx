@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Reveal } from "@/components/ui/Reveal";
 import { WaLink } from "@/components/ui/WaLink";
+import { hero } from "@/content/landing";
 
 export function Hero() {
   return (
@@ -18,31 +19,28 @@ export function Hero() {
         <Reveal className="mb-[22px] inline-flex items-center gap-[9px]">
           <span className="h-2 w-2 rounded-full bg-red motion-safe:animate-[dotpulse_1.8s_ease-in-out_infinite]" />
           <span className="font-body text-xs font-bold uppercase tracking-[0.18em] text-warm">
-            Salsa cubana · Bachata · Vilanova i la Geltrú
+            {hero.kicker}
           </span>
         </Reveal>
 
         <Reveal as="div" delay={0.08}>
           <h1 className="max-w-[16ch] text-balance font-display text-[clamp(48px,8.5vw,108px)] leading-[0.92] tracking-[0.005em] text-white">
-            No vienes a una clase. Entras a una comunidad.
+            {hero.title}
           </h1>
         </Reveal>
 
         <Reveal delay={0.16}>
           <p className="mt-[22px] max-w-[48ch] font-body text-[clamp(16px,1.5vw,20px)] leading-relaxed text-white/85">
-            Empieces donde empieces —de cero absoluto o ya con tablas— aquí encuentras tu grupo, tu
-            ritmo y tu gente.
+            {hero.subtitle}
           </p>
         </Reveal>
 
         <Reveal delay={0.24} className="mt-[30px] flex flex-wrap items-center gap-x-[22px] gap-y-4">
           <WaLink origin="hero" variant="red" className="px-7 py-[18px] text-base">
-            Escríbenos por WhatsApp
+            {hero.cta}
           </WaLink>
-          <span className="font-body text-sm text-white/70">
-            Primera clase de prueba — <strong className="font-bold text-white">gratis</strong> y sin
-            compromiso.
-          </span>
+          {/* TODO: confirmar la oferta de clase de prueba gratis (texto en content/landing.ts). */}
+          <span className="font-body text-sm text-white/70">{hero.ctaNote}</span>
         </Reveal>
       </div>
     </section>

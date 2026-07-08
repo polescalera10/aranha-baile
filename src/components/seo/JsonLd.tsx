@@ -21,14 +21,15 @@ export function localBusinessLd() {
     url: site.url,
     address: {
       "@type": "PostalAddress",
-      streetAddress: site.nap.streetAddress,
+      // La calle se omite del schema hasta que esté confirmada en lib/site.ts.
+      streetAddress: site.nap.streetAddress || undefined,
       addressLocality: site.nap.addressLocality,
       addressRegion: site.nap.addressRegion,
       postalCode: site.nap.postalCode,
       addressCountry: site.nap.addressCountry,
     },
     telephone: site.nap.telephoneDisplay,
-    sameAs: [site.social.instagram, site.social.tiktok].filter((u) => u && u !== "#"),
+    sameAs: [site.social.instagram, site.social.tiktok].filter(Boolean),
   };
 }
 

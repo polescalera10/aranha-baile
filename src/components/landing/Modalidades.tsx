@@ -19,10 +19,11 @@ export function Modalidades({ modalidades }: { modalidades: Modalidad[] }) {
                 className="group relative flex min-h-[340px] flex-col justify-end overflow-hidden rounded-xl bg-[#2a1d18] bg-[repeating-linear-gradient(135deg,rgba(232,168,124,.32)_0_14px,rgba(232,168,124,.10)_14px_28px)] text-white no-underline"
               >
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,14,11,.05)_30%,rgba(20,14,11,.85)_100%)] transition-opacity duration-300 group-hover:opacity-90" />
-                {/* PLACEHOLDER: foto a color de la modalidad */}
+                {/* TODO: foto a color de la modalidad. Marcador oculto en producción:
                 <div className="absolute left-3.5 top-3.5 rounded-md bg-black/30 px-2 py-[3px] font-mono text-[10px] text-white/75">
                   [ foto · {m.nombre.toLowerCase()} ]
                 </div>
+                */}
                 <div className="relative z-[1] p-7">
                   <span className="font-body text-[11px] font-bold uppercase tracking-[0.16em] text-warm">
                     Modalidad

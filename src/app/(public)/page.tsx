@@ -2,7 +2,8 @@ import { Hero } from "@/components/landing/Hero";
 import { ParaTi } from "@/components/landing/ParaTi";
 import { Experiencia } from "@/components/landing/Experiencia";
 import { Modalidades } from "@/components/landing/Modalidades";
-import { Comunidad } from "@/components/landing/Comunidad";
+// TODO: reactivar <Comunidad /> cuando haya fotos reales, reseñas de Google y nota media.
+// import { Comunidad } from "@/components/landing/Comunidad";
 import { Profesores } from "@/components/landing/Profesores";
 import { Founding } from "@/components/landing/Founding";
 import { ComoEmpezar } from "@/components/landing/ComoEmpezar";
@@ -24,7 +25,7 @@ export default async function HomePage() {
       <ParaTi />
       <Experiencia />
       <Modalidades modalidades={modalidades} />
-      <Comunidad />
+      {/* Oculta hasta tener contenido real (fotos + reseñas): <Comunidad /> */}
       <Profesores />
       <Founding />
       <ComoEmpezar />

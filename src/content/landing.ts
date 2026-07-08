@@ -6,7 +6,7 @@
  *
  * DATOS PENDIENTES DE POL (buscar "TODO" en este archivo):
  *   · Condiciones de la clase de prueba (¿gratis o no? Pol retiró "gratis" el 19-06).
- *   · Tarifas reales (FAQ de precios y bloque founding).
+ *   · Cuota estándar de referencia (priceOld del founding). La fundadora ya es real: 90 €/mes.
  *   · Horarios reales (FAQ de horarios).
  *   · Dirección exacta (FAQ "¿Dónde estáis?").
  *   · Reseñas reales de Google (array `reviews` — NUNCA inventarlas, Directiva Omnibus).
@@ -90,18 +90,18 @@ export const steps = [
 export const faqs = [
   {
     q: "¿Dónde estáis?",
-    // TODO: dirección exacta (calle y número) cuando Pol la confirme.
-    a: "Dentro del gimnasio Aranha, en Vilanova i la Geltrú. [TODO: calle y número exactos]",
+    // TODO: añadir calle y número exactos cuando Pol los confirme.
+    a: "Dentro del gimnasio Aranha, en Vilanova i la Geltrú. Escríbenos por WhatsApp y te mandamos la ubicación exacta.",
   },
   {
     q: "¿Cuánto cuesta?",
-    // TODO: tarifas reales y condiciones de la clase de prueba (Pol retiró "gratis" el 19-06).
-    a: "Tenemos clase de prueba para que veas el ambiente antes de decidir. [TODO: tarifas mensuales y condiciones de la prueba antes de publicar]",
+    // TODO: condiciones de la clase de prueba (Pol retiró "gratis" el 19-06) y cuota estándar de referencia.
+    a: "La tarifa fundadora de lanzamiento es de 90 €/mes e incluye acceso a todas las disciplinas de tu nivel, con la cuota bloqueada mientras sigas de alta. Y antes de decidir, tienes una clase de prueba para conocer el ambiente.",
   },
   {
     q: "¿Qué horarios hay?",
-    // TODO: horarios reales por grupo/nivel.
-    a: "[TODO: horarios reales por grupo] Escríbenos y te decimos qué grupos encajan con tu agenda.",
+    // TODO: publicar el cuadro real de horarios por grupo/nivel cuando esté cerrado.
+    a: "Estamos cerrando el cuadro definitivo de la temporada. Escríbenos con tu disponibilidad y te decimos qué grupos encajan con tu agenda.",
   },
   {
     q: "¿Necesito venir con pareja?",
@@ -145,9 +145,13 @@ export const founding = {
   subtitle:
     "Los primeros alumnos abren la escuela con nosotros: tu cuota queda bloqueada mientras sigas de alta y tu nombre forma parte de la historia desde el principio.",
   badge: "Cuota bloqueada mientras sigas de alta",
-  // TODO: precio real de la cuota fundadora y cuota estándar de referencia.
-  price: "XX €",
-  priceOld: "XX €",
+  /** Cuota fundadora confirmada por Pol (08-07-2026). */
+  price: "90 €",
+  /**
+   * Cuota estándar de referencia (tachada junto al precio fundador).
+   * TODO: poner la cuota estándar real cuando exista. Mientras sea null no se pinta.
+   */
+  priceOld: null as string | null,
   /**
    * Plazas fundadoras REALES. Los grupos tienen aforo físico limitado, pero el
    * número exacto debe salir de la capacidad real de la sala.
@@ -169,18 +173,17 @@ export const founding = {
   // TODO: confirmar condiciones reales (sin permanencia, mantenimiento de tarifa).
   finePrint: "Sin permanencia. Si te das de baja, la tarifa fundadora no se recupera.",
   /**
-   * Columna "qué incluye" — basada en el texto del propio Pol (19-06, commit 76c491b).
-   * Su versión citaba: 8 clases/mes (2/semana), cuota congelada en 50 €/mes y
-   * prioridad en eventos. TODO: confirmar el nº de clases y trasladar el precio
-   * real a `price`/`priceOld` antes de publicar.
+   * Columna "qué incluye" — condiciones confirmadas por Pol (08-07-2026):
+   * 90 €/mes con acceso a todas las disciplinas a las que puedas acceder según
+   * tu nivel, cuota bloqueada y prioridad en eventos.
    */
   benefitsTitle: "¿Qué incluye la plaza fundadora?",
   benefitsIntro:
     "La tarifa de socio fundador es una oportunidad única del lanzamiento: cuando se completen las plazas, la cuota mensual pasará a su precio estándar.",
   benefits: [
     {
-      title: "8 clases al mes (2 a la semana)",
-      text: "Elige tus clases y combina tus estilos preferidos.",
+      title: "Todas las disciplinas de tu nivel",
+      text: "Salsa cubana, bachata, reparto, reggaeton, lady style y heels: acceso a todas las clases disponibles para tu nivel, sin elegir solo una.",
     },
     {
       title: "Cuota bloqueada (con condiciones)",

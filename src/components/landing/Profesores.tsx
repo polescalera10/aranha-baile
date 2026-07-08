@@ -9,11 +9,12 @@ export function Profesores() {
       <div className="container-aranha">
         <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] items-center gap-[clamp(24px,4vw,56px)]">
           <Reveal>
+            {/* TODO: foto de grupo real (equipo + alumnos). Etiqueta oculta en producción (sr-only). */}
             <PhotoPlaceholder
               label="[ foto de grupo · el equipo + alumnos ]"
               tint="warm"
               className="min-h-[360px] rounded-xl p-3.5"
-              labelClassName="text-[11px] px-[9px] py-1"
+              labelClassName="sr-only"
             />
           </Reveal>
 

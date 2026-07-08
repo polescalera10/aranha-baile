@@ -9,9 +9,11 @@ export function Hero() {
       {/* Fondo texturizado con zoom lento (decorativo). PLACEHOLDER: vídeo real. */}
       <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,#3a2820_0_18px,#2f201a_18px_36px)] motion-safe:animate-[slowzoom_22s_ease-in-out_infinite_alternate]" />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,10,.5)_0%,rgba(10,10,10,.2)_35%,rgba(10,10,10,.55)_70%,rgba(10,10,10,.95)_100%)]" />
+      {/* Marcador del vídeo pendiente (oculto en producción; reactivar como referencia si hace falta):
       <div className="absolute right-3.5 top-3.5 z-[5] rounded-md border border-white/25 px-2 py-1 font-mono text-[10px] tracking-[0.04em] text-white/55">
         [ vídeo · gente bailando ]
       </div>
+      */}
 
       <Header />
 

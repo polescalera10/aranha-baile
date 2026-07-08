@@ -39,7 +39,6 @@ export function Hero() {
           <WaLink origin="hero" variant="red" className="px-7 py-[18px] text-base">
             {hero.cta}
           </WaLink>
-          {/* TODO: confirmar la oferta de clase de prueba gratis (texto en content/landing.ts). */}
           <span className="font-body text-sm text-white/70">{hero.ctaNote}</span>
         </Reveal>
       </div>

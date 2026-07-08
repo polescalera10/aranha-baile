@@ -64,6 +64,7 @@ export type Evento = {
   fecha: string;
   tipo: EventoTipo;
   publico: boolean;
+  slug: string | null;
   created_at: string;
   updated_at: string;
 }

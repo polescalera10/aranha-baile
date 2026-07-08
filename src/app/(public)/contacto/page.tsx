@@ -21,7 +21,7 @@ export default function ContactoPage() {
         <div>
           <h2 className="font-display text-2xl text-text-strong">Escríbenos</h2>
           <p className="mt-2 max-w-[42ch] font-body text-[15px] text-text-muted">
-            Primera clase de prueba gratis y sin compromiso.
+            Reserva tu primera clase de prueba y da tus primeros pasos con nosotros.
           </p>
           <WaLink origin="contacto" variant="red" className="mt-4 px-7 py-[15px]">
             Abrir WhatsApp

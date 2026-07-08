@@ -5,7 +5,7 @@
  * aquí queda un fallback para desarrollo sin BD y para los slugs/orden.
  *
  * DATOS PENDIENTES DE POL (buscar "TODO" en este archivo):
- *   · Confirmar la oferta "primera clase de prueba gratis" (aparece en hero y FAQs).
+ *   · Condiciones de la clase de prueba (¿gratis o no? Pol retiró "gratis" el 19-06).
  *   · Tarifas reales (FAQ de precios y bloque founding).
  *   · Horarios reales (FAQ de horarios).
  *   · Dirección exacta (FAQ "¿Dónde estáis?").
@@ -19,8 +19,8 @@ export const hero = {
   subtitle:
     "Empieces donde empieces —de cero absoluto o ya con tablas— aquí encuentras tu grupo, tu ritmo y tu gente.",
   cta: "Escríbenos por WhatsApp",
-  // TODO: confirmar con Pol que la clase de prueba es gratis antes de publicar.
-  ctaNote: "Primera clase de prueba — gratis y sin compromiso.",
+  // Pol retiró "gratis" en su edición del 19-06 (commit 76c491b). TODO: confirmar condiciones de la prueba.
+  ctaNote: "Reserva tu primera clase de prueba y conoce el ambiente.",
 };
 
 export const levels = [
@@ -95,8 +95,8 @@ export const faqs = [
   },
   {
     q: "¿Cuánto cuesta?",
-    // TODO: tarifas reales. No publicar sin confirmar precios y oferta de prueba.
-    a: "La primera clase de prueba es gratis. [TODO: tarifas mensuales reales antes de publicar]",
+    // TODO: tarifas reales y condiciones de la clase de prueba (Pol retiró "gratis" el 19-06).
+    a: "Tenemos clase de prueba para que veas el ambiente antes de decidir. [TODO: tarifas mensuales y condiciones de la prueba antes de publicar]",
   },
   {
     q: "¿Qué horarios hay?",
@@ -168,4 +168,29 @@ export const founding = {
   cta: "Quiero mi plaza fundadora",
   // TODO: confirmar condiciones reales (sin permanencia, mantenimiento de tarifa).
   finePrint: "Sin permanencia. Si te das de baja, la tarifa fundadora no se recupera.",
+  /**
+   * Columna "qué incluye" — basada en el texto del propio Pol (19-06, commit 76c491b).
+   * Su versión citaba: 8 clases/mes (2/semana), cuota congelada en 50 €/mes y
+   * prioridad en eventos. TODO: confirmar el nº de clases y trasladar el precio
+   * real a `price`/`priceOld` antes de publicar.
+   */
+  benefitsTitle: "¿Qué incluye la plaza fundadora?",
+  benefitsIntro:
+    "La tarifa de socio fundador es una oportunidad única del lanzamiento: cuando se completen las plazas, la cuota mensual pasará a su precio estándar.",
+  benefits: [
+    {
+      title: "8 clases al mes (2 a la semana)",
+      text: "Elige tus clases y combina tus estilos preferidos.",
+    },
+    {
+      title: "Cuota bloqueada (con condiciones)",
+      text: "Tu cuota mensual se mantiene congelada mientras sigas de alta.",
+    },
+    {
+      title: "Acceso preferente a eventos",
+      text: "Prioridad de reserva en fiestas sociales y masterclasses.",
+    },
+  ],
+  conditionNote:
+    "* La cuota fundadora se mantiene siempre que la suscripción no sufra periodos de baja.",
 };

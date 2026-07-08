@@ -30,7 +30,14 @@ export default function ContactoPage() {
           <div className="mt-8 space-y-1 font-body text-sm text-text-body">
             <p className="font-semibold text-text-strong">Dónde estamos</p>
             <address className="not-italic leading-7 text-text-muted">
-              {site.nap.streetAddress}
+              {site.nap.venue}
+              {/* La calle solo se pinta cuando esté confirmada en lib/site.ts. */}
+              {site.nap.streetAddress && (
+                <>
+                  <br />
+                  {site.nap.streetAddress}
+                </>
+              )}
               <br />
               {site.nap.postalCode} {site.nap.addressLocality} ({site.nap.addressRegion})
               <br />

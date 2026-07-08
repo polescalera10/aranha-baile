@@ -51,7 +51,10 @@ export function Founding() {
                 {price}
               </span>
               <span className="font-body text-[17px] text-[#c9bda3]">/mes</span>
-              <span className="font-body text-[19px] text-[#7d7460] line-through">{priceOld}</span>
+              {/* Cuota estándar tachada: solo cuando exista la cifra real. */}
+              {priceOld && (
+                <span className="font-body text-[19px] text-[#7d7460] line-through">{priceOld}</span>
+              )}
             </div>
 
             {/* Cuenta atrás: solo con fecha límite real. */}

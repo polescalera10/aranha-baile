@@ -10,7 +10,7 @@ const COL_LABEL =
   "font-body text-[11px] font-bold uppercase tracking-[0.16em] text-white/45";
 
 const EXPLORA: ReadonlyArray<readonly [string, string]> = [
-  ["/clases/salsa-cubana", "Clases"],
+  ["/clases", "Clases"],
   ["/eventos", "Eventos"],
   ["/sobre-nosotros", "Sobre nosotros"],
   ["/contacto", "Contacto"],
@@ -39,7 +39,14 @@ export function Footer() {
         <div>
           <div className={COL_LABEL}>Dónde</div>
           <address className="mt-3 font-mono text-[13px] not-italic leading-7 text-white/70">
-            {site.nap.streetAddress}
+            {site.nap.venue}
+            {/* La calle solo se pinta cuando esté confirmada en lib/site.ts. */}
+            {site.nap.streetAddress && (
+              <>
+                <br />
+                {site.nap.streetAddress}
+              </>
+            )}
             <br />
             {site.nap.postalCode} {site.nap.addressLocality}
             <br />
@@ -66,12 +73,27 @@ export function Footer() {
         <div>
           <div className={COL_LABEL}>Síguenos</div>
           <div className="mt-3 flex flex-wrap gap-2.5">
-            <a href={site.social.instagram} className={PILL}>
-              Instagram
-            </a>
-            <a href={site.social.tiktok} className={PILL}>
-              TikTok
-            </a>
+            {/* Los enlaces sociales solo se pintan si hay URL real en lib/site.ts. */}
+            {site.social.instagram && (
+              <a
+                href={site.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={PILL}
+              >
+                Instagram
+              </a>
+            )}
+            {site.social.tiktok && (
+              <a
+                href={site.social.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={PILL}
+              >
+                TikTok
+              </a>
+            )}
             <a href={buildWaLink("footer")} target="_blank" rel="noopener noreferrer" className={PILL}>
               WhatsApp
             </a>

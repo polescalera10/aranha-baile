@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SupportPage, PlaceholderNote } from "@/components/layout/SupportPage";
+import { SupportPage } from "@/components/layout/SupportPage";
 import { PhotoPlaceholder } from "@/components/ui/PhotoPlaceholder";
 import { JsonLd, eventLd } from "@/components/seo/JsonLd";
 import { getEventos } from "@/lib/queries/eventos";
@@ -79,11 +79,19 @@ export default async function EventosPage() {
           );
         })}
       </ul>
-      <div className="mt-8">
-        <PlaceholderNote>
-          Eventos sincronizados dinámicamente. Para añadir nuevos socials o masterclasses, regístralos en la base de datos Supabase y aparecerán de forma automática.
-        </PlaceholderNote>
-      </div>
+      {/* Estado vacío honesto cuando no hay eventos publicados. */}
+      {eventos.length === 0 && (
+        <p className="max-w-[60ch] font-body text-base leading-relaxed text-text-body">
+          Estamos preparando el calendario de fiestas, socials y masterclasses. Síguenos en
+          Instagram o escríbenos por WhatsApp y te avisamos del próximo evento.
+        </p>
+      )}
+
+      {/*
+        Nota interna (oculta en producción): los eventos se sincronizan desde la
+        tabla `eventos` de Supabase — añade socials o masterclasses ahí y
+        aparecen automáticamente.
+      */}
     </SupportPage>
   );
 }

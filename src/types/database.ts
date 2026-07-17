@@ -11,10 +11,23 @@ export type LeadEstado =
   | "prueba_agendada"
   | "convertido"
   | "descartado";
-export type InscripcionEstado = "activa" | "pausada" | "baja";
-export type PlanTipo = "1_modalidad" | "2_modalidades";
+export type InscripcionEstado = "activa" | "pausada" | "baja" | "lista_espera";
 export type ContenidoTipo = "video" | "comentario" | "fiesta" | "evento";
 export type EventoTipo = "fiesta" | "masterclass" | "social" | "otro";
+
+// ── Panel interno (migraciones 0011-0018) ────────────────────────────────────
+export type DanceRole = "leader" | "follower" | "both";
+export type PaymentStatus = "al_dia" | "pendiente";
+export type CycleType = "curso" | "suelta";
+export type EnrollmentRole = "leader" | "follower";
+export type SessionStatus = "programada" | "impartida" | "cancelada";
+export type WhatsappEventType =
+  | "recordatorio_clase"
+  | "cuota_pendiente"
+  | "alumno_inactivo"
+  | "confirmacion_lista_espera"
+  | "broadcast";
+export type WhatsappEventStatus = "pendiente" | "enviado" | "error";
 
 type Timestamps = { created_at: string; updated_at: string };
 
@@ -69,6 +82,93 @@ export type Evento = {
   updated_at: string;
 }
 
+export type Student = {
+  id: string;
+  full_name: string;
+  phone: string;
+  email: string | null;
+  dance_role: DanceRole;
+  nivel_id: string | null;
+  partner_id: string | null;
+  payment_status: PaymentStatus;
+  is_founding_member: boolean;
+  notes: string | null;
+  active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export type Teacher = {
+  id: string;
+  profile_id: string | null;
+  full_name: string;
+  phone: string | null;
+  disciplines: string[];
+  /** Bloques por día: {"mon":[{"start":"18:00","end":"21:00"}],...} */
+  weekly_availability: Record<string, { start: string; end: string }[]>;
+  active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export type Course = {
+  id: string;
+  name: string;
+  modalidad_id: string;
+  nivel_id: string | null;
+  teacher_id: string | null;
+  /** 1=Lun … 7=Dom (convención heredada de `clases`). */
+  weekday: number;
+  start_time: string;
+  duration_min: number;
+  capacity_leaders: number;
+  capacity_followers: number;
+  cycle_type: CycleType;
+  start_date: string | null;
+  end_date: string | null;
+  active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export type Enrollment = {
+  id: string;
+  student_id: string;
+  course_id: string;
+  role_in_course: EnrollmentRole;
+  status: InscripcionEstado;
+  enrolled_at: string;
+}
+
+export type ClassSession = {
+  id: string;
+  course_id: string;
+  session_date: string;
+  status: SessionStatus;
+  substitute_teacher_id: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export type Attendance = {
+  id: string;
+  class_session_id: string;
+  student_id: string;
+  present: boolean;
+  recorded_by: string | null;
+  recorded_at: string;
+}
+
+export type WhatsappEvent = {
+  id: string;
+  student_id: string | null;
+  type: WhatsappEventType;
+  payload: Record<string, unknown>;
+  status: WhatsappEventStatus;
+  sent_at: string | null;
+  created_at: string;
+}
+
 /**
  * Forma mínima que esperan los clientes `@supabase/ssr`.
  * Solo se tipan a fondo las tablas que la web pública/scaffold consultan;
@@ -107,6 +207,48 @@ export interface Database {
         Update: Partial<Evento>;
         Relationships: [];
       };
+      students: {
+        Row: Student;
+        Insert: Omit<Student, "id" | keyof Timestamps> & Partial<Student>;
+        Update: Partial<Student>;
+        Relationships: [];
+      };
+      teachers: {
+        Row: Teacher;
+        Insert: Omit<Teacher, "id" | keyof Timestamps> & Partial<Teacher>;
+        Update: Partial<Teacher>;
+        Relationships: [];
+      };
+      courses: {
+        Row: Course;
+        Insert: Omit<Course, "id" | keyof Timestamps> & Partial<Course>;
+        Update: Partial<Course>;
+        Relationships: [];
+      };
+      enrollments: {
+        Row: Enrollment;
+        Insert: Omit<Enrollment, "id" | "enrolled_at"> & Partial<Enrollment>;
+        Update: Partial<Enrollment>;
+        Relationships: [];
+      };
+      class_sessions: {
+        Row: ClassSession;
+        Insert: Omit<ClassSession, "id" | keyof Timestamps> & Partial<ClassSession>;
+        Update: Partial<ClassSession>;
+        Relationships: [];
+      };
+      attendance: {
+        Row: Attendance;
+        Insert: Omit<Attendance, "id" | "recorded_at"> & Partial<Attendance>;
+        Update: Partial<Attendance>;
+        Relationships: [];
+      };
+      whatsapp_events: {
+        Row: WhatsappEvent;
+        Insert: Omit<WhatsappEvent, "id" | "created_at"> & Partial<WhatsappEvent>;
+        Update: Partial<WhatsappEvent>;
+        Relationships: [];
+      };
     };
     Views: Record<never, never>;
     Functions: Record<never, never>;
@@ -115,9 +257,15 @@ export interface Database {
       user_role: UserRole;
       lead_estado: LeadEstado;
       inscripcion_estado: InscripcionEstado;
-      plan_tipo: PlanTipo;
       contenido_tipo: ContenidoTipo;
       evento_tipo: EventoTipo;
+      dance_role: DanceRole;
+      payment_status: PaymentStatus;
+      cycle_type: CycleType;
+      enrollment_role: EnrollmentRole;
+      session_status: SessionStatus;
+      whatsapp_event_type: WhatsappEventType;
+      whatsapp_event_status: WhatsappEventStatus;
     };
   };
 }

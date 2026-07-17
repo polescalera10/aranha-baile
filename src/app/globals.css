@@ -14,6 +14,7 @@
   --color-gold: #d4af37; /* EXCLUSIVO bloque Founding Member */
   --color-warm: #e8a87c; /* acento cálido: números, badges, detalles */
   --color-star: #f2a900; /* estrellas de reseñas Google */
+  --color-accent: #0e6f66; /* acento funcional del área interna (app), ajustable */
 
   /* ── Fondos cálidos ─────────────────────────────────────────────────────── */
   --color-bg-base: #f6efe4; /* beige principal */

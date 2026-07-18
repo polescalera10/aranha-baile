@@ -16,6 +16,7 @@ import { Card } from "@/components/ui/Card";
 import type { InscripcionEstado } from "@/types/database";
 import { ActiveToggle } from "../ActiveToggle";
 import { PaymentToggle } from "../PaymentToggle";
+import { CuotaWhatsAppButton } from "./CuotaWhatsAppButton";
 
 const ENROLLMENT_BADGE: Record<
   InscripcionEstado,
@@ -118,6 +119,14 @@ export default async function AlumnoPage({
               studentName={student.full_name}
               status={student.payment_status}
             />
+            {student.payment_status === "pendiente" && (
+              <div className="mt-4">
+                <CuotaWhatsAppButton
+                  studentId={student.id}
+                  studentName={student.full_name}
+                />
+              </div>
+            )}
           </Card>
 
           <Card title="Asistencia">

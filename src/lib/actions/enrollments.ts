@@ -1,15 +1,17 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { formatTime, WEEKDAYS } from "@/lib/format";
 import { createClient } from "@/lib/supabase/server";
 import { enrollmentSchema } from "@/lib/validation/enrollment";
+import { dispatchWhatsappEvent } from "@/lib/whatsapp/dispatch";
 import type { EnrollmentRole, InscripcionEstado } from "@/types/database";
 
 /**
  * Server Actions de matrícula (solo admin).
  * El control de aforo por rol (leader/follower) vive aquí: la BD no lo
- * impone (ver 0015_enrollments.sql). La confirmación de lista de espera
- * por WhatsApp llega en Fase 3 — aquí no se dispara nada.
+ * impone (ver 0015_enrollments.sql). Al promover desde lista de espera se
+ * despacha el aviso de WhatsApp `confirmacion_lista_espera` (vía n8n).
  */
 
 export type EnrollFormState = {
@@ -212,7 +214,8 @@ export async function updateEnrollmentStatus(
 /**
  * Pasa una matrícula de `lista_espera` a `activa`, revalidando antes el
  * aforo del rol: si sigue lleno, error claro y no se toca nada.
- * El aviso de WhatsApp de confirmación llega en Fase 3.
+ * Tras promover con éxito despacha el aviso `confirmacion_lista_espera`
+ * (best-effort: un fallo del webhook no revierte la promoción).
  */
 export async function promoteFromWaitlist(
   enrollmentId: string,
@@ -224,7 +227,7 @@ export async function promoteFromWaitlist(
   const supabase = await createClient();
   const { data: enrollment } = await supabase
     .from("enrollments")
-    .select("id, course_id, role_in_course, status")
+    .select("id, course_id, student_id, role_in_course, status")
     .eq("id", enrollmentId)
     .maybeSingle();
 
@@ -234,7 +237,7 @@ export async function promoteFromWaitlist(
 
   const { data: course } = await supabase
     .from("courses")
-    .select("capacity_leaders, capacity_followers")
+    .select("name, weekday, start_time, capacity_leaders, capacity_followers")
     .eq("id", enrollment.course_id)
     .maybeSingle();
   if (!course) return { status: "error", message: "Curso no encontrado." };
@@ -260,6 +263,26 @@ export async function promoteFromWaitlist(
   if (error) {
     console.error("[promoteFromWaitlist] error:", error.message);
     return { status: "error", message: "No se ha podido pasar la matrícula a activa." };
+  }
+
+  // Aviso de plaza confirmada (WhatsApp vía n8n). Best-effort: nunca lanza.
+  const { data: student } = await supabase
+    .from("students")
+    .select("full_name, phone")
+    .eq("id", enrollment.student_id)
+    .maybeSingle();
+  if (student) {
+    await dispatchWhatsappEvent(supabase, {
+      type: "confirmacion_lista_espera",
+      studentId: enrollment.student_id,
+      payload: {
+        student_name: student.full_name,
+        phone: student.phone,
+        course_name: course.name,
+        weekday: WEEKDAYS[course.weekday],
+        start_time: formatTime(course.start_time),
+      },
+    });
   }
 
   revalidateCourse(enrollment.course_id);

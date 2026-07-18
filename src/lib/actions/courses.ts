@@ -2,15 +2,16 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { formatTime, WEEKDAYS } from "@/lib/format";
 import { createClient } from "@/lib/supabase/server";
 import { courseSchema } from "@/lib/validation/course";
+import { dispatchWhatsappEvent } from "@/lib/whatsapp/dispatch";
 import type { SessionStatus } from "@/types/database";
 
 /**
  * Server Actions del módulo Cursos (solo admin).
  * Patrón: validar (Zod) → mutar vía createClient() (respeta RLS) → revalidar.
- * Los eventos de WhatsApp (aviso al sustituto, etc.) llegan en Fase 3:
- * aquí solo se persiste el dato.
+ * Al asignar sustituto se despacha su aviso de WhatsApp (vía n8n).
  */
 
 export type CourseFormState = {
@@ -239,7 +240,11 @@ export async function updateSessionStatus(
 
 /**
  * Asigna (o quita, con `teacherId = null`) el profe sustituto de una sesión.
- * El aviso de WhatsApp al sustituto llega en Fase 3 — aquí no se dispara nada.
+ * Al asignar (no al quitar) se despacha el aviso de WhatsApp al sustituto:
+ * como `whatsapp_events.student_id` es FK a students y el destinatario es un
+ * teacher, se registra como `broadcast` con `payload.kind = 'sustitucion'` y
+ * el profe dentro de payload.recipients[] (ver docs/whatsapp-contracts.md;
+ * un enum dedicado queda anotado para Fase 4). Best-effort: nunca lanza.
  */
 export async function assignSubstitute(
   sessionId: string,
@@ -254,12 +259,50 @@ export async function assignSubstitute(
     .from("class_sessions")
     .update({ substitute_teacher_id: teacherId })
     .eq("id", sessionId)
-    .select("course_id")
+    .select("course_id, session_date")
     .single();
 
   if (error || !data) {
     console.error("[assignSubstitute] error:", error?.message);
     return { status: "error", message: "No se ha podido guardar la sustitución." };
+  }
+
+  if (teacherId) {
+    const [{ data: teacher }, { data: course }] = await Promise.all([
+      supabase
+        .from("teachers")
+        .select("id, full_name, phone")
+        .eq("id", teacherId)
+        .maybeSingle(),
+      supabase
+        .from("courses")
+        .select("name, weekday, start_time")
+        .eq("id", data.course_id)
+        .maybeSingle(),
+    ]);
+
+    if (teacher && course) {
+      await dispatchWhatsappEvent(supabase, {
+        type: "broadcast",
+        studentId: null,
+        payload: {
+          kind: "sustitucion",
+          recipients: [
+            {
+              teacher_id: teacher.id,
+              full_name: teacher.full_name,
+              phone: teacher.phone,
+            },
+          ],
+          course_name: course.name,
+          session_date: data.session_date,
+          weekday: WEEKDAYS[course.weekday],
+          start_time: formatTime(course.start_time),
+        },
+      });
+    } else {
+      console.error("[assignSubstitute] sin datos para el aviso al sustituto.");
+    }
   }
 
   revalidateCourse(data.course_id);

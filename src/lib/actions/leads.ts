@@ -1,5 +1,6 @@
 "use server";
 
+import { postToN8n } from "@/lib/n8n/client";
 import { createClient } from "@/lib/supabase/server";
 import { leadSchema } from "@/lib/validation/lead";
 
@@ -65,7 +66,7 @@ export async function submitLead(
   }
 
   // 2) Notificar a n8n (email + WhatsApp). No bloquea el éxito del lead.
-  await notifyN8n(lead).catch((e) =>
+  await postToN8n({ ...lead, recibido_en: new Date().toISOString() }).catch((e) =>
     console.error("[submitLead] webhook n8n falló:", e),
   );
 
@@ -73,27 +74,4 @@ export async function submitLead(
     status: "success",
     message: "¡Gracias! Te escribimos por WhatsApp enseguida.",
   };
-}
-
-async function notifyN8n(payload: {
-  nombre: string;
-  telefono: string;
-  email?: string;
-  modalidad_interes?: string;
-  origen: string;
-  mensaje?: string;
-}) {
-  const url = process.env.N8N_WEBHOOK_URL;
-  if (!url) {
-    console.warn("[submitLead] N8N_WEBHOOK_URL no configurado; se omite notificación.");
-    return;
-  }
-
-  await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...payload, recibido_en: new Date().toISOString() }),
-    // Evita que un webhook lento cuelgue la Server Action.
-    signal: AbortSignal.timeout(5000),
-  });
 }

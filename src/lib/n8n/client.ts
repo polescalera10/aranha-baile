@@ -1,0 +1,25 @@
+/**
+ * Cliente mínimo del webhook de n8n (N8N_WEBHOOK_URL).
+ * La app NUNCA llama a Meta/WhatsApp: hace POST del evento a n8n y es n8n
+ * quien renderiza plantillas y envía (email + WhatsApp).
+ * Solo servidor — la URL del webhook no se expone nunca al cliente.
+ */
+export async function postToN8n(payload: object): Promise<void> {
+  const url = process.env.N8N_WEBHOOK_URL;
+  if (!url) {
+    console.warn("[n8n] N8N_WEBHOOK_URL no configurado; se omite el POST.");
+    return;
+  }
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    // Evita que un webhook lento cuelgue la Server Action / ruta que llama.
+    signal: AbortSignal.timeout(5000),
+  });
+
+  if (!res.ok) {
+    throw new Error(`n8n respondió ${res.status} ${res.statusText}`);
+  }
+}

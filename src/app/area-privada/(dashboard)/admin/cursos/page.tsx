@@ -61,8 +61,21 @@ export default async function AdminCursosPage({
         {items.length === 0 ? (
           <EmptyState
             title={showAll ? "Todavía no hay cursos" : "No hay cursos activos"}
-            description="Crea el primer curso con su horario y aforo por rol."
-            action={<Button href="/area-privada/admin/cursos/nuevo">Nuevo curso</Button>}
+            description={
+              showAll
+                ? "Crea el primer curso con su horario y aforo por rol."
+                : "Mira en «Todos» por si hay cursos inactivos, o crea uno nuevo."
+            }
+            action={
+              <span className="flex flex-wrap items-center justify-center gap-3">
+                {!showAll && (
+                  <Button variant="secondary" href="/area-privada/admin/cursos?ver=todos">
+                    Ver todos
+                  </Button>
+                )}
+                <Button href="/area-privada/admin/cursos/nuevo">Nuevo curso</Button>
+              </span>
+            }
           />
         ) : (
           <Table>

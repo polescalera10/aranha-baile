@@ -13,7 +13,8 @@ export type WaOrigin =
   | "nav"
   | "modalidad"
   | "contacto"
-  | "evento";
+  | "evento"
+  | "campana";
 
 const MESSAGES: Record<WaOrigin, string> = {
   hero: "¡Hola! Me gustaría info de la clase de prueba de baile 🙂",
@@ -25,15 +26,20 @@ const MESSAGES: Record<WaOrigin, string> = {
   modalidad: "¡Hola! Me interesa la clase de", // se completa con la modalidad
   contacto: "¡Hola! Os escribo desde la web de NEXUS VNG 🙂",
   evento: "¡Hola! Me gustaría más información sobre el evento", // se completa con el nombre del evento
+  // Sin base: las landings de campaña (src/content/campanas/) pasan su mensaje
+  // completo propio por dolor vía `extra` — ver buildWaLink más abajo.
+  campana: "",
 };
 
 /**
  * Construye un enlace wa.me con mensaje prerrellenado y URL-encoded.
  * @param origin  bloque/CTA de origen
- * @param extra   texto adicional (p. ej. el nombre de la modalidad)
+ * @param extra   texto adicional (p. ej. el nombre de la modalidad, o el
+ *                mensaje completo de una landing de campaña cuando el origen
+ *                no tiene base propia)
  */
 export function buildWaLink(origin: WaOrigin, extra?: string): string {
   const base = MESSAGES[origin];
-  const text = extra ? `${base} ${extra} 💃` : base;
+  const text = extra ? (base ? `${base} ${extra} 💃` : extra) : base;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 }

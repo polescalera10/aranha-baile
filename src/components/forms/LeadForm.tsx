@@ -33,10 +33,13 @@ export function LeadForm({
   origen,
   withModalidad = false,
   withMensaje = true,
+  hiddenModalidad,
 }: {
   origen: (typeof leadOrigenes)[number];
   withModalidad?: boolean;
   withMensaje?: boolean;
+  /** Valor fijo de `modalidad_interes` enviado oculto (p. ej. trazabilidad de landing de campaña). No combinar con `withModalidad`. */
+  hiddenModalidad?: string;
 }) {
   const [state, formAction] = useActionState(submitLead, initial);
 
@@ -58,6 +61,7 @@ export function LeadForm({
   return (
     <form action={formAction} className="flex flex-col gap-4" noValidate>
       <input type="hidden" name="origen" value={origen} />
+      {hiddenModalidad && <input type="hidden" name="modalidad_interes" value={hiddenModalidad} />}
       {/* Honeypot anti-spam: oculto a usuarios, visible a bots. */}
       <input
         type="text"

@@ -6,6 +6,7 @@ export const leadOrigenes = [
   "founding",
   "contacto",
   "modalidad",
+  "campana",
 ] as const;
 
 export const leadSchema = z.object({

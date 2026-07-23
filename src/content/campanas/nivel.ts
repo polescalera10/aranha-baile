@@ -8,7 +8,7 @@ export const nivel: Record<string, CampanaDolorContent> = {
   "clases-mezcladas": {
     icp: "nivel",
     dolor: "clases-mezcladas",
-    headline: "Se acabaron las clases donde el ritmo lo marca el principiante.",
+    headline: "Deja las clases donde el ritmo lo marca el que menos sabe.",
     subhead:
       "Grupos organizados por nivel real, para que avances al ritmo que te corresponde y no al de quien acaba de empezar.",
     ctaHero: "Quiero mi nivel real",
@@ -20,11 +20,11 @@ export const nivel: Record<string, CampanaDolorContent> = {
         solucion: "Los grupos están organizados por nivel real, no por franja horaria, así avanzas al ritmo que te toca.",
       },
       {
-        dolor: "Repites las mismas bases básicas clase tras clase porque hay que esperar al resto.",
+        dolor: "Repites las mismas bases clase tras clase porque hay que esperar al resto.",
         solucion: "En tu grupo de nivel se avanza en contenido nuevo cada semana, sin frenar por quien repasa lo básico.",
       },
       {
-        dolor: "Te desmotiva ir a clase y sentir que no aprendes nada que no supieras ya.",
+        dolor: "Te desmotiva ir a clase y no aprender nada que no supieras ya.",
         solucion: "Los grupos avanzados suman contenido con regularidad, para que siempre haya algo que te rete de verdad.",
       },
     ],
@@ -92,9 +92,9 @@ export const nivel: Record<string, CampanaDolorContent> = {
   "socials-garraf": {
     icp: "nivel",
     dolor: "socials-garraf",
-    headline: "Cuesta encontrar nivel para socials por el Garraf. Aquí lo tienes.",
+    headline: "Nivel en el Garraf, sin peregrinar a Barcelona.",
     subhead:
-      "Un grupo con recorrido real, cerca de casa, sin tener que mirar siempre hacia Barcelona para bailar en condiciones.",
+      "Un grupo con recorrido real, cerca de casa, para entrenar y compartir socials sin mirar siempre hacia la capital.",
     ctaHero: "Quiero mi comunidad de nivel",
     mensajeWhatsapp:
       "¡Hola! Me cuesta encontrar gente de nivel para bailar y hacer socials por la zona del Garraf, ¿cómo es vuestro grupo? 💃",
@@ -108,12 +108,12 @@ export const nivel: Record<string, CampanaDolorContent> = {
         solucion: "Al venir cada semana al mismo grupo, construyes relación real con gente que también quiere seguir subiendo.",
       },
       {
-        dolor: "Sientes que en el Garraf hay poca oferta pensada para quien ya no es principiante.",
+        dolor: "Sientes que en el Garraf hay poca oferta para quien ya no es principiante.",
         solucion: "Aquí hay grupos pensados específicamente para nivel intermedio y avanzado, no solo para quien empieza.",
       },
     ],
     objecion: {
-      pregunta: "\"¿De verdad hay nivel suficiente en Vilanova o tendré que seguir yendo a Barcelona?\"",
+      pregunta: "\"¿De verdad hay nivel en Vilanova o tendré que seguir yendo a Barcelona?\"",
       respuesta: "Los grupos avanzados están pensados justo para eso: tener dónde entrenar en serio sin salir del Garraf.",
     },
     faqExtra: [
@@ -143,7 +143,7 @@ export const nivel: Record<string, CampanaDolorContent> = {
     dolorSolucion: [
       {
         dolor: "Te da respeto apuntarte a una escuela nueva sin saber si los profes están a tu nivel.",
-        solucion: "Pregunta directamente por la formación y el recorrido de quien va a dar tu clase, antes de decidir nada.",
+        solucion: "Te contamos el recorrido de quien imparte tu grupo antes de que tomes ninguna decisión.",
       },
       {
         dolor: "Has vivido clases centradas solo en coreografía bonita, sin corrección técnica real.",
@@ -151,12 +151,12 @@ export const nivel: Record<string, CampanaDolorContent> = {
       },
       {
         dolor: "Temes pagar una cuota y no notar mejora real en tu baile.",
-        solucion: "La clase de prueba existe precisamente para que valores el nivel de enseñanza antes de comprometerte.",
+        solucion: "La clase de prueba existe precisamente para eso: valoras el nivel de enseñanza antes de comprometerte.",
       },
     ],
     objecion: {
       pregunta: "\"¿Cómo sé que los profes están a la altura antes de apuntarme?\"",
-      respuesta: "Pregúntanos directamente por su formación y ven a la clase de prueba para valorarlo tú mismo/a.",
+      respuesta: "Pregúntanos por su formación y ven a la clase de prueba a valorarlo tú mismo/a.",
     },
     faqExtra: [
       {
@@ -176,14 +176,14 @@ export const nivel: Record<string, CampanaDolorContent> = {
   estilos: {
     icp: "nivel",
     dolor: "estilos",
-    headline: "Pocas escuelas dan bien el reparto y el estilo cubano real. Aquí sí.",
+    headline: "Reparto y estilo cubano de verdad. No la versión light.",
     subhead: "Disciplinas trabajadas con su técnica y su música propias, para quien ya sabe distinguir la diferencia.",
     ctaHero: "Quiero ver la oferta de estilos",
     mensajeWhatsapp: "¡Hola! Busco clases de reparto y salsa cubana con nivel de verdad, ¿qué disciplinas tenéis y en qué grupos? 🔥",
     dolorSolucion: [
       {
         dolor: "Te cuesta encontrar escuelas que ofrezcan reparto o estilo cubano más allá de lo básico.",
-        solucion: "Tenemos estas disciplinas dentro de la oferta regular, no solo como clase suelta ocasional.",
+        solucion: "Aquí estas disciplinas están dentro de la oferta regular, no como clase suelta ocasional.",
       },
       {
         dolor: "Has probado versiones \"light\" de estos estilos, adaptadas para quien no tiene ni idea.",
@@ -191,7 +191,7 @@ export const nivel: Record<string, CampanaDolorContent> = {
       },
       {
         dolor: "Quieres variar de disciplina sin cambiar de escuela ni de grupo de gente.",
-        solucion: "La tarifa fundadora da acceso a todas las disciplinas de tu nivel, así que puedes moverte entre estilos sin salir de aquí.",
+        solucion: "La tarifa fundadora da acceso a todas las disciplinas de tu nivel: te mueves entre estilos sin salir de aquí.",
       },
     ],
     objecion: {
@@ -208,7 +208,7 @@ export const nivel: Record<string, CampanaDolorContent> = {
         a: "Forma parte de la oferta regular, no es una clase puntual aislada.",
       },
     ],
-    cierreEmocional: "Si ya sabes distinguir un reparto bien dado, ven a comprobarlo. Escríbenos y te contamos los horarios.",
+    cierreEmocional: "Si sabes distinguir un reparto bien dado, ven a comprobarlo. Escríbenos y te contamos los horarios.",
     metaTitle: "Reparto y salsa cubana real en Vilanova",
     metaDescription: "Disciplinas trabajadas con técnica real, no la versión light. Reparto, salsa cubana y más en Vilanova i la Geltrú.",
   },
@@ -223,7 +223,7 @@ export const nivel: Record<string, CampanaDolorContent> = {
     mensajeWhatsapp: "¡Hola! Ya bailo pero solo voy a clases sueltas de vez en cuando, busco algo más regular, ¿cómo funcionan vuestros grupos? 🗓️",
     dolorSolucion: [
       {
-        dolor: "Solo consigues practicar cuando encuentras una clase suelta o un workshop puntual.",
+        dolor: "Solo practicas cuando encuentras una clase suelta o un workshop puntual.",
         solucion: "Aquí te incorporas a un grupo fijo con clase semanal, así el progreso no depende de la casualidad.",
       },
       {
@@ -232,7 +232,7 @@ export const nivel: Record<string, CampanaDolorContent> = {
       },
       {
         dolor: "Te cuesta comprometerte con algo regular por miedo a que no encaje con tu nivel.",
-        solucion: "Te ubicamos en el grupo de nivel que corresponde a lo que ya bailas, para que la regularidad tenga sentido desde la primera semana.",
+        solucion: "Te ubicamos en el grupo que corresponde a lo que ya bailas, para que la regularidad tenga sentido desde la primera semana.",
       },
     ],
     objecion: {

@@ -58,11 +58,11 @@ export const empezar: Record<string, CampanaDolorContent> = {
       },
       {
         dolor: "Imaginas que todas las miradas están puestas en ti.",
-        solucion: "Cada persona está concentrada en sus propios pasos, no en los tuyos: es lo normal en cualquier clase que empieza.",
+        solucion: "Cada persona está concentrada en sus propios pasos, no en los tuyos. Nadie tiene tiempo de mirarte.",
       },
       {
-        dolor: "El miedo al ridículo te ha frenado de apuntarte antes.",
-        solucion: "Ese miedo desaparece a los diez minutos de la primera clase, cuando ves que todo el mundo está igual.",
+        dolor: "El miedo al ridículo lleva años frenándote de apuntarte.",
+        solucion: "Ese miedo suele durar diez minutos de la primera clase: lo que tardas en ver que todo el mundo está igual.",
       },
     ],
     objecion: {
@@ -83,9 +83,10 @@ export const empezar: Record<string, CampanaDolorContent> = {
   "ya-soy-mayor": {
     icp: "empezar",
     dolor: "ya-soy-mayor",
-    headline: "Nunca es tarde para empezar.",
-    subhead: "En los grupos hay gente de 18 a 60 y pico años dando sus primeros pasos. La edad no es el problema que crees.",
-    ctaHero: "Quiero empezar aunque sea \"tarde\"",
+    headline: "¿Mayor para bailar? Aquí se empieza de los 18 a los 60 y pico.",
+    subhead:
+      "En los grupos hay gente de todas las décadas dando sus primeros pasos. Empezar de adulto no es la excepción: es la norma.",
+    ctaHero: "Quiero empezar ahora",
     mensajeWhatsapp: "¡Hola! Creo que ya soy mayor para empezar a bailar, ¿es buena idea probar igualmente? 🙂",
     dolorSolucion: [
       {
@@ -98,7 +99,7 @@ export const empezar: Record<string, CampanaDolorContent> = {
       },
       {
         dolor: "Crees que has \"perdido el tren\" de aprender a bailar.",
-        solucion: "No hay tren que perder: cada grupo nuevo que abre empieza otra vez desde cero.",
+        solucion: "Ese tren no pasa una vez: cada grupo nuevo que abre vuelve a salir desde cero.",
       },
     ],
     objecion: {
@@ -111,7 +112,7 @@ export const empezar: Record<string, CampanaDolorContent> = {
         a: "Somos una escuela para adultos: hay gente de los 18 a los 60 y pico. El único requisito es tener ganas.",
       },
     ],
-    cierreEmocional: "El único momento tarde para empezar es el que nunca llega. Empieza hoy.",
+    cierreEmocional: "Llevas años diciendo \"me hubiera gustado bailar\". Todavía estás a tiempo de cambiar el verbo.",
     metaTitle: "Nunca es tarde para bailar — Clases en Vilanova",
     metaDescription: "Empezar de adulto/a es lo más habitual del grupo, no la excepción. Prueba tu primera clase en Vilanova.",
   },
@@ -121,7 +122,7 @@ export const empezar: Record<string, CampanaDolorContent> = {
     dolor: "el-peor-de-la-clase",
     headline: "No vas a frenar a nadie.",
     subhead: "Empiezas con gente que está exactamente en tu mismo punto. Nadie espera que ya sepas.",
-    ctaHero: "Quiero probar sin miedo a frenar al grupo",
+    ctaHero: "Quiero empezar en mi nivel",
     mensajeWhatsapp: "¡Hola! Me da miedo ser el/la que menos sabe y frenar a los demás, ¿cómo funcionan los grupos? 🙂",
     dolorSolucion: [
       {
@@ -129,12 +130,12 @@ export const empezar: Record<string, CampanaDolorContent> = {
         solucion: "Los grupos se forman por nivel real: si empiezas de cero, todo tu grupo empieza de cero contigo.",
       },
       {
-        dolor: "Sientes que vas a hacer esperar a los demás mientras entiendes el paso.",
-        solucion: "El ritmo de la clase lo marca el grupo, no una sola persona; todos repiten los mismos pasos las veces que hace falta.",
+        dolor: "Sientes que harás esperar a los demás mientras entiendes el paso.",
+        solucion: "El ritmo lo marca el grupo, no una sola persona; todos repiten los mismos pasos las veces que hace falta.",
       },
       {
-        dolor: "Te da vergüenza preguntar de nuevo algo que \"todos ya saben\".",
-        solucion: "En un grupo de nivel inicial, nadie sabe más: preguntar es lo normal, no la excepción.",
+        dolor: "Te da vergüenza preguntar algo que \"todos ya saben\".",
+        solucion: "En un grupo de nivel inicial nadie sabe más: preguntar es lo normal, no la excepción.",
       },
     ],
     objecion: {
@@ -158,7 +159,7 @@ export const empezar: Record<string, CampanaDolorContent> = {
     dolor: "que-disciplina",
     headline: "¿Por dónde empiezo? Te lo decimos nosotros.",
     subhead: "No hace falta que sepas si quieres salsa, bachata o heels antes de escribir. Te ubicamos según lo que buscas.",
-    ctaHero: "Quiero que me digáis por dónde empezar",
+    ctaHero: "Quiero que me orientéis",
     mensajeWhatsapp: "¡Hola! No sé qué disciplina elegir para empezar, ¿me ayudáis a decidir? 🙂",
     dolorSolucion: [
       {
@@ -207,7 +208,7 @@ export const empezar: Record<string, CampanaDolorContent> = {
         solucion: "Un WhatsApp basta. Sin formularios eternos ni compromiso por preguntar.",
       },
       {
-        dolor: "Temes que \"probar\" en realidad implique letra pequeña o permanencia.",
+        dolor: "Temes que \"probar\" esconda letra pequeña o permanencia.",
         solucion: "No hay permanencia: decides después de probar, sin condiciones ocultas.",
       },
     ],

@@ -40,7 +40,7 @@ export const pareja: Record<string, CampanaDolorContent> = {
         a: "No, la mayoría de parejas empieza sin haber bailado nunca juntas.",
       },
     ],
-    cierreEmocional: "El próximo plan de pareja puede ser distinto. Solo hace falta escribir.",
+    cierreEmocional: "Dentro de un año seréis la pareja que baila o la que sigue en el sofá. Se decide con un mensaje.",
     metaTitle: "Un plan de pareja distinto a cenar y serie",
     metaDescription: "Cambiad la rutina de pareja por un plan semanal juntos: bailar. Clase de prueba en Vilanova i la Geltrú.",
   },
@@ -48,41 +48,43 @@ export const pareja: Record<string, CampanaDolorContent> = {
   "boda": {
     icp: "pareja",
     dolor: "boda",
-    headline: "¿Boda y no sabéis bailar? Empezáis desde cero.",
-    subhead: "Aprended juntos los pasos para vuestro gran día, a vuestro ritmo y sin experiencia previa.",
+    headline: "Os casáis. Que el primer baile esté a la altura.",
+    subhead:
+      "Desde cero absoluto y a vuestro ritmo: llegáis al gran día sabiendo qué hacer cuando empiece a sonar vuestra canción.",
     ctaHero: "Queremos aprender para la boda",
     mensajeWhatsapp: "¡Hola! Nos casamos y queremos aprender a bailar para la boda 💃",
     dolorSolucion: [
       {
-        dolor: "Os casáis y queréis un primer baile que no sea dar vueltas sin saber qué hacer.",
-        solucion: "Os guiamos con una base sencilla, adaptada a vuestro nivel y pensada para vuestra canción.",
+        dolor: "Queréis un primer baile que no sea balancearse en el sitio sin saber qué hacer.",
+        // TODO: confirmar con Pol si se ofrece coreografía personalizada para bodas (no prometerlo hasta entonces).
+        solucion: "Aprendéis una base sencilla y resultona con la que moveros con seguridad delante de todos.",
       },
       {
-        dolor: "No tenéis ni idea de por dónde empezar a preparar el baile de la boda.",
-        solucion: "Empezáis desde cero absoluto: pasos básicos, guía clara y tiempo para practicar antes de la fecha.",
+        dolor: "No tenéis ni idea de por dónde empezar a prepararlo.",
+        solucion: "Empezáis desde cero, con guía clara y margen para practicar antes de la fecha.",
       },
       {
-        dolor: "Os da corte moveros juntos delante de los invitados sin haber practicado antes.",
-        solucion: "Repetís las veces que haga falta antes del gran día, hasta que os salga con naturalidad.",
+        dolor: "Os da corte bailar delante de los invitados sin haberlo trabajado antes.",
+        solucion: "Lo repetís en clase las veces que haga falta, hasta que salga con naturalidad.",
       },
     ],
     objecion: {
       pregunta: "\"No sabemos ni los pasos más básicos, ¿no es tarde para empezar?\"",
       respuesta:
-        "Cuanto antes empecéis, con más margen preparáis el baile; muchas parejas arrancan exactamente así, de cero.",
+        "Cuanto antes empecéis, con más margen llegáis; muchas parejas arrancan exactamente así, de cero.",
     },
     pruebaSocial: "Preparar el baile de la boda es uno de los motivos por los que más parejas nos escriben.",
     faqExtra: [
       {
-        q: "¿Cuánto tiempo hace falta para aprender el baile de la boda?",
-        a: "Depende de vuestra fecha y de vuestro nivel de partida; cuanto antes empecéis, con más margen preparáis la coreografía.",
+        q: "¿Cuánto tiempo hace falta para preparar el baile de la boda?",
+        a: "Depende de vuestra fecha y de vuestro nivel de partida; cuanto antes empecéis, con más calma lo preparáis.",
       },
       {
         q: "¿Necesitamos experiencia previa para apuntarnos?",
         a: "No. Empezamos desde cero y adaptamos los pasos a vuestro nivel real.",
       },
     ],
-    cierreEmocional: "Vuestro baile de boda puede empezar a prepararse hoy. El primer paso es un mensaje.",
+    cierreEmocional: "Vuestro baile de boda empieza a prepararse hoy. El primer paso es un mensaje.",
     metaTitle: "Baile para bodas en pareja — Clases en Vilanova",
     metaDescription: "Aprended a bailar para vuestra boda desde cero, a vuestro ritmo. Clase de prueba en Vilanova i la Geltrú.",
   },
@@ -130,22 +132,22 @@ export const pareja: Record<string, CampanaDolorContent> = {
     icp: "pareja",
     dolor: "verguenza-fiestas",
     headline: "Dejad de quedaros sentados en bodas y fiestas.",
-    subhead: "Cuando suena la música, vosotros también salís a la pista, aunque sea de lo primero que bailéis juntos.",
-    ctaHero: "Queremos dejar de quedarnos sentados",
+    subhead: "Cuando empiece la música, esta vez no miraréis desde la mesa.",
+    ctaHero: "Queremos salir a la pista",
     mensajeWhatsapp:
       "¡Hola! Nos da vergüenza bailar en bodas y fiestas y siempre nos quedamos sentados, ¿nos ayudáis a cambiarlo? 🙂",
     dolorSolucion: [
       {
         dolor: "En cada boda o fiesta os quedáis sentados mientras el resto sale a la pista.",
-        solucion: "Con unas bases claras, salir a bailar deja de ser un problema y pasa a ser parte del plan.",
+        solucion: "Con unas bases claras, salir a bailar deja de ser un mal trago y pasa a ser parte del plan.",
       },
       {
         dolor: "Os da vergüenza moveros juntos delante de la familia o los amigos.",
-        solucion: "Practicáis antes, en un grupo donde todo el mundo está en lo mismo, así llegáis con soltura al evento.",
+        solucion: "Practicáis antes, en un grupo donde todo el mundo está en lo mismo, y llegáis con soltura al evento.",
       },
       {
-        dolor: "En los viajes o vacaciones veis a otras parejas bailar y vosotros os quedáis mirando.",
-        solucion: "Con la base aprendida, os animáis a salir en vez de quedaros observando desde la mesa.",
+        dolor: "En los viajes veis a otras parejas bailar y vosotros os quedáis mirando.",
+        solucion: "Con la base aprendida, os animáis a salir en vez de observar desde la mesa.",
       },
     ],
     objecion: {
@@ -160,7 +162,7 @@ export const pareja: Record<string, CampanaDolorContent> = {
         a: "Con constancia, en pocas semanas ya tenéis base suficiente para salir a la pista con soltura.",
       },
     ],
-    cierreEmocional: "La próxima boda o fiesta puede ser distinta. Empezad por escribirnos.",
+    cierreEmocional: "En la próxima boda, cuando suene la primera canción, ya sabréis qué hacer. Empezad hoy.",
     metaTitle: "Dejad de quedaros sentados en bodas y fiestas",
     metaDescription: "Aprended lo básico en pareja para soltaros en bodas, fiestas y vacaciones. Clase de prueba en Vilanova i la Geltrú.",
   },
@@ -170,7 +172,7 @@ export const pareja: Record<string, CampanaDolorContent> = {
     dolor: "es-para-nosotros",
     headline: "¿Es esto para nosotros? Sí, y nada técnico.",
     subhead: "No hace falta ser una pareja \"de baile\" ni tomároslo en serio: es un rato juntos, con nivel para empezar de cero.",
-    ctaHero: "Queremos ver si es para nosotros",
+    ctaHero: "Queremos ver si es lo nuestro",
     mensajeWhatsapp: "¡Hola! No sabemos si esto es para nosotros, ¿nos contáis cómo son las clases en pareja? 🙂",
     dolorSolucion: [
       {
@@ -210,16 +212,16 @@ export const pareja: Record<string, CampanaDolorContent> = {
     mensajeWhatsapp: "¡Hola! Nos cuesta encajar planes por las agendas, ¿nos contáis qué horarios tenéis disponibles? 🙂",
     dolorSolucion: [
       {
-        dolor: "Vuestras agendas casi nunca coinciden y organizar un plan fijo parece imposible.",
+        dolor: "Vuestras agendas casi nunca coinciden y un plan fijo parece imposible.",
         solucion: "Nos contáis vuestra disponibilidad y os proponemos el grupo y horario que mejor encaja con los dos.",
       },
       {
-        dolor: "Cuadrar una actividad semanal en pareja se convierte en otro problema logístico más.",
+        dolor: "Cuadrar una actividad semanal se convierte en otro problema logístico más.",
         solucion: "Es una única cita fija en el calendario: no hay que reorganizarla cada semana.",
       },
       {
         dolor: "Teméis apuntaros y que al final uno de los dos falle por trabajo o imprevistos.",
-        solucion: "Escribidnos con vuestra disponibilidad real; buscamos el horario que mejor sostiene para los dos.",
+        solucion: "Escribidnos con vuestra disponibilidad real; buscamos el horario que mejor se sostiene para los dos.",
       },
     ],
     objecion: {

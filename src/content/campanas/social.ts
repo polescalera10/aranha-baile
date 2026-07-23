@@ -10,7 +10,7 @@ export const social: Record<string, CampanaDolorContent> = {
     dolor: "circulo-encogido",
     headline: "Tus amigos ya no salen. Nosotros sí.",
     subhead:
-      "Cuando el grupo se llena de parejas e hijos, el plan desaparece. Aquí lo recuperas: gente con ganas de quedar cada semana, sin depender de nadie más.",
+      "Parejas, hijos, sofá: el grupo de siempre se va apagando y nadie lo dice en voz alta. Aquí recuperas lo que echas de menos — gente con ganas de quedar cada semana.",
     ctaHero: "Quiero recuperar mi plan",
     mensajeWhatsapp:
       "¡Hola! Mi grupo de amigos ya casi no sale y busco un plan nuevo, ¿me contáis cómo son las clases? 🙂",
@@ -18,21 +18,21 @@ export const social: Record<string, CampanaDolorContent> = {
       {
         dolor: "Tus amigos de siempre tienen pareja, hijos o simplemente ya no salen.",
         solucion:
-          "En clase te unes a un grupo que sí queda cada semana, sin depender de la agenda de nadie más.",
+          "Aquí te espera un grupo que sí queda cada semana, sin depender de la agenda de nadie.",
       },
       {
-        dolor: "El plan de los findes se ha ido reduciendo a cero.",
-        solucion: "Tienes una cita fija en tu semana, con gente que también la está buscando.",
+        dolor: "De salir cada finde habéis pasado a veros un par de veces al año.",
+        solucion: "Recuperas una cita fija en tu semana, con gente que la busca tanto como tú.",
       },
       {
-        dolor: "Sientes que tienes que reconstruir tu vida social casi de cero.",
+        dolor: "Reconstruir la vida social de adulto parece una montaña.",
         solucion:
-          "No hace falta reconstruirla solo/a: entras a un grupo ya formado que te acoge desde la primera clase.",
+          "No la reconstruyes solo/a: entras en un grupo ya formado que te acoge desde la primera clase.",
       },
     ],
     objecion: {
       pregunta: "\"¿Y si no encajo con el grupo?\"",
-      respuesta: "La mayoría de gente llega igual que tú: sin conocer a nadie. En dos clases ya tienes con quién hablar.",
+      respuesta: "La mayoría llega igual que tú: sin conocer a nadie. En dos clases ya tienes con quién hablar.",
     },
     pruebaSocial: "La mayoría de quienes se apuntan llegan sin conocer a nadie del grupo.",
     faqExtra: [
@@ -41,7 +41,7 @@ export const social: Record<string, CampanaDolorContent> = {
         a: "Se queda gente charlando al acabar y hay salidas informales fuera de horario — no es solo entrar, bailar y salir.",
       },
     ],
-    cierreEmocional: "Tu próximo plan de los jueves puede empezar aquí. El primer paso es solo escribir.",
+    cierreEmocional: "El grupo de siempre no va a volver solo. El nuevo te está esperando en la pista.",
     metaTitle: "Recupera tu plan social — Clases de baile en Vilanova",
     metaDescription:
       "¿Tu grupo de amigos ya no sale? Únete a una comunidad que sí queda cada semana. Clase de prueba en Vilanova i la Geltrú.",
@@ -50,28 +50,28 @@ export const social: Record<string, CampanaDolorContent> = {
   "sin-apps": {
     icp: "social",
     dolor: "sin-apps",
-    headline: "Conocer gente sin apps ni ruido de bar.",
+    headline: "Conocer gente de verdad. Sin apps, sin bar.",
     subhead:
-      "Aquí no hay swipes ni gritar por encima de la música. Hay una actividad en común, conversación real y gente que vuelve semana tras semana.",
+      "Nada de swipes ni conversaciones que mueren en el móvil. Una actividad en común, risas de verdad y las mismas caras cada semana.",
     ctaHero: "Quiero conocer gente de verdad",
     mensajeWhatsapp: "¡Hola! Estoy cansado/a de apps y bares para conocer gente, ¿cómo funcionan vuestras clases? 🙂",
     dolorSolucion: [
       {
-        dolor: "Las apps de citas se han quedado en conversaciones que no llevan a ningún sitio.",
-        solucion: "En clase conoces gente haciendo algo real juntos, no hablando a través de una pantalla.",
+        dolor: "Las apps se quedan en chats que nunca llegan a nada.",
+        solucion: "Aquí conoces gente haciendo algo juntos, no hablando a través de una pantalla.",
       },
       {
-        dolor: "Las quedadas de bar acaban siendo siempre la misma superficialidad.",
-        solucion: "Bailar te obliga a interactuar de verdad: te ríes, fallas y aprendes con la misma gente cada semana.",
+        dolor: "Los planes de bar acaban siempre en la misma conversación superficial.",
+        solucion: "Bailar rompe el hielo por ti: te ríes, fallas y aprendes con la misma gente cada semana.",
       },
       {
-        dolor: "Cuesta encontrar sitios para socializar que no giren en torno a beber.",
-        solucion: "El plan aquí es moverse, no beber. La conexión sale sola.",
+        dolor: "Cuesta encontrar planes para socializar que no giren en torno a beber.",
+        solucion: "El plan aquí es moverse. La conexión sale sola.",
       },
     ],
     objecion: {
       pregunta: "\"Yo no vengo a ligar, solo quiero gente nueva\"",
-      respuesta: "Perfecto, la mayoría viene por eso: hacer amigos y tener plan, no otra cosa.",
+      respuesta: "Perfecto, la mayoría viene a eso: hacer amigos y tener plan, no otra cosa.",
     },
     faqExtra: [
       {
@@ -79,7 +79,7 @@ export const social: Record<string, CampanaDolorContent> = {
         a: "Es un grupo normal centrado en bailar y pasarlo bien; nadie te va a incomodar.",
       },
     ],
-    cierreEmocional: "Gente real, plan real, cada semana. Solo tienes que escribir.",
+    cierreEmocional: "Deja el móvil. La gente de verdad está en la pista.",
     metaTitle: "Conoce gente sin apps — Clases de baile en Vilanova",
     metaDescription:
       "Cambia las apps y los bares por un plan semanal donde conocer gente de verdad. Clase de prueba en Vilanova i la Geltrú.",
@@ -90,17 +90,17 @@ export const social: Record<string, CampanaDolorContent> = {
     dolor: "vengo-solo",
     headline: "Apúntate solo/a. Aquí es lo normal.",
     subhead:
-      "No hace falta traer pareja ni cuadrilla. Rotas por el grupo desde el primer día y sales conociendo a todo el mundo.",
+      "Sin pareja, sin cuadrilla, sin conocer a nadie. Rotas por el grupo desde el primer día y sales con nombres nuevos en el móvil.",
     ctaHero: "Quiero venir aunque sea solo/a",
     mensajeWhatsapp: "¡Hola! Quiero apuntarme pero voy solo/a, ¿es raro o es lo normal en vuestras clases? 🙂",
     dolorSolucion: [
       {
         dolor: "Te da corte apuntarte solo/a a algo nuevo.",
-        solucion: "La mayoría de la gente llega igual: sin pareja de baile ni conocidos en el grupo.",
+        solucion: "La mayoría llega exactamente igual: sin pareja de baile ni conocidos en el grupo.",
       },
       {
-        dolor: "Piensas que vas a ser la única persona que no conoce a nadie.",
-        solucion: "En clase se rota constantemente, así que en la primera hora ya has bailado con medio grupo.",
+        dolor: "Piensas que serás la única persona que no conoce a nadie.",
+        solucion: "En clase se rota constantemente: en la primera hora ya has bailado con medio grupo.",
       },
       {
         dolor: "Te preocupa quedarte sin pareja de baile toda la clase.",
@@ -118,7 +118,7 @@ export const social: Record<string, CampanaDolorContent> = {
         a: "No. Es de las dudas más comunes y la respuesta es siempre la misma: no hace falta, la mayoría viene sola.",
       },
     ],
-    cierreEmocional: "Venir solo/a no es un problema aquí, es lo habitual. Escríbenos y pruébalo.",
+    cierreEmocional: "Venir solo/a es como empieza casi todo el mundo aquí. Escríbenos y compruébalo.",
     metaTitle: "Apúntate solo/a a bailar — Clases en Vilanova",
     metaDescription:
       "No necesitas pareja ni conocidos: la mayoría viene sola y rota en clase. Prueba una clase en Vilanova i la Geltrú.",
@@ -128,22 +128,21 @@ export const social: Record<string, CampanaDolorContent> = {
     icp: "social",
     dolor: "nuevo-en-vilanova",
     headline: "¿Nuevo/a en Vilanova? Empieza por aquí.",
-    subhead:
-      "Hacer vida local cuando acabas de llegar es lento. Una clase semanal te da calendario, cara conocida y un sitio al que volver.",
+    subhead: "Hacer amigos en una ciudad nueva puede llevar años. O una clase a la semana.",
     ctaHero: "Quiero hacer vida aquí",
     mensajeWhatsapp: "¡Hola! Acabo de llegar a Vilanova y busco cómo conocer gente y hacer vida local, ¿me contáis? 🙂",
     dolorSolucion: [
       {
         dolor: "Llevas poco en Vilanova y no sabes por dónde empezar a hacer vida local.",
-        solucion: "Una clase fija a la semana te da un punto de referencia y caras conocidas desde el primer mes.",
+        solucion: "Una clase fija a la semana te da un sitio al que volver y caras conocidas desde el primer mes.",
       },
       {
-        dolor: "Todo tu círculo sigue estando en otra ciudad.",
-        solucion: "Aquí empiezas a construir uno nuevo, con gente del pueblo y de alrededor.",
+        dolor: "Tu gente sigue estando en otra ciudad.",
+        solucion: "Aquí empiezas a construir tu círculo de aquí, con gente de Vilanova y de alrededor.",
       },
       {
-        dolor: "No conoces sitios ni planes más allá de trabajo y casa.",
-        solucion: "Tienes un plan fijo semanal, sin tener que organizarlo tú ni depender de nadie.",
+        dolor: "Tu mapa de la ciudad se reduce a trabajo y casa.",
+        solucion: "Tienes un plan fijo semanal sin tener que organizarlo tú ni depender de nadie.",
       },
     ],
     objecion: {
@@ -156,7 +155,7 @@ export const social: Record<string, CampanaDolorContent> = {
         a: "Sí, es un perfil muy habitual en el grupo — no serás la única persona nueva.",
       },
     ],
-    cierreEmocional: "Hacer vida en un sitio nuevo empieza por un primer plan. Que sea este.",
+    cierreEmocional: "La vida en Vilanova empieza cuando tienes con quién vivirla. Empieza por aquí.",
     metaTitle: "Nuevo en Vilanova — Haz vida local bailando",
     metaDescription: "¿Acabas de llegar a Vilanova i la Geltrú? Empieza a hacer vida local con una clase de prueba de baile.",
   },
@@ -164,22 +163,23 @@ export const social: Record<string, CampanaDolorContent> = {
   "otro-finde-perdido": {
     icp: "social",
     dolor: "otro-finde-perdido",
-    headline: "Que el finde no sea otro trabajo–casa–móvil.",
-    subhead: "El plan empieza en la pista, no en el sofá. Una cita semanal que te saca de casa y te devuelve el finde.",
+    headline: "Viernes por la tarde. ¿Otra vez sofá y móvil?",
+    subhead:
+      "El plan no va a llamar a tu puerta. Pero puede estar ya en tu calendario: una cita semanal que te saca de casa y te devuelve el finde.",
     ctaHero: "Quiero recuperar el finde",
     mensajeWhatsapp: "¡Hola! Vi lo del finde y quiero venir a probar una clase 🙂",
     dolorSolucion: [
       {
-        dolor: "Llega el viernes y no tienes plan más allá del sofá y el móvil.",
-        solucion: "Tienes una cita fija cada semana que ya está en el calendario, sin tener que organizar nada.",
+        dolor: "Llega el viernes y el plan más emocionante es la cena y una serie.",
+        solucion: "Tienes una cita fija que ya está en el calendario antes de que llegue la pereza.",
       },
       {
-        dolor: "Sientes que los findes se repiten siempre igual.",
-        solucion: "Una clase rompe la rutina y encima te deja con energía, no reventado/a.",
+        dolor: "Los findes se repiten: mismos sitios, misma gente, mismo guion.",
+        solucion: "Cada clase trae música nueva, pasos nuevos y gente nueva con quien bailarlos.",
       },
       {
-        dolor: "Acabas la semana sin ganas de organizar nada con nadie.",
-        solucion: "Aquí no organizas tú: te presentas y el plan ya está montado.",
+        dolor: "Acabas la semana sin energía para organizar nada con nadie.",
+        solucion: "Aquí no organizas nada: te presentas y el plan ya está montado.",
       },
     ],
     objecion: {
@@ -202,21 +202,21 @@ export const social: Record<string, CampanaDolorContent> = {
     icp: "social",
     dolor: "gym-solitario",
     headline: "Del gimnasio en silencio a un grupo que te espera.",
-    subhead: "Entrar, sudar y salir sin hablar con nadie tiene fecha de caducidad. Aquí el movimiento viene con gente.",
+    subhead: "Entrar con los auriculares puestos, sudar y salir sin hablar con nadie. Esto es exactamente lo contrario.",
     ctaHero: "Quiero algo más que el gimnasio",
     mensajeWhatsapp: "¡Hola! Voy al gimnasio pero es muy solitario, ¿cómo es el ambiente en vuestras clases? 🙂",
     dolorSolucion: [
       {
-        dolor: "En el gimnasio entrenas rodeado/a de gente pero solo/a.",
-        solucion: "Aquí el movimiento se hace en grupo, con interacción real desde el primer ejercicio.",
+        dolor: "En el gimnasio entrenas rodeado/a de gente, pero solo/a.",
+        solucion: "Aquí el ejercicio es en grupo de verdad: hablas, te ríes y aprendes con las mismas caras cada semana.",
       },
       {
         dolor: "Vas, sudas y te vas sin cruzar palabra con nadie.",
-        solucion: "En clase se habla, se ríe y se aprende junto a las mismas caras cada semana.",
+        solucion: "En clase es imposible no cruzarla: los ejercicios te ponen delante de todo el grupo.",
       },
       {
-        dolor: "El gimnasio te mantiene en forma pero no te da comunidad.",
-        solucion: "Aquí entrenas cuerpo y vida social a la vez, sin tener que elegir entre las dos cosas.",
+        dolor: "El gimnasio pone el cuerpo a tono, pero deja la agenda social igual de vacía.",
+        solucion: "Aquí entrenas cuerpo y vida social a la vez, sin tener que elegir.",
       },
     ],
     objecion: {
@@ -229,7 +229,7 @@ export const social: Record<string, CampanaDolorContent> = {
         a: "Lo que quieras: hay quien lo usa como cardio principal y quien lo combina con su rutina de siempre.",
       },
     ],
-    cierreEmocional: "Cambia el silencio del gimnasio por un grupo que se alegra de verte. Empieza con un WhatsApp.",
+    cierreEmocional: "Cambia el silencio entre máquinas por un grupo que se alegra de verte llegar.",
     metaTitle: "Del gimnasio solitario a una comunidad — Baile en Vilanova",
     metaDescription: "Si el gimnasio se te queda vacío de gente, prueba una clase de baile en grupo en Vilanova i la Geltrú.",
   },

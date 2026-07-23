@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getCampana, listCampanaParams } from "@/content/campanas";
 import { CampanaHero } from "@/components/campanas/CampanaHero";
+import { CampanaAgitacion } from "@/components/campanas/CampanaAgitacion";
+import { AntesDespues } from "@/components/campanas/AntesDespues";
+import { ClaseRecomendada } from "@/components/campanas/ClaseRecomendada";
 import { DolorSolucion } from "@/components/campanas/DolorSolucion";
 import { ComoFunciona } from "@/components/campanas/ComoFunciona";
 import { CampanaObjecion } from "@/components/campanas/CampanaObjecion";
@@ -47,6 +50,10 @@ export default async function CampanaPage({ params }: Params) {
         ctaLabel={c.ctaHero}
         mensajeWhatsapp={c.mensajeWhatsapp}
       />
+      {/* PAS: agitar el dolor → contraste antes/después → la clase que lo resuelve. */}
+      <CampanaAgitacion kicker={c.agitacion.kicker} parrafos={c.agitacion.parrafos} />
+      <AntesDespues data={c.antesDespues} />
+      <ClaseRecomendada clase={c.clase} mensajeWhatsapp={c.mensajeWhatsapp} />
       <DolorSolucion items={c.dolorSolucion} />
       <ComoFunciona />
       <CampanaObjecion pregunta={c.objecion.pregunta} respuesta={c.objecion.respuesta} />

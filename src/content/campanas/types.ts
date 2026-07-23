@@ -30,6 +30,37 @@ export type CampanaDolorContent = {
   ctaHero: string;
   /** Mensaje de WhatsApp prerrellenado, propio de este dolor (sin genérico añadido). */
   mensajeWhatsapp: string;
+  /**
+   * Agitación del dolor (paso "agitate" de PAS): narrativa corta en 2ª persona
+   * que hace SENTIR el coste de seguir igual antes de presentar la solución.
+   */
+  agitacion: {
+    kicker: string;
+    parrafos: string[];
+  };
+  /**
+   * Contraste antes → después (future pacing honesto: nada de plazos ni
+   * resultados garantizados inventados — describe la experiencia, no promesas).
+   */
+  antesDespues: {
+    titulo: string;
+    antesLabel: string;
+    antes: string[];
+    despuesLabel: string;
+    despues: string[];
+  };
+  /**
+   * La clase concreta que resuelve este dolor. `slug` enlaza a /clases/[slug];
+   * `porQue` debe apoyarse SOLO en el contenido real de content/modalidades.ts.
+   */
+  clase: {
+    slug: string;
+    nombre: string;
+    titulo: string;
+    descripcion: string;
+    porQue: { title: string; text: string }[];
+    cta: string;
+  };
   /** 3 bloques dolor → solución, espejo directo del dolor del ICP. */
   dolorSolucion: [DolorSolucionBlock, DolorSolucionBlock, DolorSolucionBlock];
   /** Objeción típica de este ICP/dolor, respondida en una frase. */

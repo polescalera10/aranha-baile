@@ -5,7 +5,7 @@ import { WaLink } from "@/components/ui/WaLink";
 export const metadata: Metadata = {
   title: "Profesores",
   description:
-    "El equipo de Aranha Baile: profesores en formación constante que cuidan cada detalle y te acompañan desde el primer día.",
+    "El equipo de NEXUS VNG: profesores en formación constante que cuidan cada detalle y te acompañan desde el primer día.",
   alternates: { canonical: "/profesores" },
 };
 
@@ -38,7 +38,7 @@ export default function ProfesoresPage() {
           </p>
         </div>
 
-        <aside className="h-fit rounded-lg border border-text-strong/8 bg-white p-6 shadow-card">
+        <aside className="h-fit rounded-lg border border-white/8 bg-bg-panel p-6 shadow-card">
           <h2 className="font-display text-2xl text-text-strong">Conócelos bailando</h2>
           <p className="mt-2 font-body text-[15px] text-text-muted">
             Escríbenos y reserva tu primera clase de prueba con el grupo que mejor encaje contigo.

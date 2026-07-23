@@ -17,7 +17,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { Table, TBody, Td, Th, THead, Tr } from "@/components/ui/Table";
 import { TeacherActiveToggle } from "../TeacherActiveToggle";
 
-export const metadata = { title: "Ficha de profesor · Aranha Baile" };
+export const metadata = { title: "Ficha de profesor · NEXUS VNG" };
 
 /** "2026-07" → "Julio de 2026" */
 function monthLabel(monthKey: string) {

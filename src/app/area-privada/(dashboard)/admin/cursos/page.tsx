@@ -22,8 +22,8 @@ export default async function AdminCursosPage({
   const filterPill = (active: boolean) =>
     `rounded-full px-4 py-1.5 font-body text-[13px] font-semibold transition-colors ${
       active
-        ? "bg-accent text-white"
-        : "bg-white text-text-body hover:bg-text-strong/6"
+        ? "bg-accent text-ink"
+        : "bg-bg-panel text-text-body hover:bg-bg-elevated"
     }`;
 
   return (
@@ -99,7 +99,7 @@ export default async function AdminCursosPage({
                   leadersCount,
                   followersCount,
                 }) => (
-                  <Tr key={course.id} className="hover:bg-bg-cream/60">
+                  <Tr key={course.id} className="hover:bg-bg-elevated/60">
                     <Td>
                       <Link
                         href={`/area-privada/admin/cursos/${course.id}`}

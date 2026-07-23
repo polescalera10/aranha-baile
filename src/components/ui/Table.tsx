@@ -10,7 +10,7 @@ export function Table({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full overflow-x-auto rounded-lg border border-text-strong/8 bg-white shadow-soft">
+    <div className="w-full overflow-x-auto rounded-lg border border-text-strong/8 bg-bg-panel shadow-soft">
       <table className={`w-full min-w-max border-collapse text-left ${className}`}>
         {children}
       </table>
@@ -19,11 +19,15 @@ export function Table({
 }
 
 export function THead({ children }: { children: React.ReactNode }) {
-  return <thead className="border-b border-text-strong/10 bg-bg-cream">{children}</thead>;
+  return <thead className="border-b border-text-strong/10 bg-bg-elevated/60">{children}</thead>;
 }
 
 export function TBody({ children }: { children: React.ReactNode }) {
-  return <tbody className="divide-y divide-text-strong/6">{children}</tbody>;
+  return (
+    <tbody className="divide-y divide-text-strong/6 [&>tr]:transition-colors [&>tr:hover]:bg-bg-elevated/50">
+      {children}
+    </tbody>
+  );
 }
 
 export function Tr({

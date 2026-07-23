@@ -17,9 +17,9 @@ function diffParts(deadlineMs: number) {
 }
 
 const BOX =
-  "flex-1 max-w-[96px] rounded-sm border border-gold/30 bg-gold/10 px-1.5 py-[13px] text-center";
-const NUM = "font-display text-[clamp(30px,4vw,38px)] leading-none text-gold";
-const UNIT = "mt-1.5 font-body text-[10px] tracking-[0.12em] text-[#b9a98a]";
+  "flex-1 max-w-[96px] rounded-sm border border-neon-mint/30 bg-neon-mint/10 px-1.5 py-[13px] text-center";
+const NUM = "font-display text-[clamp(30px,4vw,38px)] leading-none text-neon-mint";
+const UNIT = "mt-1.5 font-body text-[10px] tracking-[0.12em] text-text-muted";
 
 /**
  * Cuenta atrás hasta la fecha límite de la tarifa fundadora.

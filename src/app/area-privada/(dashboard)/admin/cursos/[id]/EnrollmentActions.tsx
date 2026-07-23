@@ -28,7 +28,7 @@ export function UnenrollButton({
         variant="ghost"
         size="sm"
         loading={pending}
-        className="text-red hover:bg-red/8"
+        className="text-danger hover:bg-danger/10"
         onClick={() => {
           if (!window.confirm(`¿Dar de baja a ${studentName} de este curso?`)) return;
           setError(null);
@@ -41,7 +41,7 @@ export function UnenrollButton({
         Baja
       </Button>
       {error && (
-        <span role="alert" className="font-body text-xs font-semibold text-red">
+        <span role="alert" className="font-body text-xs font-semibold text-danger">
           {error}
         </span>
       )}
@@ -70,7 +70,7 @@ export function PromoteButton({ enrollmentId }: { enrollmentId: string }) {
         Pasar a activa
       </Button>
       {error && (
-        <span role="alert" className="max-w-[32ch] text-right font-body text-xs font-semibold text-red">
+        <span role="alert" className="max-w-[32ch] text-right font-body text-xs font-semibold text-danger">
           {error}
         </span>
       )}

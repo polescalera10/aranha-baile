@@ -4,9 +4,9 @@ import { faqs } from "@/content/landing";
 
 export function Faq() {
   return (
-    <section className="bg-bg-cream py-[clamp(64px,9vw,120px)]">
+    <section className="bg-bg-panel py-[clamp(64px,9vw,120px)]">
       <div className="mx-auto w-full max-w-[780px] px-[clamp(20px,5vw,56px)]">
-        <Reveal as="span" className="block font-body text-xs font-bold uppercase tracking-[0.18em] text-red">
+        <Reveal as="span" className="block font-body text-xs font-bold uppercase tracking-[0.18em] text-neon">
           Antes de escribir
         </Reveal>
         <Reveal delay={0.06}>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Anton, Inter } from "next/font/google";
 import { site } from "@/lib/site";
 import { JsonLd, localBusinessLd } from "@/components/seo/JsonLd";
@@ -33,6 +33,11 @@ export const metadata: Metadata = {
     url: site.url,
   },
   alternates: { canonical: "/" },
+};
+
+/** Negro de marca en la UI del navegador (barra de estado móvil). */
+export const viewport: Viewport = {
+  themeColor: "#0a0a0a",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

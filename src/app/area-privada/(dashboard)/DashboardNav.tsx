@@ -85,7 +85,7 @@ export function SidebarNav({ items }: { items: NavItem[] }) {
             className={`flex items-center gap-3 rounded-sm px-3.5 py-2.5 font-body text-sm font-semibold transition-colors ${
               active
                 ? "bg-accent/10 text-accent"
-                : "text-text-body hover:bg-text-strong/6"
+                : "text-text-body hover:bg-text-strong/8"
             }`}
           >
             <NavIcon name={item.icon} />
@@ -104,7 +104,7 @@ export function TabBar({ items }: { items: NavItem[] }) {
   return (
     <nav
       aria-label="Navegación del panel"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-text-strong/10 bg-white pb-[env(safe-area-inset-bottom)] md:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-text-strong/10 bg-bg-panel pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <div className="flex">
         {items.map((item) => {

@@ -68,7 +68,7 @@ export default async function ModalidadPage({ params }: Params) {
                 <ul className="space-y-3">
                   {contenido.aprenderas.map((item) => (
                     <li key={item} className="flex items-start gap-3">
-                      <span className="mt-[7px] h-2 w-2 flex-none rounded-full bg-red" aria-hidden />
+                      <span className="mt-[7px] h-2 w-2 flex-none rounded-full bg-neon" aria-hidden />
                       <span className="max-w-[65ch] font-body text-[15px] leading-relaxed text-text-body">
                         {item}
                       </span>
@@ -93,12 +93,13 @@ export default async function ModalidadPage({ params }: Params) {
               </Reveal>
 
               {/* ¿Es para ti? — cierre persuasivo */}
-              <Reveal as="section" className="rounded-lg bg-ink p-[clamp(24px,4vw,40px)] text-white">
-                <h2 className="font-display text-3xl text-white">¿Es para ti?</h2>
-                <p className="mt-3 max-w-[65ch] font-body text-[15px] leading-relaxed text-white/85">
+              <Reveal as="section" className="relative overflow-hidden rounded-lg border border-neon/20 bg-bg-panel p-[clamp(24px,4vw,40px)] text-white">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_100%_0%,rgba(48,228,236,.10),transparent_70%)]" />
+                <h2 className="relative font-display text-3xl text-white">¿Es para ti?</h2>
+                <p className="relative mt-3 max-w-[65ch] font-body text-[15px] leading-relaxed text-white/85">
                   {contenido.paraTi}
                 </p>
-                <WaLink origin="modalidad" extra={`de ${m.nombre}`} variant="red" className="mt-6 px-7 py-[15px]">
+                <WaLink origin="modalidad" extra={`de ${m.nombre}`} variant="red" className="relative mt-6 px-7 py-[15px]">
                   Probar una clase de {m.nombre}
                 </WaLink>
               </Reveal>
@@ -117,7 +118,7 @@ export default async function ModalidadPage({ params }: Params) {
         </div>
 
         <aside className="h-fit space-y-4 lg:sticky lg:top-24">
-          <div className="rounded-lg border border-text-strong/8 bg-white p-6 shadow-card">
+          <div className="rounded-lg border border-white/8 bg-bg-panel p-6 shadow-card">
             <h2 className="font-display text-2xl text-text-strong">¿Te animas?</h2>
             <p className="mt-2 font-body text-[15px] text-text-muted">
               Reserva tu primera clase de prueba. Escríbenos y te asignamos el grupo ideal para tu
@@ -126,14 +127,14 @@ export default async function ModalidadPage({ params }: Params) {
             <WaLink origin="modalidad" extra={`de ${m.nombre}`} variant="red" className="mt-4 w-full py-[15px]">
               Probar {m.nombre}
             </WaLink>
-            <p className="mt-4 border-t border-text-strong/8 pt-4 font-body text-[13px] leading-relaxed text-text-muted">
+            <p className="mt-4 border-t border-white/8 pt-4 font-body text-[13px] leading-relaxed text-text-muted">
               Tarifa fundadora: <strong className="text-text-strong">{founding.price}/mes</strong>{" "}
               con acceso a todas las disciplinas de tu nivel — {m.nombre} incluida.
             </p>
           </div>
 
           {otras.length > 0 && (
-            <nav className="rounded-lg border border-text-strong/8 bg-white p-6 shadow-soft" aria-label="Otras disciplinas">
+            <nav className="rounded-lg border border-white/8 bg-bg-panel p-6 shadow-soft" aria-label="Otras disciplinas">
               <h2 className="font-body text-xs font-bold uppercase tracking-[0.14em] text-text-muted">
                 Otras disciplinas
               </h2>
@@ -142,7 +143,7 @@ export default async function ModalidadPage({ params }: Params) {
                   <li key={o.slug}>
                     <Link
                       href={`/clases/${o.slug}`}
-                      className="inline-block rounded-full border border-text-strong/12 px-3.5 py-[7px] font-body text-[13px] font-semibold text-text-body no-underline transition-colors hover:border-red hover:text-red"
+                      className="inline-block rounded-full border border-white/12 px-3.5 py-[7px] font-body text-[13px] font-semibold text-text-body no-underline transition-colors hover:border-neon hover:text-neon"
                     >
                       {o.nombre}
                     </Link>

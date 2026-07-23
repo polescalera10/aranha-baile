@@ -34,17 +34,17 @@ export const experience = [
   {
     title: "Progresas sin agobio",
     text: "Grupos por nivel real. Avanzas cuando estás listo, no cuando toca.",
-    accent: "bg-red",
+    accent: "bg-neon",
   },
   {
     title: "Una comunidad de verdad",
     text: "Llegas solo y sales con planes. El finde empieza aquí, en la pista.",
-    accent: "bg-warm",
+    accent: "bg-neon-mint",
   },
   {
     title: "Sales sintiéndote capaz",
     text: "Cada clase te devuelve un poco de confianza. Y eso se nota también fuera de la pista.",
-    accent: "bg-gold",
+    accent: "bg-neon-lime",
   },
 ];
 
@@ -70,7 +70,7 @@ export type Review = {
  * TODO: añadir SOLO reseñas reales de Google (texto literal, con permiso del autor).
  * PROHIBIDO inventarlas o retocarlas: infringe la Directiva Omnibus (reseñas falsas).
  * Formato de cada entrada:
- *   { name: "Nombre A.", date: "hace X semanas", initial: "N", hue: "bg-red|bg-warm|bg-gold", text: "…" }
+ *   { name: "Nombre A.", date: "hace X semanas", initial: "N", hue: "bg-neon|bg-neon-mint|bg-neon-lime", text: "…" }
  */
 export const reviews: Review[] = [];
 

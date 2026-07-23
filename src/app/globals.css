@@ -1,31 +1,38 @@
 @import "tailwindcss";
 
 /* ════════════════════════════════════════════════════════════════════════════
-   DESIGN TOKENS · Aranha Baile
+   DESIGN TOKENS · NEXUS VNG
    Fuente única de verdad. @theme genera a la vez:
-     · variables CSS  (--color-red, --font-display, …)
-     · utilidades Tailwind  (bg-red, text-ink, font-display, rounded-lg, …)
+     · variables CSS  (--color-neon, --font-display, …)
+     · utilidades Tailwind  (bg-neon, text-ink, font-display, rounded-lg, …)
    Regla del proyecto: NADA de colores sueltos en JSX. Todo vía token.
+
+   Identidad: logo NEXUS — negro rotundo + degradado neón verde→cian.
+   El degradado del logo va de --color-neon-lime (arriba) a --color-neon (abajo)
+   pasando por --color-neon-mint; en utilidades:
+     bg-linear-to-b from-neon-lime via-neon-mint to-neon
    ════════════════════════════════════════════════════════════════════════════ */
 @theme {
   /* ── Marca ──────────────────────────────────────────────────────────────── */
-  --color-ink: #0a0a0a; /* negro de marca: hero, founding, footer */
-  --color-red: #c0202a; /* CTA principal / acentos de sección */
-  --color-gold: #d4af37; /* EXCLUSIVO bloque Founding Member */
-  --color-warm: #e8a87c; /* acento cálido: números, badges, detalles */
-  --color-star: #f2a900; /* estrellas de reseñas Google */
-  --color-accent: #0e6f66; /* acento funcional del área interna (app), ajustable */
+  --color-ink: #0a0a0a; /* negro de marca: fondo principal del sitio */
+  --color-neon: #30e4ec; /* cian del logo: CTA principal, links, focos */
+  --color-neon-mint: #71e9c9; /* tramo medio del degradado: acentos secundarios */
+  --color-neon-lime: #b5f6af; /* tramo alto del degradado: detalles, highlights */
+  --color-star: #f2a900; /* estrellas de reseñas Google (semántico, no marca) */
+  --color-accent: #30e4ec; /* acento funcional del área interna (app) */
+  --color-danger: #ff5d5d; /* estado error/peligro del panel (legible sobre oscuro) */
+  --color-warning: #f2b13d; /* estado aviso/pendiente del panel (legible sobre oscuro) */
 
-  /* ── Fondos cálidos ─────────────────────────────────────────────────────── */
-  --color-bg-base: #f6efe4; /* beige principal */
-  --color-bg-cream: #fbf6ee; /* secciones alternas */
-  --color-bg-sand: #efe1d0; /* placeholders de foto */
+  /* ── Fondos oscuros ─────────────────────────────────────────────────────── */
+  --color-bg-base: #0a0a0a; /* negro principal */
+  --color-bg-panel: #131316; /* secciones alternas / cards */
+  --color-bg-elevated: #1c1c21; /* hovers, placeholders de foto, inputs */
 
-  /* ── Texto (jerarquía) ──────────────────────────────────────────────────── */
-  --color-text-strong: #1a1512;
-  --color-text-body: #4a4136;
-  --color-text-muted: #6b6052;
-  --color-text-faint: #9a8b78;
+  /* ── Texto (jerarquía sobre oscuro) ─────────────────────────────────────── */
+  --color-text-strong: #f4f7f5;
+  --color-text-body: #c0c7c4;
+  --color-text-muted: #8b938f;
+  --color-text-faint: #5c635f;
 
   /* ── Tipografía (cargada con next/font → variables) ─────────────────────── */
   --font-display: var(--font-anton), "Arial Narrow", sans-serif;
@@ -37,14 +44,14 @@
   --radius-lg: 22px;
   --radius-xl: 26px;
 
-  /* ── Sombras (cálidas) ──────────────────────────────────────────────────── */
-  --shadow-card: 0 14px 40px -24px rgba(40, 30, 20, 0.55);
-  --shadow-soft: 0 10px 28px -20px rgba(40, 30, 20, 0.5);
-  --shadow-red: 0 14px 34px -8px rgba(192, 32, 42, 0.6);
-  --shadow-gold: 0 50px 90px -40px rgba(212, 175, 55, 0.45);
+  /* ── Sombras (glow neón sobre oscuro) ───────────────────────────────────── */
+  --shadow-card: 0 14px 40px -24px rgba(0, 0, 0, 0.85);
+  --shadow-soft: 0 10px 28px -20px rgba(0, 0, 0, 0.8);
+  --shadow-neon: 0 14px 34px -8px rgba(48, 228, 236, 0.45);
+  --shadow-glow: 0 50px 90px -40px rgba(113, 233, 201, 0.35);
 
   /* ── Layout ─────────────────────────────────────────────────────────────── */
-  --container-aranha: 1180px;
+  --container-nexus: 1180px;
 
   /* ── Keyframes / animaciones ────────────────────────────────────────────── */
   --animate-slowzoom: slowzoom 22s ease-in-out infinite alternate;
@@ -115,7 +122,7 @@
 
   /* Foco visible accesible en toda interacción por teclado. */
   :focus-visible {
-    outline: 2px solid var(--color-red);
+    outline: 2px solid var(--color-neon);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -134,9 +141,22 @@
 }
 
 /* Utilidad de contenedor reutilizable (max-width + padding fluido del diseño). */
-@utility container-aranha {
+@utility container-nexus {
   width: 100%;
-  max-width: var(--container-aranha);
+  max-width: var(--container-nexus);
   margin-inline: auto;
   padding-inline: clamp(20px, 5vw, 56px);
+}
+
+/* Texto con el degradado del logo (titulares destacados, cifras). */
+@utility text-gradient-nexus {
+  background: linear-gradient(
+    180deg,
+    var(--color-neon-lime) 0%,
+    var(--color-neon-mint) 55%,
+    var(--color-neon) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

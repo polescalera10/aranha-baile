@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!e) return { title: "Evento no encontrado" };
   const descSnippet = e.descripcion ? e.descripcion.slice(0, 150).replace(/[#*_[\]]/g, "") + "..." : "";
   return {
-    title: `${e.titulo} · Eventos Aranha Baile`,
+    title: `${e.titulo} · Eventos NEXUS VNG`,
     description: descSnippet || undefined,
     alternates: { canonical: `/eventos/${e.slug}` },
     openGraph: { title: e.titulo, description: descSnippet || undefined },
@@ -56,13 +56,13 @@ export default async function EventoDetailPage({ params }: Params) {
     >
       <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
         {/* Contenido en Markdown */}
-        <article className="bg-white rounded-lg border border-text-strong/8 p-8 shadow-soft">
+        <article className="bg-bg-panel rounded-lg border border-white/8 p-8 shadow-soft">
           <MarkdownRenderer content={e.descripcion || ""} />
         </article>
 
         {/* Barra lateral de Registro y FAQ corta */}
         <aside className="space-y-6">
-          <div className="rounded-lg border border-text-strong/8 bg-white p-6 shadow-card h-fit">
+          <div className="rounded-lg border border-white/8 bg-bg-panel p-6 shadow-card h-fit">
             <h2 className="font-display text-2xl text-text-strong">¿Te animas a venir?</h2>
             <p className="mt-2 font-body text-[15px] text-text-muted leading-relaxed">
               Reserva tu plaza o consúltanos cualquier duda sobre este evento directamente por WhatsApp. Te responderemos encantados de inmediato.
@@ -77,7 +77,7 @@ export default async function EventoDetailPage({ params }: Params) {
             </WaLink>
           </div>
 
-          <div className="rounded-lg border border-dashed border-text-strong/20 bg-white/60 p-6 font-body text-text-muted text-[14px]">
+          <div className="rounded-lg border border-dashed border-white/15 bg-bg-elevated/60 p-6 font-body text-text-muted text-[14px]">
             <h3 className="font-semibold text-text-strong">Información clave:</h3>
             <ul className="mt-3 list-disc pl-4 space-y-2">
               <li><strong>Lugar:</strong> Gimnasio Aranha (Vilanova i la Geltrú).</li>

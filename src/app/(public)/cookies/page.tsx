@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Política de cookies",
-  description: "Política de cookies de Aranha Baile.",
+  description: "Política de cookies de NEXUS VNG.",
   alternates: { canonical: "/cookies" },
 };
 

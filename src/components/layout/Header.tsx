@@ -17,14 +17,14 @@ const NAV = [
 export function Header() {
   return (
     <header className="absolute inset-x-0 top-0 z-40">
-      <div className="container-aranha flex items-center justify-between py-6">
+      <div className="container-nexus flex items-center justify-between py-6">
         <Logo />
         <nav className="hidden items-center gap-6 md:flex">
           {NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="font-body text-[13px] font-semibold text-white/75 no-underline transition-colors hover:text-white"
+              className="font-body text-[13px] font-semibold text-white/75 no-underline transition-colors hover:text-neon"
             >
               {item.label}
             </Link>

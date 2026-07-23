@@ -5,7 +5,7 @@ import { WaLink } from "@/components/ui/WaLink";
 export const metadata: Metadata = {
   title: "Sobre nosotros",
   description:
-    "Aranha Baile nace dentro del gimnasio Aranha en Vilanova i la Geltrú: misma marca, alma de comunidad.",
+    "NEXUS VNG nace dentro del gimnasio Aranha en Vilanova i la Geltrú: marca propia, alma de comunidad.",
   alternates: { canonical: "/sobre-nosotros" },
 };
 
@@ -14,11 +14,11 @@ export default function SobreNosotrosPage() {
     <SupportPage
       eyebrow="Quiénes somos"
       title="Más que una escuela, una comunidad"
-      intro="Dentro del gimnasio Aranha de Vilanova i la Geltrú, con la misma marca y un público distinto: calidez, pertenencia y baile."
+      intro="Dentro del gimnasio Aranha de Vilanova i la Geltrú, con marca propia y un público distinto: calidez, pertenencia y baile."
     >
       <div className="max-w-[68ch] space-y-5">
         <p className="font-body text-base leading-relaxed text-text-body">
-          Aranha Baile nace dentro del gimnasio Aranha, en Vilanova i la Geltrú. Misma casa, otra
+          NEXUS VNG nace dentro del gimnasio Aranha, en Vilanova i la Geltrú. Misma casa, otra
           energía: donde el gimnasio entrena cuerpos, la escuela junta personas. Salsa cubana,
           bachata, reparto, reggaeton, lady style y heels — con grupos por nivel real, desde cero
           absoluto hasta avanzado.

@@ -46,7 +46,7 @@ export default function ContactoPage() {
           </div>
         </div>
 
-        <div className="rounded-lg border border-text-strong/8 bg-white p-6 shadow-card sm:p-8">
+        <div className="rounded-lg border border-white/8 bg-bg-panel p-6 shadow-card sm:p-8">
           <h2 className="mb-4 font-display text-2xl text-text-strong">Déjanos tus datos</h2>
           <LeadForm origen="contacto" withModalidad withMensaje />
         </div>

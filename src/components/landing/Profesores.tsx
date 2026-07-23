@@ -5,8 +5,8 @@ const TAGS = ["Te corrigen el detalle", "Te conocen por tu nombre", "Formación 
 
 export function Profesores() {
   return (
-    <section className="bg-bg-cream py-[clamp(64px,9vw,120px)]">
-      <div className="container-aranha">
+    <section className="bg-bg-panel py-[clamp(64px,9vw,120px)]">
+      <div className="container-nexus">
         <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] items-center gap-[clamp(24px,4vw,56px)]">
           <Reveal>
             {/* TODO: foto de grupo real (equipo + alumnos). Etiqueta oculta en producción (sr-only). */}
@@ -19,7 +19,7 @@ export function Profesores() {
           </Reveal>
 
           <div>
-            <Reveal as="span" className="block font-body text-xs font-bold uppercase tracking-[0.18em] text-red">
+            <Reveal as="span" className="block font-body text-xs font-bold uppercase tracking-[0.18em] text-neon">
               Quién te acompaña
             </Reveal>
             <Reveal delay={0.06}>
@@ -38,7 +38,7 @@ export function Profesores() {
               {TAGS.map((t) => (
                 <span
                   key={t}
-                  className="rounded-full border border-text-strong/10 bg-white px-[17px] py-[11px] font-body text-[13px] font-semibold text-text-muted"
+                  className="rounded-full border border-white/10 bg-bg-elevated px-[17px] py-[11px] font-body text-[13px] font-semibold text-text-body"
                 >
                   {t}
                 </span>

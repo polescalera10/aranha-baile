@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Política de privacidad",
-  description: "Política de privacidad de Aranha Baile.",
+  description: "Política de privacidad de NEXUS VNG.",
   alternates: { canonical: "/privacidad" },
 };
 

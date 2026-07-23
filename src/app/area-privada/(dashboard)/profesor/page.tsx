@@ -104,7 +104,7 @@ export default async function ProfesorPage() {
               Sin sesiones en los próximos 7 días.
             </p>
           ) : (
-            <ul className="divide-y divide-text-strong/6 overflow-hidden rounded-lg border border-text-strong/8 bg-white shadow-soft">
+            <ul className="divide-y divide-text-strong/6 overflow-hidden rounded-lg border border-text-strong/8 bg-bg-panel shadow-soft">
               {upcoming.map((item) => (
                 <li key={item.session.id}>
                   <UpcomingRow item={item} />
@@ -124,7 +124,7 @@ function TodayCard({ item }: { item: TeacherSessionItem }) {
   return (
     <Link
       href={`/area-privada/profesor/asistencia/${session.id}`}
-      className="block touch-manipulation rounded-lg border border-text-strong/8 bg-white p-5 shadow-soft transition-[transform,border-color] active:scale-[0.99] hover:border-accent/35"
+      className="block touch-manipulation rounded-lg border border-text-strong/8 bg-bg-panel p-5 shadow-soft transition-[transform,border-color] active:scale-[0.99] hover:border-accent/35"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
@@ -161,7 +161,7 @@ function UpcomingRow({ item }: { item: TeacherSessionItem }) {
   return (
     <Link
       href={`/area-privada/profesor/asistencia/${session.id}`}
-      className="flex min-h-14 touch-manipulation items-center justify-between gap-3 px-4 py-3 transition-colors hover:bg-bg-cream/60 active:bg-bg-cream"
+      className="flex min-h-14 touch-manipulation items-center justify-between gap-3 px-4 py-3 transition-colors hover:bg-bg-elevated/60 active:bg-bg-elevated"
     >
       <div className="min-w-0">
         <p className="truncate font-body text-sm font-semibold text-text-strong">

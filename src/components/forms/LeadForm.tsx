@@ -8,9 +8,9 @@ import type { leadOrigenes } from "@/lib/validation/lead";
 const initial: LeadFormState = { status: "idle" };
 
 const FIELD =
-  "w-full rounded-sm border border-text-strong/15 bg-white px-4 py-3 font-body text-[15px] text-text-strong outline-none transition-colors placeholder:text-text-faint focus:border-red";
+  "w-full rounded-sm border border-white/12 bg-bg-elevated px-4 py-3 font-body text-[15px] text-text-strong outline-none transition-colors placeholder:text-text-muted focus:border-neon";
 const LABEL = "mb-1.5 block font-body text-[13px] font-semibold text-text-body";
-const ERR = "mt-1 font-body text-xs text-red";
+const ERR = "mt-1 font-body text-xs font-semibold text-neon";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -18,7 +18,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex items-center justify-center gap-2 rounded-md bg-red px-7 py-[15px] font-body text-base font-bold text-white shadow-red transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
+      className="inline-flex items-center justify-center gap-2 rounded-md bg-neon px-7 py-[15px] font-body text-base font-bold text-ink shadow-neon transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
     >
       {pending ? "Enviando…" : "Enviar"}
     </button>
@@ -44,9 +44,9 @@ export function LeadForm({
     return (
       <div
         role="status"
-        className="rounded-lg border border-red/20 bg-white p-8 text-center shadow-card"
+        className="rounded-lg border border-neon/25 bg-bg-panel p-8 text-center shadow-card"
       >
-        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red/10 text-2xl text-red">
+        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-neon/10 text-2xl text-neon">
           ✓
         </div>
         <p className="font-display text-2xl text-text-strong">¡Mensaje enviado!</p>
@@ -130,7 +130,7 @@ export function LeadForm({
       )}
 
       {state.status === "error" && state.message && (
-        <p role="alert" className="rounded-sm border border-red/30 bg-red/5 px-4 py-3 font-body text-sm text-red">
+        <p role="alert" className="rounded-sm border border-neon/30 bg-neon/5 px-4 py-3 font-body text-sm text-neon">
           {state.message}
         </p>
       )}

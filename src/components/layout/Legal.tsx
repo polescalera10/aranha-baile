@@ -39,7 +39,7 @@ export function LegalList({ items }: { items: React.ReactNode[] }) {
 /** Dato pendiente del titular. Visible a propósito: no debe llegar así a producción. */
 export function LegalTodo({ children }: { children: React.ReactNode }) {
   return (
-    <mark className="rounded-xs bg-gold/25 px-1 font-body font-semibold text-text-strong">
+    <mark className="rounded-xs bg-neon-lime/20 px-1 font-body font-semibold text-neon-lime">
       [TODO: {children}]
     </mark>
   );
@@ -48,7 +48,7 @@ export function LegalTodo({ children }: { children: React.ReactNode }) {
 /** Aviso de borrador en cabecera de cada página legal. */
 export function LegalDraftNote() {
   return (
-    <div className="mb-10 rounded-lg border border-dashed border-text-strong/25 bg-white/60 p-5 font-body text-sm leading-relaxed text-text-muted">
+    <div className="mb-10 rounded-lg border border-dashed border-white/15 bg-bg-elevated/60 p-5 font-body text-sm leading-relaxed text-text-muted">
       Borrador pendiente de: (1) completar los datos del titular marcados como{" "}
       <LegalTodo>dato</LegalTodo> y (2) revisión jurídica final antes de publicar.
     </div>

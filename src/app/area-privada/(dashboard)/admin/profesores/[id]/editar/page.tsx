@@ -9,7 +9,7 @@ import {
 } from "@/lib/queries/teachers";
 import { TeacherForm } from "../../TeacherForm";
 
-export const metadata = { title: "Editar profesor · Aranha Baile" };
+export const metadata = { title: "Editar profesor · NEXUS VNG" };
 
 /** Edición de profesor, incluida la vinculación de acceso al panel. */
 export default async function EditarProfesorPage({

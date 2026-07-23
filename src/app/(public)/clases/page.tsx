@@ -31,15 +31,15 @@ export default async function ClasesPage() {
               Nuestra Filosofía de Aprendizaje
             </h2>
             <p className="mt-4 max-w-[70ch] font-body text-base text-text-muted leading-relaxed">
-              En Aranha Baile entendemos que dar el paso de entrar a una clase de baile puede dar vértigo. 
+              En NEXUS VNG entendemos que dar el paso de entrar a una clase de baile puede dar vértigo. 
               Por eso, hemos diseñado un método enfocado en la calidez, la progresión natural y el disfrute. 
               Aquí no vienes a memorizar secuencias rígidas; vienes a sentir la música y conectar con los demás.
             </p>
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-3 mt-8">
-            <Reveal delay={0.06} className="rounded-lg border border-text-strong/8 bg-white p-6 shadow-soft flex flex-col">
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-red/10 text-red font-display text-xl font-bold">
+            <Reveal delay={0.06} className="rounded-lg border border-white/8 bg-bg-panel p-6 shadow-soft flex flex-col">
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-neon/10 text-neon font-display text-xl font-bold">
                 01
               </div>
               <h3 className="font-display text-xl text-text-strong">Progresas sin agobio</h3>
@@ -48,8 +48,8 @@ export default async function ClasesPage() {
               </p>
             </Reveal>
 
-            <Reveal delay={0.12} className="rounded-lg border border-text-strong/8 bg-white p-6 shadow-soft flex flex-col">
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-warm/20 text-text-strong font-display text-xl font-bold">
+            <Reveal delay={0.12} className="rounded-lg border border-white/8 bg-bg-panel p-6 shadow-soft flex flex-col">
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-neon-mint/10 text-neon-mint font-display text-xl font-bold">
                 02
               </div>
               <h3 className="font-display text-xl text-text-strong">Comunidad de verdad</h3>
@@ -58,8 +58,8 @@ export default async function ClasesPage() {
               </p>
             </Reveal>
 
-            <Reveal delay={0.18} className="rounded-lg border border-text-strong/8 bg-white p-6 shadow-soft flex flex-col">
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-gold/20 text-text-strong font-display text-xl font-bold">
+            <Reveal delay={0.18} className="rounded-lg border border-white/8 bg-bg-panel p-6 shadow-soft flex flex-col">
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-neon-lime/10 text-neon-lime font-display text-xl font-bold">
                 03
               </div>
               <h3 className="font-display text-xl text-text-strong">Confianza en la pista</h3>
@@ -71,7 +71,7 @@ export default async function ClasesPage() {
         </section>
 
         {/* Sección de Modalidades */}
-        <section className="space-y-8 pt-8 border-t border-text-strong/10">
+        <section className="space-y-8 pt-8 border-t border-white/8">
           <Reveal>
             <h2 className="font-display text-3xl text-text-strong tracking-wide">
               Estilos que puedes bailar
@@ -86,7 +86,7 @@ export default async function ClasesPage() {
               <Reveal
                 key={m.slug}
                 delay={idx * 0.05}
-                className="rounded-lg border border-text-strong/8 bg-white p-6 shadow-soft hover:shadow-card hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                className="rounded-lg border border-white/8 bg-bg-panel p-6 shadow-soft hover:border-neon/30 hover:shadow-card hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   <h3 className="font-display text-2xl text-text-strong mb-2">
@@ -98,7 +98,7 @@ export default async function ClasesPage() {
                 </div>
                 <Link
                   href={`/clases/${m.slug}`}
-                  className="inline-flex items-center font-body text-sm font-bold text-red hover:underline no-underline mt-auto"
+                  className="inline-flex items-center font-body text-sm font-bold text-neon hover:underline no-underline mt-auto"
                 >
                   Ver detalles de {m.nombre} &rarr;
                 </Link>

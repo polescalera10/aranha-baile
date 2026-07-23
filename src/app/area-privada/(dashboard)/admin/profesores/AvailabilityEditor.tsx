@@ -54,7 +54,7 @@ export function AvailabilityEditor({
               />
             </div>
             {error && (
-              <p className="font-body text-xs font-semibold text-red">{error}</p>
+              <p className="font-body text-xs font-semibold text-danger">{error}</p>
             )}
           </div>
         );

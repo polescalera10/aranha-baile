@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Table, TBody, Td, Th, THead, Tr } from "@/components/ui/Table";
 
-export const metadata = { title: "Profesores · Aranha Baile" };
+export const metadata = { title: "Profesores · NEXUS VNG" };
 
 /** Lista del equipo docente (solo admin). */
 export default async function ProfesoresPage() {

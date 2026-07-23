@@ -124,7 +124,7 @@ export function EnrollForm({
       {state.status === "error" && state.message && (
         <p
           role="alert"
-          className="rounded-sm border border-red/30 bg-red/5 px-4 py-3 font-body text-sm text-red"
+          className="rounded-sm border border-danger/30 bg-danger/10 px-4 py-3 font-body text-sm text-danger"
         >
           {state.message}
         </p>
@@ -140,7 +140,7 @@ export function EnrollForm({
       )}
 
       {state.status === "full" ? (
-        <div className="flex flex-col gap-3 rounded-sm border border-gold/40 bg-gold/10 px-4 py-3">
+        <div className="flex flex-col gap-3 rounded-sm border border-warning/35 bg-warning/10 px-4 py-3">
           <p role="alert" className="font-body text-sm text-text-strong">
             {state.message}
           </p>

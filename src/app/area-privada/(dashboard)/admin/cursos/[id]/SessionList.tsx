@@ -59,7 +59,7 @@ export function GenerateSessionsButton({ courseId }: { courseId: string }) {
         <p
           role={message.ok ? "status" : "alert"}
           className={`max-w-[40ch] text-right font-body text-xs font-semibold ${
-            message.ok ? "text-accent" : "text-red"
+            message.ok ? "text-accent" : "text-danger"
           }`}
         >
           {message.text}
@@ -113,7 +113,7 @@ function SessionRow({
               onChange={(e) =>
                 run(() => assignSubstitute(session.id, e.target.value || null))
               }
-              className="rounded-sm border border-text-strong/15 bg-white px-3 py-2 font-body text-[13px] text-text-strong focus-visible:outline-accent disabled:opacity-55"
+              className="scheme-dark rounded-sm border border-text-strong/15 bg-bg-elevated px-3 py-2 font-body text-[13px] text-text-strong focus-visible:outline-accent disabled:opacity-55"
             >
               <option value="">Sin sustituto</option>
               {substitutes.map((t) => (
@@ -128,7 +128,7 @@ function SessionRow({
                 variant="ghost"
                 size="sm"
                 loading={pending}
-                className="text-red hover:bg-red/8"
+                className="text-danger hover:bg-danger/10"
                 onClick={() => run(() => updateSessionStatus(session.id, "cancelada"))}
               >
                 Cancelar
@@ -154,7 +154,7 @@ function SessionRow({
       </div>
 
       {error && (
-        <p role="alert" className="font-body text-xs font-semibold text-red">
+        <p role="alert" className="font-body text-xs font-semibold text-danger">
           {error}
         </p>
       )}

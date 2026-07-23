@@ -34,7 +34,7 @@ function Checkbox({
   defaultChecked?: boolean;
 }) {
   return (
-    <label className="flex min-h-11 cursor-pointer items-start gap-3 rounded-sm border border-text-strong/15 bg-white px-3.5 py-2.5">
+    <label className="flex min-h-11 cursor-pointer items-start gap-3 rounded-sm border border-text-strong/15 bg-bg-elevated px-3.5 py-2.5">
       <input
         type="checkbox"
         name={name}
@@ -189,7 +189,7 @@ export function StudentForm({
       {state.status === "error" && state.message && (
         <p
           role="alert"
-          className="sm:col-span-2 rounded-sm border border-red/30 bg-red/5 px-4 py-3 font-body text-sm text-red"
+          className="sm:col-span-2 rounded-sm border border-danger/30 bg-danger/10 px-4 py-3 font-body text-sm text-danger"
         >
           {state.message}
         </p>

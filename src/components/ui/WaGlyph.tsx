@@ -5,7 +5,7 @@
  */
 export function WaGlyph({
   size = 20,
-  className = "bg-white",
+  className = "bg-ink",
 }: {
   size?: number;
   className?: string;

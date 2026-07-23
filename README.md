@@ -1,4 +1,4 @@
-# Aranha Baile
+# NEXUS VNG
 
 Dos aplicaciones en un mismo repo Next.js:
 

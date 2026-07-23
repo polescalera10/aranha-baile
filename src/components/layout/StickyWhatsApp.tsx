@@ -27,13 +27,13 @@ export function StickyWhatsApp() {
         href={buildWaLink("sticky")}
         target="_blank"
         rel="noopener noreferrer"
-        className="pointer-events-auto relative flex items-center gap-[11px] rounded-full bg-red px-7 py-4 font-body text-[15px] font-bold text-white no-underline shadow-red"
+        className="pointer-events-auto relative flex items-center gap-[11px] rounded-full bg-neon px-7 py-4 font-body text-[15px] font-bold text-ink no-underline shadow-neon"
       >
         <span
           aria-hidden="true"
-          className="absolute inset-0 -z-10 rounded-full bg-red motion-safe:animate-[pulsering_2.6s_ease-out_infinite]"
+          className="absolute inset-0 -z-10 rounded-full bg-neon motion-safe:animate-[pulsering_2.6s_ease-out_infinite]"
         />
-        <WaGlyph size={18} className="bg-white" />
+        <WaGlyph size={18} className="bg-ink" />
         Reserva tu clase de prueba
       </a>
     </div>

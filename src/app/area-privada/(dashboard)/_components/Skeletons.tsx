@@ -1,11 +1,13 @@
 /**
  * Bloques de carga sobrios para los loading.tsx del panel.
- * Solo rectángulos bg-bg-sand con animate-pulse — sin spinners.
+ * Rectángulos text-strong/10 con animate-pulse — sin spinners.
+ * (bg-bg-elevated apenas se distinguía del panel oscuro; la transparencia
+ * de text-strong garantiza que el pulso se vea sobre cualquier superficie.)
  */
 
 export function SkeletonBlock({ className = "" }: { className?: string }) {
   return (
-    <div aria-hidden="true" className={`animate-pulse rounded-sm bg-bg-sand ${className}`} />
+    <div aria-hidden="true" className={`animate-pulse rounded-sm bg-text-strong/10 ${className}`} />
   );
 }
 
@@ -25,7 +27,7 @@ export function PageHeaderSkeleton({ withAction = false }: { withAction?: boolea
 /** Tabla o lista: cabecera + n filas. */
 export function TableSkeleton({ rows = 6 }: { rows?: number }) {
   return (
-    <div className="overflow-hidden rounded-lg border border-text-strong/8 bg-white shadow-soft">
+    <div className="overflow-hidden rounded-lg border border-text-strong/8 bg-bg-panel shadow-soft">
       <div className="border-b border-text-strong/8 px-4 py-3.5">
         <SkeletonBlock className="h-3.5 w-2/3 max-w-72" />
       </div>
@@ -48,7 +50,7 @@ export function CardSkeleton({
 }) {
   return (
     <div
-      className={`rounded-lg border border-text-strong/8 bg-white p-5 shadow-soft ${className}`}
+      className={`rounded-lg border border-text-strong/8 bg-bg-panel p-5 shadow-soft ${className}`}
     >
       <SkeletonBlock className="h-4 w-32" />
       <div className="mt-4 flex flex-col gap-3">

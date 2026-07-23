@@ -3,8 +3,8 @@ type BadgeVariant = "neutral" | "success" | "warning" | "danger";
 const variants: Record<BadgeVariant, string> = {
   neutral: "bg-text-strong/8 text-text-body",
   success: "bg-accent/12 text-accent",
-  warning: "bg-gold/22 text-text-strong",
-  danger: "bg-red/10 text-red",
+  warning: "bg-warning/12 text-warning",
+  danger: "bg-danger/12 text-danger",
 };
 
 export function Badge({

@@ -42,7 +42,7 @@ export function PaymentToggle({
         label={`Cuota de ${studentName}: ${PAYMENT_STATUS_LABELS[optimistic]}`}
       />
       <span
-        className={`font-body text-xs font-semibold ${alDia ? "text-accent" : "text-red"}`}
+        className={`font-body text-xs font-semibold ${alDia ? "text-accent" : "text-danger"}`}
       >
         {PAYMENT_STATUS_LABELS[optimistic]}
       </span>

@@ -27,7 +27,7 @@ export function Accordion({ items }: { items: QA[] }) {
                 </span>
                 <span
                   aria-hidden="true"
-                  className="flex-none font-body text-[28px] leading-none text-red transition-transform duration-300"
+                  className="flex-none font-body text-[28px] leading-none text-neon transition-transform duration-300"
                   style={{ transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}
                 >
                   +

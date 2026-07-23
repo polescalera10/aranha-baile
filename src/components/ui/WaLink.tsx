@@ -3,18 +3,20 @@ import { WaGlyph } from "@/components/ui/WaGlyph";
 
 type Variant = "red" | "white" | "gold" | "outline";
 
+/* Los nombres de variante se conservan por compatibilidad de API;
+   el mapeo visual es ya el de NEXUS: neón sobre oscuro, texto ink en CTAs. */
 const GLYPH: Record<Variant, string> = {
-  red: "bg-white",
-  white: "bg-red",
-  gold: "bg-[#1a1208]",
-  outline: "bg-white",
+  red: "bg-ink",
+  white: "bg-ink",
+  gold: "bg-ink",
+  outline: "bg-neon",
 };
 
 const WRAP: Record<Variant, string> = {
-  red: "bg-red text-white shadow-red hover:-translate-y-[3px] hover:shadow-[0_20px_44px_-8px_rgba(192,32,42,0.78)]",
-  white: "bg-white text-red shadow-[0_18px_44px_-12px_rgba(0,0,0,0.45)] hover:-translate-y-[3px]",
-  gold: "bg-gold text-[#1a1208] shadow-gold hover:-translate-y-[3px]",
-  outline: "border border-white/30 text-white/85 hover:bg-white/10",
+  red: "bg-neon text-ink shadow-neon hover:-translate-y-[3px] hover:shadow-glow",
+  white: "bg-text-strong text-ink shadow-card hover:-translate-y-[3px]",
+  gold: "bg-neon-lime text-ink shadow-glow hover:-translate-y-[3px]",
+  outline: "border border-text-strong/30 text-text-strong/85 hover:bg-text-strong/10",
 };
 
 /**

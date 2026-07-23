@@ -203,7 +203,7 @@ export function CourseForm({
       {state.status === "error" && state.message && (
         <p
           role="alert"
-          className="rounded-sm border border-red/30 bg-red/5 px-4 py-3 font-body text-sm text-red sm:col-span-2"
+          className="rounded-sm border border-danger/30 bg-danger/10 px-4 py-3 font-body text-sm text-danger sm:col-span-2"
         >
           {state.message}
         </p>

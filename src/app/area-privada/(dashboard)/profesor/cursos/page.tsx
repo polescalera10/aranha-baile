@@ -62,7 +62,7 @@ export default async function ProfesorCursosPage() {
             <TBody>
               {items.map(
                 ({ course, modalidadNombre, nivelNombre, leadersCount, followersCount }) => (
-                  <Tr key={course.id} className="hover:bg-bg-cream/60">
+                  <Tr key={course.id} className="hover:bg-bg-elevated/60">
                     <Td>
                       <Link
                         href={`/area-privada/profesor/cursos/${course.id}`}

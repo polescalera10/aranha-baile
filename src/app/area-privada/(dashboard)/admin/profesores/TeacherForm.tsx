@@ -67,7 +67,7 @@ export function TeacherForm({
             {modalidades.map((m) => (
               <label
                 key={m.slug}
-                className="flex min-h-11 cursor-pointer items-center gap-2.5 rounded-sm border border-text-strong/15 bg-white px-3.5 font-body text-sm text-text-body"
+                className="flex min-h-11 cursor-pointer items-center gap-2.5 rounded-sm border border-text-strong/15 bg-bg-elevated px-3.5 font-body text-sm text-text-body"
               >
                 <input
                   type="checkbox"
@@ -82,7 +82,7 @@ export function TeacherForm({
           </div>
         )}
         {state.errors?.disciplines && (
-          <p className="font-body text-xs font-semibold text-red">
+          <p className="font-body text-xs font-semibold text-danger">
             {state.errors.disciplines[0]}
           </p>
         )}
@@ -122,7 +122,7 @@ export function TeacherForm({
       {state.status === "error" && state.message && (
         <p
           role="alert"
-          className="rounded-sm border border-red/30 bg-red/5 px-4 py-3 font-body text-sm text-red"
+          className="rounded-sm border border-danger/30 bg-danger/10 px-4 py-3 font-body text-sm text-danger"
         >
           {state.message}
         </p>

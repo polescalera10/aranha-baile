@@ -11,9 +11,9 @@ export default function AreaPrivadaLoginPage() {
     <div className="flex min-h-screen flex-col items-center justify-center px-5 py-16">
       <div className="w-full max-w-[400px]">
         <div className="mb-8 flex justify-center">
-          <Logo size={28} onDark={false} />
+          <Logo size={28} />
         </div>
-        <div className="rounded-xl border border-text-strong/8 bg-white p-8 shadow-card">
+        <div className="rounded-xl border border-text-strong/8 bg-bg-panel p-8 shadow-card">
           <h1 className="font-display text-3xl text-text-strong">Área privada</h1>
           <p className="mb-6 mt-1 font-body text-sm text-text-muted">
             Accede con tu cuenta de alumno, profesor o admin.
@@ -21,7 +21,7 @@ export default function AreaPrivadaLoginPage() {
           <LoginForm />
         </div>
         <p className="mt-6 text-center font-body text-sm text-text-muted">
-          <Link href="/" className="text-red no-underline hover:underline">
+          <Link href="/" className="text-accent no-underline hover:underline">
             ← Volver a la web
           </Link>
         </p>

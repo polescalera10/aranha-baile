@@ -1,3 +1,5 @@
+> **NOTA (23-07-2026):** este documento es el brief original bajo la marca antigua "Aranha Baile". El proyecto se renombró a **NEXUS VNG** (dominio nexusvng.es, Instagram @nexusvng) con identidad dark neón. Se conserva tal cual como registro histórico.
+
 # /goal — Aranha Baile: App de gestión de escuela de baile (MVP)
 
 Pega este bloque completo tras `/goal` en Claude Code (modelo Fable 5). Está escrito para que orquestes subagentes por fases. Léelo entero antes de tocar nada.

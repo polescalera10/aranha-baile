@@ -4,7 +4,7 @@ import { createTeacher } from "@/lib/actions/teachers";
 import { getModalidadOptions } from "@/lib/queries/teachers";
 import { TeacherForm } from "../TeacherForm";
 
-export const metadata = { title: "Nuevo profesor · Aranha Baile" };
+export const metadata = { title: "Nuevo profesor · NEXUS VNG" };
 
 /** Alta de profesor (solo admin). El acceso al panel se vincula al editar. */
 export default async function NuevoProfesorPage() {

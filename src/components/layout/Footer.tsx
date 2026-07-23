@@ -4,10 +4,10 @@ import { buildWaLink } from "@/lib/whatsapp";
 import { site } from "@/lib/site";
 
 const PILL =
-  "rounded-full border border-white/20 px-4 py-[9px] font-body text-[13px] font-semibold text-white no-underline transition-colors hover:bg-white/8";
+  "rounded-full border border-white/15 px-4 py-[9px] font-body text-[13px] font-semibold text-white no-underline transition-colors hover:border-neon/50 hover:text-neon";
 
 const COL_LABEL =
-  "font-body text-[11px] font-bold uppercase tracking-[0.16em] text-white/45";
+  "font-body text-[11px] font-bold uppercase tracking-[0.16em] text-neon-mint/80";
 
 const EXPLORA: ReadonlyArray<readonly [string, string]> = [
   ["/clases", "Clases"],
@@ -27,8 +27,8 @@ const LEGAL: ReadonlyArray<readonly [string, string]> = [
  */
 export function Footer() {
   return (
-    <footer className="bg-ink pb-28 pt-[clamp(48px,6vw,72px)] text-white">
-      <div className="container-aranha grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-7">
+    <footer className="border-t border-white/8 bg-ink pb-28 pt-[clamp(48px,6vw,72px)] text-white">
+      <div className="container-nexus grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-7">
         <div>
           <Logo size={26} />
           <p className="mt-3.5 max-w-[38ch] font-body text-sm leading-relaxed text-white/60">
@@ -61,7 +61,7 @@ export function Footer() {
               <li key={href}>
                 <Link
                   href={href}
-                  className="font-body text-[13px] text-white/70 no-underline transition-colors hover:text-white"
+                  className="font-body text-[13px] text-white/70 no-underline transition-colors hover:text-neon"
                 >
                   {label}
                 </Link>
@@ -101,10 +101,10 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="container-aranha">
-        <div className="my-4 mt-8 h-px bg-white/12" />
+      <div className="container-nexus">
+        <div className="my-4 mt-8 h-px bg-white/10" />
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="font-body text-xs text-white/40">
+          <p className="font-body text-xs text-white/50">
             © {new Date().getFullYear()} {site.name} · Hecho con ritmo
           </p>
           <div className="flex gap-4">
@@ -112,7 +112,7 @@ export function Footer() {
               <Link
                 key={href}
                 href={href}
-                className="font-body text-xs text-white/40 no-underline transition-colors hover:text-white/70"
+                className="font-body text-xs text-white/50 no-underline transition-colors hover:text-neon"
               >
                 {label}
               </Link>

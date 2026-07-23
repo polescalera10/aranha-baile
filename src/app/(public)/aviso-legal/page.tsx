@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Aviso legal",
-  description: "Aviso legal de Aranha Baile.",
+  description: "Aviso legal de NEXUS VNG.",
   alternates: { canonical: "/aviso-legal" },
 };
 

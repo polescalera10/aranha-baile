@@ -7,7 +7,7 @@ import { getEventos } from "@/lib/queries/eventos";
 
 export const metadata: Metadata = {
   title: "Eventos de Baile",
-  description: "Fiestas, masterclasses y socials de Aranha Baile en Vilanova i la Geltrú.",
+  description: "Fiestas, masterclasses y socials de NEXUS VNG en Vilanova i la Geltrú.",
   alternates: { canonical: "/eventos" },
 };
 
@@ -36,10 +36,10 @@ export default async function EventosPage() {
             <li key={e.id}>
               <Link
                 href={`/eventos/${e.slug}`}
-                className="group overflow-hidden rounded-lg border border-text-strong/8 bg-white shadow-soft hover:shadow-card hover:-translate-y-1 transition-all duration-300 block no-underline text-inherit"
+                className="group overflow-hidden rounded-lg border border-white/8 bg-bg-panel shadow-soft hover:border-neon/30 hover:shadow-card hover:-translate-y-1 transition-all duration-300 block no-underline text-inherit"
               >
                 {/* Cabecera de la tarjeta con imagen o fallback */}
-                <div className="overflow-hidden h-48 relative bg-bg-sand">
+                <div className="overflow-hidden h-48 relative bg-bg-elevated">
                   {cover ? (
                     <img
                       src={cover}
@@ -49,13 +49,13 @@ export default async function EventosPage() {
                   ) : (
                     <PhotoPlaceholder label={`[ ${e.tipo} ]`} tint="mix" className="h-full p-3" />
                   )}
-                  <span className="absolute top-3 left-3 bg-red text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow-sm">
+                  <span className="absolute top-3 left-3 bg-neon text-ink text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow-sm">
                     {e.tipo}
                   </span>
                 </div>
 
                 <div className="p-6">
-                  <time className="font-body text-xs font-semibold uppercase tracking-wide text-red">
+                  <time className="font-body text-xs font-semibold uppercase tracking-wide text-neon-mint">
                     {new Date(e.fecha).toLocaleDateString("es-ES", {
                       day: "numeric",
                       month: "long",
@@ -63,13 +63,13 @@ export default async function EventosPage() {
                       minute: "2-digit",
                     })}h
                   </time>
-                  <h2 className="mt-1 font-display text-2xl text-text-strong group-hover:text-red transition-colors">
+                  <h2 className="mt-1 font-display text-2xl text-text-strong group-hover:text-neon transition-colors">
                     {e.titulo}
                   </h2>
                   <p className="mt-2 font-body text-[14px] text-text-muted line-clamp-2 leading-relaxed">
                     {e.descripcion?.replace(/[#*_[\]]/g, "")}
                   </p>
-                  <span className="mt-4 inline-block font-body text-[13px] font-bold text-red group-hover:underline">
+                  <span className="mt-4 inline-block font-body text-[13px] font-bold text-neon group-hover:underline">
                     Ver más detalles &rarr;
                   </span>
                 </div>

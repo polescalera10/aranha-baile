@@ -9,7 +9,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   return {
     title: `Profesor · ${slug}`,
-    description: "Perfil del profesor de Aranha Baile.",
+    description: "Perfil del profesor de NEXUS VNG.",
     alternates: { canonical: `/profesores/${slug}` },
   };
 }

@@ -22,7 +22,7 @@ function StateIcon({ present }: { present: boolean }) {
     <span
       aria-hidden="true"
       className={`flex size-7 flex-none items-center justify-center rounded-full transition-colors ${
-        present ? "bg-accent text-white" : "bg-text-strong/8 text-text-faint"
+        present ? "bg-accent text-ink" : "bg-text-strong/8 text-text-faint"
       }`}
     >
       <svg
@@ -100,7 +100,7 @@ export function AttendanceSheet({
                 className={`flex min-h-16 w-full touch-manipulation select-none items-center justify-between gap-3 rounded-md border px-4 py-3 text-left transition-colors active:scale-[0.99] ${
                   isPresent
                     ? "border-accent/35 bg-accent/10"
-                    : "border-text-strong/10 bg-white"
+                    : "border-text-strong/10 bg-bg-panel"
                 }`}
               >
                 <span
@@ -127,12 +127,12 @@ export function AttendanceSheet({
       </ul>
 
       {/* Barra de guardado: sticky por encima de la tab bar móvil (min-h-14 + safe-area). */}
-      <div className="sticky bottom-[calc(4.25rem+env(safe-area-inset-bottom))] mt-5 rounded-lg border border-text-strong/10 bg-white p-4 shadow-card md:bottom-6">
+      <div className="sticky bottom-[calc(4.25rem+env(safe-area-inset-bottom))] mt-5 rounded-lg border border-text-strong/10 bg-bg-elevated p-4 shadow-card md:bottom-6">
         {result?.message && (
           <p
             role={result.status === "error" ? "alert" : "status"}
             className={`mb-3 font-body text-sm font-semibold ${
-              result.status === "error" ? "text-red" : "text-accent"
+              result.status === "error" ? "text-danger" : "text-accent"
             }`}
           >
             {result.message}

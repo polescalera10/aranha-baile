@@ -37,7 +37,7 @@ export function LoginForm() {
   }
 
   const field =
-    "w-full rounded-sm border border-text-strong/15 bg-white px-4 py-3 font-body text-[15px] outline-none focus:border-red";
+    "w-full scheme-dark rounded-sm border border-text-strong/15 bg-bg-elevated px-4 py-3 font-body text-[15px] text-text-strong outline-none focus:border-accent";
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4">
@@ -55,7 +55,7 @@ export function LoginForm() {
       </div>
 
       {status === "error" && (
-        <p role="alert" className="rounded-sm border border-red/30 bg-red/5 px-4 py-2.5 font-body text-sm text-red">
+        <p role="alert" className="rounded-sm border border-danger/30 bg-danger/10 px-4 py-2.5 font-body text-sm text-danger">
           {message}
         </p>
       )}
@@ -63,7 +63,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="mt-1 rounded-md bg-red px-7 py-[15px] font-body text-base font-bold text-white shadow-red transition-transform hover:-translate-y-0.5 disabled:opacity-70"
+        className="mt-1 rounded-md bg-accent px-7 py-[15px] font-body text-base font-bold text-ink shadow-neon transition-transform hover:-translate-y-0.5 disabled:opacity-70"
       >
         {status === "loading" ? "Entrando…" : "Entrar"}
       </button>

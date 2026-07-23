@@ -97,9 +97,9 @@ export default async function AdminCursoDetailPage({
       </div>
 
       {/* Balance de aforo */}
-      <p className="mt-6 rounded-sm border border-text-strong/8 bg-white px-4 py-3 font-body text-sm font-semibold text-text-strong">
+      <p className="mt-6 rounded-sm border border-text-strong/8 bg-bg-panel px-4 py-3 font-body text-sm font-semibold text-text-strong">
         {leadersActive} leaders / {followersActive} followers —{" "}
-        <span className={diff === 0 ? "text-accent" : "text-red"}>{balance}</span>
+        <span className={diff === 0 ? "text-accent" : "text-danger"}>{balance}</span>
       </p>
 
       {/* Matriculados en dos columnas */}

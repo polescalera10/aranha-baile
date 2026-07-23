@@ -42,7 +42,7 @@ export function TeacherActiveToggle({
       >
         {active ? "Dar de baja" : "Reactivar"}
       </Button>
-      {error && <p className="font-body text-xs font-semibold text-red">{error}</p>}
+      {error && <p className="font-body text-xs font-semibold text-danger">{error}</p>}
     </div>
   );
 }

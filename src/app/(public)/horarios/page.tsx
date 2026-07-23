@@ -5,7 +5,7 @@ import { levels } from "@/content/landing";
 
 export const metadata: Metadata = {
   title: "Horarios",
-  description: "Horarios de las clases de baile de Aranha en Vilanova i la Geltrú.",
+  description: "Horarios de las clases de baile de NEXUS VNG en Vilanova i la Geltrú.",
   alternates: { canonical: "/horarios" },
 };
 
@@ -27,14 +27,14 @@ export default function HorariosPage() {
           <ul className="space-y-3">
             {levels.map((l) => (
               <li key={l.n} className="flex items-center gap-4">
-                <span className="font-display text-2xl text-warm">{l.n}</span>
+                <span className="font-display text-2xl text-neon-mint">{l.n}</span>
                 <span className="font-body text-[15px] font-semibold text-text-strong">{l.label}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <aside className="h-fit rounded-lg border border-text-strong/8 bg-white p-6 shadow-card lg:sticky lg:top-24">
+        <aside className="h-fit rounded-lg border border-white/8 bg-bg-panel p-6 shadow-card lg:sticky lg:top-24">
           <h2 className="font-display text-2xl text-text-strong">Encuentra tu hueco</h2>
           <p className="mt-2 font-body text-[15px] text-text-muted">
             Escríbenos con tu disponibilidad y la disciplina que te interesa, y te decimos qué

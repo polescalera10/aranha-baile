@@ -3,9 +3,9 @@ import { experience } from "@/content/landing";
 
 export function Experiencia() {
   return (
-    <section className="bg-bg-cream py-[clamp(64px,9vw,120px)]">
-      <div className="container-aranha">
-        <Reveal as="span" className="block font-body text-xs font-bold uppercase tracking-[0.18em] text-red">
+    <section className="bg-bg-panel py-[clamp(64px,9vw,120px)]">
+      <div className="container-nexus">
+        <Reveal as="span" className="block font-body text-xs font-bold uppercase tracking-[0.18em] text-neon">
           Lo que vas a vivir
         </Reveal>
         <Reveal delay={0.06}>
@@ -19,7 +19,7 @@ export function Experiencia() {
             <Reveal
               key={e.title}
               delay={i * 0.08}
-              className="rounded-lg border border-text-strong/5 bg-white p-[30px] shadow-card transition-transform duration-200 hover:-translate-y-1"
+              className="rounded-lg border border-white/6 bg-bg-elevated p-[30px] shadow-card transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-neon/25"
             >
               <span className={`block h-10 w-10 rounded-sm ${e.accent}`} />
               <h3 className="mb-2.5 mt-[18px] font-display text-[clamp(24px,2.4vw,30px)] text-text-strong">

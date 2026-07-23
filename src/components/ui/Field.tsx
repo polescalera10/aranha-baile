@@ -58,7 +58,7 @@ export function FieldShell({
         </p>
       )}
       {error && (
-        <p id={errorId} className="font-body text-xs font-semibold text-red">
+        <p id={errorId} className="font-body text-xs font-semibold text-danger">
           {error}
         </p>
       )}
@@ -68,6 +68,6 @@ export function FieldShell({
 
 /** Estilo base compartido de los controles de formulario. */
 export const controlClasses = (error?: string) =>
-  `w-full rounded-sm border bg-white px-3.5 py-2.5 font-body text-sm text-text-strong placeholder:text-text-faint focus-visible:outline-accent disabled:opacity-55 ${
-    error ? "border-red" : "border-text-strong/15"
+  `w-full scheme-dark rounded-sm border bg-bg-elevated px-3.5 py-2.5 font-body text-sm text-text-strong placeholder:text-text-muted focus-visible:outline-accent disabled:opacity-55 ${
+    error ? "border-danger" : "border-text-strong/15"
   }`;

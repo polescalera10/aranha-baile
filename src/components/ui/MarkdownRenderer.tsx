@@ -64,14 +64,14 @@ export function MarkdownRenderer({ content }: { content: string }) {
     if (imgMatch) {
       const [, alt, src] = imgMatch;
       renderedElements.push(
-        <div key={elementKey++} className="my-8 overflow-hidden rounded-lg border border-text-strong/8 bg-white shadow-soft">
+        <div key={elementKey++} className="my-8 overflow-hidden rounded-lg border border-text-strong/8 bg-bg-panel shadow-soft">
           <img
             src={src}
             alt={alt || "Imagen del evento"}
             className="w-full h-auto max-h-[480px] object-cover"
           />
           {alt && (
-            <div className="bg-bg-cream px-4 py-2.5 text-center text-xs font-semibold text-text-muted border-t border-text-strong/5">
+            <div className="bg-bg-elevated px-4 py-2.5 text-center text-xs font-semibold text-text-muted border-t border-text-strong/5">
               {alt}
             </div>
           )}

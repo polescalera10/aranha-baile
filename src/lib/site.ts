@@ -8,11 +8,11 @@
  * no los muestra. Rellenar y aparecen solos.
  */
 export const site = {
-  name: "Aranha Baile",
-  legalName: "Aranha Baile",
+  name: "NEXUS VNG",
+  legalName: "NEXUS VNG",
   description:
     "Escuela de salsa cubana, bachata y más en Vilanova i la Geltrú. Comunidad, niveles desde cero a avanzado y clases de prueba para empezar.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://aranhabaile.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nexusvng.es",
   locale: "es_ES",
   nap: {
     /** Nombre del local tal y como lo conoce la gente (se muestra en dirección). */
@@ -27,8 +27,8 @@ export const site = {
     telephoneDisplay: "+34 669 29 10 88",
   },
   social: {
-    instagram: "https://www.instagram.com/aranha.dance",
-    instagramHandle: "@aranha.dance",
+    instagram: "https://www.instagram.com/nexusvng",
+    instagramHandle: "@nexusvng",
     // TODO: URL real de TikTok — mientras esté vacío, la UI no pinta el enlace.
     tiktok: "",
   },

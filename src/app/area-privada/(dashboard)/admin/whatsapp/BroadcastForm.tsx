@@ -101,7 +101,7 @@ export function BroadcastForm({
         <p className="font-body text-sm font-semibold text-accent">{state.message}</p>
       )}
       {state.status === "error" && state.message && (
-        <p className="font-body text-sm font-semibold text-red">{state.message}</p>
+        <p className="font-body text-sm font-semibold text-danger">{state.message}</p>
       )}
 
       <div>

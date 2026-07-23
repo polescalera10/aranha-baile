@@ -51,9 +51,9 @@ export default async function DashboardLayout({
   return (
     <div className="min-h-screen">
       {/* Sidebar de escritorio */}
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-text-strong/8 bg-white md:flex">
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-text-strong/8 bg-bg-panel md:flex">
         <div className="px-6 pt-6 pb-8">
-          <Logo size={22} onDark={false} />
+          <Logo size={22} />
         </div>
         <div className="flex-1 overflow-y-auto px-3">
           <SidebarNav items={items} />
@@ -65,8 +65,8 @@ export default async function DashboardLayout({
       </aside>
 
       {/* Cabecera móvil */}
-      <header className="flex items-center justify-between border-b border-text-strong/8 bg-white px-5 py-3.5 md:hidden">
-        <Logo size={20} onDark={false} />
+      <header className="flex items-center justify-between border-b border-text-strong/8 bg-bg-panel px-5 py-3.5 md:hidden">
+        <Logo size={20} />
         <SignOutButton />
       </header>
 

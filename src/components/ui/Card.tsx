@@ -12,7 +12,7 @@ export function Card({
 }) {
   return (
     <div
-      className={`rounded-lg border border-text-strong/8 bg-white p-5 shadow-soft ${className}`}
+      className={`rounded-lg border border-text-strong/8 bg-bg-panel p-5 shadow-soft ${className}`}
     >
       {(title || action) && (
         <div className="mb-4 flex items-center justify-between gap-3">

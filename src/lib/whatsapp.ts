@@ -18,12 +18,12 @@ export type WaOrigin =
 const MESSAGES: Record<WaOrigin, string> = {
   hero: "¡Hola! Me gustaría info de la clase de prueba de baile 🙂",
   sticky: "¡Hola! Quiero reservar mi clase de prueba de baile 💃",
-  founding: "¡Hola! Quiero mi plaza fundadora de Aranha Baile ✨",
+  founding: "¡Hola! Quiero mi plaza fundadora de NEXUS VNG ✨",
   "cta-final": "¡Hola! ¿Empezamos? Me gustaría apuntarme a una clase de prueba 🙂",
-  footer: "¡Hola! Me gustaría más información sobre Aranha Baile 🙂",
+  footer: "¡Hola! Me gustaría más información sobre NEXUS VNG 🙂",
   nav: "¡Hola! Me gustaría info sobre las clases de baile 🙂",
   modalidad: "¡Hola! Me interesa la clase de", // se completa con la modalidad
-  contacto: "¡Hola! Os escribo desde la web de Aranha Baile 🙂",
+  contacto: "¡Hola! Os escribo desde la web de NEXUS VNG 🙂",
   evento: "¡Hola! Me gustaría más información sobre el evento", // se completa con el nombre del evento
 };
 

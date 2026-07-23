@@ -4,8 +4,8 @@ import { levels } from "@/content/landing";
 export function ParaTi() {
   return (
     <section className="bg-bg-base py-[clamp(64px,9vw,120px)]">
-      <div className="container-aranha">
-        <Reveal as="span" className="block font-body text-xs font-bold uppercase tracking-[0.18em] text-red">
+      <div className="container-nexus">
+        <Reveal as="span" className="block font-body text-xs font-bold uppercase tracking-[0.18em] text-neon">
           Esto es para ti
         </Reveal>
         <Reveal delay={0.06}>
@@ -25,9 +25,9 @@ export function ParaTi() {
             <Reveal
               key={lv.n}
               delay={i * 0.06}
-              className="rounded-md border border-text-strong/8 bg-white p-5 shadow-soft transition-transform duration-200 hover:-translate-y-1"
+              className="rounded-md border border-white/8 bg-bg-panel p-5 shadow-soft transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-neon/30"
             >
-              <div className="font-display text-3xl leading-none text-warm">{lv.n}</div>
+              <div className="font-display text-3xl leading-none text-neon-mint">{lv.n}</div>
               <div className="mt-2 font-body text-sm font-semibold text-text-strong">{lv.label}</div>
             </Reveal>
           ))}

@@ -39,7 +39,7 @@ export function NotesForm({
         error={state.errors?.notes?.[0]}
       />
       {state.status === "error" && state.message && (
-        <p role="alert" className="font-body text-sm font-semibold text-red">
+        <p role="alert" className="font-body text-sm font-semibold text-danger">
           {state.message}
         </p>
       )}

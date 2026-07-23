@@ -35,7 +35,7 @@ export function Toggle({
         }`}
       >
         <span
-          className={`absolute top-1 size-5 rounded-full bg-white shadow-soft transition-[left] ${
+          className={`absolute top-1 size-5 rounded-full bg-text-strong shadow-soft transition-[left] ${
             checked ? "left-6" : "left-1"
           }`}
         />

@@ -2,7 +2,7 @@
 
 import { postToN8n } from "@/lib/n8n/client";
 import { createClient } from "@/lib/supabase/server";
-import { leadSchema } from "@/lib/validation/lead";
+import { interestLeadSchema, leadSchema } from "@/lib/validation/lead";
 
 export type LeadFormState = {
   status: "idle" | "success" | "error";
@@ -73,5 +73,76 @@ export async function submitLead(
   return {
     status: "success",
     message: "¡Gracias! Te escribimos por WhatsApp enseguida.",
+  };
+}
+
+/**
+ * Server Action de las landings de INTENSIVOS y CURSO REGULAR.
+ * Igual que `submitLead` pero con email obligatorio, consentimiento RGPD y un
+ * array de `intereses` (etiquetas para marketing segmentado). Los intereses se
+ * guardan como `text[]` en `leads` y se envían a n8n también en texto plano.
+ */
+export async function submitInterestLead(
+  _prev: LeadFormState,
+  formData: FormData,
+): Promise<LeadFormState> {
+  const raw = {
+    nombre: formData.get("nombre"),
+    telefono: formData.get("telefono"),
+    email: formData.get("email") ?? "",
+    origen: formData.get("origen"),
+    // Checkboxes múltiples con el mismo name → getAll.
+    intereses: formData.getAll("intereses").map(String),
+    consentimiento: formData.get("consentimiento") ?? "",
+    website: formData.get("website") ?? "",
+  };
+
+  const parsed = interestLeadSchema.safeParse(raw);
+  if (!parsed.success) {
+    return {
+      status: "error",
+      message: "Revisa los campos marcados.",
+      errors: parsed.error.flatten().fieldErrors,
+    };
+  }
+
+  // Honeypot: si viene relleno, fingimos éxito y no hacemos nada.
+  if (parsed.data.website) {
+    return { status: "success", message: "¡Gracias! Te escribimos enseguida." };
+  }
+
+  const { website: _hp, consentimiento: _c, ...lead } = parsed.data;
+
+  const supabase = await createClient();
+  const { error } = await supabase.from("leads").insert({
+    nombre: lead.nombre,
+    telefono: lead.telefono,
+    email: lead.email,
+    origen: lead.origen,
+    intereses: lead.intereses,
+    mensaje: null,
+    // Trazabilidad legible en el CRM: qué landing convirtió.
+    modalidad_interes: lead.origen === "intensivos" ? "Intensivos agosto" : "Curso regular",
+  });
+
+  if (error) {
+    console.error("[submitInterestLead] insert error:", error.message);
+    return {
+      status: "error",
+      message:
+        "No hemos podido guardar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp.",
+    };
+  }
+
+  await postToN8n({
+    ...lead,
+    intereses_texto: lead.intereses.join(", "),
+    consentimiento: true,
+    recibido_en: new Date().toISOString(),
+  }).catch((e) => console.error("[submitInterestLead] webhook n8n falló:", e));
+
+  return {
+    status: "success",
+    message: "¡Gracias! Hemos recibido tu solicitud y te escribimos enseguida.",
   };
 }

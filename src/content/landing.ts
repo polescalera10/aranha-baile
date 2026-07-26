@@ -6,7 +6,7 @@
  *
  * DATOS PENDIENTES DE POL (buscar "TODO" en este archivo):
  *   · Condiciones de la clase de prueba (¿gratis o no? Pol retiró "gratis" el 19-06).
- *   · Cuota estándar de referencia (priceOld del founding). La fundadora ya es real: 90 €/mes.
+ *   · (Resuelto 26-07) Founding: 85 €/mes, 10 plazas. Tarifa plana sin promo: 100 €/mes. Estilos sueltos desde 35 €/mes.
  *   · Horarios reales (FAQ de horarios).
  *   · Dirección exacta (FAQ "¿Dónde estáis?").
  *   · Reseñas reales de Google (array `reviews` — NUNCA inventarlas, Directiva Omnibus).
@@ -96,7 +96,7 @@ export const faqs = [
   {
     q: "¿Cuánto cuesta?",
     // TODO: condiciones de la clase de prueba (Pol retiró "gratis" el 19-06) y cuota estándar de referencia.
-    a: "La tarifa fundadora de lanzamiento es de 90 €/mes e incluye acceso a todas las disciplinas de tu nivel, con la cuota bloqueada mientras sigas de alta. Y antes de decidir, tienes una clase de prueba para conocer el ambiente.",
+    a: "La tarifa fundadora de lanzamiento es de 85 €/mes (solo 10 plazas) e incluye acceso a todas las disciplinas, con la cuota bloqueada mientras sigas de alta. Después, la tarifa plana con todos los estilos es de 100 €/mes; también puedes venir por estilos sueltos desde 35 €/mes. Y antes de decidir, tienes una clase de prueba para conocer el ambiente.",
   },
   {
     q: "¿Qué horarios hay?",
@@ -145,21 +145,20 @@ export const founding = {
   subtitle:
     "Los primeros alumnos abren la escuela con nosotros: tu cuota queda bloqueada mientras sigas de alta y tu nombre forma parte de la historia desde el principio.",
   badge: "Cuota bloqueada mientras sigas de alta",
-  /** Cuota fundadora confirmada por Pol (08-07-2026). */
-  price: "90 €",
+  /** Cuota fundadora confirmada por Pol (26-07-2026): 85 €/mes, tarifa plana con todo incluido. */
+  price: "85 €",
   /**
-   * Cuota estándar de referencia (tachada junto al precio fundador).
-   * TODO: poner la cuota estándar real cuando exista. Mientras sea null no se pinta.
+   * Cuota estándar de referencia (tachada junto al precio fundador): la tarifa
+   * plana sin promoción de fundador (100 €/mes, todos los estilos).
    */
-  priceOld: null as string | null,
+  priceOld: "100 €" as string | null,
   /**
-   * Plazas fundadoras REALES. Los grupos tienen aforo físico limitado, pero el
-   * número exacto debe salir de la capacidad real de la sala.
-   * TODO: aforo real → spotsTotal, y actualizar spotsLeft a mano o desde BD.
-   * Mientras sean null no se muestra la barra de plazas.
+   * Plazas fundadoras REALES: la promoción está limitada a 10 plazas (Pol, 26-07-2026).
+   * `spotsLeft` debe reflejar las que quedan de verdad — actualízalo a mano (o desde BD)
+   * conforme se ocupen; arranca en 10 (ninguna vendida todavía).
    */
-  spotsLeft: null as number | null,
-  spotsTotal: null as number | null,
+  spotsLeft: 10 as number | null,
+  spotsTotal: 10 as number | null,
   /**
    * Fecha límite REAL de la tarifa fundadora (fin del periodo de apertura).
    * TODO: fecha real de cierre. Mientras sea null no se muestra la cuenta atrás.
@@ -174,7 +173,7 @@ export const founding = {
   finePrint: "Sin permanencia. Si te das de baja, la tarifa fundadora no se recupera.",
   /**
    * Columna "qué incluye" — condiciones confirmadas por Pol (08-07-2026):
-   * 90 €/mes con acceso a todas las disciplinas a las que puedas acceder según
+   * 85 €/mes con acceso a todas las disciplinas a las que puedas acceder según
    * tu nivel, cuota bloqueada y prioridad en eventos.
    */
   benefitsTitle: "¿Qué incluye la plaza fundadora?",

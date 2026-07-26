@@ -6,6 +6,7 @@ import { Modalidades } from "@/components/landing/Modalidades";
 // import { Comunidad } from "@/components/landing/Comunidad";
 import { Profesores } from "@/components/landing/Profesores";
 import { Founding } from "@/components/landing/Founding";
+import { Precios } from "@/components/landing/Precios";
 import { ComoEmpezar } from "@/components/landing/ComoEmpezar";
 import { Faq } from "@/components/landing/Faq";
 import { CtaFinal } from "@/components/landing/CtaFinal";
@@ -28,6 +29,14 @@ export default async function HomePage() {
       {/* Oculta hasta tener contenido real (fotos + reseñas): <Comunidad /> */}
       <Profesores />
       <Founding />
+      {/* Precios "estándar": debajo del founding a propósito — cuando la promo
+          fundadora se retire y se borre <Founding />, esta sección queda como
+          el bloque de precios de referencia de la home. */}
+      <section className="bg-bg-panel py-[clamp(56px,9vw,110px)]">
+        <div className="container-nexus">
+          <Precios />
+        </div>
+      </section>
       <ComoEmpezar />
       <Faq />
       <CtaFinal />

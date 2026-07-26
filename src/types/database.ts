@@ -64,6 +64,8 @@ export type Lead = {
   telefono: string;
   email: string | null;
   modalidad_interes: string | null;
+  /** Etiquetas de interés (estilos/sesiones) para marketing segmentado. */
+  intereses: string[] | null;
   origen: string;
   mensaje: string | null;
   estado: LeadEstado;
@@ -197,7 +199,7 @@ export interface Database {
       };
       leads: {
         Row: Lead;
-        Insert: Omit<Lead, "id" | "estado" | "created_at"> & Partial<Lead>;
+        Insert: Omit<Lead, "id" | "estado" | "created_at" | "intereses"> & Partial<Lead>;
         Update: Partial<Lead>;
         Relationships: [];
       };

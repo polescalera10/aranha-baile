@@ -15,7 +15,7 @@ export function RolePlaceholder({
   const label = { alumno: "Alumno", profesor: "Profesor", admin: "Admin" }[rol];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-dvh">
       <header className="border-b border-text-strong/8 bg-bg-panel">
         <div className="container-nexus flex items-center justify-between py-4">
           <Logo size={22} />

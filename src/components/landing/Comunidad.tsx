@@ -27,7 +27,7 @@ export function Comunidad() {
         )}
 
         {/* Mosaico de fotos. PLACEHOLDER: fotografía real de fiestas/eventos/caras. */}
-        <Reveal delay={0.12} className="mt-[30px] grid grid-cols-[repeat(auto-fit,minmax(170px,1fr))] gap-3">
+        <Reveal delay={0.12} className="mt-[30px] grid grid-cols-[repeat(auto-fit,minmax(min(170px,100%),1fr))] gap-3">
           <PhotoPlaceholder label="[ fiesta ]" tint="warm" className="row-span-2 min-h-[300px] rounded-lg p-3" />
           <PhotoPlaceholder label="[ masterclass ]" tint="red" className="min-h-[144px] rounded-lg p-3" />
           <PhotoPlaceholder label="[ caras ]" tint="warm" className="min-h-[144px] rounded-lg p-3" />
@@ -42,7 +42,7 @@ export function Comunidad() {
           </div>
         )}
 
-        <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
+        <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-4">
           {reviews.map((r, i) => (
             <Reveal
               key={r.name}

@@ -34,8 +34,10 @@ export function AvailabilityEditor({
 
         return (
           <div key={day} className="flex flex-col gap-1">
-            <div className="grid grid-cols-[5rem_1fr_1fr] items-center gap-2">
-              <span className="font-body text-sm font-semibold text-text-body">
+            {/* En móvil el nombre del día ocupa su propia fila: con 5rem fijos
+                los dos <input type="time"> no caben por debajo de ~360px. */}
+            <div className="grid grid-cols-2 items-center gap-2 sm:grid-cols-[5rem_1fr_1fr]">
+              <span className="col-span-2 font-body text-sm font-semibold text-text-body sm:col-span-1">
                 {dayName}
               </span>
               <input

@@ -9,7 +9,7 @@ export default function NotFound() {
   const router = useRouter();
 
   return (
-    <div className="flex min-h-screen flex-col bg-ink text-white">
+    <div className="flex min-h-dvh flex-col bg-ink text-white">
       {/* Cabecera integrada */}
       <SiteHeader />
 

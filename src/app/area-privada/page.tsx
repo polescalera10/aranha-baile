@@ -8,7 +8,7 @@ import { LoginForm } from "./LoginForm";
  */
 export default function AreaPrivadaLoginPage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-5 py-16">
+    <div className="flex min-h-dvh flex-col items-center justify-center px-5 py-16">
       <div className="w-full max-w-[400px]">
         <div className="mb-8 flex justify-center">
           <Logo size={28} />

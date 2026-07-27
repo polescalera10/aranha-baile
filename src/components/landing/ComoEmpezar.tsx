@@ -14,7 +14,7 @@ export function ComoEmpezar() {
           </h2>
         </Reveal>
 
-        <div className="mt-11 grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-[clamp(22px,3vw,40px)]">
+        <div className="mt-11 grid grid-cols-[repeat(auto-fit,minmax(min(240px,100%),1fr))] gap-[clamp(22px,3vw,40px)]">
           {steps.map((s, i) => (
             <Reveal key={s.n} delay={i * 0.08} className="border-t-2 border-neon/25 pt-[18px]">
               <span className="block font-display text-[clamp(40px,5vw,56px)] leading-[0.85] text-neon-mint">

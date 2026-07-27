@@ -28,7 +28,7 @@ export default async function EventosPage() {
       title="Eventos"
       intro="Fiestas, masterclasses y socials donde la escuela se convierte en pista."
     >
-      <ul className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 p-0 list-none">
+      <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-6 p-0 list-none">
         {eventos.map((e) => {
           const cover = e.slug ? COVER_IMAGES[e.slug] : null;
           

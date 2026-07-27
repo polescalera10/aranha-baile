@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function AreaPrivadaLayout({ children }: { children: React.ReactNode }) {
-  return <div className="min-h-screen bg-bg-base">{children}</div>;
+  return <div className="min-h-dvh bg-bg-base">{children}</div>;
 }

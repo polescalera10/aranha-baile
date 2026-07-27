@@ -1,0 +1,124 @@
+import { describe, expect, it } from "vitest";
+import { interestLeadSchema, leadSchema } from "@/lib/validation/lead";
+
+/** Lead válido mínimo, para mutar campo a campo en cada caso. */
+const validLead = {
+  nombre: "Ana Ruiz",
+  telefono: "+34 600 00 00 00",
+  email: "",
+  modalidad_interes: "",
+  origen: "clase-prueba",
+  mensaje: "",
+  website: "",
+};
+
+describe("leadSchema", () => {
+  it("acepta el mínimo real: nombre + teléfono + origen", () => {
+    const parsed = leadSchema.safeParse(validLead);
+    expect(parsed.success).toBe(true);
+  });
+
+  it("recorta espacios del nombre y del teléfono", () => {
+    const parsed = leadSchema.parse({ ...validLead, nombre: "  Ana  " });
+    expect(parsed.nombre).toBe("Ana");
+  });
+
+  it("rechaza un nombre de una sola letra", () => {
+    const parsed = leadSchema.safeParse({ ...validLead, nombre: "A" });
+    expect(parsed.success).toBe(false);
+    expect(parsed.error?.flatten().fieldErrors.nombre?.[0]).toBe("Dinos tu nombre");
+  });
+
+  it("acepta teléfonos con prefijo, espacios, guiones y paréntesis", () => {
+    for (const telefono of ["+34600000000", "600 00 00 00", "(+34) 600-000-000"]) {
+      expect(leadSchema.safeParse({ ...validLead, telefono }).success).toBe(true);
+    }
+  });
+
+  it("rechaza un teléfono con letras", () => {
+    const parsed = leadSchema.safeParse({ ...validLead, telefono: "llámame" });
+    expect(parsed.success).toBe(false);
+  });
+
+  it("rechaza un teléfono demasiado corto", () => {
+    expect(leadSchema.safeParse({ ...validLead, telefono: "600" }).success).toBe(false);
+  });
+
+  it("permite email vacío pero no un email inválido", () => {
+    expect(leadSchema.safeParse({ ...validLead, email: "" }).success).toBe(true);
+    expect(leadSchema.safeParse({ ...validLead, email: "ana@nexus.es" }).success).toBe(true);
+    expect(leadSchema.safeParse({ ...validLead, email: "ana@" }).success).toBe(false);
+  });
+
+  it("solo admite los orígenes declarados", () => {
+    expect(leadSchema.safeParse({ ...validLead, origen: "campana" }).success).toBe(true);
+    expect(leadSchema.safeParse({ ...validLead, origen: "tiktok" }).success).toBe(false);
+  });
+
+  it("el honeypot debe llegar vacío: un bot que lo rellena no valida", () => {
+    const parsed = leadSchema.safeParse({ ...validLead, website: "http://spam.example" });
+    expect(parsed.success).toBe(false);
+  });
+
+  it("corta mensajes de más de 1000 caracteres", () => {
+    expect(
+      leadSchema.safeParse({ ...validLead, mensaje: "x".repeat(1001) }).success,
+    ).toBe(false);
+    expect(leadSchema.safeParse({ ...validLead, mensaje: "x".repeat(1000) }).success).toBe(
+      true,
+    );
+  });
+});
+
+const validInterest = {
+  nombre: "Ana Ruiz",
+  telefono: "+34600000000",
+  email: "ana@nexus.es",
+  origen: "intensivos",
+  intereses: ["Salsa cubana"],
+  consentimiento: "on",
+  website: "",
+};
+
+describe("interestLeadSchema", () => {
+  it("acepta un lead de intensivos completo", () => {
+    expect(interestLeadSchema.safeParse(validInterest).success).toBe(true);
+  });
+
+  it("exige email (a diferencia del lead genérico)", () => {
+    const parsed = interestLeadSchema.safeParse({ ...validInterest, email: "" });
+    expect(parsed.success).toBe(false);
+    expect(parsed.error?.flatten().fieldErrors.email?.[0]).toBe("Necesitamos tu email");
+  });
+
+  it("exige al menos un interés marcado", () => {
+    const parsed = interestLeadSchema.safeParse({ ...validInterest, intereses: [] });
+    expect(parsed.success).toBe(false);
+    expect(parsed.error?.flatten().fieldErrors.intereses?.[0]).toBe(
+      "Marca al menos una opción que te interese",
+    );
+  });
+
+  it("exige el consentimiento RGPD explícito", () => {
+    const parsed = interestLeadSchema.safeParse({ ...validInterest, consentimiento: "" });
+    expect(parsed.success).toBe(false);
+    expect(parsed.error?.flatten().fieldErrors.consentimiento?.[0]).toBe(
+      "Debes aceptar el tratamiento de datos para continuar",
+    );
+  });
+
+  it("solo admite los orígenes de estas dos landings", () => {
+    expect(
+      interestLeadSchema.safeParse({ ...validInterest, origen: "curso-regular" }).success,
+    ).toBe(true);
+    expect(
+      interestLeadSchema.safeParse({ ...validInterest, origen: "clase-prueba" }).success,
+    ).toBe(false);
+  });
+
+  it("mantiene el honeypot como barrera anti-spam", () => {
+    expect(
+      interestLeadSchema.safeParse({ ...validInterest, website: "spam" }).success,
+    ).toBe(false);
+  });
+});

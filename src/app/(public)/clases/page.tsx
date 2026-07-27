@@ -166,7 +166,17 @@ export default async function ClasesPage() {
               </p>
             </Reveal>
 
-            <Reveal className="overflow-x-auto">
+            {/* La parrilla no cabe en móvil: se desplaza en horizontal dentro de
+                su caja (nunca la página). tabIndex la hace accesible por teclado. */}
+            <p className="font-body text-[13px] text-text-faint md:hidden" aria-hidden="true">
+              Desliza la tabla para ver toda la semana →
+            </p>
+            <Reveal
+              className="overflow-x-auto focus-visible:outline-neon"
+              role="region"
+              aria-label="Horario semanal de clases"
+              tabIndex={0}
+            >
               <table className="w-full min-w-[720px] table-fixed border-separate border-spacing-2">
                 <thead>
                   <tr>

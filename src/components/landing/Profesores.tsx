@@ -7,7 +7,7 @@ export function Profesores() {
   return (
     <section className="bg-bg-panel py-[clamp(64px,9vw,120px)]">
       <div className="container-nexus">
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] items-center gap-[clamp(24px,4vw,56px)]">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] items-center gap-[clamp(24px,4vw,56px)]">
           <Reveal>
             {/* TODO: foto de grupo real (equipo + alumnos). Etiqueta oculta en producción (sr-only). */}
             <PhotoPlaceholder

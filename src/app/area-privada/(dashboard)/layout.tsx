@@ -49,7 +49,7 @@ export default async function DashboardLayout({
   const items = NAV[role];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-dvh">
       {/* Sidebar de escritorio */}
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-text-strong/8 bg-bg-panel md:flex">
         <div className="px-6 pt-6 pb-8">

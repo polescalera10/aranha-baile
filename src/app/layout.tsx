@@ -35,9 +35,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-/** Negro de marca en la UI del navegador (barra de estado móvil). */
+/**
+ * Negro de marca en la UI del navegador (barra de estado móvil).
+ * `viewportFit: "cover"` habilita las variables env(safe-area-inset-*) que usan
+ * el WhatsApp sticky y el menú móvil para no quedar bajo el indicador de inicio.
+ */
 export const viewport: Viewport = {
   themeColor: "#0a0a0a",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

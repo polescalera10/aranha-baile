@@ -29,7 +29,9 @@ export function Hero() {
 
       <Header />
 
-      <div className="container-nexus relative z-[2] flex min-h-screen flex-col justify-end pb-[clamp(56px,9vh,110px)] pt-[140px]">
+      {/* dvh (no vh): en móvil el 100vh cuenta la barra del navegador que se
+          repliega, y el CTA quedaba empujado fuera de la pantalla al cargar. */}
+      <div className="container-nexus relative z-[2] flex min-h-dvh flex-col justify-end pb-[clamp(56px,9vh,110px)] pt-[110px] md:pt-[140px]">
         <Reveal className="mb-[22px] inline-flex items-center gap-[9px]">
           <span className="h-2 w-2 rounded-full bg-neon shadow-neon motion-safe:animate-[dotpulse_1.8s_ease-in-out_infinite]" />
           <span className="font-body text-xs font-bold uppercase tracking-[0.18em] text-neon-mint">

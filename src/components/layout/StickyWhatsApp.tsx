@@ -20,14 +20,14 @@ export function StickyWhatsApp() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-x-0 bottom-0 z-[60] flex justify-center p-4 transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)]"
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-[60] flex justify-center p-4 pb-[max(1rem,env(safe-area-inset-bottom))] transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)]"
       style={{ transform: shown ? "translateY(0)" : "translateY(140%)" }}
     >
       <a
         href={buildWaLink("sticky")}
         target="_blank"
         rel="noopener noreferrer"
-        className="pointer-events-auto relative flex items-center gap-[11px] rounded-full bg-neon px-7 py-4 font-body text-[15px] font-bold text-ink no-underline shadow-neon"
+        className="pointer-events-auto relative flex max-w-full items-center justify-center gap-[11px] rounded-full bg-neon px-6 py-4 text-center font-body text-sm font-bold text-ink no-underline shadow-neon sm:px-7 sm:text-[15px]"
       >
         <span
           aria-hidden="true"

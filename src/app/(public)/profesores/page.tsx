@@ -52,7 +52,7 @@ export default function ProfesoresPage() {
       {/*
         Grid original de fichas (oculto hasta tener datos reales):
 
-        <ul className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-6">
+        <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(240px,100%),1fr))] gap-6">
           {PROFES.map((p) => (
             <li key={p.slug}>
               <Link href={`/profesores/${p.slug}`} className="group block no-underline">

@@ -14,7 +14,7 @@ export function Experiencia() {
           </h2>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-[18px]">
+        <div className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-[18px]">
           {experience.map((e, i) => (
             <Reveal
               key={e.title}

@@ -66,8 +66,14 @@ export function FieldShell({
   );
 }
 
-/** Estilo base compartido de los controles de formulario. */
+/**
+ * Estilo base compartido de los controles de formulario.
+ * `text-base` en móvil (16px) es deliberado: por debajo de 16px, Safari iOS
+ * hace zoom automático al enfocar el campo y descoloca la página. A partir de
+ * sm se vuelve a la escala compacta del panel. `min-h-11` garantiza el objetivo
+ * táctil mínimo de 44px.
+ */
 export const controlClasses = (error?: string) =>
-  `w-full scheme-dark rounded-sm border bg-bg-elevated px-3.5 py-2.5 font-body text-sm text-text-strong placeholder:text-text-muted focus-visible:outline-accent disabled:opacity-55 ${
+  `w-full min-h-11 scheme-dark rounded-sm border bg-bg-elevated px-3.5 py-2.5 font-body text-base sm:text-sm text-text-strong placeholder:text-text-muted focus-visible:outline-accent disabled:opacity-55 ${
     error ? "border-danger" : "border-text-strong/15"
   }`;

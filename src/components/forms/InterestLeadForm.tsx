@@ -7,7 +7,7 @@ import { submitInterestLead, type LeadFormState } from "@/lib/actions/leads";
 const initial: LeadFormState = { status: "idle" };
 
 const FIELD =
-  "w-full rounded-sm border border-white/12 bg-bg-elevated px-4 py-3 font-body text-[15px] text-text-strong outline-none transition-colors placeholder:text-text-muted focus:border-neon";
+  "w-full min-h-12 rounded-sm border border-white/12 bg-bg-elevated px-4 py-3 font-body text-base text-text-strong outline-none transition-colors placeholder:text-text-muted focus:border-neon";
 const LABEL = "mb-1.5 block font-body text-[13px] font-semibold text-text-body";
 const ERR = "mt-1 font-body text-xs font-semibold text-neon";
 

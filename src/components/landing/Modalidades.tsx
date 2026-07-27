@@ -11,7 +11,7 @@ export function Modalidades({ modalidades }: { modalidades: Modalidad[] }) {
           Qué se baila
         </Reveal>
 
-        <div className="mt-[26px] grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-[18px]">
+        <div className="mt-[26px] grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-[18px]">
           {modalidades.map((m, i) => (
             <Reveal key={m.slug} delay={(i % 3) * 0.08}>
               <Link

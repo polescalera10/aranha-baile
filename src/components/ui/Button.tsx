@@ -11,9 +11,10 @@ const variants: Record<ButtonVariant, string> = {
   ghost: "bg-transparent text-text-body hover:bg-text-strong/8",
 };
 
+/** min-h-11 = 44px: objetivo táctil mínimo recomendado en móvil. */
 const sizes: Record<ButtonSize, string> = {
-  sm: "px-3.5 py-2 text-[13px]",
-  md: "px-5 py-2.5 text-sm",
+  sm: "min-h-11 px-3.5 py-2 text-[13px] sm:min-h-9",
+  md: "min-h-11 px-5 py-2.5 text-sm",
 };
 
 function Spinner() {

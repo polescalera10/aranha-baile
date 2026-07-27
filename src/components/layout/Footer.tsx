@@ -3,8 +3,10 @@ import { Logo } from "@/components/layout/Logo";
 import { buildWaLink } from "@/lib/whatsapp";
 import { site } from "@/lib/site";
 
+// min-h-11 (44px): con py-[9px] la píldora se quedaba en 40px de alto, por
+// debajo del objetivo táctil mínimo en móvil.
 const PILL =
-  "rounded-full border border-white/15 px-4 py-[9px] font-body text-[13px] font-semibold text-white no-underline transition-colors hover:border-neon/50 hover:text-neon";
+  "inline-flex min-h-11 items-center rounded-full border border-white/15 px-4 py-[9px] font-body text-[13px] font-semibold text-white no-underline transition-colors hover:border-neon/50 hover:text-neon";
 
 const COL_LABEL =
   "font-body text-[11px] font-bold uppercase tracking-[0.16em] text-neon-mint/80";
@@ -28,7 +30,7 @@ const LEGAL: ReadonlyArray<readonly [string, string]> = [
 export function Footer() {
   return (
     <footer className="border-t border-white/8 bg-ink pb-28 pt-[clamp(48px,6vw,72px)] text-white">
-      <div className="container-nexus grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-7">
+      <div className="container-nexus grid grid-cols-[repeat(auto-fit,minmax(min(240px,100%),1fr))] gap-7">
         <div>
           <Logo size={26} />
           <p className="mt-3.5 max-w-[38ch] font-body text-sm leading-relaxed text-white/60">
@@ -56,12 +58,14 @@ export function Footer() {
 
         <div>
           <div className={COL_LABEL}>Explora</div>
-          <ul className="mt-3 flex flex-col gap-2">
+          {/* En móvil los enlaces se separan hasta 44px de alto para poder
+              pulsarlos con el pulgar; en sm+ vuelve la lista compacta. */}
+          <ul className="mt-1 flex flex-col sm:mt-3 sm:gap-2">
             {EXPLORA.map(([href, label]) => (
               <li key={href}>
                 <Link
                   href={href}
-                  className="font-body text-[13px] text-white/70 no-underline transition-colors hover:text-neon"
+                  className="inline-flex min-h-11 items-center font-body text-[13px] text-white/70 no-underline transition-colors hover:text-neon sm:min-h-0"
                 >
                   {label}
                 </Link>

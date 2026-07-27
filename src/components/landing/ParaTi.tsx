@@ -20,7 +20,7 @@ export function ParaTi() {
           </p>
         </Reveal>
 
-        <div className="mt-9 grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3">
+        <div className="mt-9 grid grid-cols-[repeat(auto-fit,minmax(min(150px,100%),1fr))] gap-3">
           {levels.map((lv, i) => (
             <Reveal
               key={lv.n}

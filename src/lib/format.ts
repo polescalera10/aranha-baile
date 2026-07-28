@@ -37,6 +37,30 @@ export function formatDate(iso: string): string {
   });
 }
 
+/**
+ * Timestamp ISO → tiempo relativo corto ("hace 5 min", "ayer", "hace 3 d").
+ * A partir de 7 días cae a fecha absoluta. `now` es inyectable para tests.
+ */
+export function formatRelative(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  const diffMs = now.getTime() - then.getTime();
+  if (Number.isNaN(diffMs)) return "";
+  if (diffMs < 0) return "ahora";
+
+  const min = Math.floor(diffMs / 60_000);
+  if (min < 1) return "ahora";
+  if (min < 60) return `hace ${min} min`;
+
+  const hours = Math.floor(min / 60);
+  if (hours < 24) return `hace ${hours} h`;
+
+  const days = Math.floor(hours / 24);
+  if (days === 1) return "ayer";
+  if (days < 7) return `hace ${days} d`;
+
+  return then.toLocaleDateString("es-ES", { day: "numeric", month: "short" });
+}
+
 /** Etiquetas de UI para enums del panel. */
 export const DANCE_ROLE_LABELS: Record<string, string> = {
   leader: "Leader",
@@ -60,6 +84,24 @@ export const SESSION_STATUS_LABELS: Record<string, string> = {
   programada: "Programada",
   impartida: "Impartida",
   cancelada: "Cancelada",
+};
+
+export const LEAD_ESTADO_LABELS: Record<string, string> = {
+  nuevo: "Nuevo",
+  contactado: "Contactado",
+  prueba_agendada: "Prueba agendada",
+  convertido: "Convertido",
+  descartado: "Descartado",
+};
+
+export const LEAD_ORIGEN_LABELS: Record<string, string> = {
+  "clase-prueba": "Clase de prueba",
+  founding: "Founding",
+  contacto: "Contacto",
+  modalidad: "Modalidad",
+  campana: "Campaña",
+  intensivos: "Intensivos",
+  "curso-regular": "Curso regular",
 };
 
 export const CYCLE_TYPE_LABELS: Record<string, string> = {

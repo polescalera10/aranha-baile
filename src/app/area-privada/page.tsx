@@ -5,8 +5,16 @@ import { LoginForm } from "./LoginForm";
 /**
  * Login del área privada. El middleware ya redirige a un usuario autenticado
  * a su panel por rol, así que aquí solo se renderiza el formulario.
+ * `?error=enlace` llega desde /area-privada/callback cuando el magic link
+ * está caducado o ya usado.
  */
-export default function AreaPrivadaLoginPage() {
+export default async function AreaPrivadaLoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const sp = await searchParams;
+
   return (
     <div className="flex min-h-dvh flex-col items-center justify-center px-5 py-16">
       <div className="w-full max-w-[400px]">
@@ -18,7 +26,7 @@ export default function AreaPrivadaLoginPage() {
           <p className="mb-6 mt-1 font-body text-sm text-text-muted">
             Accede con tu cuenta de alumno, profesor o admin.
           </p>
-          <LoginForm />
+          <LoginForm initialError={sp.error === "enlace"} />
         </div>
         <p className="mt-6 text-center font-body text-sm text-text-muted">
           <Link href="/" className="text-accent no-underline hover:underline">

@@ -17,4 +17,10 @@ port = 54323
 [auth]
 enable_signup = true
 site_url = "http://localhost:3000"
-additional_redirect_urls = ["http://localhost:3000/area-privada"]
+# El callback del enlace mágico debe estar permitido aquí Y en el proyecto real
+# (Supabase Dashboard → Authentication → URL Configuration → Redirect URLs).
+additional_redirect_urls = [
+  "http://localhost:3000/area-privada",
+  "http://localhost:3000/area-privada/callback",
+  "https://nexusvng.es/area-privada/callback",
+]

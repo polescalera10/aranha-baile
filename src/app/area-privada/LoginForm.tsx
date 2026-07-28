@@ -5,14 +5,23 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 /**
- * Login del área privada (Supabase Auth, email + contraseña).
- * Tras autenticar, redirige a la home del área; el middleware reenvía al
- * panel correspondiente según el rol del perfil.
+ * Login del área privada. Dos vías:
+ *   · Enlace por email (por defecto): Supabase manda un magic link que vuelve
+ *     a /area-privada/callback y allí se canjea la sesión.
+ *   · Contraseña: signInWithPassword de toda la vida.
+ * Tras autenticar, el middleware reenvía al panel según el rol del perfil.
  */
-export function LoginForm() {
+
+type Mode = "enlace" | "password";
+type Status = "idle" | "loading" | "sent" | "error";
+
+export function LoginForm({ initialError }: { initialError?: boolean }) {
   const router = useRouter();
-  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
-  const [message, setMessage] = useState("");
+  const [mode, setMode] = useState<Mode>("enlace");
+  const [status, setStatus] = useState<Status>(initialError ? "error" : "idle");
+  const [message, setMessage] = useState(
+    initialError ? "Ese enlace ya no vale. Pide uno nuevo." : "",
+  );
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,10 +29,36 @@ export function LoginForm() {
     setMessage("");
 
     const form = new FormData(e.currentTarget);
-    const email = String(form.get("email"));
-    const password = String(form.get("password"));
-
+    const email = String(form.get("email")).trim();
     const supabase = createClient();
+
+    if (mode === "enlace") {
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: `${window.location.origin}/area-privada/callback`,
+          // Nadie se crea una cuenta pidiendo un enlace: solo entran los
+          // usuarios que ya existen en Supabase Auth.
+          shouldCreateUser: false,
+        },
+      });
+
+      if (error) {
+        setStatus("error");
+        setMessage(
+          "No hemos podido enviar el enlace. Revisa que el email sea el de tu cuenta.",
+        );
+        return;
+      }
+
+      setStatus("sent");
+      setMessage(
+        `Te hemos enviado un enlace a ${email}. Ábrelo en este mismo dispositivo.`,
+      );
+      return;
+    }
+
+    const password = String(form.get("password"));
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
@@ -36,37 +71,114 @@ export function LoginForm() {
     router.replace("/area-privada");
   }
 
+  function switchMode(next: Mode) {
+    setMode(next);
+    setStatus("idle");
+    setMessage("");
+  }
+
   const field =
-    "w-full scheme-dark rounded-sm border border-text-strong/15 bg-bg-elevated px-4 py-3 font-body text-[15px] text-text-strong outline-none focus:border-accent";
+    "w-full scheme-dark rounded-sm border border-text-strong/15 bg-bg-elevated px-4 py-3 font-body text-base text-text-strong outline-none focus:border-accent";
+
+  const tab = (active: boolean) =>
+    `min-h-11 flex-1 rounded-sm font-body text-[13px] font-semibold transition-colors ${
+      active ? "bg-accent/12 text-accent" : "text-text-muted hover:bg-text-strong/8"
+    }`;
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-4">
-      <div>
-        <label htmlFor="email" className="mb-1.5 block font-body text-[13px] font-semibold text-text-body">
-          Email
-        </label>
-        <input id="email" name="email" type="email" required className={field} />
-      </div>
-      <div>
-        <label htmlFor="password" className="mb-1.5 block font-body text-[13px] font-semibold text-text-body">
-          Contraseña
-        </label>
-        <input id="password" name="password" type="password" required className={field} />
-      </div>
-
-      {status === "error" && (
-        <p role="alert" className="rounded-sm border border-danger/30 bg-danger/10 px-4 py-2.5 font-body text-sm text-danger">
-          {message}
-        </p>
-      )}
-
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="mt-1 rounded-md bg-accent px-7 py-[15px] font-body text-base font-bold text-ink shadow-neon transition-transform hover:-translate-y-0.5 disabled:opacity-70"
+    <div>
+      <div
+        role="tablist"
+        aria-label="Forma de acceso"
+        className="mb-5 flex gap-1 rounded-sm border border-text-strong/10 p-1"
       >
-        {status === "loading" ? "Entrando…" : "Entrar"}
-      </button>
-    </form>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={mode === "enlace"}
+          onClick={() => switchMode("enlace")}
+          className={tab(mode === "enlace")}
+        >
+          Enlace por email
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={mode === "password"}
+          onClick={() => switchMode("password")}
+          className={tab(mode === "password")}
+        >
+          Contraseña
+        </button>
+      </div>
+
+      <form onSubmit={onSubmit} className="flex flex-col gap-4">
+        <div>
+          <label
+            htmlFor="email"
+            className="mb-1.5 block font-body text-[13px] font-semibold text-text-body"
+          >
+            Email
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            className={field}
+          />
+        </div>
+
+        {mode === "password" && (
+          <div>
+            <label
+              htmlFor="password"
+              className="mb-1.5 block font-body text-[13px] font-semibold text-text-body"
+            >
+              Contraseña
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              required
+              className={field}
+            />
+          </div>
+        )}
+
+        {status === "error" && (
+          <p
+            role="alert"
+            className="rounded-sm border border-danger/30 bg-danger/10 px-4 py-2.5 font-body text-sm text-danger"
+          >
+            {message}
+          </p>
+        )}
+
+        {status === "sent" && (
+          <p
+            role="status"
+            className="rounded-sm border border-accent/30 bg-accent/10 px-4 py-2.5 font-body text-sm text-accent"
+          >
+            {message}
+          </p>
+        )}
+
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="mt-1 rounded-md bg-accent px-7 py-[15px] font-body text-base font-bold text-ink shadow-neon transition-transform hover:-translate-y-0.5 disabled:opacity-70"
+        >
+          {status === "loading"
+            ? "Enviando…"
+            : mode === "enlace"
+              ? "Enviarme el enlace"
+              : "Entrar"}
+        </button>
+      </form>
+    </div>
   );
 }

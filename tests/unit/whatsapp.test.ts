@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildWaLink } from "@/lib/whatsapp";
+import { buildLeadWaLink, buildWaLink, normalizePhone } from "@/lib/whatsapp";
 import { WHATSAPP_NUMBER } from "@/lib/site";
 
 /**
@@ -49,5 +49,39 @@ describe("buildWaLink", () => {
   it("no rompe con caracteres reservados de URL en el extra", () => {
     const text = new URL(buildWaLink("evento", "Fiesta & Salsa #1?")).searchParams.get("text");
     expect(text).toBe("¡Hola! Me gustaría más información sobre el evento Fiesta & Salsa #1? 💃");
+  });
+});
+
+/**
+ * Acciones rápidas del panel: el admin escribe AL LEAD, no a la escuela. Los
+ * teléfonos de `leads` son texto libre (el schema permite espacios y símbolos),
+ * así que normalizarlos bien es lo que hace que el botón funcione.
+ */
+describe("normalizePhone", () => {
+  it("limpia espacios y símbolos y prefija +34 en los de 9 dígitos", () => {
+    expect(normalizePhone("600 12 34 56")).toBe("34600123456");
+    expect(normalizePhone("(600) 123-456")).toBe("34600123456");
+  });
+
+  it("respeta los que ya traen prefijo internacional", () => {
+    expect(normalizePhone("+34 600 123 456")).toBe("34600123456");
+    expect(normalizePhone("0034600123456")).toBe("34600123456");
+  });
+
+  it("descarta lo que no puede ser un teléfono", () => {
+    expect(normalizePhone("123")).toBeNull();
+    expect(normalizePhone("sin teléfono")).toBeNull();
+  });
+});
+
+describe("buildLeadWaLink", () => {
+  it("abre el chat del lead con el mensaje ya escrito", () => {
+    const href = buildLeadWaLink("600 123 456", "Marta Gil");
+    expect(href).toContain("https://wa.me/34600123456?text=");
+    expect(decodeURIComponent(href!)).toContain("¡Hola Marta!");
+  });
+
+  it("no inventa un enlace si el teléfono no sirve", () => {
+    expect(buildLeadWaLink("123", "Marta")).toBeNull();
   });
 });

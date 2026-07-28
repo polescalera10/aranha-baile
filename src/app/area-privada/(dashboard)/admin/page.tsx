@@ -1,56 +1,86 @@
 import Link from "next/link";
 import { requireRole } from "@/lib/auth";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
+import { getActivityFeed, getDashboardStats, listLeads } from "@/lib/queries/activity";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { ActivityFeed } from "./_components/ActivityFeed";
+import { LeadCard } from "./_components/LeadCard";
+import { StatTiles } from "./_components/StatTiles";
 
-const modules = [
-  {
-    href: "/area-privada/admin/alumnos",
-    title: "Alumnos",
-    description: "Altas, fichas y estado de pago del alumnado.",
-  },
-  {
-    href: "/area-privada/admin/cursos",
-    title: "Cursos",
-    description: "Grupos, horarios y sesiones de cada curso.",
-  },
-  {
-    href: "/area-privada/admin/profesores",
-    title: "Profesores",
-    description: "Equipo docente y cursos asignados.",
-  },
-  {
-    href: "/area-privada/admin/whatsapp",
-    title: "WhatsApp",
-    description: "Avisos y comunicación con los grupos.",
-  },
-];
+/**
+ * Inicio del panel de admin: qué ha pasado desde la última vez.
+ * Métricas → leads sin atender (con acciones rápidas) → feed de novedades.
+ * Datos en vivo: sin caché, cada visita relee Supabase.
+ */
+export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
   await requireRole("admin");
 
+  const [stats, leadsNuevos, activity] = await Promise.all([
+    getDashboardStats(),
+    listLeads({ estado: "nuevo", limit: 5 }),
+    getActivityFeed(25),
+  ]);
+
   return (
     <>
-      <h1 className="font-display text-[clamp(30px,4.5vw,44px)] text-text-strong">
-        Panel de administración
-      </h1>
-      <p className="mt-2 max-w-[52ch] font-body text-base text-text-muted">
-        Gestión interna de la escuela. Elige un módulo para empezar.
-      </p>
-
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        {modules.map((mod) => (
-          <Link key={mod.href} href={mod.href} className="group">
-            <Card
-              title={mod.title}
-              action={<Badge variant="neutral">En construcción</Badge>}
-              className="h-full transition-shadow group-hover:shadow-card"
-            >
-              <p className="font-body text-sm text-text-muted">{mod.description}</p>
-            </Card>
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="font-display text-[clamp(30px,4.5vw,44px)] text-text-strong">
+            Novedades
+          </h1>
+          <p className="mt-1 font-body text-sm text-text-muted">
+            Todo lo que ha entrado en la escuela, de lo más reciente a lo más antiguo.
+          </p>
+        </div>
+        {stats.whatsappErrores > 0 && (
+          <Link
+            href="/area-privada/admin/whatsapp"
+            className="font-body text-[13px] font-semibold text-danger hover:underline"
+          >
+            {stats.whatsappErrores} envío{stats.whatsappErrores === 1 ? "" : "s"} de
+            WhatsApp con error →
           </Link>
-        ))}
+        )}
       </div>
+
+      <div className="mt-6">
+        <StatTiles stats={stats} />
+      </div>
+
+      <section className="mt-10">
+        <div className="mb-3 flex items-baseline justify-between gap-3">
+          <h2 className="font-body text-[15px] font-bold text-text-strong">
+            Leads sin atender
+          </h2>
+          <Link
+            href="/area-privada/admin/leads"
+            className="font-body text-[13px] font-semibold text-accent hover:underline"
+          >
+            Ver todos
+          </Link>
+        </div>
+
+        {leadsNuevos.length === 0 ? (
+          <EmptyState
+            title="Bandeja limpia"
+            description="No hay leads pendientes de contactar. Los nuevos aparecerán aquí en cuanto entren."
+          />
+        ) : (
+          <ul className="divide-y divide-text-strong/8 rounded-lg border border-text-strong/8 bg-bg-panel shadow-soft">
+            {leadsNuevos.map((lead) => (
+              <LeadCard key={lead.id} lead={lead} />
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section className="mt-10">
+        <h2 className="mb-3 font-body text-[15px] font-bold text-text-strong">
+          Últimas actualizaciones
+        </h2>
+        <ActivityFeed items={activity} />
+      </section>
     </>
   );
 }

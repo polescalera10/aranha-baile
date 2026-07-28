@@ -1,8 +1,9 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { postToN8n } from "@/lib/n8n/client";
 import { createClient } from "@/lib/supabase/server";
-import { interestLeadSchema, leadSchema } from "@/lib/validation/lead";
+import { interestLeadSchema, leadEstadoSchema, leadSchema } from "@/lib/validation/lead";
 
 export type LeadFormState = {
   status: "idle" | "success" | "error";
@@ -145,4 +146,34 @@ export async function submitInterestLead(
     status: "success",
     message: "¡Gracias! Hemos recibido tu solicitud y te escribimos enseguida.",
   };
+}
+
+/** Resultado de las mutaciones rápidas del panel (fuera de useActionState). */
+export type LeadMutationResult = { ok: boolean; message?: string };
+
+/**
+ * Cambia el estado de un lead desde el panel (acción rápida del inicio de admin).
+ * La barrera real es la RLS: solo `is_admin()` puede actualizar `leads`.
+ */
+export async function updateLeadEstado(
+  leadId: string,
+  estado: string,
+): Promise<LeadMutationResult> {
+  const parsed = leadEstadoSchema.safeParse(estado);
+  if (!parsed.success) return { ok: false, message: "Estado no válido." };
+
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("leads")
+    .update({ estado: parsed.data })
+    .eq("id", leadId);
+
+  if (error) {
+    console.error("[updateLeadEstado] error:", error.message);
+    return { ok: false, message: "No se ha podido actualizar el lead." };
+  }
+
+  revalidatePath("/area-privada/admin");
+  revalidatePath("/area-privada/admin/leads");
+  return { ok: true };
 }

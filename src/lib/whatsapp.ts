@@ -38,6 +38,31 @@ const MESSAGES: Record<WaOrigin, string> = {
  *                mensaje completo de una landing de campaña cuando el origen
  *                no tiene base propia)
  */
+/**
+ * Normaliza un teléfono de lead (texto libre) a formato wa.me: solo dígitos,
+ * con prefijo de país. Los de 9 dígitos se asumen españoles (+34), que es de
+ * donde llegan todos los leads de la escuela; `00` internacional se recorta.
+ * Devuelve null si no queda un número usable.
+ */
+export function normalizePhone(phone: string): string | null {
+  const digits = phone.replace(/\D/g, "").replace(/^00/, "");
+  if (digits.length === 9) return `34${digits}`;
+  if (digits.length < 8 || digits.length > 15) return null;
+  return digits;
+}
+
+/**
+ * Enlace de WhatsApp AL LEAD (no a la escuela): acción rápida del panel para
+ * responder a alguien que ha dejado sus datos en la web.
+ */
+export function buildLeadWaLink(phone: string, nombre?: string): string | null {
+  const number = normalizePhone(phone);
+  if (!number) return null;
+  const saludo = nombre ? `¡Hola ${nombre.split(" ")[0]}!` : "¡Hola!";
+  const text = `${saludo} Te escribo desde NEXUS VNG por tu consulta sobre las clases 🙂`;
+  return `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+}
+
 export function buildWaLink(origin: WaOrigin, extra?: string): string {
   const base = MESSAGES[origin];
   const text = extra ? (base ? `${base} ${extra} 💃` : extra) : base;

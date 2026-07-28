@@ -3,12 +3,21 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export type NavIconName = "home" | "students" | "courses" | "teachers" | "whatsapp" | "today";
+export type NavIconName =
+  | "home"
+  | "leads"
+  | "students"
+  | "courses"
+  | "teachers"
+  | "whatsapp"
+  | "today";
 
 export type NavItem = {
   href: string;
   label: string;
   icon: NavIconName;
+  /** Etiqueta corta para la barra de pestañas móvil (cabe menos texto). */
+  short?: string;
   /** true en las rutas raíz del panel para no quedar siempre activas. */
   exact?: boolean;
 };
@@ -18,6 +27,11 @@ function NavIcon({ name }: { name: NavIconName }) {
   const paths: Record<NavIconName, React.ReactNode> = {
     home: (
       <path d="M4 11.5 12 4l8 7.5M6 10.5V20h12v-9.5M10 20v-5h4v5" />
+    ),
+    leads: (
+      <>
+        <path d="M4 13.5V18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4.5M4 13.5 6.5 5h11L20 13.5M4 13.5h5l1 2h4l1-2h5" />
+      </>
     ),
     students: (
       <>
@@ -114,12 +128,12 @@ export function TabBar({ items }: { items: NavItem[] }) {
               key={item.href}
               href={item.href}
               aria-current={active ? "page" : undefined}
-              className={`flex min-h-14 flex-1 flex-col items-center justify-center gap-1 font-body text-[11px] font-semibold ${
+              className={`flex min-h-14 min-w-0 flex-1 flex-col items-center justify-center gap-1 px-0.5 font-body text-[11px] font-semibold ${
                 active ? "text-accent" : "text-text-muted"
               }`}
             >
               <NavIcon name={item.icon} />
-              {item.label}
+              <span className="max-w-full truncate">{item.short ?? item.label}</span>
             </Link>
           );
         })}

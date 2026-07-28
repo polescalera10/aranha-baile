@@ -13,11 +13,17 @@ import { SidebarNav, TabBar, type NavItem } from "./DashboardNav";
 
 const NAV: Record<"admin" | "profesor", NavItem[]> = {
   admin: [
-    { href: "/area-privada/admin", label: "Inicio", icon: "home", exact: true },
+    { href: "/area-privada/admin", label: "Novedades", icon: "home", short: "Inicio", exact: true },
+    { href: "/area-privada/admin/leads", label: "Leads", icon: "leads" },
     { href: "/area-privada/admin/alumnos", label: "Alumnos", icon: "students" },
     { href: "/area-privada/admin/cursos", label: "Cursos", icon: "courses" },
-    { href: "/area-privada/admin/profesores", label: "Profesores", icon: "teachers" },
-    { href: "/area-privada/admin/whatsapp", label: "WhatsApp", icon: "whatsapp" },
+    {
+      href: "/area-privada/admin/profesores",
+      label: "Profesores",
+      icon: "teachers",
+      short: "Profes",
+    },
+    { href: "/area-privada/admin/whatsapp", label: "WhatsApp", icon: "whatsapp", short: "WA" },
   ],
   profesor: [
     { href: "/area-privada/profesor", label: "Hoy", icon: "today", exact: true },

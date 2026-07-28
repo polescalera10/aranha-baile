@@ -35,9 +35,12 @@ export async function updateSession(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isPrivate = pathname.startsWith("/area-privada");
   const isLogin = pathname === "/area-privada";
+  // El callback del enlace mágico llega SIN sesión (justo va a canjearla):
+  // si lo protegiéramos, nunca podría completarse el login por email.
+  const isCallback = pathname === "/area-privada/callback";
 
   // Zona protegida sin sesión → al login.
-  if (isPrivate && !isLogin && !user) {
+  if (isPrivate && !isLogin && !isCallback && !user) {
     const url = request.nextUrl.clone();
     url.pathname = "/area-privada";
     url.searchParams.set("redirect", pathname);

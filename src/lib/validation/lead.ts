@@ -67,3 +67,14 @@ export const interestLeadSchema = z.object({
 });
 
 export type InterestLeadInput = z.infer<typeof interestLeadSchema>;
+
+/** Estados del embudo de un lead (enum `lead_estado` en Postgres). */
+export const leadEstados = [
+  "nuevo",
+  "contactado",
+  "prueba_agendada",
+  "convertido",
+  "descartado",
+] as const;
+
+export const leadEstadoSchema = z.enum(leadEstados);

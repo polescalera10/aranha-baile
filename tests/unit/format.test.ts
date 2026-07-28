@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   formatDate,
+  formatRelative,
   formatTime,
   WEEKDAYS,
   WEEKDAYS_SHORT,
@@ -58,5 +59,34 @@ describe("etiquetas de enums", () => {
     expect(DANCE_ROLE_LABELS.leader).toBe("Leader");
     expect(DANCE_ROLE_LABELS.both).toBe("Ambos");
     expect(ENROLLMENT_STATUS_LABELS.lista_espera).toBe("Lista de espera");
+  });
+});
+
+describe("formatRelative", () => {
+  const now = new Date("2026-07-28T12:00:00.000Z");
+  const ago = (ms: number) => new Date(now.getTime() - ms).toISOString();
+
+  it("colapsa lo de hace menos de un minuto en 'ahora'", () => {
+    expect(formatRelative(ago(30 * 1000), now)).toBe("ahora");
+  });
+
+  it("da minutos y horas dentro del día", () => {
+    expect(formatRelative(ago(5 * 60_000), now)).toBe("hace 5 min");
+    expect(formatRelative(ago(3 * 3_600_000), now)).toBe("hace 3 h");
+  });
+
+  it("usa 'ayer' para el día anterior y días sueltos hasta 7", () => {
+    expect(formatRelative(ago(26 * 3_600_000), now)).toBe("ayer");
+    expect(formatRelative(ago(4 * 86_400_000), now)).toBe("hace 4 d");
+  });
+
+  it("a partir de una semana cae a fecha absoluta", () => {
+    expect(formatRelative(ago(20 * 86_400_000), now)).toMatch(/jul/);
+  });
+
+  it("no muestra tiempos negativos por desfase de reloj", () => {
+    expect(formatRelative(new Date(now.getTime() + 60_000).toISOString(), now)).toBe(
+      "ahora",
+    );
   });
 });

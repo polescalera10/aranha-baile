@@ -15,6 +15,13 @@ export default async function AreaPrivadaLoginPage({
 }) {
   const sp = await searchParams;
 
+  // El middleware guarda en `?redirect=` la ruta privada que se intentó abrir
+  // sin sesión. Solo se acepta como ruta interna: un `//evil.com` también
+  // empieza por "/" y el navegador lo trataría como dominio externo.
+  const raw = Array.isArray(sp.redirect) ? sp.redirect[0] : sp.redirect;
+  const redirectTo =
+    raw?.startsWith("/") && !raw.startsWith("//") ? raw : "/area-privada";
+
   return (
     <div className="flex min-h-dvh flex-col items-center justify-center px-5 py-16">
       <div className="w-full max-w-[400px]">
@@ -26,7 +33,7 @@ export default async function AreaPrivadaLoginPage({
           <p className="mb-6 mt-1 font-body text-sm text-text-muted">
             Accede con tu cuenta de alumno, profesor o admin.
           </p>
-          <LoginForm initialError={sp.error === "enlace"} />
+          <LoginForm initialError={sp.error === "enlace"} redirectTo={redirectTo} />
         </div>
         <p className="mt-6 text-center font-body text-sm text-text-muted">
           <Link href="/" className="text-accent no-underline hover:underline">

@@ -17,9 +17,13 @@ export async function GET(request: NextRequest) {
   const code = searchParams.get("code");
   const tokenHash = searchParams.get("token_hash");
   const type = searchParams.get("type");
-  // `next` solo se acepta como ruta interna: evita open redirect.
+  // `next` solo se acepta como ruta interna: un `//evil.com` también empieza
+  // por "/" y el navegador lo resolvería como dominio externo (open redirect).
   const nextParam = searchParams.get("next") ?? "";
-  const next = nextParam.startsWith("/") ? nextParam : "/area-privada";
+  const next =
+    nextParam.startsWith("/") && !nextParam.startsWith("//")
+      ? nextParam
+      : "/area-privada";
 
   const supabase = await createClient();
 

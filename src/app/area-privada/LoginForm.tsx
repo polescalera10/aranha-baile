@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 /**
@@ -15,8 +14,14 @@ import { createClient } from "@/lib/supabase/client";
 type Mode = "enlace" | "password";
 type Status = "idle" | "loading" | "sent" | "error";
 
-export function LoginForm({ initialError }: { initialError?: boolean }) {
-  const router = useRouter();
+export function LoginForm({
+  initialError,
+  redirectTo = "/area-privada",
+}: {
+  initialError?: boolean;
+  /** Ruta a la que volver tras entrar (la pone el middleware en `?redirect=`). */
+  redirectTo?: string;
+}) {
   const [mode, setMode] = useState<Mode>("enlace");
   const [status, setStatus] = useState<Status>(initialError ? "error" : "idle");
   const [message, setMessage] = useState(
@@ -33,10 +38,13 @@ export function LoginForm({ initialError }: { initialError?: boolean }) {
     const supabase = createClient();
 
     if (mode === "enlace") {
+      const callback = new URL("/area-privada/callback", window.location.origin);
+      if (redirectTo !== "/area-privada") callback.searchParams.set("next", redirectTo);
+
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: `${window.location.origin}/area-privada/callback`,
+          emailRedirectTo: callback.toString(),
           // Nadie se crea una cuenta pidiendo un enlace: solo entran los
           // usuarios que ya existen en Supabase Auth.
           shouldCreateUser: false,
@@ -66,9 +74,12 @@ export function LoginForm({ initialError }: { initialError?: boolean }) {
       setMessage("Email o contraseña incorrectos.");
       return;
     }
-    // Recarga para que el middleware redirija según rol.
-    router.refresh();
-    router.replace("/area-privada");
+
+    // Navegación DURA a propósito. La sesión vive en una cookie que solo el
+    // servidor puede leer en la siguiente petición: con router.replace() el
+    // destino es la misma URL en la que ya estamos (no navega) y el usuario
+    // se queda mirando "Entrando…" con la sesión ya creada.
+    window.location.assign(redirectTo);
   }
 
   function switchMode(next: Mode) {

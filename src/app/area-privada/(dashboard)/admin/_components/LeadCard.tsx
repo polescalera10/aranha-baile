@@ -69,6 +69,30 @@ export function LeadCard({ lead }: { lead: Lead }) {
         </time>
       </div>
 
+      {/* Contacto a la vista: teléfono y email pulsables sin abrir la ficha. */}
+      <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 font-body text-[13px] text-text-body">
+        <a href={`tel:${lead.telefono.replace(/\s/g, "")}`} className="hover:underline">
+          {lead.telefono}
+        </a>
+        {lead.email ? (
+          <>
+            <span aria-hidden="true" className="text-text-muted">
+              ·
+            </span>
+            <a href={`mailto:${lead.email}`} className="break-all hover:underline">
+              {lead.email}
+            </a>
+          </>
+        ) : (
+          <>
+            <span aria-hidden="true" className="text-text-muted">
+              ·
+            </span>
+            <span className="text-text-muted">sin email</span>
+          </>
+        )}
+      </p>
+
       {meta && <p className="mt-1 font-body text-[13px] text-text-muted">{meta}</p>}
       {lead.mensaje && (
         <p className="mt-1.5 font-body text-sm text-text-body">“{lead.mensaje}”</p>

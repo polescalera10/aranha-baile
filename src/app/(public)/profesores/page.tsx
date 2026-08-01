@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SupportPage } from "@/components/layout/SupportPage";
 import { WaLink } from "@/components/ui/WaLink";
+import { modalidadesDe, profesores } from "@/content/profesores";
 
 export const metadata: Metadata = {
   title: "Profesores de baile en Vilanova i la Geltrú",
@@ -54,6 +55,41 @@ export default function ProfesoresPage() {
             className="h-auto w-full object-contain"
           />
         </figure>
+
+        {/* Fichas del equipo. Nombres, fotos y disciplinas salen de
+            content/profesores.ts; las disciplinas se derivan del cartel. */}
+        <section className="space-y-6">
+          <h2 className="font-display text-text-strong text-[clamp(28px,4vw,44px)]">
+            Quién te va a dar clase
+          </h2>
+          <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(200px,100%),1fr))] gap-5">
+            {profesores.map((p) => {
+              const disciplinas = modalidadesDe(p.nombre);
+              return (
+                <li key={p.slug}>
+                  <Link href={`/profesores/${p.slug}`} className="group block no-underline">
+                    <div className="bg-bg-elevated overflow-hidden rounded-lg">
+                      <Image
+                        src={p.foto}
+                        alt={p.fotoAlt}
+                        width={933}
+                        height={1400}
+                        sizes="(max-width: 640px) 90vw, 260px"
+                        className="aspect-[3/4] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                      />
+                    </div>
+                    <h3 className="font-display text-text-strong group-hover:text-neon mt-3 text-2xl transition-colors">
+                      {p.nombre}
+                    </h3>
+                    <p className="font-body text-text-muted mt-1 text-[13px] leading-snug">
+                      {disciplinas.map((d) => d.nombre).join(" · ")}
+                    </p>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
 
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
           <div className="space-y-10">
@@ -118,9 +154,9 @@ export default function ProfesoresPage() {
                 </Link>
               </p>
               <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
-                Las fichas completas del equipo —con foto, disciplinas y trayectoria— llegarán a
-                esta página en cuanto las tengamos listas. Mientras tanto, la mejor forma de
-                conocerlos es en persona: reserva tu clase de prueba y ponles cara bailando.
+                Arriba tienes la ficha de cada uno: sus clases, sus días y las disciplinas que
+                imparte. Y la mejor forma de conocerlos sigue siendo en persona — reserva tu clase
+                de prueba y ponles cara bailando.
               </p>
             </section>
           </div>

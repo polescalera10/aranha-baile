@@ -55,7 +55,7 @@ function ofertaFundadoraLd() {
     },
     availability: plazas.left > 0 ? "https://schema.org/InStock" : "https://schema.org/SoldOut",
     inventoryLevel: { "@type": "QuantitativeValue", value: plazas.left, maxValue: plazas.total },
-    areaServed: { "@type": "City", name: site.nap.addressLocality },
+    areaServed: { "@type": "City", name: site.locality },
     offeredBy: { "@type": "DanceSchool", name: site.name, url: site.url },
   };
 }

@@ -24,7 +24,7 @@ export default function AvisoLegalPage() {
           items={[
             <>Titular: <LegalTodo>nombre y apellidos o razón social del titular</LegalTodo></>,
             <>NIF/CIF: <LegalTodo>NIF o CIF</LegalTodo></>,
-            <>Domicilio: <LegalTodo>dirección completa</LegalTodo>, {site.nap.addressLocality} ({site.nap.addressRegion})</>,
+            <>Domicilio: {site.nap.streetAddress}, {site.nap.postalCode} {site.nap.addressLocality} ({site.nap.addressRegion})</>,
             <>Correo electrónico: <LegalTodo>email de contacto legal</LegalTodo></>,
             <>Teléfono: <LegalTodo>teléfono de contacto</LegalTodo></>,
             <>Nombre comercial: {site.name}</>,
@@ -36,7 +36,7 @@ export default function AvisoLegalPage() {
       <LegalSection title="2. Objeto">
         <LegalP>
           Este sitio web tiene por objeto dar a conocer la actividad de {site.name} —escuela de
-          baile en {site.nap.addressLocality}—, informar sobre sus clases, eventos y servicios, y
+          baile en {site.locality}—, informar sobre sus clases, eventos y servicios, y
           facilitar el contacto con las personas interesadas. El acceso y la navegación implican la
           aceptación de este aviso legal.
         </LegalP>

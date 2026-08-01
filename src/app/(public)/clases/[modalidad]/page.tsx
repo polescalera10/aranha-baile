@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SupportPage } from "@/components/layout/SupportPage";
@@ -10,6 +11,7 @@ import { getModalidades, getModalidadBySlug, getModalidadSlugs } from "@/lib/que
 import { modalidadesContenido } from "@/content/modalidades";
 import { sesionesRegulares } from "@/content/horario-regular";
 import { precios } from "@/content/precios";
+import { profesoresDe } from "@/content/profesores";
 import { ogImages } from "@/lib/seo";
 import { founding } from "@/content/landing";
 
@@ -58,6 +60,9 @@ export default async function ModalidadPage({ params }: Params) {
         (s) => !s.compania && contenido.estilos.includes(baseEstilo(s.estilo)),
       )
     : [];
+
+  // Profesores que la imparten, derivados del cartel (content/profesores.ts).
+  const profes = profesoresDe(m.slug);
 
   // Enlaces cruzados: solo a disciplinas que existen y están activas.
   const relacionadas = (contenido?.relacionadas ?? []).filter((r) => nombrePorSlug.has(r.slug));
@@ -210,6 +215,39 @@ export default async function ModalidadPage({ params }: Params) {
                   Probar una clase de {m.nombre}
                 </WaLink>
               </Reveal>
+
+              {/* Quién la imparte: se deriva del cartel, no se escribe a mano. */}
+              {profes.length > 0 && (
+                <Reveal as="section" className="space-y-5">
+                  <h2 className="font-display text-text-strong text-3xl">
+                    Quién imparte {m.nombre}
+                  </h2>
+                  <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(160px,100%),1fr))] gap-4 p-0">
+                    {profes.map((p) => (
+                      <li key={p.slug}>
+                        <Link href={`/profesores/${p.slug}`} className="group block no-underline">
+                          <div className="bg-bg-elevated overflow-hidden rounded-lg">
+                            <Image
+                              src={p.foto}
+                              alt={p.fotoAlt}
+                              width={933}
+                              height={1400}
+                              sizes="(max-width: 640px) 45vw, 200px"
+                              className="aspect-[3/4] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                            />
+                          </div>
+                          <h3 className="font-display text-text-strong group-hover:text-neon mt-2 text-xl transition-colors">
+                            {p.nombre}
+                          </h3>
+                          <p className="font-body text-text-muted mt-0.5 text-[13px] leading-snug">
+                            {p.claim}
+                          </p>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              )}
 
               {/* Enlaces cruzados entre disciplinas */}
               {relacionadas.length > 0 && (

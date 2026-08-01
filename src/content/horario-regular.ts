@@ -75,9 +75,9 @@ export const horarioRegular: FranjaHoraria[] = [
     clases: [
       { estilo: "Bachata Lady", profes: "Martina", familia: "bachata" },
       { estilo: "Heels", profes: "Yuri", familia: "urbano" },
-      { estilo: "Salsa 1", profes: "Ana y Pol", familia: "salsa" },
+      { estilo: "Salsa 1", profes: "Ana Aylén y Pol", familia: "salsa" },
       { estilo: "Salsa 0", profes: "Martina y Pol", familia: "salsa" },
-      { estilo: "Salsa 2", profes: "Ana y Pol", familia: "salsa" },
+      { estilo: "Salsa 2", profes: "Ana Aylén y Pol", familia: "salsa" },
     ],
   },
   {
@@ -85,7 +85,7 @@ export const horarioRegular: FranjaHoraria[] = [
     clases: [
       { estilo: "Cía Lady Bachata", profes: "Martina", familia: "bachata", compania: true },
       { estilo: "Sexy Style", profes: "Yuri", familia: "urbano" },
-      { estilo: "Bachata 1", profes: "Ana y Pol", familia: "bachata" },
+      { estilo: "Bachata 1", profes: "Ana Aylén y Pol", familia: "bachata" },
       { estilo: "Bachata 0", profes: "Martina y Pol", familia: "bachata" },
       { estilo: "Cía Salsa", profes: "Ana Aylén", familia: "salsa", compania: true },
     ],

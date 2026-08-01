@@ -23,12 +23,12 @@ export function IntroLocal() {
       <div className="container-nexus">
         <Reveal>
           <h2 className="font-display text-text-strong max-w-[24ch] text-balance text-[clamp(28px,4.2vw,48px)] leading-[1.05]">
-            Escuela de baile en {site.nap.addressLocality}
+            Escuela de baile en {site.locality}
           </h2>
           <div className="mt-5 max-w-[65ch] space-y-4">
             <p className="font-body text-text-body text-base leading-relaxed">
               {site.name} es la escuela de baile del {site.nap.venue}, en{" "}
-              {site.nap.addressLocality} ({site.nap.addressRegion}). Clases de {disciplinas} en
+              {site.locality} ({site.nap.addressRegion}). Clases de {disciplinas} en
               grupos por nivel real, de lunes a viernes, desde cero absoluto hasta avanzado.
             </p>
             <p className="font-body text-text-body text-base leading-relaxed">

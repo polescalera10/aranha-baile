@@ -1,65 +1,244 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { SupportPage } from "@/components/layout/SupportPage";
+import { WaLink } from "@/components/ui/WaLink";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  clasesDe,
+  companerosDe,
+  getProfesor,
+  listProfesorSlugs,
+  modalidadesDe,
+  profesores,
+  type Profesor,
+} from "@/content/profesores";
+import { site } from "@/lib/site";
 
 /*
-  RUTA DESACTIVADA A PROPÓSITO — devuelve 404 siempre.
+  Ficha individual de profesor. Estuvo desactivada (404 para todo) mientras no
+  hubo datos reales: servía un placeholder con canónica propia para cualquier
+  slug inventado, que era espacio infinito de URLs indexables vacías.
 
-  Motivo: todavía no existen fichas reales de profesores (el grid de
-  /profesores está comentado a la espera de nombres y fotos de Pol). Mientras
-  la ruta respondía 200 con un placeholder ("Nombre Apellido") y canónica
-  propia, cualquier slug inventado —/profesores/xyz123qqq— generaba una URL
-  indexable de basura: espacio infinito de páginas vacías para Google.
-
-  Se reactivará cuando haya fichas reales: bastará con recuperar el contenido
-  comentado al final del archivo, sustituir el placeholder por la consulta a
-  los datos del profesor y llamar a notFound() solo si el slug no existe.
-  Recordar entonces añadir /profesores/[slug] al sitemap.
+  Ahora se generan solo las 5 rutas del equipo real; cualquier otro slug sigue
+  devolviendo 404. Todo lo que se afirma sale de `content/profesores.ts` y del
+  cartel de horarios — nada de bios ni trayectorias inventadas.
 */
 
-export async function generateMetadata(): Promise<Metadata> {
-  notFound();
+type Params = { params: Promise<{ slug: string }> };
+
+export function generateStaticParams() {
+  return listProfesorSlugs().map((slug) => ({ slug }));
 }
 
-export default async function ProfesorPage() {
-  notFound();
+/**
+ * Schema.org Person. Solo campos verificables: nombre, foto, qué imparte y
+ * dónde trabaja. Sin `award`, `alumniOf` ni titulaciones que nadie ha confirmado.
+ */
+function personLd(profe: Profesor) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: profe.nombre,
+    url: `${site.url}/profesores/${profe.slug}`,
+    image: `${site.url}${profe.foto}`,
+    jobTitle: "Profesor de baile",
+    knowsAbout: modalidadesDe(profe.nombre).map((m) => m.nombre),
+    worksFor: {
+      "@type": "DanceSchool",
+      name: site.name,
+      url: site.url,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: site.nap.streetAddress,
+        addressLocality: site.nap.addressLocality,
+        postalCode: site.nap.postalCode,
+        addressRegion: site.nap.addressRegion,
+        addressCountry: site.nap.addressCountry,
+      },
+    },
+  };
 }
 
-/*
-  Contenido original (placeholder) a recuperar cuando existan fichas reales:
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { slug } = await params;
+  const profe = getProfesor(slug);
+  if (!profe) return { title: "Página no encontrada" };
 
-  import { SupportPage, PlaceholderNote } from "@/components/layout/SupportPage";
-  import { WaLink } from "@/components/ui/WaLink";
-  import { PhotoPlaceholder } from "@/components/ui/PhotoPlaceholder";
+  const disciplinas = modalidadesDe(profe.nombre)
+    .map((m) => m.nombre.toLowerCase())
+    .join(", ");
 
-  type Params = { params: Promise<{ slug: string }> };
+  return {
+    title: `${profe.nombre} · Profesor de baile`,
+    description: `${profe.nombre} imparte ${disciplinas || "clases de baile"} en NEXUS VNG, ${site.locality}. Sus clases, días y niveles, y cómo reservar una clase de prueba.`,
+    alternates: { canonical: `/profesores/${profe.slug}` },
+    openGraph: {
+      title: `${profe.nombre} · NEXUS VNG`,
+      images: [{ url: profe.foto, width: 933, height: 1400, alt: profe.fotoAlt }],
+    },
+  };
+}
 
-  export async function generateMetadata({ params }: Params): Promise<Metadata> {
-    const { slug } = await params;
-    return {
-      title: `Profesor · ${slug}`,
-      description: "Perfil del profesor de NEXUS VNG.",
-      alternates: { canonical: `/profesores/${slug}` },
-    };
-  }
+export default async function ProfesorPage({ params }: Params) {
+  const { slug } = await params;
+  const profe = getProfesor(slug);
+  if (!profe) notFound();
 
-  export default async function ProfesorPage({ params }: Params) {
-    const { slug } = await params;
+  const clases = clasesDe(profe.nombre);
+  const disciplinas = modalidadesDe(profe.nombre);
+  const companeros = companerosDe(profe.nombre);
+  const otros = profesores.filter((p) => p.slug !== profe.slug);
 
-    return (
-      <SupportPage eyebrow="Profesor" title="Nombre Apellido">
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
-          <PhotoPlaceholder label={`[ foto · ${slug} ]`} tint="warm" className="min-h-[360px] rounded-lg p-3" />
-          <div className="space-y-4">
-            <PlaceholderNote>
-              Bio del profesor: trayectoria, modalidades que imparte, estilo de enseñanza. Se
-              completará con el cliente.
-            </PlaceholderNote>
-            <WaLink origin="contacto" variant="red" className="px-7 py-[15px]">
-              Pregúntale por una clase
-            </WaLink>
+  return (
+    <SupportPage eyebrow="Profesor" title={profe.nombre} intro={profe.claim}>
+      <div className="space-y-[clamp(48px,7vw,80px)]">
+        <Breadcrumbs
+          items={[
+            { name: "Inicio", path: "/" },
+            { name: "Profesores", path: "/profesores" },
+            { name: profe.nombre, path: `/profesores/${profe.slug}` },
+          ]}
+        />
+
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_1.2fr]">
+          <figure className="bg-bg-elevated m-0 overflow-hidden rounded-xl">
+            <Image
+              src={profe.foto}
+              alt={profe.fotoAlt}
+              width={933}
+              height={1400}
+              priority
+              sizes="(max-width: 1024px) 100vw, 420px"
+              className="aspect-[3/4] w-full object-cover object-top"
+            />
+            {profe.fotoDeDos && (
+              <figcaption className="font-body text-text-faint px-4 py-3 text-[13px]">
+                {profe.fotoAlt}
+              </figcaption>
+            )}
+          </figure>
+
+          <div className="space-y-8">
+            {profe.bio && (
+              <section className="space-y-4">
+                <h2 className="font-display text-text-strong text-3xl">Quién es {profe.nombre}</h2>
+                {profe.bio.map((parrafo) => (
+                  <p
+                    key={parrafo.slice(0, 24)}
+                    className="font-body text-text-body max-w-[65ch] text-base leading-relaxed"
+                  >
+                    {parrafo}
+                  </p>
+                ))}
+              </section>
+            )}
+
+            {clases.length > 0 && (
+              <section className="space-y-4">
+                <h2 className="font-display text-text-strong text-3xl">
+                  Sus clases esta temporada
+                </h2>
+                <ul className="grid gap-3 sm:grid-cols-2">
+                  {clases.map((clase) => (
+                    <li
+                      key={clase.value}
+                      className="border-white/8 bg-bg-panel rounded-lg border px-4 py-3"
+                    >
+                      <p className="font-body text-text-strong text-[15px] font-bold">
+                        {clase.estilo}
+                      </p>
+                      <p className="font-body text-text-muted mt-1 text-[13px]">
+                        {clase.dia} · {clase.hora}
+                        {clase.nivel ? ` · ${clase.nivel}` : ""}
+                      </p>
+                      {clase.profes !== profe.nombre && (
+                        <p className="font-body text-text-faint mt-1 text-[12px]">
+                          Con {clase.profes}
+                        </p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                <p className="font-body text-text-muted text-[13px]">
+                  Datos del cartel de la temporada 26·27 —{" "}
+                  <Link href="/horarios" className="text-neon underline underline-offset-2">
+                    ver el horario completo
+                  </Link>
+                  .
+                </p>
+              </section>
+            )}
+
+            {disciplinas.length > 0 && (
+              <section className="space-y-4">
+                <h2 className="font-display text-text-strong text-3xl">Qué imparte</h2>
+                <ul className="flex flex-wrap gap-2.5">
+                  {disciplinas.map((d) => (
+                    <li key={d.slug}>
+                      <Link
+                        href={`/clases/${d.slug}`}
+                        className="border-white/12 bg-bg-elevated font-body text-text-body hover:border-neon/50 hover:text-neon inline-flex min-h-11 items-center rounded-full border px-4 py-2 text-[13px] font-semibold no-underline transition-colors"
+                      >
+                        {d.nombre}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                {companeros.length > 0 && (
+                  <p className="font-body text-text-muted max-w-[60ch] text-[15px] leading-relaxed">
+                    En los grupos de baile en pareja da clase con {companeros.join(" y ")}: dos
+                    profesores en la sala significa que siempre hay alguien mirando tu lado del
+                    paso.
+                  </p>
+                )}
+              </section>
+            )}
+
+            <div className="border-white/8 bg-bg-panel shadow-card rounded-lg border p-6">
+              <h2 className="font-display text-text-strong text-2xl">
+                Conócele en una clase de prueba
+              </h2>
+              <p className="font-body text-text-muted mt-2 text-[15px]">
+                Escríbenos y te decimos en qué grupo de {profe.nombre} encajas mejor según tu nivel
+                y tu disponibilidad.
+              </p>
+              <WaLink origin="contacto" variant="red" className="mt-4 w-full py-[15px]">
+                Reservar clase de prueba
+              </WaLink>
+            </div>
           </div>
         </div>
-      </SupportPage>
-    );
-  }
-*/
+
+        <section className="space-y-5">
+          <h2 className="font-display text-text-strong text-3xl">El resto del equipo</h2>
+          <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(150px,100%),1fr))] gap-4">
+            {otros.map((p) => (
+              <li key={p.slug}>
+                <Link href={`/profesores/${p.slug}`} className="group block no-underline">
+                  <div className="bg-bg-elevated overflow-hidden rounded-lg">
+                    <Image
+                      src={p.foto}
+                      alt={p.fotoAlt}
+                      width={933}
+                      height={1400}
+                      sizes="(max-width: 640px) 45vw, 200px"
+                      className="aspect-[3/4] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <p className="font-display text-text-strong group-hover:text-neon mt-2 text-xl transition-colors">
+                    {p.nombre}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <JsonLd data={personLd(profe)} />
+    </SupportPage>
+  );
+}

@@ -14,14 +14,26 @@ export const site = {
     "Escuela de salsa cubana, bachata y más en Vilanova i la Geltrú. Comunidad, niveles desde cero a avanzado y clases de prueba para empezar.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nexusvng.es",
   locale: "es_ES",
+  /**
+   * Localidad de MARCA: la que aparece en el copy, los títulos y el SEO.
+   *
+   * Ojo, no coincide con el municipio del NAP y es a propósito (decisión de
+   * Pol, 01-08-2026): la sala está en Sant Pere de Ribes, pegada a Vilanova,
+   * pero el público, las búsquedas y el local propio previsto son de Vilanova.
+   * Para textos usa SIEMPRE `site.locality`; para direcciones y schema,
+   * `site.nap` — que lleva el dato verificable.
+   */
+  locality: "Vilanova i la Geltrú",
+  /** Comarca: sirve para el área de servicio y para el copy de alcance. */
+  area: "Garraf",
   nap: {
     /** Nombre del local tal y como lo conoce la gente (se muestra en dirección). */
     venue: "Gimnasio Aranha",
-    // TODO: calle y número exactos — mientras esté vacío, la UI no lo pinta.
-    streetAddress: "",
-    addressLocality: "Vilanova i la Geltrú",
+    streetAddress: "Rambla del Garraf, 32, 1a Planta",
+    /** Municipio REAL de la sala. No usar en copy — para eso está `site.locality`. */
+    addressLocality: "Sant Pere de Ribes",
     addressRegion: "Barcelona",
-    postalCode: "08800",
+    postalCode: "08812",
     addressCountry: "ES",
     /** Teléfono visible (formato local). El de WhatsApp sale de env o del fallback de abajo. */
     telephoneDisplay: "+34 669 29 10 88",

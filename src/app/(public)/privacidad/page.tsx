@@ -22,7 +22,7 @@ export default function PrivacidadPage() {
           items={[
             <>Responsable: <LegalTodo>nombre y apellidos o razón social del titular</LegalTodo></>,
             <>NIF/CIF: <LegalTodo>NIF o CIF</LegalTodo></>,
-            <>Domicilio: <LegalTodo>dirección completa</LegalTodo>, {site.nap.addressLocality} ({site.nap.addressRegion})</>,
+            <>Domicilio: {site.nap.streetAddress}, {site.nap.postalCode} {site.nap.addressLocality} ({site.nap.addressRegion})</>,
             <>Correo electrónico: <LegalTodo>email para asuntos de privacidad</LegalTodo></>,
           ]}
         />

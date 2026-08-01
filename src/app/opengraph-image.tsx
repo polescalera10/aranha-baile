@@ -20,7 +20,7 @@ import { modalidadesFallback } from "@/content/landing";
  * el .ttf en el repo; se prioriza que el build no se rompa nunca.
  */
 
-export const alt = `${site.name} — Escuela de baile en ${site.nap.addressLocality}`;
+export const alt = `${site.name} — Escuela de baile en ${site.locality}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -84,7 +84,7 @@ export default function OpenGraphImage() {
               textTransform: "uppercase",
             }}
           >
-            {site.nap.addressLocality} · {site.nap.addressRegion}
+            {site.locality} · {site.nap.addressRegion}
           </div>
 
           {/* Nombre de marca con el degradado verde→cian */}
@@ -116,7 +116,7 @@ export default function OpenGraphImage() {
               lineHeight: 1.15,
             }}
           >
-            Escuela de baile en {site.nap.addressLocality}
+            Escuela de baile en {site.locality}
           </div>
 
           {/* Disciplinas */}

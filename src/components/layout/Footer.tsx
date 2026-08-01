@@ -34,7 +34,7 @@ export function Footer() {
         <div>
           <Logo size={26} />
           <p className="mt-3.5 max-w-[38ch] font-body text-sm leading-relaxed text-white/60">
-            Escuela de salsa cubana y bachata. Dentro del gimnasio Aranha · {site.nap.addressLocality}.
+            Escuela de salsa cubana y bachata. Dentro del gimnasio Aranha · {site.locality}.
           </p>
         </div>
 

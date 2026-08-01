@@ -66,7 +66,7 @@ export function CampanaFooter() {
             </Link>
           ))}
           <p className="font-body text-xs text-white/40">
-            © {new Date().getFullYear()} {site.name} · {site.nap.addressLocality}
+            © {new Date().getFullYear()} {site.name} · {site.locality}
           </p>
         </div>
       </div>

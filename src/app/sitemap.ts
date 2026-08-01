@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { listCampanaParams } from "@/content/campanas";
+import { listProfesorSlugs } from "@/content/profesores";
 import { getModalidadSlugs } from "@/lib/queries/modalidades";
 import { getEventoSlugs } from "@/lib/queries/eventos";
 
@@ -41,6 +42,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    })),
+    ...listProfesorSlugs().map((slug) => ({
+      url: `${base}/profesores/${slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
     ...eventos.map((slug) => ({
       url: `${base}/eventos/${slug}`,

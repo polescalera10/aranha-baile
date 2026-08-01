@@ -14,6 +14,6 @@ export const ogImages = [
     url: "/opengraph-image",
     width: 1200,
     height: 630,
-    alt: `${site.name} — Escuela de baile en ${site.nap.addressLocality}`,
+    alt: `${site.name} — Escuela de baile en ${site.locality}`,
   },
 ];

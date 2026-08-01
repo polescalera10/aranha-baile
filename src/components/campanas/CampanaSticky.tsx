@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { trackWhatsAppClick } from "@/lib/analytics";
 import { buildWaLink } from "@/lib/whatsapp";
 import { WaGlyph } from "@/components/ui/WaGlyph";
 
@@ -24,6 +25,7 @@ export function CampanaSticky({ mensaje }: { mensaje: string }) {
         href={buildWaLink("campana", mensaje)}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackWhatsAppClick("campana", mensaje)}
         className="pointer-events-auto relative flex items-center gap-[11px] rounded-full bg-neon px-7 py-4 font-body text-[15px] font-bold text-ink no-underline shadow-neon"
       >
         <span

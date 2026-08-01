@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SupportPage } from "@/components/layout/SupportPage";
+import { CookieSettingsButton } from "@/components/analytics/CookieBanner";
 import { LegalDraftNote, LegalList, LegalP, LegalSection, LegalTodo } from "@/components/layout/Legal";
 import { site } from "@/lib/site";
 
@@ -24,34 +25,52 @@ export default function CookiesPage() {
         </LegalP>
       </LegalSection>
 
-      <LegalSection title="2. Cookies que usa este sitio">
+      <LegalSection title="2. Cookies técnicas (sin consentimiento)">
         <LegalP>
-          Actualmente {site.name} solo utiliza cookies técnicas, estrictamente necesarias para el
-          funcionamiento del sitio y exentas de consentimiento según el artículo 22.2 de la LSSI-CE:
+          Son estrictamente necesarias para el funcionamiento del sitio y están exentas de
+          consentimiento según el artículo 22.2 de la LSSI-CE:
         </LegalP>
         <LegalList
           items={[
             "Cookies de sesión de autenticación (Supabase, con prefijo “sb-”): mantienen la sesión iniciada en el área privada de alumnos y profesores. Duración: la de la sesión y su renovación.",
-            "La parte pública de la web (landing, clases, contacto) no instala cookies de análisis, publicidad ni seguimiento.",
+            "Preferencia de cookies (almacenamiento local del navegador, clave “nexus-consent-analytics”): recuerda si has aceptado o rechazado la analítica para no volver a preguntártelo.",
+          ]}
+        />
+      </LegalSection>
+
+      <LegalSection title="3. Cookies de análisis (solo si las aceptas)">
+        <LegalP>
+          {site.name} utiliza Google Analytics 4 (Google Ireland Limited) para saber cuántas
+          personas visitan la web, qué páginas leen y qué botones funcionan mejor. Nos sirve para
+          mejorar el sitio, no para perfilarte con fines publicitarios.
+        </LegalP>
+        <LegalList
+          items={[
+            "Cookies “_ga” y “_ga_<ID>”: distinguen visitantes y sesiones de forma anónima. Duración: hasta 2 años.",
+            "No se activan hasta que pulsas “Aceptar” en el banner: hasta entonces el modo de consentimiento de Google mantiene el almacenamiento denegado y no se escribe ninguna cookie de análisis.",
+            "No usamos cookies de publicidad ni compartimos los datos con fines de marketing (ad_storage, ad_user_data y ad_personalization permanecen denegados).",
+            "Los datos se tratan en la infraestructura de Google, que puede implicar transferencias internacionales amparadas en el Marco de Privacidad de Datos UE-EE. UU.",
           ]}
         />
         <LegalP>
-          <LegalTodo>
-            si se añade analítica (p. ej. GA4, Plausible) o píxeles de marketing, actualizar esta
-            tabla e implantar un banner de consentimiento previo antes de activarlos
-          </LegalTodo>
+          Puedes cambiar tu decisión en cualquier momento —retirar el consentimiento es tan fácil
+          como darlo:
         </LegalP>
+        <div className="mt-4">
+          <CookieSettingsButton />
+        </div>
       </LegalSection>
 
-      <LegalSection title="3. Cookies de terceros">
+      <LegalSection title="4. Cookies de terceros">
         <LegalP>
-          Los enlaces a servicios externos (WhatsApp, Instagram, Google Maps) abren esos servicios
-          fuera de este sitio; una vez allí, se aplican sus propias políticas de cookies. Este sitio
-          no incrusta contenido de terceros que instale cookies en nuestras páginas.
+          El único tercero que puede instalar cookies en nuestras páginas es Google Analytics, y
+          solo tras tu consentimiento (apartado 3). Los enlaces a servicios externos (WhatsApp,
+          Instagram, Google Maps) abren esos servicios fuera de este sitio; una vez allí, se aplican
+          sus propias políticas de cookies.
         </LegalP>
       </LegalSection>
 
-      <LegalSection title="4. Cómo gestionar o eliminar cookies">
+      <LegalSection title="5. Cómo gestionar o eliminar cookies">
         <LegalP>
           Puedes configurar tu navegador para bloquear o eliminar cookies (consulta la ayuda de
           Chrome, Safari, Firefox o Edge). Si bloqueas las cookies técnicas, el área privada puede
@@ -59,7 +78,7 @@ export default function CookiesPage() {
         </LegalP>
       </LegalSection>
 
-      <LegalSection title="5. Actualizaciones">
+      <LegalSection title="6. Actualizaciones">
         <LegalP>
           Esta política se revisará si cambian las cookies utilizadas. Última actualización:{" "}
           <LegalTodo>fecha de publicación definitiva</LegalTodo>.

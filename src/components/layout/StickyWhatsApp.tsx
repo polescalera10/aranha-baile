@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { trackWhatsAppClick } from "@/lib/analytics";
 import { buildWaLink } from "@/lib/whatsapp";
 import { WaGlyph } from "@/components/ui/WaGlyph";
 
@@ -27,6 +28,7 @@ export function StickyWhatsApp() {
         href={buildWaLink("sticky")}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackWhatsAppClick("sticky")}
         className="pointer-events-auto relative flex max-w-full items-center justify-center gap-[11px] rounded-full bg-neon px-6 py-4 text-center font-body text-sm font-bold text-ink no-underline shadow-neon sm:px-7 sm:text-[15px]"
       >
         <span

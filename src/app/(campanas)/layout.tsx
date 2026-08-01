@@ -1,3 +1,4 @@
+import { Analytics } from "@/components/analytics/Analytics";
 import { Logo } from "@/components/layout/Logo";
 
 /**
@@ -13,6 +14,7 @@ export default function CampanasLayout({ children }: { children: React.ReactNode
         <Logo size={28} />
       </header>
       {children}
+      <Analytics />
     </div>
   );
 }

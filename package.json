@@ -19,6 +19,7 @@
     "test:all": "vitest run && playwright test"
   },
   "dependencies": {
+    "@next/third-parties": "^16.2.12",
     "@supabase/ssr": "0.5.2",
     "@supabase/supabase-js": "2.45.4",
     "framer-motion": "^11.5.4",

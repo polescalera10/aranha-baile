@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/layout/Logo";
-import { buildWaLink } from "@/lib/whatsapp";
+import { WaTrackedLink } from "@/components/ui/WaTrackedLink";
 import { site } from "@/lib/site";
 
 // min-h-11 (44px): con py-[9px] la píldora se quedaba en 40px de alto, por
@@ -98,9 +98,9 @@ export function Footer() {
                 TikTok
               </a>
             )}
-            <a href={buildWaLink("footer")} target="_blank" rel="noopener noreferrer" className={PILL}>
+            <WaTrackedLink origin="footer" className={PILL}>
               WhatsApp
-            </a>
+            </WaTrackedLink>
           </div>
         </div>
       </div>

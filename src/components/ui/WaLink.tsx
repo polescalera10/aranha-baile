@@ -1,3 +1,6 @@
+"use client";
+
+import { trackWhatsAppClick } from "@/lib/analytics";
 import { buildWaLink, type WaOrigin } from "@/lib/whatsapp";
 import { WaGlyph } from "@/components/ui/WaGlyph";
 
@@ -22,6 +25,7 @@ const WRAP: Record<Variant, string> = {
 /**
  * CTA de WhatsApp. Abre wa.me con mensaje prerrellenado según el origen.
  * Microinteracción de hover (elevación + sombra) vía Tailwind; press con active.
+ * Cada clic emite `whatsapp_click` a GA4 con el origen: es la conversión nº1.
  */
 export function WaLink({
   origin,
@@ -43,6 +47,7 @@ export function WaLink({
       href={buildWaLink(origin, extra)}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackWhatsAppClick(origin, extra)}
       className={`inline-flex items-center justify-center gap-3 rounded-md font-body font-bold no-underline transition-[transform,box-shadow,background] duration-200 active:translate-y-0 active:scale-[0.99] ${WRAP[variant]} ${className}`}
     >
       {showGlyph && <WaGlyph className={GLYPH[variant]} />}

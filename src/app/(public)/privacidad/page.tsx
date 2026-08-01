@@ -66,6 +66,7 @@ export default function PrivacidadPage() {
             <>Supabase (base de datos y autenticación del área privada) — <LegalTodo>confirmar región de alojamiento (UE) y acuerdo de encargo (DPA)</LegalTodo>.</>,
             <>n8n (automatización de avisos internos de nuevas solicitudes) — <LegalTodo>confirmar dónde está alojada la instancia y su DPA</LegalTodo>.</>,
             "WhatsApp (Meta Platforms Ireland Ltd.), si nos escribes por ese canal: se aplica su propia política de privacidad.",
+            "Google Analytics 4 (Google Ireland Ltd.), solo si aceptas las cookies de análisis: mide de forma agregada el uso de la web. Ver la política de cookies.",
           ]}
         />
       </LegalSection>

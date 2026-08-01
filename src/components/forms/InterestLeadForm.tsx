@@ -1,7 +1,8 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
+import { trackLead } from "@/lib/analytics";
 import { submitInterestLead, type LeadFormState } from "@/lib/actions/leads";
 
 const initial: LeadFormState = { status: "idle" };
@@ -70,6 +71,11 @@ export function InterestLeadForm({
   interesesHelp?: string;
 }) {
   const [state, formAction] = useActionState(submitInterestLead, initial);
+
+  // Conversión: un lead guardado en Supabase vale como `generate_lead` en GA4.
+  useEffect(() => {
+    if (state.status === "success") trackLead(origen);
+  }, [state.status, origen]);
 
   if (state.status === "success") {
     return (

@@ -1,3 +1,4 @@
+import { Analytics } from "@/components/analytics/Analytics";
 import { Footer } from "@/components/layout/Footer";
 import { StickyWhatsApp } from "@/components/layout/StickyWhatsApp";
 
@@ -12,6 +13,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       {children}
       <Footer />
       <StickyWhatsApp />
+      <Analytics />
     </>
   );
 }

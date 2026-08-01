@@ -19,6 +19,25 @@ window.matchMedia = ((query: string) => ({
   dispatchEvent: () => false,
 })) as typeof window.matchMedia;
 
+// Node 25 expone su propio `localStorage` global (experimental) y, al no
+// arrancar con --localstorage-file, es un objeto roto que gana a la
+// implementación de jsdom. Se reemplaza por un Storage en memoria para que el
+// banner de cookies pueda leer y escribir su decisión en los tests.
+const memory = new Map<string, string>();
+Object.defineProperty(window, "localStorage", {
+  configurable: true,
+  value: {
+    getItem: (key: string) => memory.get(key) ?? null,
+    setItem: (key: string, value: string) => void memory.set(key, String(value)),
+    removeItem: (key: string) => void memory.delete(key),
+    clear: () => memory.clear(),
+    key: (index: number) => [...memory.keys()][index] ?? null,
+    get length() {
+      return memory.size;
+    },
+  } satisfies Storage,
+});
+
 if (!("IntersectionObserver" in window)) {
   class IntersectionObserverStub {
     observe() {}

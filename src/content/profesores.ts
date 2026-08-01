@@ -23,8 +23,9 @@ export type Profesor = {
   foto: string;
   /** Texto alternativo de la foto. */
   fotoAlt: string;
-  /** La foto es de dos personas (aún no hay retrato individual). */
-  fotoDeDos?: boolean;
+  /** Dimensiones reales del archivo: next/image las necesita para el srcset. */
+  ancho: number;
+  alto: number;
   /** Bio real. Vacía hasta que Pol la pase — ver comentario de cabecera. */
   bio?: string[];
 };
@@ -35,8 +36,9 @@ export const profesores: Profesor[] = [
     nombre: "Davide",
     claim: "Bachata en pareja, de iniciación a intermedio.",
     foto: "/images/profes/davide.jpg",
-    fotoAlt: "Davide y Martina, profesores de bachata de NEXUS VNG",
-    fotoDeDos: true,
+    fotoAlt: "Davide, profesor de bachata de NEXUS VNG",
+    ancho: 933,
+    alto: 1400,
   },
   {
     slug: "martina",
@@ -44,6 +46,8 @@ export const profesores: Profesor[] = [
     claim: "Bachata, lady style y los grupos de compañía.",
     foto: "/images/profes/martina.jpg",
     fotoAlt: "Martina, profesora de bachata y lady style de NEXUS VNG",
+    ancho: 933,
+    alto: 1400,
   },
   {
     slug: "pol",
@@ -51,6 +55,8 @@ export const profesores: Profesor[] = [
     claim: "Salsa cubana y bachata, desde cero absoluto.",
     foto: "/images/profes/pol.jpg",
     fotoAlt: "Pol, profesor de salsa cubana y bachata de NEXUS VNG",
+    ancho: 1021,
+    alto: 1400,
   },
   {
     slug: "yuri",
@@ -58,6 +64,8 @@ export const profesores: Profesor[] = [
     claim: "Heels y sexy style: técnica, líneas y actitud.",
     foto: "/images/profes/yuri.jpg",
     fotoAlt: "Yuri, profesora de heels y sexy style de NEXUS VNG",
+    ancho: 1050,
+    alto: 1400,
   },
   {
     slug: "ana-aylen",
@@ -65,6 +73,8 @@ export const profesores: Profesor[] = [
     claim: "Estilo cubano y urbano: salsa, reparto y reggaetón.",
     foto: "/images/profes/ana-aylen.jpg",
     fotoAlt: "Ana Aylén, profesora de salsa, reparto y reggaetón de NEXUS VNG",
+    ancho: 1050,
+    alto: 1400,
   },
 ];
 

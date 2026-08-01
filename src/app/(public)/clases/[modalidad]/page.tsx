@@ -230,8 +230,8 @@ export default async function ModalidadPage({ params }: Params) {
                             <Image
                               src={p.foto}
                               alt={p.fotoAlt}
-                              width={933}
-                              height={1400}
+                              width={p.ancho}
+                              height={p.alto}
                               sizes="(max-width: 640px) 45vw, 200px"
                               className="aspect-[3/4] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
                             />

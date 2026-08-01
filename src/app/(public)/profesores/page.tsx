@@ -25,12 +25,11 @@ export const metadata: Metadata = {
 };
 
 /*
-  TODO: fichas individuales del equipo — nombre, disciplinas que imparte y bio.
-  La foto de grupo ya es real (01-08-2026); faltan los datos por persona, que
-  Pol tiene que confirmar (los nombres de pila están en content/horario-regular.ts,
-  pero no se atribuye cara a nombre sin confirmarlo). Grid original comentado al
-  final del archivo. Mientras tanto, esta página habla del MÉTODO — nada de bios
-  ni currículos inventados.
+  Nombres, fotos y disciplinas del equipo viven en content/profesores.ts (las
+  disciplinas se derivan del cartel de horarios, no se escriben a mano).
+
+  TODO: bio real de cada profesor. Hasta que Pol la pase, la ficha individual
+  muestra solo lo verificable — nada de trayectorias ni titulaciones inventadas.
 */
 
 export default function ProfesoresPage() {
@@ -72,8 +71,8 @@ export default function ProfesoresPage() {
                       <Image
                         src={p.foto}
                         alt={p.fotoAlt}
-                        width={933}
-                        height={1400}
+                        width={p.ancho}
+                        height={p.alto}
                         sizes="(max-width: 640px) 90vw, 260px"
                         className="aspect-[3/4] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
                       />

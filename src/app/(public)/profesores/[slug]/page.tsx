@@ -77,7 +77,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     alternates: { canonical: `/profesores/${profe.slug}` },
     openGraph: {
       title: `${profe.nombre} · NEXUS VNG`,
-      images: [{ url: profe.foto, width: 933, height: 1400, alt: profe.fotoAlt }],
+      images: [{ url: profe.foto, width: profe.ancho, height: profe.alto, alt: profe.fotoAlt }],
     },
   };
 }
@@ -108,17 +108,12 @@ export default async function ProfesorPage({ params }: Params) {
             <Image
               src={profe.foto}
               alt={profe.fotoAlt}
-              width={933}
-              height={1400}
+              width={profe.ancho}
+              height={profe.alto}
               priority
               sizes="(max-width: 1024px) 100vw, 420px"
               className="aspect-[3/4] w-full object-cover object-top"
             />
-            {profe.fotoDeDos && (
-              <figcaption className="font-body text-text-faint px-4 py-3 text-[13px]">
-                {profe.fotoAlt}
-              </figcaption>
-            )}
           </figure>
 
           <div className="space-y-8">
@@ -222,8 +217,8 @@ export default async function ProfesorPage({ params }: Params) {
                     <Image
                       src={p.foto}
                       alt={p.fotoAlt}
-                      width={933}
-                      height={1400}
+                      width={p.ancho}
+                      height={p.alto}
                       sizes="(max-width: 640px) 45vw, 200px"
                       className="aspect-[3/4] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
                     />

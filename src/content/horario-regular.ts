@@ -87,7 +87,7 @@ export const horarioRegular: FranjaHoraria[] = [
       { estilo: "Sexy Style", profes: "Yuri", familia: "urbano" },
       { estilo: "Bachata 1", profes: "Ana Aylén y Pol", familia: "bachata" },
       { estilo: "Bachata 0", profes: "Martina y Pol", familia: "bachata" },
-      { estilo: "Cía Salsa", profes: "Ana Aylén", familia: "salsa", compania: true },
+      { estilo: "Cía Salsa", profes: "Ana Aylén y Pol", familia: "salsa", compania: true },
     ],
   },
 ];

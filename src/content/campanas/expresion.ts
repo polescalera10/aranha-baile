@@ -93,7 +93,8 @@ export const expresion: Record<string, CampanaDolorContent> = {
     ],
     cierreEmocional: "Deja de apuntarte a cosas que odias. Prueba una que te dé pena que acabe.",
     metaTitle: "¿Odias el gimnasio? Reggaeton en Vilanova",
-    metaDescription: "El mejor cardio de la semana: reggaeton con técnica, grupo y la música que ya te sabes. Prueba en Vilanova.",
+    metaDescription:
+      "Cuando suena tu canción el cuerpo va solo: entrena así, con música, técnica y grupo. Clase de prueba de reggaeton en Vilanova i la Geltrú.",
   },
 
   "soltarse": {
@@ -177,7 +178,8 @@ export const expresion: Record<string, CampanaDolorContent> = {
     ],
     cierreEmocional: "El primer paso para soltarte es venir. El resto lo hace la música.",
     metaTitle: "Suéltate con tu cuerpo — Lady Style en Vilanova",
-    metaDescription: "La soltura se entrena: postura, cadera, brazos y actitud frente al espejo. Prueba Lady Style en Vilanova.",
+    metaDescription:
+      "La soltura no se trae de casa, se entrena: postura, cadera, brazos y actitud frente al espejo. Prueba una clase de Lady Style en Vilanova.",
   },
 
   "confianza": {
@@ -262,7 +264,8 @@ export const expresion: Record<string, CampanaDolorContent> = {
     ],
     cierreEmocional: "La seguridad no aparece de golpe: se entrena. Empieza por una clase y compruébalo tú misma.",
     metaTitle: "Reconstruye tu seguridad — Heels en Vilanova",
-    metaDescription: "Empoderamiento sin postureo: técnica, actitud y presencia que se vienen contigo a la calle. Prueba Heels en Vilanova.",
+    metaDescription:
+      "La confianza se construye clase a clase: técnica, actitud y presencia que se vienen contigo a la calle. Prueba una clase de Heels en Vilanova.",
   },
 
   "tu-rato": {
@@ -346,7 +349,8 @@ export const expresion: Record<string, CampanaDolorContent> = {
     ],
     cierreEmocional: "Llevas semanas dándoselo todo a todos. Guárdate una hora.",
     metaTitle: "Tu rato de la semana — Lady Style en Vilanova",
-    metaDescription: "Una hora a la semana solo para ti: postura, estilo y presencia frente al espejo. Prueba Lady Style en Vilanova.",
+    metaDescription:
+      "Una hora a la semana que es solo tuya: postura, estilo y presencia frente al espejo, sin ocuparte de nadie más. Lady Style en Vilanova.",
   },
 
   "espacio-sin-juicios": {
@@ -430,8 +434,9 @@ export const expresion: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "Aquí nadie te mide. Se viene a bailar, no a competir. Ven a comprobarlo.",
-    metaTitle: "Espacio femenino sin juicios — Heels en Vilanova",
-    metaDescription: "La clase más libre de la escuela: grupo femenino, cero competición, tu versión del estilo. Prueba Heels en Vilanova.",
+    metaTitle: "Espacio femenino sin juicios — Heels, Vilanova",
+    metaDescription:
+      "Un grupo mayoritariamente femenino, sin miradas ni competición: te mueves a tu manera y a tu ritmo. Prueba una clase de Heels en Vilanova.",
   },
 
   "cardio-divertido": {
@@ -515,7 +520,8 @@ export const expresion: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "El mejor entrenamiento es el que no abandonas. Este no se abandona: engancha.",
-    metaTitle: "Cardio divertido que sí mantienes — Reggaeton en Vilanova",
-    metaDescription: "Cardio completo disfrazado de fiesta: reggaeton con técnica y grupo en Vilanova i la Geltrú.",
+    metaTitle: "Cardio que sí mantienes — Reggaeton en Vilanova",
+    metaDescription:
+      "Cardio completo disfrazado de fiesta: una hora de música, coreografía y grupo que te deja con ganas de volver. Reggaeton en Vilanova.",
   },
 };

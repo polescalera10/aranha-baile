@@ -89,8 +89,9 @@ export const empezar: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "Llevas años creyéndote lo de los dos pies izquierdos. Una clase basta para empezar a desmentirlo.",
-    metaTitle: "\"No tengo ritmo\" — Bachata desde cero en Vilanova",
-    metaDescription: "El ritmo se entrena, no es un don. Bachata desde cero: la favorita de los que dicen \"yo no sé bailar\".",
+    metaTitle: "\"No tengo ritmo\" — Bachata desde cero, Vilanova",
+    metaDescription:
+      "El ritmo se entrena, no es un don: repetición y buena guía. Bachata desde cero, la favorita de quien dice \"yo no sé bailar\". En Vilanova.",
   },
 
   "miedo-al-ridiculo": {
@@ -172,8 +173,9 @@ export const empezar: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "El corte se pasa en la primera clase. El mensaje es el paso más difícil, y ya casi lo has dado.",
-    metaTitle: "Sin miedo al ridículo — Salsa cubana para empezar",
-    metaDescription: "En la rueda de casino nadie es el centro: la vergüenza no sobrevive a una clase. Prueba en Vilanova.",
+    metaTitle: "Sin miedo al ridículo — Salsa cubana en Vilanova",
+    metaDescription:
+      "Todo el grupo empezó donde estás tú: en la rueda de casino nadie es el centro y la vergüenza no sobrevive a una clase. Prueba en Vilanova.",
   },
 
   "ya-soy-mayor": {
@@ -256,8 +258,9 @@ export const empezar: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "Llevas años diciendo \"me hubiera gustado bailar\". Todavía estás a tiempo de cambiar el verbo.",
-    metaTitle: "Nunca es tarde para bailar — Salsa cubana en Vilanova",
-    metaDescription: "De los 18 a los 60 y pico: empezar de adulto es la norma, no la excepción. Prueba salsa cubana en Vilanova.",
+    metaTitle: "Nunca es tarde para bailar — Salsa en Vilanova",
+    metaDescription:
+      "De los 18 a los 60 y pico: en los grupos hay gente de todas las décadas dando sus primeros pasos. Prueba salsa cubana en Vilanova.",
   },
 
   "el-peor-de-la-clase": {
@@ -340,8 +343,9 @@ export const empezar: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "Nadie va a frenar a nadie: todo el grupo empieza igual. Escríbenos y lo compruebas tú mismo/a.",
-    metaTitle: "No frenarás a nadie — Bachata en tu nivel",
-    metaDescription: "Grupos por nivel real desde cero absoluto y un básico que se aprende rápido. Clase de prueba en Vilanova.",
+    metaTitle: "No frenarás a nadie — Bachata en Vilanova",
+    metaDescription:
+      "Empiezas con gente que está exactamente en tu mismo punto: grupos por nivel desde cero y un básico que se aprende rápido. En Vilanova.",
   },
 
   "que-disciplina": {
@@ -425,7 +429,8 @@ export const empezar: Record<string, CampanaDolorContent> = {
     ],
     cierreEmocional: "No necesitas tener claro el estilo. Solo necesitas escribirnos y contarnos qué buscas.",
     metaTitle: "¿Qué disciplina elijo? Te ubicamos nosotros",
-    metaDescription: "¿No sabes por dónde empezar a bailar? Cuéntanos qué buscas y te orientamos. Acceso a todas las disciplinas de tu nivel.",
+    metaDescription:
+      "¿No sabes por dónde empezar a bailar? Cuéntanos qué buscas y te orientamos entre salsa, bachata, reggaeton o heels. Escuela en Vilanova.",
   },
 
   "probar-sin-compromiso": {
@@ -507,7 +512,8 @@ export const empezar: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "Todo empieza por probar. Decide después, con calma.",
-    metaTitle: "Clase de prueba sin compromiso — Baile en Vilanova",
-    metaDescription: "Prueba una clase de baile antes de decidir, sin permanencia ni letra pequeña. Vilanova i la Geltrú.",
+    metaTitle: "Clase de prueba sin compromiso en Vilanova",
+    metaDescription:
+      "Prueba una clase de baile antes de decidir nada: sin permanencia y sin letra pequeña. Ven a conocer el ambiente en Vilanova i la Geltrú.",
   },
 };

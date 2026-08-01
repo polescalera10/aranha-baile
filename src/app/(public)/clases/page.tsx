@@ -3,20 +3,17 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { WaLink } from "@/components/ui/WaLink";
+import { HorarioSemanal } from "@/components/landing/HorarioSemanal";
 import { Precios } from "@/components/landing/Precios";
 import { InterestLeadForm } from "@/components/forms/InterestLeadForm";
-import {
-  cursoRegularGrupos,
-  diasSemana,
-  familiaColor,
-  horarioRegular,
-} from "@/content/horario-regular";
+import { cursoRegularGrupos } from "@/content/horario-regular";
 import { getModalidades } from "@/lib/queries/modalidades";
 
 export const metadata: Metadata = {
   title: "Clases de Baile · Curso Regular",
+  // 150–160 caracteres: por encima, Google corta la descripción en el SERP.
   description:
-    "Curso regular de baile en Vilanova i la Geltrú, temporada 26·27: salsa cubana, bachata, reggaetón, heels y más, de lunes a viernes. Grupos desde cero absoluto. Apúntate desde 35 €/mes.",
+    "Curso regular de baile en Vilanova i la Geltrú, temporada 26·27: salsa cubana, bachata, reggaetón y más, de lunes a viernes. Desde cero y desde 35 €/mes.",
   alternates: { canonical: "/clases" },
 };
 
@@ -166,71 +163,9 @@ export default async function ClasesPage() {
               </p>
             </Reveal>
 
-            {/* La parrilla no cabe en móvil: se desplaza en horizontal dentro de
-                su caja (nunca la página). tabIndex la hace accesible por teclado. */}
-            <p className="font-body text-text-faint text-[13px] md:hidden" aria-hidden="true">
-              Desliza la tabla para ver toda la semana →
-            </p>
-            <Reveal
-              className="focus-visible:outline-neon overflow-x-auto"
-              role="region"
-              aria-label="Horario semanal de clases"
-              tabIndex={0}
-            >
-              <table className="w-full min-w-[720px] table-fixed border-separate border-spacing-2">
-                <thead>
-                  <tr>
-                    <th className="font-body text-text-faint w-[68px] px-2 py-2 text-left text-[11px] font-bold tracking-wider uppercase">
-                      Hora
-                    </th>
-                    {diasSemana.map((dia) => (
-                      <th
-                        key={dia}
-                        className="bg-bg-elevated font-display text-text-strong rounded-sm px-3 py-2 text-center text-base"
-                      >
-                        {dia}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {horarioRegular.map((franja) => (
-                    <tr key={franja.hora}>
-                      <td className="font-display text-text-muted px-2 py-2 align-middle text-lg">
-                        {franja.hora}
-                      </td>
-                      {franja.clases.map((clase, i) => (
-                        <td key={i} className="align-top">
-                          {clase ? (
-                            <div className="bg-bg-panel hover:border-neon/30 flex h-full min-h-[66px] flex-col rounded-sm border border-white/8 px-3 py-3 transition-colors">
-                              <p
-                                className={`font-body text-sm leading-tight font-bold ${familiaColor[clase.familia]}`}
-                              >
-                                {clase.estilo}
-                              </p>
-                              <p className="font-body text-text-muted mt-1 text-[12px]">
-                                {clase.profes}
-                              </p>
-                            </div>
-                          ) : (
-                            <div className="h-full min-h-[66px] rounded-sm border border-dashed border-white/5" />
-                          )}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </Reveal>
-
-            <Reveal>
-              <p className="font-body text-text-faint text-[13px]">
-                El número indica el nivel: <strong className="text-text-muted">0</strong> desde cero
-                absoluto, <strong className="text-text-muted">1</strong> iniciación,{" "}
-                <strong className="text-text-muted">2</strong> intermedio. ¿No ves tu hueco?
-                Escríbenos y lo encontramos.
-              </p>
-            </Reveal>
+            {/* Fuente única de la parrilla: el mismo componente que usa
+                /horarios. Antes este marcado estaba duplicado aquí. */}
+            <HorarioSemanal />
           </div>
         </section>
 

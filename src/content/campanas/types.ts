@@ -74,7 +74,11 @@ export type CampanaDolorContent = {
   faqExtra: FaqItem[];
   /** Cierre emocional del CTA final (1–2 frases). */
   cierreEmocional: string;
-  /** SEO solo por si se comparte en redes — la ruta lleva noindex. */
+  /**
+   * SEO real: desde el 01-08-2026 estas rutas son indexables y están en el
+   * sitemap. `metaTitle` ≤48 caracteres — la plantilla del layout raíz le suma
+   * " · NEXUS VNG" (12); `metaDescription` entre 120 y 155.
+   */
   metaTitle: string;
   metaDescription: string;
 };

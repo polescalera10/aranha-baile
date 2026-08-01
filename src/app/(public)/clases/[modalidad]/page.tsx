@@ -5,13 +5,20 @@ import { SupportPage } from "@/components/layout/SupportPage";
 import { Reveal } from "@/components/ui/Reveal";
 import { WaLink } from "@/components/ui/WaLink";
 import { JsonLd, courseLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { getModalidades, getModalidadBySlug, getModalidadSlugs } from "@/lib/queries/modalidades";
 import { modalidadesContenido } from "@/content/modalidades";
+import { sesionesRegulares } from "@/content/horario-regular";
+import { precios } from "@/content/precios";
+import { ogImages } from "@/lib/seo";
 import { founding } from "@/content/landing";
 
 export const revalidate = 3600;
 
 type Params = { params: Promise<{ modalidad: string }> };
+
+/** "Salsa 1" → "Salsa": el nombre de disciplina sin el número de nivel. */
+const baseEstilo = (estilo: string) => estilo.replace(/\s+\d+$/, "").trim();
 
 export async function generateStaticParams() {
   const slugs = await getModalidadSlugs();
@@ -28,7 +35,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     title: `Clases de ${m.nombre} en Vilanova i la Geltrú`,
     description,
     alternates: { canonical: `/clases/${m.slug}` },
-    openGraph: { title: `Clases de ${m.nombre}`, description },
+    openGraph: { title: `Clases de ${m.nombre}`, description, images: ogImages },
   };
 }
 
@@ -40,7 +47,20 @@ export default async function ModalidadPage({ params }: Params) {
   // Contenido editorial largo (content/modalidades.ts). Puede no existir si la
   // modalidad se creó en la BD sin redactar aún su página.
   const contenido = modalidadesContenido[m.slug];
-  const otras = (await getModalidades()).filter((o) => o.slug !== m.slug);
+  const todas = await getModalidades();
+  const otras = todas.filter((o) => o.slug !== m.slug);
+  const nombrePorSlug = new Map(todas.map((o) => [o.slug, o.nombre]));
+
+  // Clases REALES de esta disciplina en el cartel semanal. Los grupos de
+  // compañía no son clase regular, así que no cuentan.
+  const sesiones = contenido
+    ? sesionesRegulares.filter(
+        (s) => !s.compania && contenido.estilos.includes(baseEstilo(s.estilo)),
+      )
+    : [];
+
+  // Enlaces cruzados: solo a disciplinas que existen y están activas.
+  const relacionadas = (contenido?.relacionadas ?? []).filter((r) => nombrePorSlug.has(r.slug));
 
   return (
     <SupportPage
@@ -48,7 +68,15 @@ export default async function ModalidadPage({ params }: Params) {
       title={m.nombre}
       intro={contenido?.lead ?? m.descripcion ?? undefined}
     >
-      <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
+      <Breadcrumbs
+        items={[
+          { name: "Inicio", path: "/" },
+          { name: "Clases", path: "/clases" },
+          { name: m.nombre, path: `/clases/${m.slug}` },
+        ]}
+      />
+
+      <div className="mt-8 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
         <div className="space-y-12">
           {contenido ? (
             <>
@@ -77,6 +105,85 @@ export default async function ModalidadPage({ params }: Params) {
                 </ul>
               </Reveal>
 
+              {/* Cómo es una clase */}
+              <Reveal as="section" className="space-y-4">
+                <h2 className="font-display text-3xl text-text-strong">Cómo es una clase</h2>
+                {contenido.comoEsLaClase.map((p) => (
+                  <p key={p.slice(0, 32)} className="max-w-[70ch] font-body text-base leading-relaxed text-text-body">
+                    {p}
+                  </p>
+                ))}
+              </Reveal>
+
+              {/* Horario real de la disciplina + precio. Si la disciplina no
+                  está en el cartel, no se pinta la parrilla vacía. */}
+              <Reveal as="section" className="space-y-5">
+                <h2 className="font-display text-3xl text-text-strong">
+                  {sesiones.length > 0 ? `Horario y precio de ${m.nombre}` : `Precio de ${m.nombre}`}
+                </h2>
+
+                {sesiones.length > 0 && (
+                  <>
+                    <p className="max-w-[65ch] font-body text-[15px] leading-relaxed text-text-muted">
+                      Estas son las clases de {m.nombre.toLowerCase()} de la temporada 26·27 en
+                      Vilanova i la Geltrú. El número indica el nivel: 0 desde cero absoluto, 1
+                      iniciación, 2 intermedio.
+                    </p>
+                    <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(210px,100%),1fr))] gap-3 p-0">
+                      {sesiones.map((s) => (
+                        <li
+                          key={s.value}
+                          className="rounded-lg border border-white/8 bg-bg-panel p-4 shadow-soft"
+                        >
+                          <p className="font-body text-[11px] font-bold uppercase tracking-[0.14em] text-neon-mint">
+                            {s.dia}
+                          </p>
+                          <p className="mt-1 font-display text-2xl leading-none text-text-strong">
+                            {s.hora}
+                          </p>
+                          <p className="mt-2 font-body text-[14px] font-semibold text-text-body">
+                            {s.estilo}
+                            {s.nivel && (
+                              <span className="font-normal text-text-muted"> · {s.nivel}</span>
+                            )}
+                          </p>
+                          <p className="mt-0.5 font-body text-[13px] text-text-muted">{s.profes}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+
+                <div className="rounded-lg border border-neon-mint/20 bg-bg-panel p-5">
+                  <p className="font-body text-[15px] leading-relaxed text-text-body">
+                    <strong className="text-neon-mint">
+                      {precios.base} €/{precios.periodo}
+                    </strong>{" "}
+                    por una disciplina. Cada estilo adicional suma {precios.estiloExtra} €/
+                    {precios.periodo}, y con {precios.flat} €/{precios.periodo} tienes la tarifa
+                    plana con todos los estilos. Sin matrícula y sin permanencia.
+                  </p>
+                  <p className="mt-2 font-body text-[13px] leading-relaxed text-text-muted">
+                    ¿Vas a venir varios días? La{" "}
+                    <Link
+                      href="/socio-fundador"
+                      className="font-semibold text-neon no-underline hover:underline"
+                    >
+                      plaza de socio fundador
+                    </Link>{" "}
+                    deja todas las disciplinas de tu nivel en {founding.price}/mes. También puedes
+                    ver el{" "}
+                    <Link
+                      href="/clases#horario"
+                      className="font-semibold text-neon no-underline hover:underline"
+                    >
+                      horario completo de la semana
+                    </Link>
+                    .
+                  </p>
+                </div>
+              </Reveal>
+
               {/* Qué te llevas */}
               <Reveal as="section" className="space-y-5">
                 <h2 className="font-display text-3xl text-text-strong">Qué te llevas</h2>
@@ -99,10 +206,39 @@ export default async function ModalidadPage({ params }: Params) {
                 <p className="relative mt-3 max-w-[65ch] font-body text-[15px] leading-relaxed text-white/85">
                   {contenido.paraTi}
                 </p>
-                <WaLink origin="modalidad" extra={`de ${m.nombre}`} variant="red" className="relative mt-6 px-7 py-[15px]">
+                <WaLink origin="modalidad" extra={`de ${m.nombre}`} variant="red" className="relative mt-6 min-h-12 px-7 py-[15px]">
                   Probar una clase de {m.nombre}
                 </WaLink>
               </Reveal>
+
+              {/* Enlaces cruzados entre disciplinas */}
+              {relacionadas.length > 0 && (
+                <Reveal as="section" className="space-y-5">
+                  <h2 className="font-display text-3xl text-text-strong">
+                    Si te gusta {m.nombre}, prueba también
+                  </h2>
+                  <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(240px,100%),1fr))] gap-4 p-0">
+                    {relacionadas.map((r) => (
+                      <li key={r.slug}>
+                        <Link
+                          href={`/clases/${r.slug}`}
+                          className="group flex h-full flex-col rounded-lg border border-white/8 bg-bg-panel p-5 text-inherit no-underline shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-neon/30 hover:shadow-card"
+                        >
+                          <h3 className="font-display text-xl text-text-strong transition-colors group-hover:text-neon">
+                            {nombrePorSlug.get(r.slug)}
+                          </h3>
+                          <p className="mt-2 font-body text-[14px] leading-relaxed text-text-muted">
+                            {r.text}
+                          </p>
+                          <span className="mt-4 inline-block font-body text-[13px] font-bold text-neon group-hover:underline">
+                            Ver {nombrePorSlug.get(r.slug)} &rarr;
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              )}
             </>
           ) : (
             // Modalidad nueva en la BD sin contenido editorial todavía: layout genérico.
@@ -124,12 +260,14 @@ export default async function ModalidadPage({ params }: Params) {
               Reserva tu primera clase de prueba. Escríbenos y te asignamos el grupo ideal para tu
               nivel.
             </p>
-            <WaLink origin="modalidad" extra={`de ${m.nombre}`} variant="red" className="mt-4 w-full py-[15px]">
+            <WaLink origin="modalidad" extra={`de ${m.nombre}`} variant="red" className="mt-4 min-h-12 w-full py-[15px]">
               Probar {m.nombre}
             </WaLink>
             <p className="mt-4 border-t border-white/8 pt-4 font-body text-[13px] leading-relaxed text-text-muted">
-              Tarifa fundadora: <strong className="text-text-strong">{founding.price}/mes</strong>{" "}
-              con acceso a todas las disciplinas de tu nivel — {m.nombre} incluida.
+              Desde <strong className="text-text-strong">{precios.base} €/mes</strong> por una
+              disciplina. Tarifa fundadora:{" "}
+              <strong className="text-text-strong">{founding.price}/mes</strong> con acceso a todas
+              las disciplinas de tu nivel — {m.nombre} incluida.
             </p>
           </div>
 
@@ -154,7 +292,21 @@ export default async function ModalidadPage({ params }: Params) {
           )}
         </aside>
       </div>
-      <JsonLd data={courseLd(m.nombre, contenido?.lead ?? m.descripcion ?? "", m.slug)} />
+      <JsonLd
+        data={courseLd(
+          m.nombre,
+          contenido?.lead ?? m.descripcion ?? "",
+          m.slug,
+          // Cuando la disciplina agrupa varios estilos del cartel (Lady Salsa y
+          // Bachata Lady, por ejemplo), el estilo distingue las instancias que
+          // no tienen número de nivel.
+          sesiones.map((s) => ({
+            dia: s.dia,
+            hora: s.hora,
+            nivel: s.nivel ?? (contenido && contenido.estilos.length > 1 ? s.estilo : undefined),
+          })),
+        )}
+      />
     </SupportPage>
   );
 }

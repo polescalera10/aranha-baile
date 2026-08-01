@@ -92,8 +92,9 @@ export const nivel: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "Tu nivel merece un grupo a su altura. Cuéntanos qué llevas bailado y te ubicamos.",
-    metaTitle: "Clases de nivel real, sin ir mezcladas — Vilanova",
-    metaDescription: "Grupos por nivel real: timba, musicalidad y contenido nuevo cada semana. Salsa de nivel en Vilanova.",
+    metaTitle: "Grupos por nivel real, sin mezclar — Vilanova",
+    metaDescription:
+      "Deja las clases donde el ritmo lo marca quien menos sabe: grupos por nivel real, timba y musicalidad. Salsa cubana en Vilanova.",
   },
 
   techo: {
@@ -182,7 +183,8 @@ export const nivel: Record<string, CampanaDolorContent> = {
     ],
     cierreEmocional: "Seguir progresando no debería ser la excepción. Cuéntanos de dónde vienes y seguimos desde ahí.",
     metaTitle: "Rompe tu techo de nivel — Reparto en Vilanova",
-    metaDescription: "¿Estancado en tu escuela? El reparto es territorio nuevo entero: disociación, flow e improvisación. Vilanova.",
+    metaDescription:
+      "¿Estancado en tu escuela anterior? El reparto es territorio nuevo entero: disociación, flow e improvisación. Clases en Vilanova i la Geltrú.",
   },
 
   "socials-garraf": {
@@ -271,7 +273,8 @@ export const nivel: Record<string, CampanaDolorContent> = {
     ],
     cierreEmocional: "Tu comunidad de nivel no tiene por qué estar a una hora de coche. Escríbenos y la construimos aquí.",
     metaTitle: "Comunidad de baile de nivel en el Garraf",
-    metaDescription: "Deja de peregrinar a Barcelona: grupo de nivel, socials y comunidad en Vilanova i la Geltrú.",
+    metaDescription:
+      "Deja de peregrinar a Barcelona: grupo con recorrido real, socials y comunidad de baile en Vilanova i la Geltrú, en pleno Garraf.",
   },
 
   "calidad-profes": {
@@ -360,7 +363,8 @@ export const nivel: Record<string, CampanaDolorContent> = {
     ],
     cierreEmocional: "No tienes por qué fiarte a ciegas. Ven, prueba y júzgalo con tu propio cuerpo.",
     metaTitle: "Profes a tu altura, técnica de verdad — Vilanova",
-    metaDescription: "Técnica con fundamento, no coreografía para reels. Ven a la clase de prueba y júzgalo con tu criterio.",
+    metaDescription:
+      "Formación técnica con fundamento, no coreografía para reels: se nota en tu cuerpo. Ven a la clase de prueba en Vilanova y júzgalo tú.",
   },
 
   estilos: {
@@ -447,7 +451,8 @@ export const nivel: Record<string, CampanaDolorContent> = {
     ],
     cierreEmocional: "Si sabes distinguir un reparto bien dado, ven a comprobarlo. Escríbenos y te contamos los horarios.",
     metaTitle: "Reparto y salsa cubana real en Vilanova",
-    metaDescription: "El código auténtico del reparto y el casino, cada semana y cerca de casa. No la versión light. Vilanova.",
+    metaDescription:
+      "El código auténtico del reparto y el casino, con su técnica y su música propias. No la versión light. Clases cada semana en Vilanova.",
   },
 
   "practicar-regular": {
@@ -535,6 +540,7 @@ export const nivel: Record<string, CampanaDolorContent> = {
     ],
     cierreEmocional: "El progreso real viene de la regularidad, no de la clase suelta ocasional. Empieza tu cita semanal aquí.",
     metaTitle: "Practica baile de forma regular — Vilanova",
-    metaDescription: "Deja el patrón de workshops sueltos: grupo fijo semanal de tu nivel en Vilanova i la Geltrú.",
+    metaDescription:
+      "Deja los workshops sueltos: una cita semanal fija con tu grupo de nivel para que el progreso no dependa de tu memoria. Salsa en Vilanova.",
   },
 };

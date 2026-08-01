@@ -141,6 +141,32 @@ export function LeadForm({
         </div>
       )}
 
+      {/* Consentimiento RGPD (art. 13): obligatorio, nunca premarcado. */}
+      {/* min-h-11 (44px): objetivo táctil aunque el texto quepa en dos líneas. */}
+      <label className="flex min-h-11 cursor-pointer items-start gap-3 py-1">
+        <input
+          type="checkbox"
+          name="consentimiento"
+          value="on"
+          required
+          className="accent-neon mt-0.5 h-4 w-4 shrink-0"
+        />
+        <span className="font-body text-text-muted text-[13px] leading-snug">
+          He leído y acepto la{" "}
+          <a
+            href="/privacidad"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-neon font-semibold underline"
+          >
+            política de privacidad
+          </a>{" "}
+          y el tratamiento de mis datos para gestionar mi solicitud y recibir información de NEXUS
+          VNG.
+        </span>
+      </label>
+      {state.errors?.consentimiento && <p className={ERR}>{state.errors.consentimiento[0]}</p>}
+
       {state.status === "error" && state.message && (
         <p role="alert" className="rounded-sm border border-neon/30 bg-neon/5 px-4 py-3 font-body text-sm text-neon">
           {state.message}

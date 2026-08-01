@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getCampana, listCampanaParams } from "@/content/campanas";
+import { ogImages } from "@/lib/seo";
 import { CampanaHero } from "@/components/campanas/CampanaHero";
 import { CampanaAgitacion } from "@/components/campanas/CampanaAgitacion";
 import { AntesDespues } from "@/components/campanas/AntesDespues";
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     // Canónica propia OBLIGATORIA: sin ella heredan la del layout raíz ("/") y
     // Google descartaría las 30 landings en favor de la home.
     alternates: { canonical: `/l/${icp}/${dolor}` },
-    openGraph: { title: c.metaTitle, description: c.metaDescription },
+    openGraph: { title: c.metaTitle, description: c.metaDescription, images: ogImages },
   };
 }
 

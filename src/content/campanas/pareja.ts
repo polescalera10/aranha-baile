@@ -90,8 +90,9 @@ export const pareja: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "Dentro de un año seréis la pareja que baila o la que sigue en el sofá. Se decide con un mensaje.",
-    metaTitle: "Un plan de pareja distinto — Salsa cubana en Vilanova",
-    metaDescription: "Cambiad cena y serie por un plan que os saque del piloto automático. Salsa en pareja en Vilanova i la Geltrú.",
+    metaTitle: "Un plan de pareja distinto — Salsa en Vilanova",
+    metaDescription:
+      "Cambiad la cena y la serie por un plan semanal que es solo vuestro: salsa cubana en pareja y desde cero, en Vilanova i la Geltrú.",
   },
 
   "boda": {
@@ -181,8 +182,9 @@ export const pareja: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "Vuestro baile de boda empieza a prepararse hoy. El primer paso es un mensaje.",
-    metaTitle: "Baile para bodas en pareja — Bachata en Vilanova",
-    metaDescription: "Preparad vuestro primer baile desde cero y a vuestro ritmo. Bachata para bodas en Vilanova i la Geltrú.",
+    metaTitle: "Baile para bodas en pareja — Bachata, Vilanova",
+    metaDescription:
+      "Preparad vuestro primer baile desde cero y a vuestro ritmo, sin experiencia previa. Clases de bachata para bodas en Vilanova i la Geltrú.",
   },
 
   "uno-no-sirve": {
@@ -267,8 +269,9 @@ export const pareja: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "Nadie \"no sirve\" para esto. Escribid y lo comprobáis juntos.",
-    metaTitle: "\"No sirvo para bailar\" — Bachata en pareja en Vilanova",
-    metaDescription: "La bachata es la favorita de los que se creen negados. Probad juntos, desde cero, en Vilanova i la Geltrú.",
+    metaTitle: "\"No sirvo para bailar\" — Bachata en Vilanova",
+    metaDescription:
+      "Si uno de los dos cree que no sirve para bailar, la bachata es su disciplina: empezáis juntos y desde cero, en Vilanova i la Geltrú.",
   },
 
   "verguenza-fiestas": {
@@ -353,8 +356,9 @@ export const pareja: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "En la próxima boda, cuando suene la primera canción, ya sabréis qué hacer. Empezad hoy.",
-    metaTitle: "Dejad de quedaros sentados — Bachata en Vilanova",
-    metaDescription: "La bachata suena en todas las fiestas: aprended lo justo para no volver a mirar desde la mesa. Vilanova i la Geltrú.",
+    metaTitle: "Dejad de quedaros sentados — Bachata, Vilanova",
+    metaDescription:
+      "La bachata suena en todas las bodas y fiestas: aprended lo justo para no volver a mirar desde la mesa. Clase de prueba en Vilanova.",
   },
 
   "es-para-nosotros": {
@@ -436,8 +440,9 @@ export const pareja: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "Si dudáis si es para vosotros, la forma de saberlo es probar. Escribidnos.",
-    metaTitle: "¿Bailar en pareja es para nosotros? — Salsa en Vilanova",
-    metaDescription: "Nada técnico ni solemne: salsa cubana desde cero para parejas normales. Clase de prueba en Vilanova i la Geltrú.",
+    metaTitle: "¿Es para nosotros? — Salsa en pareja, Vilanova",
+    metaDescription:
+      "No hace falta ser una pareja de baile ni tomárselo en serio: salsa cubana desde cero para parejas normales. Clase de prueba en Vilanova.",
   },
 
   "dos-agendas": {
@@ -519,7 +524,8 @@ export const pareja: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "Encontrar el hueco es más fácil de lo que parece. Contadnos vuestras agendas y lo cuadramos.",
-    metaTitle: "Un plan de pareja que encaja en dos agendas — Vilanova",
-    metaDescription: "Una cita fija cuadrada a vuestra disponibilidad real. Bachata en pareja en Vilanova i la Geltrú.",
+    metaTitle: "Dos agendas, un plan que encaja — Vilanova",
+    metaDescription:
+      "Una cita semanal fija que solo tenéis que cuadrar una vez: el resto lo organizamos nosotros. Bachata en pareja en Vilanova i la Geltrú.",
   },
 };

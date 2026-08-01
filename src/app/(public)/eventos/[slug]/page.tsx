@@ -5,6 +5,7 @@ import { MarkdownRenderer } from "@/components/ui/MarkdownRenderer";
 import { WaLink } from "@/components/ui/WaLink";
 import { getEventoBySlug, getEventoSlugs } from "@/lib/queries/eventos";
 import { JsonLd, eventLd } from "@/components/seo/JsonLd";
+import { ogImages } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     title: `${e.titulo} · Eventos NEXUS VNG`,
     description: descSnippet || undefined,
     alternates: { canonical: `/eventos/${e.slug}` },
-    openGraph: { title: e.titulo, description: descSnippet || undefined },
+    openGraph: { title: e.titulo, description: descSnippet || undefined, images: ogImages },
   };
 }
 

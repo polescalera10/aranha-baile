@@ -89,9 +89,9 @@ export const social: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "El grupo de siempre no va a volver solo. El nuevo te está esperando en la pista.",
-    metaTitle: "Recupera tu plan social — Salsa cubana en Vilanova",
+    metaTitle: "Recupera tu plan social — Salsa en Vilanova",
     metaDescription:
-      "¿Tu grupo de amigos ya no sale? La rueda de casino viene con grupo incluido. Clase de prueba en Vilanova i la Geltrú.",
+      "¿Tu grupo de amigos ya no sale? En la rueda de casino bailas con todo el mundo y el plan se repite cada semana. Clase de prueba en Vilanova.",
   },
 
   "sin-apps": {
@@ -176,7 +176,7 @@ export const social: Record<string, CampanaDolorContent> = {
     cierreEmocional: "Deja el móvil. La gente de verdad está en la pista.",
     metaTitle: "Conoce gente sin apps — Bachata en Vilanova",
     metaDescription:
-      "Cambia las apps y los bares por un plan semanal donde conocer gente de verdad. Clase de prueba de bachata en Vilanova.",
+      "Cambia las apps y los bares por un plan semanal donde conocer gente de verdad: bachata en Vilanova i la Geltrú, con clase de prueba para empezar.",
   },
 
   "vengo-solo": {
@@ -260,9 +260,9 @@ export const social: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "Venir solo/a es como empieza casi todo el mundo aquí. Escríbenos y compruébalo.",
-    metaTitle: "Apúntate solo/a a bailar — Salsa cubana en Vilanova",
+    metaTitle: "Apúntate solo/a — Salsa cubana en Vilanova",
     metaDescription:
-      "No necesitas pareja ni conocidos: en la rueda de casino rotas con todo el grupo. Prueba una clase en Vilanova.",
+      "No necesitas pareja ni venir con nadie: en la rueda de casino rotas con todo el grupo. Prueba una clase de salsa cubana en Vilanova.",
   },
 
   "nuevo-en-vilanova": {
@@ -345,7 +345,8 @@ export const social: Record<string, CampanaDolorContent> = {
     ],
     cierreEmocional: "La vida en Vilanova empieza cuando tienes con quién vivirla. Empieza por aquí.",
     metaTitle: "Nuevo en Vilanova — Haz vida local bailando",
-    metaDescription: "¿Acabas de llegar a Vilanova i la Geltrú? La forma más rápida de hacer vida local: una clase de salsa a la semana.",
+    metaDescription:
+      "¿Acabas de llegar a Vilanova i la Geltrú? Una clase de salsa a la semana es la vía rápida para hacer vida local y conocer gente de la ciudad.",
   },
 
   "otro-finde-perdido": {
@@ -430,7 +431,8 @@ export const social: Record<string, CampanaDolorContent> = {
     ],
     cierreEmocional: "De los próximos 52 findes, tú decides cuántos se parecen al de esta semana. Empieza por un mensaje.",
     metaTitle: "Recupera tu finde — Bachata en Vilanova",
-    metaDescription: "Cambia sofá y móvil por el baile que suena en todas las fiestas. Clase de prueba de bachata en Vilanova.",
+    metaDescription:
+      "Cambia el sofá y el móvil por el baile que suena en todas las fiestas: una cita fija cada semana. Clase de prueba de bachata en Vilanova.",
   },
 
   "gym-solitario": {
@@ -512,7 +514,8 @@ export const social: Record<string, CampanaDolorContent> = {
       },
     ],
     cierreEmocional: "Cambia el silencio entre máquinas por un grupo que se alegra de verte llegar.",
-    metaTitle: "Del gimnasio solitario a una comunidad — Reggaeton en Vilanova",
-    metaDescription: "El mejor cardio de la semana, en grupo y con música. Prueba una clase de reggaeton en Vilanova i la Geltrú.",
+    metaTitle: "Sal del gym solitario — Reggaeton en Vilanova",
+    metaDescription:
+      "Entrenar con los auriculares puestos y salir sin hablar con nadie tiene alternativa: el mejor cardio de la semana, en grupo. Reggaeton en Vilanova.",
   },
 };

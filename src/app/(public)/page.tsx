@@ -1,5 +1,7 @@
 import { Hero } from "@/components/landing/Hero";
+import { IntroLocal } from "@/components/landing/IntroLocal";
 import { ParaTi } from "@/components/landing/ParaTi";
+import { PuntoDePartida } from "@/components/landing/PuntoDePartida";
 import { Experiencia } from "@/components/landing/Experiencia";
 import { Modalidades } from "@/components/landing/Modalidades";
 // TODO: reactivar <Comunidad /> cuando haya fotos reales, reseñas de Google y nota media.
@@ -23,6 +25,7 @@ export default async function HomePage() {
   return (
     <main>
       <Hero />
+      <IntroLocal />
       <ParaTi />
       <Experiencia />
       <Modalidades modalidades={modalidades} />
@@ -38,6 +41,7 @@ export default async function HomePage() {
         </div>
       </section>
       <ComoEmpezar />
+      <PuntoDePartida />
       <Faq />
       <CtaFinal />
       <JsonLd data={faqLd(faqs)} />

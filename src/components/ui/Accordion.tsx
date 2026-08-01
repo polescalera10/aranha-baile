@@ -1,57 +1,36 @@
-"use client";
-
-import { useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-
 export type QA = { q: string; a: string };
 
+/**
+ * Acordeón de preguntas frecuentes.
+ *
+ * Implementado con `<details>` nativo A PROPÓSITO. La versión anterior era un
+ * componente cliente que solo montaba la respuesta al abrir: el texto no
+ * existía en el HTML servido, así que ni Google ni el buscador del navegador
+ * lo veían. Afectaba a la home, a /socio-fundador y a las 30 landings de
+ * campaña — cientos de palabras de contenido real invisibles.
+ *
+ * De paso desaparece el JavaScript: `<details>` ya es accesible por teclado y
+ * anuncia el estado expandido/colapsado sin `aria-expanded`.
+ */
 export function Accordion({ items }: { items: QA[] }) {
-  const [open, setOpen] = useState<number | null>(null);
-  const reduce = useReducedMotion();
-
   return (
     <div>
-      {items.map((item, i) => {
-        const isOpen = open === i;
-        return (
-          <div key={i} className="border-b border-text-strong/12">
-            <h3 className="m-0">
-              <button
-                type="button"
-                aria-expanded={isOpen}
-                onClick={() => setOpen(isOpen ? null : i)}
-                className="flex w-full cursor-pointer items-center justify-between gap-3 border-0 bg-transparent py-5 text-left"
-              >
-                <span className="font-body text-[clamp(16px,1.6vw,18px)] font-semibold normal-case tracking-normal text-text-strong">
-                  {item.q}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="flex-none font-body text-[28px] leading-none text-neon transition-transform duration-300"
-                  style={{ transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}
-                >
-                  +
-                </span>
-              </button>
+      {items.map((item) => (
+        <details key={item.q} className="group border-text-strong/12 border-b">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-5 text-left [&::-webkit-details-marker]:hidden">
+            <h3 className="font-body text-text-strong m-0 text-[clamp(16px,1.6vw,18px)] font-semibold tracking-normal normal-case">
+              {item.q}
             </h3>
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  initial={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
-                  animate={reduce ? { opacity: 1 } : { height: "auto", opacity: 1 }}
-                  exit={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
-                  transition={{ duration: 0.32, ease: "easeInOut" }}
-                  className="overflow-hidden"
-                >
-                  <p className="pb-[18px] font-body text-base leading-relaxed text-text-muted">
-                    {item.a}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        );
-      })}
+            <span
+              aria-hidden="true"
+              className="font-body text-neon flex-none text-[28px] leading-none transition-transform duration-300 group-open:rotate-45"
+            >
+              +
+            </span>
+          </summary>
+          <p className="font-body text-text-muted pb-[18px] text-base leading-relaxed">{item.a}</p>
+        </details>
+      ))}
     </div>
   );
 }

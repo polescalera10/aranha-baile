@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SupportPage } from "@/components/layout/SupportPage";
 import { WaLink } from "@/components/ui/WaLink";
 
 export const metadata: Metadata = {
-  title: "Profesores",
+  title: "Profesores de baile en Vilanova i la Geltrú",
   description:
-    "El equipo de NEXUS VNG: profesores en formación constante que cuidan cada detalle y te acompañan desde el primer día.",
+    "Cómo enseñamos en NEXUS VNG: grupos por nivel real, corrección individual en cada clase y parejas de profesores en los grupos de baile en pareja.",
   alternates: { canonical: "/profesores" },
 };
 
 /*
   TODO: fichas reales del equipo — sustituir por consulta a profiles
   (role = 'profesor') o por datos estáticos cuando Pol confirme nombres,
-  fotos y disciplinas. Grid original comentado al final del archivo.
+  fotos, disciplinas y trayectoria. Grid original comentado al final del
+  archivo. Mientras no existan esos datos, esta página habla del MÉTODO —
+  nada de bios, fotos ni currículos inventados.
 */
 
 export default function ProfesoresPage() {
@@ -20,33 +23,100 @@ export default function ProfesoresPage() {
     <SupportPage
       eyebrow="Quién te acompaña"
       title="El equipo"
-      intro="Profesores en formación constante que corrigen con cariño y adaptan la clase a tu nivel."
+      intro="Profesores en formación constante que corrigen con cariño y adaptan la clase a tu nivel. Así es como damos clase — y cómo notarás la diferencia desde el primer día."
     >
-      <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-        <div className="space-y-6">
-          <h2 className="font-display text-3xl text-text-strong">
-            Aquí te conocen por tu nombre
-          </h2>
-          <p className="max-w-[65ch] font-body text-base leading-relaxed text-text-body">
-            No te suelta nadie. Nuestro equipo cuida el detalle de cada movimiento, corrige con
-            cariño y adapta la clase a tu nivel — desde el primer día. Muy pronto podrás conocer
-            aquí a cada profesor con nombre, cara y disciplina.
-          </p>
-          <p className="max-w-[65ch] font-body text-base leading-relaxed text-text-body">
-            Mientras tanto, la mejor forma de conocerlos es en persona: reserva tu clase de prueba
-            y ponles cara bailando.
-          </p>
-        </div>
+      <div className="space-y-[clamp(48px,7vw,80px)]">
+        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
+          <div className="space-y-10">
+            <section className="space-y-4">
+              <h2 className="font-display text-text-strong text-3xl">
+                Aquí te conocen por tu nombre
+              </h2>
+              <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
+                No te suelta nadie. Nuestro equipo cuida el detalle de cada movimiento, corrige con
+                cariño y adapta la clase a tu nivel — desde el primer día. En una escuela pequeña
+                eso no es un eslogan: es lo único que se puede hacer cuando el grupo cabe en una
+                sala y el profe te ve entrar.
+              </p>
+            </section>
 
-        <aside className="h-fit rounded-lg border border-white/8 bg-bg-panel p-6 shadow-card">
-          <h2 className="font-display text-2xl text-text-strong">Conócelos bailando</h2>
-          <p className="mt-2 font-body text-[15px] text-text-muted">
-            Escríbenos y reserva tu primera clase de prueba con el grupo que mejor encaje contigo.
-          </p>
-          <WaLink origin="nav" variant="red" className="mt-4 w-full py-[15px]">
-            Reservar clase de prueba
-          </WaLink>
-        </aside>
+            <section className="space-y-4">
+              <h2 className="font-display text-text-strong text-3xl">Grupos por nivel real</h2>
+              <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
+                No mezclamos a quien lleva tres años con quien viene por primera vez. Cada
+                disciplina se abre por niveles —desde cero absoluto, iniciación, intermedio— y en
+                el horario cada grupo lleva el suyo marcado. Eso cambia por completo la clase: nadie
+                frena a nadie y nadie se queda mirando cómo los demás hacen algo que aún no toca.
+              </p>
+              <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
+                Si al probar vemos que el grupo se te queda corto o largo, se ajusta. Preferimos
+                moverte de grupo a que te aburras o te agobies.
+              </p>
+            </section>
+
+            <section className="space-y-4">
+              <h2 className="font-display text-text-strong text-3xl">
+                Corrección individual, no una clase dirigida
+              </h2>
+              <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
+                La diferencia entre repetir un paso y aprenderlo está en que alguien te diga qué
+                estás haciendo distinto. En clase se explica, se practica y se pasa por las parejas
+                corrigiendo: peso, postura, tiempo. Varias clases se imparten con dos profesores a
+                la vez, precisamente para que en el trabajo en pareja haya corrección por los dos
+                lados.
+              </p>
+              <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
+                Y se rota. No hace falta venir acompañado: bailas con todo el grupo, que es la única
+                forma real de aprender a guiar y a seguir con gente distinta.
+              </p>
+            </section>
+
+            <section className="space-y-4">
+              <h2 className="font-display text-text-strong text-3xl">
+                Quién imparte cada clase
+              </h2>
+              <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
+                El nombre del profe de cada grupo está publicado en la parrilla de la temporada,
+                junto al estilo y la franja horaria: así sabes con quién vas a bailar antes de
+                escribirnos.
+              </p>
+              <p className="font-body text-text-muted max-w-[65ch] text-[15px] leading-relaxed">
+                <Link
+                  href="/horarios"
+                  className="text-neon font-semibold no-underline hover:underline"
+                >
+                  Ver el horario con los profes de cada grupo →
+                </Link>
+              </p>
+              <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
+                Las fichas completas del equipo —con foto, disciplinas y trayectoria— llegarán a
+                esta página en cuanto las tengamos listas. Mientras tanto, la mejor forma de
+                conocerlos es en persona: reserva tu clase de prueba y ponles cara bailando.
+              </p>
+            </section>
+          </div>
+
+          <aside className="bg-bg-panel shadow-card h-fit rounded-lg border border-white/8 p-6 lg:sticky lg:top-24">
+            <h2 className="font-display text-text-strong text-2xl">Conócelos bailando</h2>
+            <p className="font-body text-text-muted mt-2 text-[15px]">
+              Escríbenos y reserva tu primera clase de prueba con el grupo que mejor encaje contigo.
+            </p>
+            <WaLink origin="nav" variant="red" className="mt-4 w-full py-[15px]">
+              Reservar clase de prueba
+            </WaLink>
+            <p className="font-body text-text-faint mt-3 text-[13px]">
+              ¿Prefieres verlo antes?{" "}
+              <Link href="/clases" className="text-text-muted no-underline hover:underline">
+                Mira las disciplinas
+              </Link>{" "}
+              o{" "}
+              <Link href="/horarios" className="text-text-muted no-underline hover:underline">
+                la parrilla de la temporada
+              </Link>
+              .
+            </p>
+          </aside>
+        </div>
       </div>
 
       {/*

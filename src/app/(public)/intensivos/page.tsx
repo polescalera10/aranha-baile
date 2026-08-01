@@ -3,14 +3,110 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { WaLink } from "@/components/ui/WaLink";
 import { InterestLeadForm } from "@/components/forms/InterestLeadForm";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { site } from "@/lib/site";
 import { intensivos, intensivosGrupos } from "@/content/intensivos";
 
 export const metadata: Metadata = {
-  title: "Intensivos de Agosto",
+  // ≤60 caracteres contando el sufijo " · NEXUS VNG" de la plantilla del layout.
+  title: "Intensivos de baile en Vilanova i la Geltrú",
   description:
-    "8 intensivos de baile en agosto en Vilanova i la Geltrú: salsa, bachata, reparto, heels y más. Dos semanas, cada día un estilo. Reserva tu plaza.",
+    "Ocho intensivos de baile en agosto de 2026 en Vilanova i la Geltrú: salsa, bachata, reparto, heels y más. Dos semanas, un estilo cada día.",
   alternates: { canonical: "/intensivos" },
 };
+
+/** Año de la edición vigente de los intensivos (cartel de agosto). */
+const ANYO = 2026;
+
+/**
+ * Península en agosto = horario de verano (CEST). Todas las sesiones caen en
+ * agosto, así que el desfase es constante; si algún día hubiera intensivos de
+ * invierno habría que derivarlo del mes.
+ */
+const OFFSET = "+02:00";
+
+const MESES: Record<string, string> = {
+  enero: "01",
+  febrero: "02",
+  marzo: "03",
+  abril: "04",
+  mayo: "05",
+  junio: "06",
+  julio: "07",
+  agosto: "08",
+  septiembre: "09",
+  octubre: "10",
+  noviembre: "11",
+  diciembre: "12",
+};
+
+/**
+ * "17 agosto" + "19:30 – 21:30" → fechas ISO reales de inicio y fin.
+ * Devuelve `null` si el dato no se puede interpretar: preferimos no emitir
+ * schema antes que emitir una fecha inventada.
+ */
+function fechasSesion(fecha: string, hora: string): { start: string; end: string } | null {
+  const [diaTxt = "", mesTxt = ""] = fecha.trim().split(/\s+/);
+  const mes = MESES[mesTxt.toLowerCase()];
+  const dia = Number(diaTxt);
+  if (!mes || !Number.isFinite(dia)) return null;
+
+  const [inicio, fin] = hora.split(/[–-]/).map((h) => h.trim());
+  if (!inicio || !fin) return null;
+
+  const dd = String(dia).padStart(2, "0");
+  return {
+    start: `${ANYO}-${mes}-${dd}T${inicio}:00${OFFSET}`,
+    end: `${ANYO}-${mes}-${dd}T${fin}:00${OFFSET}`,
+  };
+}
+
+/** Lugar común a todas las sesiones (NAP único de lib/site). */
+const lugar = {
+  "@type": "Place",
+  name: `${site.name} · ${site.nap.venue}`,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.nap.streetAddress || undefined,
+    addressLocality: site.nap.addressLocality,
+    addressRegion: site.nap.addressRegion,
+    postalCode: site.nap.postalCode,
+    addressCountry: site.nap.addressCountry,
+  },
+};
+
+/**
+ * Un `Event` por sesión con su `startDate` real. Son ocho fechas concretas y
+ * hasta ahora no se declaraba ninguna. Sin precio: los intensivos no tienen
+ * tarifa publicada y no se inventa.
+ */
+function intensivosLd() {
+  return {
+    "@context": "https://schema.org",
+    "@graph": intensivos.flatMap((semana) =>
+      semana.sesiones.flatMap((s) => {
+        const fechas = fechasSesion(s.fecha, s.hora);
+        if (!fechas) return [];
+        return [
+          {
+            "@type": "Event",
+            name: `Intensivo de ${s.estilo}${s.nivel ? ` · ${s.nivel}` : ""} en Vilanova i la Geltrú`,
+            description: s.desc,
+            startDate: fechas.start,
+            endDate: fechas.end,
+            eventStatus: "https://schema.org/EventScheduled",
+            eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+            inLanguage: "es-ES",
+            url: `${site.url}/intensivos`,
+            location: lugar,
+            organizer: { "@type": "DanceSchool", name: site.name, url: site.url },
+          },
+        ];
+      }),
+    ),
+  };
+}
 
 const beneficios = [
   {
@@ -42,15 +138,22 @@ export default function IntensivosPage() {
         <section className="relative overflow-hidden border-b border-white/6 bg-bg-panel pb-[clamp(48px,8vw,88px)] pt-[clamp(48px,8vw,80px)]">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_100%_0%,rgba(48,228,236,.12),transparent_70%)]" />
           <div className="container-nexus relative z-[1]">
+            <Breadcrumbs
+              items={[
+                { name: "Inicio", path: "/" },
+                { name: "Intensivos", path: "/intensivos" },
+              ]}
+            />
             <Reveal
               as="span"
-              className="block font-body text-xs font-bold uppercase tracking-[0.18em] text-neon-mint"
+              className="mt-5 block font-body text-xs font-bold uppercase tracking-[0.18em] text-neon-mint"
             >
               Nexus VNG · Vilanova i la Geltrú
             </Reveal>
             <Reveal delay={0.06}>
-              <h1 className="mt-3 max-w-[16ch] text-balance font-display text-[clamp(44px,8vw,88px)] leading-[0.92]">
-                Intensivos <span className="text-gradient-nexus">Agosto</span>
+              <h1 className="mt-3 max-w-[19ch] text-balance font-display text-[clamp(38px,6.5vw,76px)] leading-[0.94]">
+                Intensivos de baile <span className="text-gradient-nexus">agosto 2026</span> en
+                Vilanova i la Geltrú
               </h1>
             </Reveal>
             <Reveal delay={0.12}>
@@ -196,6 +299,8 @@ export default function IntensivosPage() {
             </Reveal>
           </div>
         </section>
+
+        <JsonLd data={intensivosLd()} />
       </main>
     </>
   );

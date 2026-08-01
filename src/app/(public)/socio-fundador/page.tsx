@@ -7,24 +7,58 @@ import { Countdown } from "@/components/ui/Countdown";
 import { WaLink } from "@/components/ui/WaLink";
 import { InterestLeadForm } from "@/components/forms/InterestLeadForm";
 import { JsonLd, faqLd } from "@/components/seo/JsonLd";
+import { ogImages } from "@/lib/seo";
+import { site } from "@/lib/site";
 import { founding } from "@/content/landing";
 import { disciplinas, numeros, plazas, socioFundador as c } from "@/content/socio-fundador";
 
 export const metadata: Metadata = {
   title: "Socio Fundador · 10 plazas a 85 €/mes",
+  // 150–160 caracteres: por encima, Google corta la descripción en el SERP.
   description:
-    "Solo 10 plazas de socio fundador en NEXUS VNG (Vilanova i la Geltrú): las 8 disciplinas regulares de tu nivel o inferior, de lunes a viernes, por 85 €/mes con la cuota bloqueada mientras sigas de alta.",
+    "Socio fundador en NEXUS VNG (Vilanova i la Geltrú): todas las disciplinas regulares de tu nivel, de lunes a viernes, por 85 €/mes con la cuota bloqueada.",
   alternates: { canonical: "/socio-fundador" },
   openGraph: {
     title: "Socio Fundador de NEXUS VNG · 10 plazas a 85 €/mes",
     description:
       "Baila todos los días: las 8 disciplinas regulares de tu nivel o inferior por 85 €/mes, con la cuota bloqueada. Solo 10 plazas.",
     url: "/socio-fundador",
+    images: ogImages,
   },
 };
 
 /** Barra de plazas: mínimo visual del 6 % para que la barra se vea aunque esté a 0. */
 const tomadasPct = Math.max(6, Math.round(((plazas.total - plazas.left) / plazas.total) * 100));
+
+/**
+ * `Offer` de la plaza fundadora: el precio (85 €/mes) y la disponibilidad que
+ * ya se anuncian en pantalla, declarados también en schema.org. Todos los
+ * valores salen de `founding`/`precios`, no se escriben a mano: si mañana
+ * cambia la cuota o se agotan las plazas, el schema cambia solo.
+ */
+function ofertaFundadoraLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Offer",
+    name: "Plaza de socio fundador · NEXUS VNG",
+    description: `Acceso a las ${numeros.disciplinas} disciplinas regulares de tu nivel o inferior, de lunes a viernes, con la cuota bloqueada mientras sigas de alta.`,
+    url: `${site.url}/socio-fundador`,
+    category: "Subscription",
+    price: numeros.cuota,
+    priceCurrency: "EUR",
+    priceSpecification: {
+      "@type": "UnitPriceSpecification",
+      price: numeros.cuota,
+      priceCurrency: "EUR",
+      // Cuota mensual: una unidad de referencia = 1 mes (unitCode UN/CEFACT "MON").
+      referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" },
+    },
+    availability: plazas.left > 0 ? "https://schema.org/InStock" : "https://schema.org/SoldOut",
+    inventoryLevel: { "@type": "QuantitativeValue", value: plazas.left, maxValue: plazas.total },
+    areaServed: { "@type": "City", name: site.nap.addressLocality },
+    offeredBy: { "@type": "DanceSchool", name: site.name, url: site.url },
+  };
+}
 
 export default function SocioFundadorPage() {
   return (
@@ -491,6 +525,7 @@ export default function SocioFundadorPage() {
         </section>
 
         <JsonLd data={faqLd([...c.faqs])} />
+        <JsonLd data={ofertaFundadoraLd()} />
       </main>
     </>
   );

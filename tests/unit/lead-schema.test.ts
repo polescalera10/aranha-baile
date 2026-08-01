@@ -9,13 +9,30 @@ const validLead = {
   modalidad_interes: "",
   origen: "clase-prueba",
   mensaje: "",
+  consentimiento: "on",
   website: "",
 };
 
 describe("leadSchema", () => {
-  it("acepta el mínimo real: nombre + teléfono + origen", () => {
+  it("acepta el mínimo real: nombre + teléfono + origen + consentimiento", () => {
     const parsed = leadSchema.safeParse(validLead);
     expect(parsed.success).toBe(true);
+  });
+
+  it("exige el consentimiento RGPD explícito", () => {
+    for (const consentimiento of ["", undefined, "off", "false", true]) {
+      const parsed = leadSchema.safeParse({ ...validLead, consentimiento });
+      expect(parsed.success).toBe(false);
+      expect(parsed.error?.flatten().fieldErrors.consentimiento?.[0]).toBe(
+        "Debes aceptar el tratamiento de datos para continuar",
+      );
+    }
+  });
+
+  it("acepta el lead cuando la casilla de consentimiento viene marcada", () => {
+    const parsed = leadSchema.safeParse({ ...validLead, consentimiento: "on" });
+    expect(parsed.success).toBe(true);
+    expect(parsed.data?.consentimiento).toBe("on");
   });
 
   it("recorta espacios del nombre y del teléfono", () => {

@@ -12,6 +12,11 @@ export const leadOrigenes = [
   "socio-fundador",
 ] as const;
 
+/**
+ * Lead genérico (clase de prueba, founding, contacto, modalidades, campañas).
+ * `consentimiento`: casilla RGPD obligatoria (art. 13 RGPD / LSSI-CE). Se valida
+ * también en servidor: no basta con el `required` del HTML.
+ */
 export const leadSchema = z.object({
   nombre: z
     .string()
@@ -33,6 +38,9 @@ export const leadSchema = z.object({
   modalidad_interes: z.string().trim().max(80).optional().or(z.literal("")),
   origen: z.enum(leadOrigenes),
   mensaje: z.string().trim().max(1000, "Mensaje demasiado largo").optional().or(z.literal("")),
+  consentimiento: z.literal("on", {
+    errorMap: () => ({ message: "Debes aceptar el tratamiento de datos para continuar" }),
+  }),
   // Honeypot anti-spam: debe llegar vacío.
   website: z.string().max(0).optional(),
 });

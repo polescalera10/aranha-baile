@@ -14,7 +14,8 @@ export type LeadFormState = {
 
 /**
  * Server Action de los formularios públicos (clase de prueba, founding, contacto).
- * Flujo: validar (Zod) → insertar en `leads` → POST al webhook n8n → feedback.
+ * Flujo: validar (Zod, incluido el consentimiento RGPD) → insertar en `leads` →
+ * POST al webhook n8n → feedback.
  * El webhook n8n NUNCA se expone al cliente: se llama desde aquí, en el servidor.
  */
 export async function submitLead(
@@ -28,6 +29,7 @@ export async function submitLead(
     modalidad_interes: formData.get("modalidad_interes") ?? "",
     origen: formData.get("origen"),
     mensaje: formData.get("mensaje") ?? "",
+    consentimiento: formData.get("consentimiento") ?? "",
     website: formData.get("website") ?? "",
   };
 
@@ -45,7 +47,9 @@ export async function submitLead(
     return { status: "success", message: "¡Gracias! Te escribimos enseguida." };
   }
 
-  const { website: _hp, ...lead } = parsed.data;
+  // `consentimiento` solo se valida: no hay columna para él en `leads` (mismo
+  // criterio que `submitInterestLead`); viaja a n8n como booleano.
+  const { website: _hp, consentimiento: _c, ...lead } = parsed.data;
 
   // 1) Persistir el lead (RLS permite insert anónimo en `leads`).
   const supabase = await createClient();
@@ -67,9 +71,11 @@ export async function submitLead(
   }
 
   // 2) Notificar a n8n (email + WhatsApp). No bloquea el éxito del lead.
-  await postToN8n({ ...lead, recibido_en: new Date().toISOString() }).catch((e) =>
-    console.error("[submitLead] webhook n8n falló:", e),
-  );
+  await postToN8n({
+    ...lead,
+    consentimiento: true,
+    recibido_en: new Date().toISOString(),
+  }).catch((e) => console.error("[submitLead] webhook n8n falló:", e));
 
   return {
     status: "success",

@@ -11,7 +11,14 @@ const FIELD =
 const LABEL = "mb-1.5 block font-body text-[13px] font-semibold text-text-body";
 const ERR = "mt-1 font-body text-xs font-semibold text-neon";
 
-export type InterestOption = { value: string; label: string; hint?: string };
+export type InterestOption = {
+  value: string;
+  label: string;
+  /** Segunda línea destacada (día y hora de la clase). */
+  meta?: string;
+  /** Tercera línea en gris (nivel, profesores…). */
+  hint?: string;
+};
 export type InterestGroup = { label: string; options: InterestOption[] };
 
 function SubmitButton({ label }: { label: string }) {
@@ -28,19 +35,29 @@ function SubmitButton({ label }: { label: string }) {
 }
 
 /**
- * Formulario de captación de las landings de INTENSIVOS y CURSO REGULAR.
- * Recoge nombre completo, email, teléfono, uno o varios intereses (checkboxes,
- * se envían como `intereses[]` y se guardan como tags para marketing segmentado)
- * y el consentimiento RGPD obligatorio. Escribe en Supabase vía Server Action.
+ * Formulario de captación de las landings de INTENSIVOS, CURSO REGULAR y
+ * SOCIO FUNDADOR. Recoge nombre completo, email, teléfono, uno o varios
+ * intereses (checkboxes, se envían como `intereses[]` y se guardan como tags
+ * para marketing segmentado) y el consentimiento RGPD obligatorio. Escribe en
+ * Supabase vía Server Action.
+ *
+ * En el curso regular cada casilla es una CLASE concreta (estilo + día + hora),
+ * no un estilo genérico: así el lead llega al CRM con el grupo ya identificado.
  */
 export function InterestLeadForm({
   origen,
   groups,
   submitLabel = "Reservar mi plaza",
+  interesesLabel = "¿Qué te interesa? Marca todo lo que quieras",
+  interesesHelp,
 }: {
-  origen: "intensivos" | "curso-regular";
+  origen: "intensivos" | "curso-regular" | "socio-fundador";
   groups: InterestGroup[];
   submitLabel?: string;
+  /** Texto del `legend` del bloque de casillas. */
+  interesesLabel?: string;
+  /** Ayuda opcional bajo el `legend` (p. ej. cómo elegir el nivel). */
+  interesesHelp?: string;
 }) {
   const [state, formAction] = useActionState(submitInterestLead, initial);
 
@@ -119,18 +136,22 @@ export function InterestLeadForm({
       </div>
 
       <fieldset>
-        <legend className={LABEL}>¿Qué te interesa? Marca todo lo que quieras</legend>
-        <div className="mt-1 space-y-4">
+        <legend className={LABEL}>{interesesLabel}</legend>
+        {interesesHelp && (
+          <p className="mb-3 font-body text-[13px] leading-snug text-text-muted">{interesesHelp}</p>
+        )}
+        <div className="mt-1 space-y-5">
           {groups.map((group) => (
             <div key={group.label}>
               <p className="mb-2 font-body text-[12px] font-bold uppercase tracking-[0.14em] text-neon-mint">
                 {group.label}
               </p>
-              <div className="grid gap-2 sm:grid-cols-2">
+              {/* minmax(min(200px,100%),1fr): a 320px la tarjeta no desborda. */}
+              <div className="grid gap-2 [grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))]">
                 {group.options.map((opt) => (
                   <label
                     key={opt.value}
-                    className="flex cursor-pointer items-start gap-3 rounded-sm border border-white/10 bg-bg-elevated px-3 py-2.5 transition-colors hover:border-neon/40 has-[:checked]:border-neon has-[:checked]:bg-neon/5"
+                    className="flex min-h-12 cursor-pointer items-start gap-3 rounded-sm border border-white/10 bg-bg-elevated px-3 py-2.5 transition-colors hover:border-neon/40 has-[:checked]:border-neon has-[:checked]:bg-neon/5"
                   >
                     <input
                       type="checkbox"
@@ -139,7 +160,12 @@ export function InterestLeadForm({
                       className="mt-0.5 h-4 w-4 shrink-0 accent-neon"
                     />
                     <span className="font-body text-[14px] leading-tight text-text-strong">
-                      {opt.label}
+                      <span className="font-semibold">{opt.label}</span>
+                      {opt.meta && (
+                        <span className="mt-0.5 block font-normal text-[12.5px] text-text-body">
+                          {opt.meta}
+                        </span>
+                      )}
                       {opt.hint && (
                         <span className="mt-0.5 block font-normal text-[12px] text-text-muted">
                           {opt.hint}

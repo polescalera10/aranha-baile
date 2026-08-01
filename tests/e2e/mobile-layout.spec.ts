@@ -6,7 +6,16 @@ import { expect, test, type Page } from "@playwright/test";
  * desborda ahí, desborda en todas partes.
  */
 
-const PAGES = ["/", "/clases", "/intensivos", "/profesores", "/eventos", "/horarios", "/faq"];
+const PAGES = [
+  "/",
+  "/clases",
+  "/socio-fundador",
+  "/intensivos",
+  "/profesores",
+  "/eventos",
+  "/horarios",
+  "/faq",
+];
 
 /** Diferencia entre el ancho del documento y el del viewport. */
 async function horizontalOverflow(page: Page) {

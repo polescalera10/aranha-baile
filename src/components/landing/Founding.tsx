@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { Countdown } from "@/components/ui/Countdown";
 import { WaLink } from "@/components/ui/WaLink";
@@ -92,9 +93,22 @@ export function Founding() {
               {founding.urgencyNote}
             </p>
 
-            <WaLink origin="founding" variant="gold" className="mt-6 w-full py-[18px] text-base">
+            <Link
+              href="/socio-fundador"
+              className="mt-6 inline-flex w-full min-h-12 items-center justify-center rounded-md bg-neon-lime px-6 py-[18px] font-body text-base font-bold text-ink no-underline shadow-glow transition-transform duration-200 hover:-translate-y-[3px] active:translate-y-0"
+            >
               {founding.cta}
-            </WaLink>
+            </Link>
+            <div className="mt-3 flex justify-center">
+              <WaLink
+                origin="founding"
+                variant="outline"
+                showGlyph={false}
+                className="min-h-11 px-5 py-2.5 text-[13px]"
+              >
+                O pregúntanos por WhatsApp
+              </WaLink>
+            </div>
             <p className="mt-3 text-center font-body text-xs text-white/50">{founding.finePrint}</p>
           </Reveal>
 

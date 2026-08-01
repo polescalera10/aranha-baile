@@ -77,8 +77,15 @@ export async function submitLead(
   };
 }
 
+/** Etiqueta legible en el CRM de la landing que convirtió al lead. */
+const LANDING_LABEL: Record<"intensivos" | "curso-regular" | "socio-fundador", string> = {
+  intensivos: "Intensivos agosto",
+  "curso-regular": "Curso regular",
+  "socio-fundador": "Socio fundador",
+};
+
 /**
- * Server Action de las landings de INTENSIVOS y CURSO REGULAR.
+ * Server Action de las landings de INTENSIVOS, CURSO REGULAR y SOCIO FUNDADOR.
  * Igual que `submitLead` pero con email obligatorio, consentimiento RGPD y un
  * array de `intereses` (etiquetas para marketing segmentado). Los intereses se
  * guardan como `text[]` en `leads` y se envían a n8n también en texto plano.
@@ -123,7 +130,7 @@ export async function submitInterestLead(
     intereses: lead.intereses,
     mensaje: null,
     // Trazabilidad legible en el CRM: qué landing convirtió.
-    modalidad_interes: lead.origen === "intensivos" ? "Intensivos agosto" : "Curso regular",
+    modalidad_interes: LANDING_LABEL[lead.origen],
   });
 
   if (error) {

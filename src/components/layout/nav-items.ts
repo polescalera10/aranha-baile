@@ -8,6 +8,7 @@ export type NavLink = { href: string; label: string };
 /** Nav de la landing (cabecera transparente sobre el hero). */
 export const NAV_LANDING: readonly NavLink[] = [
   { href: "/clases", label: "Clases" },
+  { href: "/socio-fundador", label: "Socio fundador" },
   { href: "/profesores", label: "Profesores" },
   { href: "/eventos", label: "Eventos" },
   { href: "/horarios", label: "Horarios" },
@@ -17,6 +18,7 @@ export const NAV_LANDING: readonly NavLink[] = [
 /** Nav de las páginas de soporte (cabecera sólida). */
 export const NAV_SITE: readonly NavLink[] = [
   { href: "/clases", label: "Clases" },
+  { href: "/socio-fundador", label: "Socio fundador" },
   { href: "/intensivos", label: "Intensivos" },
   { href: "/profesores", label: "Profesores" },
   { href: "/eventos", label: "Eventos" },

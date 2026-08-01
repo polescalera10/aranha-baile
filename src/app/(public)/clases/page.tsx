@@ -225,8 +225,10 @@ export default async function ClasesPage() {
 
             <Reveal>
               <p className="font-body text-[13px] text-text-faint">
-                Grupos desde cero absoluto · sin presión. ¿No ves tu hueco? Escríbenos y lo
-                encontramos.
+                El número indica el nivel: <strong className="text-text-muted">0</strong> desde cero
+                absoluto, <strong className="text-text-muted">1</strong> iniciación,{" "}
+                <strong className="text-text-muted">2</strong> intermedio. ¿No ves tu hueco?
+                Escríbenos y lo encontramos.
               </p>
             </Reveal>
           </div>
@@ -250,8 +252,9 @@ export default async function ClasesPage() {
               </Reveal>
               <Reveal delay={0.06}>
                 <p className="max-w-[52ch] font-body text-base leading-relaxed text-text-muted">
-                  Marca los estilos que te interesan y déjanos tus datos. Te escribimos para
-                  ubicarte en tu grupo por nivel y resolver cualquier duda antes de empezar.
+                  Marca las clases a las que quieres venir —cada casilla lleva su día, su hora y su
+                  nivel— y déjanos tus datos. Te escribimos para confirmar tu grupo y resolver
+                  cualquier duda antes de empezar.
                 </p>
               </Reveal>
               <Reveal delay={0.12}>
@@ -277,6 +280,8 @@ export default async function ClasesPage() {
                 origen="curso-regular"
                 groups={cursoRegularGrupos}
                 submitLabel="Apuntarme al curso"
+                interesesLabel="¿A qué clases quieres venir?"
+                interesesHelp="Marca todas las que quieras. Los números son el nivel: 0 = desde cero, 1 = iniciación, 2 = intermedio. Si no lo tienes claro, marca «Aún no sé mi nivel» y lo vemos juntos."
               />
             </Reveal>
           </div>

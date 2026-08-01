@@ -20,19 +20,19 @@ export function Founding() {
     : 0;
 
   return (
-    <section className="relative overflow-hidden bg-bg-base py-[clamp(70px,10vw,130px)] text-white">
+    <section className="bg-bg-base relative overflow-hidden py-[clamp(70px,10vw,130px)] text-white">
       {/* Halo neón superior (degradado de marca, muy difuminado). */}
       <div className="pointer-events-none absolute -top-[140px] left-1/2 h-[380px] w-[680px] max-w-[120vw] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(113,233,201,.16),transparent_70%)]" />
 
       <div className="container-nexus relative z-[1] max-w-[960px]">
         <Reveal className="mb-10 text-center">
-          <span className="block font-body text-xs font-extrabold uppercase tracking-[0.2em] text-neon-lime">
+          <span className="font-body text-neon-lime block text-xs font-extrabold tracking-[0.2em] uppercase">
             {founding.kicker}
           </span>
-          <h2 className="mt-3.5 text-balance font-display text-[clamp(36px,6vw,64px)] leading-[0.96]">
+          <h2 className="font-display mt-3.5 text-[clamp(36px,6vw,64px)] leading-[0.96] text-balance">
             <span className="text-gradient-nexus">{founding.title}</span>
           </h2>
-          <p className="mx-auto mt-3.5 max-w-[50ch] font-body text-[clamp(16px,1.4vw,18px)] leading-relaxed text-white/72">
+          <p className="font-body mx-auto mt-3.5 max-w-[50ch] text-[clamp(16px,1.4vw,18px)] leading-relaxed text-white/72">
             {founding.subtitle}
           </p>
         </Reveal>
@@ -41,16 +41,16 @@ export function Founding() {
           {/* Columna izquierda: tarjeta de la oferta */}
           <Reveal
             delay={0.1}
-            className="rounded-xl border-[1.5px] border-neon-lime/45 bg-[linear-gradient(180deg,#16161b,#0d0d10)] p-[clamp(24px,4vw,40px)] shadow-glow"
+            className="border-neon-lime/45 shadow-glow rounded-xl border-[1.5px] bg-[linear-gradient(180deg,#16161b,#0d0d10)] p-[clamp(24px,4vw,40px)]"
           >
             <div className="flex justify-center">
-              <span className="rounded-full border border-neon-lime/40 bg-neon-lime/10 px-3.5 py-[7px] font-body text-[11px] font-extrabold uppercase tracking-[0.12em] text-neon-lime">
+              <span className="border-neon-lime/40 bg-neon-lime/10 font-body text-neon-lime rounded-full border px-3.5 py-[7px] text-[11px] font-extrabold tracking-[0.12em] uppercase">
                 {founding.badge}
               </span>
             </div>
 
             <div className="mt-[18px] flex items-baseline justify-center gap-2.5">
-              <span className="font-display text-[clamp(54px,9vw,76px)] leading-none text-neon-mint">
+              <span className="font-display text-neon-mint text-[clamp(54px,9vw,76px)] leading-none">
                 {price}
               </span>
               <span className="font-body text-[17px] text-white/65">/mes</span>
@@ -63,7 +63,7 @@ export function Founding() {
             {/* Cuenta atrás: solo con fecha límite real. */}
             {deadline && (
               <>
-                <div className="mt-6 text-center font-body text-xs font-semibold uppercase tracking-[0.05em] text-white/60">
+                <div className="font-body mt-6 text-center text-xs font-semibold tracking-[0.05em] text-white/60 uppercase">
                   {founding.deadlineLabel}
                 </div>
                 <Countdown deadline={deadline} />
@@ -73,7 +73,7 @@ export function Founding() {
             {/* Barra de plazas: solo con aforo real. */}
             {hasSpots && (
               <div className="mt-6">
-                <div className="mb-2 flex justify-between font-body text-xs text-white/65">
+                <div className="font-body mb-2 flex justify-between text-xs text-white/65">
                   <span>Plazas fundadoras</span>
                   <span>
                     Quedan {spotsLeft} / {spotsTotal}
@@ -81,7 +81,7 @@ export function Founding() {
                 </div>
                 <div className="h-2 overflow-hidden rounded-full bg-white/8">
                   <div
-                    className="h-full rounded-full bg-linear-to-r from-neon-lime via-neon-mint to-neon"
+                    className="from-neon-lime via-neon-mint to-neon h-full rounded-full bg-linear-to-r"
                     style={{ width: `${takenPct}%` }}
                   />
                 </div>
@@ -89,13 +89,13 @@ export function Founding() {
             )}
 
             {/* Urgencia basada en hechos (aforo físico, periodo de apertura). */}
-            <p className="mt-6 text-center font-body text-sm leading-relaxed text-white/70">
+            <p className="font-body mt-6 text-center text-sm leading-relaxed text-white/70">
               {founding.urgencyNote}
             </p>
 
             <Link
               href="/socio-fundador"
-              className="mt-6 inline-flex w-full min-h-12 items-center justify-center rounded-md bg-neon-lime px-6 py-[18px] font-body text-base font-bold text-ink no-underline shadow-glow transition-transform duration-200 hover:-translate-y-[3px] active:translate-y-0"
+              className="bg-neon-lime font-body text-ink shadow-glow mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-md px-6 py-[18px] text-base font-bold no-underline transition-transform duration-200 hover:-translate-y-[3px] active:translate-y-0"
             >
               {founding.cta}
             </Link>
@@ -109,12 +109,12 @@ export function Founding() {
                 O pregúntanos por WhatsApp
               </WaLink>
             </div>
-            <p className="mt-3 text-center font-body text-xs text-white/50">{founding.finePrint}</p>
+            <p className="font-body mt-3 text-center text-xs text-white/50">{founding.finePrint}</p>
           </Reveal>
 
           {/* Columna derecha: qué incluye la plaza fundadora */}
           <Reveal delay={0.2} className="space-y-6 text-left lg:pl-6">
-            <h3 className="font-display text-2xl uppercase tracking-wide text-neon-lime">
+            <h3 className="font-display text-neon-lime text-2xl tracking-wide uppercase">
               {founding.benefitsTitle}
             </h3>
 
@@ -125,7 +125,7 @@ export function Founding() {
             <ul className="list-none space-y-4 p-0">
               {founding.benefits.map((benefit) => (
                 <li key={benefit.title} className="flex items-start gap-3">
-                  <span className="mt-1 text-lg leading-none text-neon-lime">✓</span>
+                  <span className="text-neon-lime mt-1 text-lg leading-none">✓</span>
                   <span className="font-body text-[14px] leading-relaxed text-white/85">
                     <strong className="text-white">{benefit.title}:</strong> {benefit.text}
                   </span>
@@ -133,7 +133,7 @@ export function Founding() {
               ))}
             </ul>
 
-            <div className="rounded-lg border border-neon-lime/20 bg-neon-lime/5 p-4 font-body text-[13px] leading-relaxed text-white/70">
+            <div className="border-neon-lime/20 bg-neon-lime/5 font-body rounded-lg border p-4 text-[13px] leading-relaxed text-white/70">
               {founding.conditionNote}
             </div>
           </Reveal>

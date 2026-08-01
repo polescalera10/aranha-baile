@@ -49,12 +49,36 @@ export const experience = [
 ];
 
 export const modalidadesFallback = [
-  { slug: "salsa-cubana", nombre: "Salsa cubana", descripcion: "El sabor del son y la rueda de casino. Energía, giros y mucha risa en grupo." },
-  { slug: "bachata", nombre: "Bachata", descripcion: "Musicalidad, conexión y sensibilidad. La que engancha desde el primer día." },
-  { slug: "reparto", nombre: "Reparto", descripcion: "El género urbano que arrasa en La Habana. Movimiento, actitud y mucha calle." },
-  { slug: "reggaeton", nombre: "Reggaeton", descripcion: "Perreo con técnica y estilo. Suena fuerte, se siente más fuerte." },
-  { slug: "lady-style", nombre: "Lady Style", descripcion: "Feminidad, expresión y soltura. Para brillar en cualquier pista." },
-  { slug: "heels", nombre: "Heels", descripcion: "Potencia, actitud y glamour. Con o sin tacones, la energía es la misma." },
+  {
+    slug: "salsa-cubana",
+    nombre: "Salsa cubana",
+    descripcion: "El sabor del son y la rueda de casino. Energía, giros y mucha risa en grupo.",
+  },
+  {
+    slug: "bachata",
+    nombre: "Bachata",
+    descripcion: "Musicalidad, conexión y sensibilidad. La que engancha desde el primer día.",
+  },
+  {
+    slug: "reparto",
+    nombre: "Reparto",
+    descripcion: "El género urbano que arrasa en La Habana. Movimiento, actitud y mucha calle.",
+  },
+  {
+    slug: "reggaeton",
+    nombre: "Reggaeton",
+    descripcion: "Perreo con técnica y estilo. Suena fuerte, se siente más fuerte.",
+  },
+  {
+    slug: "lady-style",
+    nombre: "Lady Style",
+    descripcion: "Feminidad, expresión y soltura. Para brillar en cualquier pista.",
+  },
+  {
+    slug: "heels",
+    nombre: "Heels",
+    descripcion: "Potencia, actitud y glamour. Con o sin tacones, la energía es la misma.",
+  },
 ];
 
 export type Review = {
@@ -82,9 +106,21 @@ export const reviews: Review[] = [];
 export const googleRating: string | null = null;
 
 export const steps = [
-  { n: "01", title: "Escríbenos", text: "Un WhatsApp y listo. Sin formularios eternos, sin compromiso." },
-  { n: "02", title: "Te ubicamos", text: "Te proponemos el grupo, el día y el nivel que mejor te encajan para probar." },
-  { n: "03", title: "Vienes a probar", text: "Bailas, conoces al grupo y decides. Sin presión y sin letra pequeña." },
+  {
+    n: "01",
+    title: "Escríbenos",
+    text: "Un WhatsApp y listo. Sin formularios eternos, sin compromiso.",
+  },
+  {
+    n: "02",
+    title: "Te ubicamos",
+    text: "Te proponemos el grupo, el día y el nivel que mejor te encajan para probar.",
+  },
+  {
+    n: "03",
+    title: "Vienes a probar",
+    text: "Bailas, conoces al grupo y decides. Sin presión y sin letra pequeña.",
+  },
 ];
 
 export const faqs = [
@@ -141,9 +177,9 @@ export const ctaFinal = {
  */
 export const founding = {
   kicker: "Plazas fundadoras",
-  title: "Sé fundador desde el día uno",
+  title: "Baila todos los días",
   subtitle:
-    "Los primeros alumnos abren la escuela con nosotros: tu cuota queda bloqueada mientras sigas de alta y tu nombre forma parte de la historia desde el principio.",
+    "La plaza fundadora abre las 8 disciplinas regulares de la escuela —de tu nivel o inferior— de lunes a viernes, con la cuota bloqueada mientras sigas de alta. Es la tarifa de quien viene a bailar mucho.",
   badge: "Cuota bloqueada mientras sigas de alta",
   /** Cuota fundadora confirmada por Pol (26-07-2026): 85 €/mes, tarifa plana con todo incluido. */
   price: "85 €",
@@ -172,17 +208,18 @@ export const founding = {
   // TODO: confirmar condiciones reales (sin permanencia, mantenimiento de tarifa).
   finePrint: "Sin permanencia. Si te das de baja, la tarifa fundadora no se recupera.",
   /**
-   * Columna "qué incluye" — condiciones confirmadas por Pol (08-07-2026):
-   * 85 €/mes con acceso a todas las disciplinas a las que puedas acceder según
-   * tu nivel, cuota bloqueada y prioridad en eventos.
+   * Columna "qué incluye" — condiciones confirmadas por Pol (01-08-2026):
+   * 85 €/mes con acceso a TODAS las disciplinas regulares de tu nivel o
+   * inferior (las compañías quedan fuera), cuota bloqueada y prioridad en
+   * eventos. El detalle largo vive en `/socio-fundador`.
    */
   benefitsTitle: "¿Qué incluye la plaza fundadora?",
   benefitsIntro:
-    "La tarifa de socio fundador es una oportunidad única del lanzamiento: cuando se completen las plazas, la cuota mensual pasará a su precio estándar.",
+    "No compras un estilo: compras la semana entera. Es la tarifa de quien quiere venir tres, cuatro o cinco días. Si solo vas a venir una o dos veces, te sale mejor la mensualidad normal y te lo diremos nosotros.",
   benefits: [
     {
-      title: "Todas las disciplinas de tu nivel",
-      text: "Salsa cubana, bachata, reparto, reggaeton, lady style y heels: acceso a todas las clases disponibles para tu nivel, sin elegir solo una.",
+      title: "Las 8 disciplinas, de tu nivel o inferior",
+      text: "Salsa, bachata, lady salsa, bachata lady, reparto, reggaetón, sexy style y heels: todas las clases regulares abiertas a tu nivel o por debajo, de lunes a viernes. Los grupos de compañía quedan fuera.",
     },
     {
       title: "Cuota bloqueada (con condiciones)",

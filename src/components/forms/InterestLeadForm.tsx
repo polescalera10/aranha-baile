@@ -27,7 +27,7 @@ function SubmitButton({ label }: { label: string }) {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-neon px-7 py-[15px] font-body text-base font-bold text-ink shadow-neon transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
+      className="bg-neon font-body text-ink shadow-neon inline-flex w-full items-center justify-center gap-2 rounded-md px-7 py-[15px] text-base font-bold transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
     >
       {pending ? "Enviando…" : label}
     </button>
@@ -47,12 +47,22 @@ function SubmitButton({ label }: { label: string }) {
 export function InterestLeadForm({
   origen,
   groups,
+  fixedIntereses,
+  nivel,
   submitLabel = "Reservar mi plaza",
   interesesLabel = "¿Qué te interesa? Marca todo lo que quieras",
   interesesHelp,
 }: {
   origen: "intensivos" | "curso-regular" | "socio-fundador";
-  groups: InterestGroup[];
+  /** Casillas múltiples. Se omite cuando la oferta ya lo incluye todo. */
+  groups?: InterestGroup[];
+  /**
+   * Intereses fijos que viajan ocultos (p. ej. "Plaza fundadora · todas las
+   * disciplinas"). Permiten cumplir el mínimo de un interés sin pedir nada.
+   */
+  fixedIntereses?: string[];
+  /** Bloque opcional de nivel: una sola respuesta, sin marcar por defecto. */
+  nivel?: { legend: string; help?: string; options: InterestOption[] };
   submitLabel?: string;
   /** Texto del `legend` del bloque de casillas. */
   interesesLabel?: string;
@@ -65,13 +75,13 @@ export function InterestLeadForm({
     return (
       <div
         role="status"
-        className="rounded-lg border border-neon/25 bg-bg-panel p-8 text-center shadow-card"
+        className="border-neon/25 bg-bg-panel shadow-card rounded-lg border p-8 text-center"
       >
-        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-neon/10 text-2xl text-neon">
+        <div className="bg-neon/10 text-neon mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full text-2xl">
           ✓
         </div>
-        <p className="font-display text-2xl text-text-strong">¡Solicitud recibida!</p>
-        <p className="mt-2 font-body text-[15px] text-text-muted">{state.message}</p>
+        <p className="font-display text-text-strong text-2xl">¡Solicitud recibida!</p>
+        <p className="font-body text-text-muted mt-2 text-[15px]">{state.message}</p>
       </div>
     );
   }
@@ -135,51 +145,92 @@ export function InterestLeadForm({
         </div>
       </div>
 
-      <fieldset>
-        <legend className={LABEL}>{interesesLabel}</legend>
-        {interesesHelp && (
-          <p className="mb-3 font-body text-[13px] leading-snug text-text-muted">{interesesHelp}</p>
-        )}
-        <div className="mt-1 space-y-5">
-          {groups.map((group) => (
-            <div key={group.label}>
-              <p className="mb-2 font-body text-[12px] font-bold uppercase tracking-[0.14em] text-neon-mint">
-                {group.label}
-              </p>
-              {/* minmax(min(200px,100%),1fr): a 320px la tarjeta no desborda. */}
-              <div className="grid gap-2 [grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))]">
-                {group.options.map((opt) => (
-                  <label
-                    key={opt.value}
-                    className="flex min-h-12 cursor-pointer items-start gap-3 rounded-sm border border-white/10 bg-bg-elevated px-3 py-2.5 transition-colors hover:border-neon/40 has-[:checked]:border-neon has-[:checked]:bg-neon/5"
-                  >
-                    <input
-                      type="checkbox"
-                      name="intereses"
-                      value={opt.value}
-                      className="mt-0.5 h-4 w-4 shrink-0 accent-neon"
-                    />
-                    <span className="font-body text-[14px] leading-tight text-text-strong">
-                      <span className="font-semibold">{opt.label}</span>
-                      {opt.meta && (
-                        <span className="mt-0.5 block font-normal text-[12.5px] text-text-body">
-                          {opt.meta}
-                        </span>
-                      )}
-                      {opt.hint && (
-                        <span className="mt-0.5 block font-normal text-[12px] text-text-muted">
-                          {opt.hint}
-                        </span>
-                      )}
+      {/* Intereses implícitos de la oferta (no se preguntan, pero sí se guardan). */}
+      {fixedIntereses?.map((value) => (
+        <input key={value} type="hidden" name="intereses" value={value} />
+      ))}
+
+      {nivel && (
+        <fieldset>
+          <legend className={LABEL}>{nivel.legend}</legend>
+          {nivel.help && (
+            <p className="font-body text-text-muted mb-3 text-[13px] leading-snug">{nivel.help}</p>
+          )}
+          <div className="grid [grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr))] gap-2">
+            {nivel.options.map((opt) => (
+              <label
+                key={opt.value}
+                className="bg-bg-elevated hover:border-neon/40 has-[:checked]:border-neon has-[:checked]:bg-neon/5 flex min-h-12 cursor-pointer items-start gap-3 rounded-sm border border-white/10 px-3 py-2.5 transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="intereses"
+                  value={opt.value}
+                  className="accent-neon mt-0.5 h-4 w-4 shrink-0"
+                />
+                <span className="font-body text-text-strong text-[14px] leading-tight">
+                  <span className="font-semibold">{opt.label}</span>
+                  {opt.hint && (
+                    <span className="text-text-muted mt-0.5 block text-[12px] font-normal">
+                      {opt.hint}
                     </span>
-                  </label>
-                ))}
+                  )}
+                </span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )}
+
+      {groups && (
+        <fieldset>
+          <legend className={LABEL}>{interesesLabel}</legend>
+          {interesesHelp && (
+            <p className="font-body text-text-muted mb-3 text-[13px] leading-snug">
+              {interesesHelp}
+            </p>
+          )}
+          <div className="mt-1 space-y-5">
+            {groups.map((group) => (
+              <div key={group.label}>
+                <p className="font-body text-neon-mint mb-2 text-[12px] font-bold tracking-[0.14em] uppercase">
+                  {group.label}
+                </p>
+                {/* minmax(min(200px,100%),1fr): a 320px la tarjeta no desborda. */}
+                <div className="grid [grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))] gap-2">
+                  {group.options.map((opt) => (
+                    <label
+                      key={opt.value}
+                      className="bg-bg-elevated hover:border-neon/40 has-[:checked]:border-neon has-[:checked]:bg-neon/5 flex min-h-12 cursor-pointer items-start gap-3 rounded-sm border border-white/10 px-3 py-2.5 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        name="intereses"
+                        value={opt.value}
+                        className="accent-neon mt-0.5 h-4 w-4 shrink-0"
+                      />
+                      <span className="font-body text-text-strong text-[14px] leading-tight">
+                        <span className="font-semibold">{opt.label}</span>
+                        {opt.meta && (
+                          <span className="text-text-body mt-0.5 block text-[12.5px] font-normal">
+                            {opt.meta}
+                          </span>
+                        )}
+                        {opt.hint && (
+                          <span className="text-text-muted mt-0.5 block text-[12px] font-normal">
+                            {opt.hint}
+                          </span>
+                        )}
+                      </span>
+                    </label>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-        {state.errors?.intereses && <p className={ERR}>{state.errors.intereses[0]}</p>}
-      </fieldset>
+            ))}
+          </div>
+          {state.errors?.intereses && <p className={ERR}>{state.errors.intereses[0]}</p>}
+        </fieldset>
+      )}
 
       <label className="flex cursor-pointer items-start gap-3">
         <input
@@ -187,15 +238,15 @@ export function InterestLeadForm({
           name="consentimiento"
           value="on"
           required
-          className="mt-0.5 h-4 w-4 shrink-0 accent-neon"
+          className="accent-neon mt-0.5 h-4 w-4 shrink-0"
         />
-        <span className="font-body text-[13px] leading-snug text-text-muted">
+        <span className="font-body text-text-muted text-[13px] leading-snug">
           He leído y acepto la{" "}
           <a
             href="/privacidad"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-neon underline"
+            className="text-neon font-semibold underline"
           >
             política de privacidad
           </a>{" "}
@@ -208,7 +259,7 @@ export function InterestLeadForm({
       {state.status === "error" && state.message && (
         <p
           role="alert"
-          className="rounded-sm border border-neon/30 bg-neon/5 px-4 py-3 font-body text-sm text-neon"
+          className="border-neon/30 bg-neon/5 font-body text-neon rounded-sm border px-4 py-3 text-sm"
         >
           {state.message}
         </p>

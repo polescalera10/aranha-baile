@@ -12,6 +12,7 @@ export type WaOrigin =
   | "footer"
   | "nav"
   | "modalidad"
+  | "profesor"
   | "contacto"
   | "evento"
   | "campana";
@@ -24,6 +25,8 @@ const MESSAGES: Record<WaOrigin, string> = {
   footer: "¡Hola! Me gustaría más información sobre NEXUS VNG 🙂",
   nav: "¡Hola! Me gustaría info sobre las clases de baile 🙂",
   modalidad: "¡Hola! Me interesa la clase de", // se completa con la modalidad
+  // Se completa con el nombre del profe: así sabemos qué ficha convierte.
+  profesor: "¡Hola! Me gustaría probar una clase con",
   contacto: "¡Hola! Os escribo desde la web de NEXUS VNG 🙂",
   evento: "¡Hola! Me gustaría más información sobre el evento", // se completa con el nombre del evento
   // Sin base: las landings de campaña (src/content/campanas/) pasan su mensaje

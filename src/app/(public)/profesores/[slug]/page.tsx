@@ -103,8 +103,13 @@ export default async function ProfesorPage({ params }: Params) {
           ]}
         />
 
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_1.2fr]">
-          <figure className="bg-bg-elevated m-0 overflow-hidden rounded-xl">
+        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_1.2fr]">
+          {/* `self-start` es imprescindible: por defecto el grid estira el
+              <figure> a la altura de la columna de texto, y como la imagen
+              tiene una proporción fija quedaba una franja de fondo vacía
+              debajo — más marco que foto. En móvil, 3/4 a ancho completo se
+              come la pantalla, así que ahí va más apaisada. */}
+          <figure className="bg-bg-elevated m-0 self-start overflow-hidden rounded-xl lg:sticky lg:top-24">
             <Image
               src={profe.foto}
               alt={profe.fotoAlt}
@@ -112,7 +117,7 @@ export default async function ProfesorPage({ params }: Params) {
               height={profe.alto}
               priority
               sizes="(max-width: 1024px) 100vw, 420px"
-              className="aspect-[3/4] w-full object-cover object-top"
+              className="aspect-[4/5] w-full object-cover object-top sm:aspect-[3/4]"
             />
           </figure>
 

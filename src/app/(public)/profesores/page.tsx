@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { SupportPage } from "@/components/layout/SupportPage";
+import { Reveal } from "@/components/ui/Reveal";
 import { WaLink } from "@/components/ui/WaLink";
-import { modalidadesDe, profesores } from "@/content/profesores";
+import { clasesDe, modalidadesDe, profesores } from "@/content/profesores";
 
 export const metadata: Metadata = {
   title: "Profesores de baile en Vilanova i la Geltrú",
   description:
-    "Cómo enseñamos en NEXUS VNG: grupos por nivel real, corrección individual en cada clase y parejas de profesores en los grupos de baile en pareja.",
+    "Quién te va a dar clase en NEXUS VNG: qué baila cada profesor, qué días y con qué nivel. Elige con quién quieres empezar y reserva tu clase de prueba.",
   alternates: { canonical: "/profesores" },
   // Al compartir esta página sale la foto del equipo, no la imagen genérica.
   openGraph: {
@@ -25,179 +26,237 @@ export const metadata: Metadata = {
 };
 
 /*
-  Nombres, fotos y disciplinas del equipo viven en content/profesores.ts (las
-  disciplinas se derivan del cartel de horarios, no se escriben a mano).
+  Nombres, fotos y disciplinas del equipo viven en content/profesores.ts; las
+  clases y las disciplinas se derivan del cartel de horarios.
+
+  Decisión de layout (01-08-2026, a petición de Pol): la página no es un
+  organigrama, es una ayuda a decidir. El alumno no llega preguntando "¿quiénes
+  sois?" sino "¿con quién voy a bailar yo, qué día y si valgo para su grupo?".
+  Por eso el equipo se presenta en bandas alternas a ancho completo —una por
+  persona, con su horario real y un WhatsApp que ya lleva su nombre escrito— en
+  vez de en una rejilla de tarjetas iguales, que obliga a comparar caras sin
+  darte ningún dato para elegir.
 
   TODO: bio real de cada profesor. Hasta que Pol la pase, la ficha individual
   muestra solo lo verificable — nada de trayectorias ni titulaciones inventadas.
 */
 
+/** Lo que puede esperar cualquier alumno, sea cual sea el grupo que elija. */
+const PROMESAS = [
+  {
+    titulo: "Vengas con quien vengas, no vienes solo",
+    texto:
+      "Se rota con todo el grupo. No hace falta traer pareja — de hecho es la única forma real de aprender a guiar y a seguir con gente distinta.",
+  },
+  {
+    titulo: "Tu grupo es de tu nivel, no de la media",
+    texto:
+      "Cada disciplina se abre desde cero absoluto, iniciación e intermedio. Si al probar el grupo se te queda corto o largo, se cambia: preferimos moverte a que te aburras.",
+  },
+  {
+    titulo: "Alguien te corrige a ti, no a la sala",
+    texto:
+      "Se explica, se practica y se pasa por las parejas mirando peso, postura y tiempo. Varias clases van con dos profesores precisamente para que en el trabajo en pareja haya corrección por los dos lados.",
+  },
+];
+
 export default function ProfesoresPage() {
   return (
     <SupportPage
       eyebrow="Quién te acompaña"
-      title="El equipo"
-      intro="Profesores en formación constante que corrigen con cariño y adaptan la clase a tu nivel. Así es como damos clase — y cómo notarás la diferencia desde el primer día."
+      title="Los profesores con los que vas a bailar"
+      intro="Cinco personas, ocho disciplinas y grupos por nivel real. Mira quién da qué, qué día lo da, y escribe directamente a quien te encaje."
     >
-      <div className="space-y-[clamp(48px,7vw,80px)]">
-        {/* Foto real del equipo. Recorte con fondo transparente, así que
-            object-contain sobre el panel: con cover se cortarían cabezas en
-            móvil. Sin nombres: no se atribuye cara a nombre sin confirmarlo. */}
-        <figure className="bg-bg-elevated m-0 overflow-hidden rounded-xl">
-          <Image
-            src="/images/equipo-nexus.png"
-            alt="El equipo de profesores de NEXUS VNG"
-            width={921}
-            height={568}
-            priority
-            sizes="(max-width: 1024px) 100vw, 960px"
-            className="h-auto w-full object-contain"
-          />
-        </figure>
+      <div className="space-y-[clamp(64px,10vw,120px)]">
+        {/* Bandas alternas, una por profesor: la foto manda y al lado va lo que
+            el alumno necesita para decidir — qué baila, cuándo y cómo escribirle. */}
+        <ul className="m-0 list-none space-y-[clamp(56px,8vw,104px)] p-0">
+          {profesores.map((p, i) => {
+            const disciplinas = modalidadesDe(p.nombre);
+            const clases = clasesDe(p.nombre);
+            const fotoPrimero = i % 2 === 0;
 
-        {/* Fichas del equipo. Nombres, fotos y disciplinas salen de
-            content/profesores.ts; las disciplinas se derivan del cartel. */}
-        <section className="space-y-6">
-          <h2 className="font-display text-text-strong text-[clamp(28px,4vw,44px)]">
-            Quién te va a dar clase
-          </h2>
-          <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(200px,100%),1fr))] gap-5">
-            {profesores.map((p) => {
-              const disciplinas = modalidadesDe(p.nombre);
-              return (
-                <li key={p.slug}>
-                  <Link href={`/profesores/${p.slug}`} className="group block no-underline">
-                    <div className="bg-bg-elevated overflow-hidden rounded-lg">
+            return (
+              <li key={p.slug}>
+                {/* La columna de la foto mide siempre 0.85fr y la de texto 1fr:
+                    al alternar el orden hay que invertir también las medidas,
+                    o las bandas pares saldrían con la foto más ancha que las
+                    impares y el ritmo de la página se rompe. */}
+                <article
+                  className={`grid items-center gap-[clamp(24px,4vw,56px)] ${
+                    fotoPrimero
+                      ? "md:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]"
+                      : "md:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)]"
+                  }`}
+                >
+                  <Reveal
+                    className={`bg-bg-elevated overflow-hidden rounded-xl ${
+                      fotoPrimero ? "" : "md:order-2"
+                    }`}
+                  >
+                    <Link href={`/profesores/${p.slug}`} className="group block">
                       <Image
                         src={p.foto}
                         alt={p.fotoAlt}
                         width={p.ancho}
                         height={p.alto}
-                        sizes="(max-width: 640px) 90vw, 260px"
-                        className="aspect-[3/4] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                        sizes="(max-width: 768px) 100vw, 42vw"
+                        className="aspect-[4/5] w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
                       />
+                    </Link>
+                  </Reveal>
+
+                  <Reveal delay={0.08} className="space-y-5">
+                    <div>
+                      <h2 className="font-display text-text-strong text-[clamp(34px,5.5vw,60px)] leading-[0.95]">
+                        <Link
+                          href={`/profesores/${p.slug}`}
+                          className="hover:text-neon text-inherit no-underline transition-colors"
+                        >
+                          {p.nombre}
+                        </Link>
+                      </h2>
+                      <p className="font-body text-text-body mt-2 max-w-[42ch] text-[clamp(16px,1.5vw,19px)] leading-relaxed">
+                        {p.claim}
+                      </p>
                     </div>
-                    <h3 className="font-display text-text-strong group-hover:text-neon mt-3 text-2xl transition-colors">
-                      {p.nombre}
-                    </h3>
-                    <p className="font-body text-text-muted mt-1 text-[13px] leading-snug">
-                      {disciplinas.map((d) => d.nombre).join(" · ")}
-                    </p>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
 
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-          <div className="space-y-10">
-            <section className="space-y-4">
-              <h2 className="font-display text-text-strong text-3xl">
-                Aquí te conocen por tu nombre
-              </h2>
-              <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
-                No te suelta nadie. Nuestro equipo cuida el detalle de cada movimiento, corrige con
-                cariño y adapta la clase a tu nivel — desde el primer día. En una escuela pequeña
-                eso no es un eslogan: es lo único que se puede hacer cuando el grupo cabe en una
-                sala y el profe te ve entrar.
-              </p>
-            </section>
+                    {clases.length > 0 && (
+                      <div>
+                        <h3 className="font-body text-text-muted text-[13px] font-bold">
+                          Cuándo da clase
+                        </h3>
+                        <ul className="mt-2.5 flex list-none flex-wrap gap-2 p-0">
+                          {clases.map((clase) => (
+                            <li
+                              key={clase.value}
+                              className="border-white/12 bg-bg-panel font-body text-text-body rounded-full border px-3.5 py-2 text-[13px]"
+                            >
+                              <span className="text-text-strong font-semibold">{clase.estilo}</span>
+                              <span className="text-text-faint"> · </span>
+                              {clase.dia} {clase.hora}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
-            <section className="space-y-4">
-              <h2 className="font-display text-text-strong text-3xl">Grupos por nivel real</h2>
-              <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
-                No mezclamos a quien lleva tres años con quien viene por primera vez. Cada
-                disciplina se abre por niveles —desde cero absoluto, iniciación, intermedio— y en
-                el horario cada grupo lleva el suyo marcado. Eso cambia por completo la clase: nadie
-                frena a nadie y nadie se queda mirando cómo los demás hacen algo que aún no toca.
-              </p>
-              <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
-                Si al probar vemos que el grupo se te queda corto o largo, se ajusta. Preferimos
-                moverte de grupo a que te aburras o te agobies.
-              </p>
-            </section>
+                    <div className="flex flex-wrap items-center gap-3 pt-1">
+                      <WaLink
+                        origin="profesor"
+                        extra={p.nombre}
+                        variant="red"
+                        className="min-h-12 px-6 py-[14px] text-[15px]"
+                      >
+                        Probar una clase con {p.nombre}
+                      </WaLink>
+                      <Link
+                        href={`/profesores/${p.slug}`}
+                        className="font-body text-text-muted hover:text-neon inline-flex min-h-12 items-center text-[14px] font-semibold no-underline transition-colors"
+                      >
+                        Ver su ficha completa →
+                      </Link>
+                    </div>
 
-            <section className="space-y-4">
-              <h2 className="font-display text-text-strong text-3xl">
-                Corrección individual, no una clase dirigida
-              </h2>
-              <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
-                La diferencia entre repetir un paso y aprenderlo está en que alguien te diga qué
-                estás haciendo distinto. En clase se explica, se practica y se pasa por las parejas
-                corrigiendo: peso, postura, tiempo. Varias clases se imparten con dos profesores a
-                la vez, precisamente para que en el trabajo en pareja haya corrección por los dos
-                lados.
-              </p>
-              <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
-                Y se rota. No hace falta venir acompañado: bailas con todo el grupo, que es la única
-                forma real de aprender a guiar y a seguir con gente distinta.
-              </p>
-            </section>
+                    {/* text-muted, no text-faint: sobre el negro de marca,
+                        text-faint se queda en ~1,9:1 de contraste — muy por
+                        debajo del 4,5:1 que exige un texto de lectura. */}
+                    {disciplinas.length > 0 && (
+                      <p className="font-body text-text-muted text-[13px] leading-relaxed">
+                        Imparte{" "}
+                        {disciplinas.map((d, j) => (
+                          <span key={d.slug}>
+                            {j > 0 && ", "}
+                            <Link
+                              href={`/clases/${d.slug}`}
+                              className="text-text-body hover:text-neon underline underline-offset-2 transition-colors"
+                            >
+                              {d.nombre}
+                            </Link>
+                          </span>
+                        ))}
+                        .
+                      </p>
+                    )}
+                  </Reveal>
+                </article>
+              </li>
+            );
+          })}
+        </ul>
 
-            <section className="space-y-4">
-              <h2 className="font-display text-text-strong text-3xl">
-                Quién imparte cada clase
-              </h2>
-              <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
-                El nombre del profe de cada grupo está publicado en la parrilla de la temporada,
-                junto al estilo y la franja horaria: así sabes con quién vas a bailar antes de
-                escribirnos.
-              </p>
-              <p className="font-body text-text-muted max-w-[65ch] text-[15px] leading-relaxed">
-                <Link
-                  href="/horarios"
-                  className="text-neon font-semibold no-underline hover:underline"
-                >
-                  Ver el horario con los profes de cada grupo →
-                </Link>
-              </p>
-              <p className="font-body text-text-body max-w-[65ch] text-base leading-relaxed">
-                Arriba tienes la ficha de cada uno: sus clases, sus días y las disciplinas que
-                imparte. Y la mejor forma de conocerlos sigue siendo en persona — reserva tu clase
-                de prueba y ponles cara bailando.
-              </p>
-            </section>
+        {/* Lo común a todos: va después del equipo, porque primero se elige
+            persona y luego se confirma que la clase encaja. */}
+        <section className="border-t border-white/8 pt-[clamp(40px,6vw,72px)]">
+          <Reveal>
+            <h2 className="font-display text-text-strong max-w-[22ch] text-balance text-[clamp(28px,4.2vw,48px)] leading-[1.05]">
+              Da igual con cuál empieces
+            </h2>
+            <p className="font-body text-text-muted mt-4 max-w-[62ch] text-base leading-relaxed">
+              Cambian los estilos y los días, no la forma de dar clase. Esto es lo que te vas a
+              encontrar en cualquiera de los grupos.
+            </p>
+          </Reveal>
+
+          <div className="mt-10 grid gap-x-10 gap-y-9 md:grid-cols-3">
+            {PROMESAS.map((promesa, i) => (
+              <Reveal key={promesa.titulo} delay={0.06 * i} className="space-y-2.5">
+                <h3 className="font-display text-text-strong text-2xl leading-tight">
+                  {promesa.titulo}
+                </h3>
+                <p className="font-body text-text-body text-[15px] leading-relaxed">
+                  {promesa.texto}
+                </p>
+              </Reveal>
+            ))}
           </div>
 
-          <aside className="bg-bg-panel shadow-card h-fit rounded-lg border border-white/8 p-6 lg:sticky lg:top-24">
-            <h2 className="font-display text-text-strong text-2xl">Conócelos bailando</h2>
-            <p className="font-body text-text-muted mt-2 text-[15px]">
-              Escríbenos y reserva tu primera clase de prueba con el grupo que mejor encaje contigo.
-            </p>
-            <WaLink origin="nav" variant="red" className="mt-4 w-full py-[15px]">
-              Reservar clase de prueba
-            </WaLink>
-            <p className="font-body text-text-faint mt-3 text-[13px]">
-              ¿Prefieres verlo antes?{" "}
-              <Link href="/clases" className="text-text-muted no-underline hover:underline">
-                Mira las disciplinas
-              </Link>{" "}
-              o{" "}
-              <Link href="/horarios" className="text-text-muted no-underline hover:underline">
-                la parrilla de la temporada
+          <Reveal delay={0.2} className="mt-10">
+            <p className="font-body text-text-muted max-w-[62ch] text-[15px] leading-relaxed">
+              El nombre del profe de cada grupo está en la parrilla de la temporada, junto al estilo
+              y la franja horaria, así que sabes con quién vas a bailar antes de escribirnos.{" "}
+              <Link
+                href="/horarios"
+                className="text-neon font-semibold no-underline hover:underline"
+              >
+                Ver el horario completo →
               </Link>
-              .
             </p>
-          </aside>
-        </div>
+          </Reveal>
+        </section>
+
+        {/* Cierre: el equipo entero, y una última salida para quien no lo tenga claro. */}
+        <section className="border-white/8 bg-bg-panel shadow-card overflow-hidden rounded-xl border">
+          <Image
+            src="/images/equipo-nexus.png"
+            alt="El equipo de profesores de NEXUS VNG"
+            width={921}
+            height={568}
+            sizes="(max-width: 1024px) 100vw, 960px"
+            className="h-auto w-full object-contain"
+          />
+          <div className="border-t border-white/8 p-[clamp(24px,4vw,40px)]">
+            <h2 className="font-display text-text-strong text-[clamp(24px,3.4vw,36px)] leading-tight">
+              ¿No sabes con quién empezar?
+            </h2>
+            <p className="font-body text-text-muted mt-3 max-w-[58ch] text-[15px] leading-relaxed">
+              Es lo más normal del mundo. Dinos qué días puedes y si has bailado antes, y te
+              proponemos el grupo y el profe que mejor te encajan.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <WaLink origin="nav" variant="red" className="min-h-12 px-7 py-[15px]">
+                Que nos encarguemos nosotros
+              </WaLink>
+              <Link
+                href="/clases"
+                className="font-body text-text-muted hover:text-neon inline-flex min-h-12 items-center text-[14px] font-semibold no-underline transition-colors"
+              >
+                Mirar primero las disciplinas →
+              </Link>
+            </div>
+          </div>
+        </section>
       </div>
-
-      {/*
-        Grid original de fichas (oculto hasta tener datos reales):
-
-        <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(240px,100%),1fr))] gap-6">
-          {PROFES.map((p) => (
-            <li key={p.slug}>
-              <Link href={`/profesores/${p.slug}`} className="group block no-underline">
-                <PhotoPlaceholder label="[ foto profe ]" tint="warm" className="min-h-[280px] rounded-lg p-3" />
-                <h2 className="mt-3 font-display text-2xl text-text-strong">{p.nombre}</h2>
-                <p className="font-body text-sm text-text-muted">Salsa · Bachata · …</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      */}
     </SupportPage>
   );
 }

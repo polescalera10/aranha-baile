@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { SupportPage } from "@/components/layout/SupportPage";
 import { WaLink } from "@/components/ui/WaLink";
@@ -8,14 +9,27 @@ export const metadata: Metadata = {
   description:
     "Cómo enseñamos en NEXUS VNG: grupos por nivel real, corrección individual en cada clase y parejas de profesores en los grupos de baile en pareja.",
   alternates: { canonical: "/profesores" },
+  // Al compartir esta página sale la foto del equipo, no la imagen genérica.
+  openGraph: {
+    title: "Profesores de baile en Vilanova i la Geltrú",
+    images: [
+      {
+        url: "/images/equipo-nexus.png",
+        width: 921,
+        height: 568,
+        alt: "El equipo de profesores de NEXUS VNG",
+      },
+    ],
+  },
 };
 
 /*
-  TODO: fichas reales del equipo — sustituir por consulta a profiles
-  (role = 'profesor') o por datos estáticos cuando Pol confirme nombres,
-  fotos, disciplinas y trayectoria. Grid original comentado al final del
-  archivo. Mientras no existan esos datos, esta página habla del MÉTODO —
-  nada de bios, fotos ni currículos inventados.
+  TODO: fichas individuales del equipo — nombre, disciplinas que imparte y bio.
+  La foto de grupo ya es real (01-08-2026); faltan los datos por persona, que
+  Pol tiene que confirmar (los nombres de pila están en content/horario-regular.ts,
+  pero no se atribuye cara a nombre sin confirmarlo). Grid original comentado al
+  final del archivo. Mientras tanto, esta página habla del MÉTODO — nada de bios
+  ni currículos inventados.
 */
 
 export default function ProfesoresPage() {
@@ -26,6 +40,21 @@ export default function ProfesoresPage() {
       intro="Profesores en formación constante que corrigen con cariño y adaptan la clase a tu nivel. Así es como damos clase — y cómo notarás la diferencia desde el primer día."
     >
       <div className="space-y-[clamp(48px,7vw,80px)]">
+        {/* Foto real del equipo. Recorte con fondo transparente, así que
+            object-contain sobre el panel: con cover se cortarían cabezas en
+            móvil. Sin nombres: no se atribuye cara a nombre sin confirmarlo. */}
+        <figure className="bg-bg-elevated m-0 overflow-hidden rounded-xl">
+          <Image
+            src="/images/equipo-nexus.png"
+            alt="El equipo de profesores de NEXUS VNG"
+            width={921}
+            height={568}
+            priority
+            sizes="(max-width: 1024px) 100vw, 960px"
+            className="h-auto w-full object-contain"
+          />
+        </figure>
+
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
           <div className="space-y-10">
             <section className="space-y-4">

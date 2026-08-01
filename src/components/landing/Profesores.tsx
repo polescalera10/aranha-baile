@@ -1,5 +1,5 @@
+import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
-import { PhotoPlaceholder } from "@/components/ui/PhotoPlaceholder";
 
 const TAGS = ["Te corrigen el detalle", "Te conocen por tu nombre", "Formación constante"];
 
@@ -9,13 +9,18 @@ export function Profesores() {
       <div className="container-nexus">
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] items-center gap-[clamp(24px,4vw,56px)]">
           <Reveal>
-            {/* TODO: foto de grupo real (equipo + alumnos). Etiqueta oculta en producción (sr-only). */}
-            <PhotoPlaceholder
-              label="[ foto de grupo · el equipo + alumnos ]"
-              tint="warm"
-              className="min-h-[360px] rounded-xl p-3.5"
-              labelClassName="sr-only"
-            />
+            {/* Recorte con fondo transparente: object-contain sobre el panel, no
+                cover — recortarlo cortaría cabezas en móvil. */}
+            <div className="bg-bg-elevated relative overflow-hidden rounded-xl">
+              <Image
+                src="/images/equipo-nexus.png"
+                alt="El equipo de profesores de NEXUS VNG"
+                width={921}
+                height={568}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="h-auto w-full object-contain"
+              />
+            </div>
           </Reveal>
 
           <div>

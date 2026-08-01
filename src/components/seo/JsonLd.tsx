@@ -63,6 +63,9 @@ export function localBusinessLd() {
       addressCountry: site.nap.addressCountry,
     },
     telephone: site.nap.telephoneDisplay,
+    // Foto real del equipo: Google la usa en el panel de conocimiento y en el
+    // resultado local. Absoluta, como exige schema.org.
+    image: `${site.url}/images/equipo-nexus.png`,
     sameAs: [site.social.instagram, site.social.tiktok].filter(Boolean),
     // Rango de precio derivado del modelo real (35–100 €/mes), no inventado.
     priceRange: `${precios.base}–${precios.flat} €/${precios.periodo}`,

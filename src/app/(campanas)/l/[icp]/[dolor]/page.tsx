@@ -31,8 +31,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: c.metaTitle,
     description: c.metaDescription,
-    // Landings de campaña (pago): fuera de indexación y del sitemap.
-    robots: { index: false, follow: true },
+    // Canónica propia OBLIGATORIA: sin ella heredan la del layout raíz ("/") y
+    // Google descartaría las 30 landings en favor de la home.
+    alternates: { canonical: `/l/${icp}/${dolor}` },
     openGraph: { title: c.metaTitle, description: c.metaDescription },
   };
 }

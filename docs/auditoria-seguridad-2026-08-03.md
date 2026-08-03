@@ -1,10 +1,22 @@
 # Auditoría de seguridad — nexusvng.es · 2026-08-03
 
-> **ESTADO (2026-08-03, mismo día): la mayoría ya está aplicada.**
-> Commit `226ffb9` (local, pendiente de `git push origin main`) + migración
-> `0022_hotfix_escalada_rol` **ya aplicada contra la base de datos de
-> producción**. El hallazgo crítico C1 está cerrado y verificado.
-> Lo que queda en manos de Pol está listado en §7 al final del documento.
+> **ESTADO (2026-08-03, cierre de jornada): todo aplicado salvo la promoción de
+> la CSP y el segundo factor.**
+>
+> | # | Acción | Estado |
+> |---|---|---|
+> | C1 | Escalada de rol (migración `0022`) | ✅ aplicada y verificada en producción |
+> | A1 | Cabeceras de seguridad | ✅ vivas en `nexusvng.es` (CSP en Report-Only) |
+> | A2 | Insert anónimo en `leads` (migración `0023`) | ✅ retirado; REST anónimo responde 401 |
+> | A3 · A4 · M2 · M3 · M4 · M7 · B1 · B2 | Correcciones de código | ✅ desplegadas (`226ffb9`, `9969264`) |
+> | 7.2 | Registro público cerrado | ✅ `disable_signup: true` |
+> | 7.3 | Auditoría de cuentas | ✅ un solo usuario, un solo admin |
+> | 7.4 | Política de contraseñas | ✅ (leaked password: no disponible en plan Free) |
+> | 7.5 | Rate limit | ✅ 10/60s por IP en Vercel Firewall, verificado (429 + challenge) |
+> | 7.6 | CSP a modo bloqueante | ⏳ tras unos días recogiendo avisos |
+> | 4·MFA | Segundo factor del admin | ⏳ pendiente de decisión (ver §7.4) |
+>
+> Detalle de lo que queda, en §7.
 
 > **Alcance.** Aplicación Next.js 15 (App Router) + Supabase + Vercel. Revisión
 > estática de `src/**`, `supabase/migrations/**`, configuración de build y
@@ -564,9 +576,30 @@ producción** (rellena uno de prueba tras el deploy del 7.1 y míralo en la tabl
 drop policy if exists "leads: insert público" on public.leads;
 ```
 
-Y en Vercel → proyecto `aranha-baile` → **Firewall** → *Add rule*:
-`POST` + path `/*` → **Rate limit** 10 peticiones / 10 min por IP → acción
-*Challenge*. Invisible para un visitante normal.
+Y en Vercel → **Firewall** → *Add rule*: `Method equals POST` **AND**
+`Rate Limit · Fixed Window · 60s · 10 requests · key IP Address` → *Challenge*.
+Invisible para un visitante normal.
+
+⚠️ **Dos trampas que costaron un rato el 03-08:**
+
+1. **El proyecto correcto es `aranha-baile`**, no `aranha-vng` (otro proyecto de
+   la cuenta). El que sirve `nexusvng.es` es `aranha-baile`
+   (`prj_ps5HaGo545WXxdbSpGNt02Pw51Zd`), el mismo que apunta `.vercel/repo.json`.
+2. **Guardar la regla no la activa.** Hasta publicarla, el panel *Rules* dice
+   *"There are no enforced rules"* aunque *Custom Rules* cuente 1.
+
+Verificación desde fuera (25 POST seguidos desde la misma IP):
+
+```bash
+for i in $(seq 1 25); do
+  curl -s -o /dev/null -D - -w "%{http_code} " -X POST "https://nexusvng.es/contacto" -d "probe=$i" \
+    | grep -i "x-vercel-mitigated"
+done
+```
+
+Resultado esperado, y obtenido el 03-08: las 10 primeras pasan (405, porque un
+POST sin cabecera de Server Action no enruta) y de la 11 en adelante `429` con
+`x-vercel-mitigated: challenge`.
 
 ### 7.6 · Promover la CSP a modo bloqueante (5 min, dentro de ~1 semana)
 

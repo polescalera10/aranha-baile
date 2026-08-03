@@ -1,5 +1,11 @@
 # Auditoría de seguridad — nexusvng.es · 2026-08-03
 
+> **ESTADO (2026-08-03, mismo día): la mayoría ya está aplicada.**
+> Commit `226ffb9` (local, pendiente de `git push origin main`) + migración
+> `0022_hotfix_escalada_rol` **ya aplicada contra la base de datos de
+> producción**. El hallazgo crítico C1 está cerrado y verificado.
+> Lo que queda en manos de Pol está listado en §7 al final del documento.
+
 > **Alcance.** Aplicación Next.js 15 (App Router) + Supabase + Vercel. Revisión
 > estática de `src/**`, `supabase/migrations/**`, configuración de build y
 > despliegue, **más verificación en vivo** contra el proyecto de producción
@@ -488,3 +494,116 @@ alter function public.set_updated_at() set search_path = public;
 
 Los pasos 1-6 no alteran ni un píxel de la web ni retiran ninguna
 funcionalidad.
+
+---
+
+## 7. Qué queda para Pol — paso a paso
+
+Lo demás ya está hecho (commit `226ffb9` + migración `0022` aplicada en
+producción). Estas seis cosas requieren credenciales o decisiones que no tengo.
+
+### 7.1 · Publicar el commit (1 min) — **primero**
+
+```bash
+cd "/Users/polescalera/Desktop/Cowork OS/nexus-vng/repo/nexus-vng"
+git push origin main
+```
+
+Dispara el deploy de producción en Vercel. El arreglo de base de datos ya está
+activo sin esperar a esto; lo que despliega son las cabeceras, el JSON-LD, el
+callback y el resto.
+
+### 7.2 · Cerrar el registro público en Supabase (2 min)
+
+Ya no es crítico —la migración 0022 cierra las dos vías de escalada aunque el
+registro siga abierto— pero sigue siendo la defensa correcta: hoy cualquiera
+puede crear cuentas en tu proyecto sin límite.
+
+1. https://supabase.com/dashboard/project/vruqtozggrntirdjmezy
+2. **Authentication → Sign In / Providers → Email**
+3. Desactivar **"Allow new users to sign up"** → *Save*
+4. Comprobar: `curl -s https://vruqtozggrntirdjmezy.supabase.co/auth/v1/settings -H "apikey: sb_publishable_aduGHt2LSy2lzNHXjSgyVA_WKY0K_Jv"` debe decir `"disable_signup": true`
+
+No rompe el login: `LoginForm` usa `shouldCreateUser: false` y las altas las
+haces tú invitando desde Studio.
+
+### 7.3 · Auditar las cuentas existentes (5 min)
+
+Comprobar que nadie aprovechó la ventana. **Authentication → SQL Editor**:
+
+```sql
+select p.id, p.role, u.email, u.created_at, u.last_sign_in_at
+from public.profiles p
+join auth.users u on u.id = p.id
+order by u.created_at desc;
+```
+
+Esperado: solo las cuentas que creaste tú, con **un único `admin`**
+(`polescalera10@gmail.com`, id `b2035be8-…`).
+
+Si aparece cualquier otra cosa: Authentication → Users → *Sign out* de esa
+cuenta, borrarla, y valorar notificación a la AEPD (la tabla `leads` tiene datos
+personales reales y habría sido accesible).
+
+### 7.4 · Activar protecciones de Auth (3 min)
+
+Dashboard → **Authentication → Policies / Passwords**:
+
+- **Leaked password protection** → ON (comprueba contra HaveIBeenPwned).
+- **Minimum password length** → 12.
+- **MFA** en tu cuenta de admin, si el panel va a gestionar datos de alumnos.
+
+### 7.5 · Limitar la tasa del formulario (10 min)
+
+El código ya inserta los leads con el service role, así que la política anónima
+sobra. **Solo después de confirmar que los formularios siguen guardando en
+producción** (rellena uno de prueba tras el deploy del 7.1 y míralo en la tabla
+`leads`), ejecutar en el SQL Editor:
+
+```sql
+drop policy if exists "leads: insert público" on public.leads;
+```
+
+Y en Vercel → proyecto `aranha-baile` → **Firewall** → *Add rule*:
+`POST` + path `/*` → **Rate limit** 10 peticiones / 10 min por IP → acción
+*Challenge*. Invisible para un visitante normal.
+
+### 7.6 · Promover la CSP a modo bloqueante (5 min, dentro de ~1 semana)
+
+Tras unos días con la web en marcha, abrir la consola del navegador en varias
+páginas y buscar avisos que empiecen por *"Content Security Policy"*. Si no hay
+ninguno, en `next.config.ts` cambiar:
+
+```diff
+-  { key: "Content-Security-Policy-Report-Only", value: csp },
++  { key: "Content-Security-Policy", value: csp },
+```
+
+Si aparece algún aviso, mándamelo y ajusto la política antes de bloquear.
+
+### 7.7 · Pendientes de mayor calado (sin prisa)
+
+- **M1 · Migraciones 0011–0021** contra producción, con backup previo y cuidado
+  con el `drop table suscripciones` de la 0017. Sesión dedicada.
+- **B3 · Subir `@supabase/ssr` y `supabase-js`** en una rama, probando el login
+  por enlace mágico y el callback.
+- **B5 · Revisar Redirect URLs** en Authentication → URL Configuration: solo
+  `https://nexusvng.es/area-privada/callback` (y el local). Sin comodines.
+- **B6 · Política de retención de `leads`** (borrado a los 24 meses) para cerrar
+  el punto de RGPD.
+
+### 7.8 · Lo que decidí NO aplicar, y por qué
+
+**M6 (revocar `EXECUTE` en las funciones `SECURITY DEFINER`)** queda descartado
+pese a que el linter de Supabase lo señala:
+
+- `handle_new_user()` y `rls_auto_enable()` son funciones de *trigger*: llamarlas
+  por RPC falla sola con *"trigger functions can only be called as triggers"*.
+  La exposición real es nula y revocar el privilegio arriesga romper el trigger.
+- `is_admin()` y `current_role()` **no se pueden revocar de `anon`**: las
+  políticas de `modalidades` y `eventos` las invocan en la rama anónima, y
+  PostgreSQL comprueba el privilegio `EXECUTE` del rol que ejecuta la consulta.
+  Revocarlas tumbaría la web pública. Además solo devuelven información sobre
+  quien llama (a `anon` le responden `false`/`null`).
+
+Es un falso positivo del linter en este esquema.

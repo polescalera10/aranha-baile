@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { postToN8n } from "@/lib/n8n/client";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createServiceClient } from "@/lib/supabase/server";
 import { interestLeadSchema, leadEstadoSchema, leadSchema } from "@/lib/validation/lead";
 
 export type LeadFormState = {
@@ -11,6 +11,27 @@ export type LeadFormState = {
   /** Errores por campo, para feedback inline. */
   errors?: Record<string, string[]>;
 };
+
+/**
+ * Cliente con el que se persiste un lead público.
+ *
+ * Se usa el service role a propósito: así el INSERT en `leads` deja de
+ * necesitar la política `leads: insert público` (`WITH CHECK (true)` para
+ * `anon`), que permitía a cualquiera lanzar `POST /rest/v1/leads` en bucle con
+ * la clave publicable del bundle, saltándose el honeypot y la validación Zod.
+ * Para el visitante no cambia nada: sigue siendo el mismo formulario.
+ * Ver docs/auditoria-seguridad-2026-08-03.md (A2).
+ *
+ * ⚠️ Si `SUPABASE_SERVICE_ROLE_KEY` no estuviera configurada se cae al cliente
+ * anónimo de siempre — mejor un lead guardado con la política antigua que un
+ * formulario roto. Por eso la política solo debe retirarse DESPUÉS de
+ * comprobar en producción que los formularios siguen guardando.
+ */
+async function leadsWriteClient() {
+  if (process.env.SUPABASE_SERVICE_ROLE_KEY) return createServiceClient();
+  console.warn("[leads] SUPABASE_SERVICE_ROLE_KEY ausente; se inserta como anon.");
+  return createClient();
+}
 
 /**
  * Server Action de los formularios públicos (clase de prueba, founding, contacto).
@@ -51,8 +72,8 @@ export async function submitLead(
   // criterio que `submitInterestLead`); viaja a n8n como booleano.
   const { website: _hp, consentimiento: _c, ...lead } = parsed.data;
 
-  // 1) Persistir el lead (RLS permite insert anónimo en `leads`).
-  const supabase = await createClient();
+  // 1) Persistir el lead (escritura de servidor, ver leadsWriteClient).
+  const supabase = await leadsWriteClient();
   const { error } = await supabase.from("leads").insert({
     nombre: lead.nombre,
     telefono: lead.telefono,
@@ -127,7 +148,7 @@ export async function submitInterestLead(
 
   const { website: _hp, consentimiento: _c, ...lead } = parsed.data;
 
-  const supabase = await createClient();
+  const supabase = await leadsWriteClient();
   const { error } = await supabase.from("leads").insert({
     nombre: lead.nombre,
     telefono: lead.telefono,

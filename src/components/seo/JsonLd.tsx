@@ -34,13 +34,20 @@ function openingHours() {
     .filter(Boolean);
 }
 
-/** Inserta un bloque JSON-LD. `data` debe ser serializable. */
+/**
+ * Inserta un bloque JSON-LD. `data` debe ser serializable.
+ *
+ * ⚠️ `JSON.stringify` NO escapa `<`, así que un dato que contenga la secuencia
+ * `</script>` cerraría el bloque y ejecutaría lo que viniera detrás (XSS). No
+ * todo lo que llega aquí es estático: las páginas de eventos pasan `titulo` y
+ * `descripcion` leídos de Supabase. `<` es JSON válido y schema.org lo
+ * interpreta igual. Ver docs/auditoria-seguridad-2026-08-03.md (A3).
+ */
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
     <script
       type="application/ld+json"
-      // El contenido es nuestro, no entrada de usuario.
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
     />
   );
 }

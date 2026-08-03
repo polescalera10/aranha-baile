@@ -3,6 +3,30 @@ import { createClient } from "@/lib/supabase/server";
 import type { UserRole } from "@/types/database";
 
 /**
+ * Rol del usuario de la sesión, o `null` si no hay sesión.
+ *
+ * A diferencia de requireRole/requireAnyRole NO redirige: está pensada para
+ * Server Actions que devuelven un estado de formulario o un `{ ok: false }` al
+ * cliente, donde un `redirect()` (que lanza) rompería el flujo de la respuesta.
+ * Es una segunda barrera por encima de la RLS, no la barrera principal.
+ */
+export async function getSessionRole(): Promise<UserRole | null> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+
+  return profile?.role ?? "alumno";
+}
+
+/**
  * Garantiza sesión + rol en una página protegida del área privada.
  * Sin sesión → login. Rol distinto → su propio panel.
  * Devuelve { user, role } cuando el acceso es válido.

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { secretMatches } from "@/lib/cron-auth";
 import { createServiceClient } from "@/lib/supabase/server";
 
 /**
@@ -19,7 +20,7 @@ export async function GET(request: Request) {
     console.error("[keep-alive] CRON_SECRET no configurado.");
     return NextResponse.json({ error: "CRON_SECRET no configurado." }, { status: 500 });
   }
-  if (request.headers.get("authorization") !== `Bearer ${secret}`) {
+  if (!secretMatches(request.headers.get("authorization"), `Bearer ${secret}`)) {
     return NextResponse.json({ error: "No autorizado." }, { status: 401 });
   }
 
@@ -27,8 +28,9 @@ export async function GET(request: Request) {
   const { error } = await supabase.from("modalidades").select("slug").limit(1);
 
   if (error) {
+    // El detalle de Postgres se queda en el log, no viaja en la respuesta.
     console.error("[keep-alive] ping error:", error.message);
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    return NextResponse.json({ ok: false }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true, at: new Date().toISOString() });

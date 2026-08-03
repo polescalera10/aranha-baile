@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { getSessionRole } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import {
   paymentStatuses,
@@ -9,7 +10,7 @@ import {
   studentSchema,
   type StudentInput,
 } from "@/lib/validation/student";
-import type { PaymentStatus } from "@/types/database";
+import type { PaymentStatus, UserRole } from "@/types/database";
 
 export type StudentFormState = {
   status: "idle" | "success" | "error";
@@ -24,6 +25,21 @@ export type StudentMutationResult = { ok: boolean; message?: string };
 type Supa = Awaited<ReturnType<typeof createClient>>;
 
 /* ── helpers (no exportados: un módulo "use server" solo exporta async) ────── */
+
+/**
+ * Segunda barrera de permisos, por encima de la RLS.
+ *
+ * La barrera real sigue siendo la RLS de `students` (0019/0020): si falla,
+ * el update afecta 0 filas y se detecta. Pero el resto de módulos del panel
+ * (`teachers`, `courses`, `enrollments`, `whatsapp-events`) ya comprueban el
+ * rol en la propia acción, y esta asimetría era frágil: si algún día se relaja
+ * una política, estas acciones se quedaban sin red. Ver
+ * docs/auditoria-seguridad-2026-08-03.md (M4).
+ */
+async function hasRole(allowed: UserRole[]): Promise<boolean> {
+  const role = await getSessionRole();
+  return role !== null && allowed.includes(role);
+}
 
 function readStudentForm(formData: FormData) {
   return {
@@ -116,6 +132,10 @@ export async function createStudent(
   _prev: StudentFormState,
   formData: FormData,
 ): Promise<StudentFormState> {
+  if (!(await hasRole(["admin"]))) {
+    return { status: "error", message: "No tienes permisos para crear alumnos." };
+  }
+
   const parsed = studentSchema.safeParse(readStudentForm(formData));
   if (!parsed.success) {
     return {
@@ -153,6 +173,10 @@ export async function updateStudent(
   _prev: StudentFormState,
   formData: FormData,
 ): Promise<StudentFormState> {
+  if (!(await hasRole(["admin"]))) {
+    return { status: "error", message: "No tienes permisos para editar la ficha." };
+  }
+
   const idRaw = formData.get("id");
   const id = typeof idRaw === "string" ? idRaw : "";
   if (!id) return { status: "error", message: "Alumno no encontrado." };
@@ -208,6 +232,9 @@ export async function updatePaymentStatus(
   studentId: string,
   paymentStatus: PaymentStatus,
 ): Promise<StudentMutationResult> {
+  if (!(await hasRole(["admin", "profesor"]))) {
+    return { ok: false, message: "No tienes permisos para cambiar la cuota." };
+  }
   if (!paymentStatuses.includes(paymentStatus)) {
     return { ok: false, message: "Estado de cuota no válido." };
   }
@@ -233,6 +260,10 @@ export async function setStudentActive(
   studentId: string,
   active: boolean,
 ): Promise<StudentMutationResult> {
+  if (!(await hasRole(["admin"]))) {
+    return { ok: false, message: "No tienes permisos para dar de baja alumnos." };
+  }
+
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("students")
@@ -259,6 +290,10 @@ export async function updateStudentNotes(
   _prev: StudentFormState,
   formData: FormData,
 ): Promise<StudentFormState> {
+  if (!(await hasRole(["admin", "profesor"]))) {
+    return { status: "error", message: "No tienes permisos para editar las notas." };
+  }
+
   const parsed = studentNotesSchema.safeParse({
     student_id: formData.get("student_id"),
     notes: formData.get("notes") ?? "",
